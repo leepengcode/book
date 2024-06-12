@@ -1,7 +1,16 @@
+import 'package:book/Class/address.dart';
+import 'package:book/Componnents/ImagWidget.dart';
 import 'package:book/Componnents/bankDropdown.dart';
+import 'package:book/Componnents/branchDropdown.dart';
 import 'package:book/Componnents/dropdown.dart';
+import 'package:book/Componnents/style.dart';
 import 'package:book/Componnents/textField.dart';
-import 'package:book/style.dart';
+import 'package:book/Form/Widget/NearbyProperty.dart';
+import 'package:book/Form/Widget/PhotoDetail.dart';
+import 'package:book/Form/Widget/PropertyInfo.dart';
+import 'package:book/Form/Widget/mapWidget.dart';
+import 'package:book/Form/Widget/uploadIdCard.dart';
+import 'package:book/Form/Widget/uploadLayoutWidget.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -49,9 +58,18 @@ class _FormScreenState extends State<FormScreen> {
     },
     // Add more banks as needed
   ];
-
   String? _selectedBankName;
-  String? _selectedBranch;
+  String? _selectedBankBranch;
+
+  final List<String> _branches = [
+    'Phnom Penh',
+    'Siem Reap',
+    'Battambang',
+    'Preah Sihanuk',
+    'Kom Pot',
+  ];
+
+  String? _selectedbranch;
 
   @override
   void initState() {
@@ -63,24 +81,24 @@ class _FormScreenState extends State<FormScreen> {
   void _onBankChanged(String? value) {
     setState(() {
       _selectedBankName = value;
-      // Reset branch selection when bank changes
-      _selectedBranch = null;
+      _selectedBankBranch = null;
     });
   }
 
   void _onBranchChanged(String? value) {
     setState(() {
-      _selectedBranch = value;
+      _selectedBankBranch = value;
     });
   }
 
+  DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: Text("FILL THE FORM"),
-        titleTextStyle: TextStyle(color: Colors.white, fontSize: 40),
+        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
         centerTitle: true,
         actions: [
           Padding(
@@ -89,10 +107,10 @@ class _FormScreenState extends State<FormScreen> {
               onTap: () {
                 Navigator.pushNamed(context, '/pdf');
               },
-              child: const Icon(
+              child: Icon(
                 Icons.picture_as_pdf,
                 color: Colors.white,
-                size: 35,
+                size: 25,
               ),
             ),
           ),
@@ -102,80 +120,236 @@ class _FormScreenState extends State<FormScreen> {
         child: Center(
           child: Column(
             children: [
-              HeaderDropdown(
-                hint: "Select Header",
-                title: "Select Header",
-                headerList: _HeaderList,
-                selectedVal: _selectedVal!,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedVal = value!;
-                  });
-                },
+              const SizedBox(
+                height: 30,
               ),
-              HeaderDropdown(
-                hint: "Select Information",
-                title: "Select Information",
-                headerList: _inforList,
-                selectedVal: _selectedinfo!,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedinfo = value!;
-                  });
-                },
-              ),
-              if (_selectedinfo == "Bank") ...[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+                width: 1500,
+                decoration: BoxDecoration(
+                    color: Colors.blueGrey.shade100,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
                   children: [
-                    BankDropdown(
-                      onBankChanged: _onBankChanged,
-                      onBranchChanged: _onBranchChanged,
-                      title: "Select Bank",
-                      banks: _bankList,
-                      selectedBankName: _selectedBankName,
-                      selectedBranch: _selectedBranch,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        HeaderDropdown(
+                          hint: "Select Header",
+                          title: "Select Header",
+                          headerList: _HeaderList,
+                          selectedVal: _selectedVal!,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedVal = value!;
+                            });
+                          },
+                        ),
+                        HeaderDropdown(
+                          hint: "Select Information",
+                          title: "Select Information",
+                          headerList: _inforList,
+                          selectedVal: _selectedinfo!,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedinfo = value!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    if (_selectedinfo == "Bank") ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BankDropdown(
+                            onBankChanged: _onBankChanged,
+                            onBranchChanged: _onBranchChanged,
+                            title: "Select Bank",
+                            banks: _bankList,
+                            selectedBankName: _selectedBankName,
+                            selectedBranch: _selectedBankBranch,
+                          ),
+                        ],
+                      ),
+                    ] else ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Ownership",
+                        style: THeader(),
+                        textAlign: TextAlign.start,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 30, top: 10),
+                          child: Container(
+                            width: 550,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  hintText: "Owner Name",
+                                  border: InputBorder.none),
+                            ),
+                          ))
+                    ],
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Select Image",
+                          style: THeader(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: ImagePickerWidget(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Owner Name",
+                              style: THeader(),
+                            ),
+                            const textField(
+                              hint: "Owner Name",
+                            )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Deep Title",
+                              style: THeader(),
+                            ),
+                            const textField(
+                              hint: "Deep Title",
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Property Location",
+                              style: THeader(),
+                            ),
+                            const textField(
+                              hint: "Enter property location",
+                            )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Street",
+                              style: THeader(),
+                            ),
+                            const textField(
+                              hint: "Enter Street",
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    CascadingDropdown(),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BranchDropdown(
+                          branches: _branches,
+                          selectedBranch: _selectedbranch,
+                          onChanged: (branch) {
+                            setState(() {
+                              _selectedbranch = branch;
+                            });
+                          },
+                        ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  '${date.day}/${date.month}/${date.year}',
+                                  style: THeader(),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: ElevatedButton(
+                                child: const Text(
+                                  "Select Date",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                onPressed: () async {
+                                  DateTime? newDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: date,
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2100),
+                                  );
+                                  if (newDate != null) {
+                                    setState(() {
+                                      date = newDate;
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ],
                 ),
-              ] else ...[
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Ownership",
-                  style: THeader(),
-                ),
-                textField(
-                  hint: "Your Name",
-                ),
-              ],
-              SizedBox(
-                height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "Owner Name",
-                        style: THeader(),
-                      ),
-                      textField(hint: "Owner Name")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "Deep Title",
-                        style: THeader(),
-                      ),
-                      textField(hint: "Deep Title")
-                    ],
-                  ),
-                ],
-              )
+              const SizedBox(
+                height: 25,
+              ),
+              const PropertyInfo_Widget(),
+              const SizedBox(
+                height: 25,
+              ),
+              const uploadIDCard(),
+              const SizedBox(
+                height: 25,
+              ),
+              const uploadLayoutWidget(),
+              const SizedBox(
+                height: 25,
+              ),
+              const Mapwidget(),
+              const SizedBox(
+                height: 25,
+              ),
+              const PhotoDetailWidget(),
+              const SizedBox(
+                height: 25,
+              ),
+              NearbyPropertyWidget()
             ],
           ),
         ),

@@ -1,18 +1,18 @@
 import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
-class HeaderDropdown extends StatelessWidget {
-  final List headerList;
-  final String selectedVal;
+class AddressDropdown extends StatelessWidget {
+  final List<String> headerList;
+  final String? selectedVal;
   final ValueChanged<String?> onChanged;
   final String title;
   final String? hint;
 
-  HeaderDropdown({
+  AddressDropdown({
     required this.headerList,
     required this.selectedVal,
     required this.title,
-    required this.hint,
+    this.hint,
     required this.onChanged,
   });
 
@@ -21,32 +21,39 @@ class HeaderDropdown extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
       child: Container(
-        width: 550,
+        width: 250,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Text(
               title,
               style: THeader(),
             ),
             DropdownButtonFormField<String>(
-              alignment: Alignment.center,
-              elevation: 16,
               decoration: InputDecoration(
+                hintStyle: const TextStyle(height: 2.5),
                 hintText: hint,
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
                 filled: true,
-                fillColor: Colors.grey[200], // Replace with your desired color
+                fillColor: Colors.grey[200],
               ),
               value: selectedVal,
-              items: headerList
-                  .map((e) => DropdownMenuItem<String>(
-                        child: Text(e),
-                        value: e,
-                      ))
-                  .toList(),
+              items: headerList.isNotEmpty
+                  ? headerList
+                      .map((e) => DropdownMenuItem<String>(
+                            child: Text(e),
+                            value: e,
+                          ))
+                      .toList()
+                  : [],
               onChanged: onChanged,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please select a value';
+                }
+                return null;
+              },
             ),
           ],
         ),

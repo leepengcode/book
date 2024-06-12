@@ -1,4 +1,4 @@
-import 'package:book/style.dart';
+import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
 class BankDropdown extends StatelessWidget {
@@ -25,46 +25,44 @@ class BankDropdown extends StatelessWidget {
       child: Container(
         width: 550,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: THeader()),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8)),
+              value: selectedBankName,
+              onChanged: onBankChanged,
+              items: banks.map((bank) {
+                return DropdownMenuItem<String>(
+                  value: bank['name'],
+                  child: Text(bank['name']),
+                );
+              }).toList(),
+            ),
             SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 8)),
-                  value: selectedBankName,
-                  onChanged: onBankChanged,
-                  items: banks.map((bank) {
-                    return DropdownMenuItem<String>(
-                      value: bank['name'],
-                      child: Text(bank['name']),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 10),
-                DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 8)),
-                  value: selectedBranch,
-                  onChanged: onBranchChanged,
-                  items: selectedBankName != null
-                      ? banks
-                          .firstWhere((bank) =>
-                              bank['name'] == selectedBankName)['branches']
-                          .map<DropdownMenuItem<String>>((branch) {
-                          return DropdownMenuItem<String>(
-                            value: branch,
-                            child: Text(branch),
-                          );
-                        }).toList()
-                      : [],
-                ),
-              ],
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8)),
+              value: selectedBranch,
+              onChanged: onBranchChanged,
+              items: selectedBankName != null
+                  ? banks
+                      .firstWhere((bank) => bank['name'] == selectedBankName)[
+                          'branches']
+                      .map<DropdownMenuItem<String>>((branch) {
+                      return DropdownMenuItem<String>(
+                        value: branch,
+                        child: Text(branch),
+                      );
+                    }).toList()
+                  : [],
             ),
           ],
         ),

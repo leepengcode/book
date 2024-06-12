@@ -10,18 +10,16 @@ class textField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
-        child: Container(
-          width: 550,
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: hint,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ),
-          ),
-        ));
+    return Container(
+      width: 250,
+      child: TextField(
+        maxLines: null,
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.grey[200],
+            hintText: hint,
+            border: InputBorder.none),
+      ),
+    );
   }
 }
