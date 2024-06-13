@@ -17,29 +17,51 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
   TextEditingController _lsize = TextEditingController();
   TextEditingController _lprice = TextEditingController();
   TextEditingController _tlprice = TextEditingController();
+  TextEditingController _bsize = TextEditingController();
+  TextEditingController _bprice = TextEditingController();
+  TextEditingController _tbprice = TextEditingController();
+  TextEditingController _tblprice = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _lsize.addListener(_calculateTotalLandPrice);
-    _lprice.addListener(_calculateTotalLandPrice);
+    _lsize.addListener(_calculateTotal);
+    _lprice.addListener(_calculateTotal);
+    _bsize.addListener(_calculateTotal);
+    _bprice.addListener(_calculateTotal);
+    _tblprice.addListener(_calculateTotal);
   }
 
   @override
   void dispose() {
-    _lsize.removeListener(_calculateTotalLandPrice);
-    _lprice.removeListener(_calculateTotalLandPrice);
+    _lsize.removeListener(_calculateTotal);
+    _lprice.removeListener(_calculateTotal);
+    _bsize.removeListener(_calculateTotal);
+    _bprice.removeListener(_calculateTotal);
+    _tblprice.removeListener(_calculateTotal);
+    _tblprice.dispose();
+    _bsize.dispose();
+    _bprice.dispose();
+    _tbprice.dispose();
     _lsize.dispose();
     _lprice.dispose();
     _tlprice.dispose();
     super.dispose();
   }
 
-  void _calculateTotalLandPrice() {
+  void _calculateTotal() {
     double landSize = double.tryParse(_lsize.text) ?? 0.0;
     double landPrice = double.tryParse(_lprice.text) ?? 0.0;
+    double buildingSize = double.tryParse(_bsize.text) ?? 0.0;
+    double buildingPrice = double.tryParse(_bprice.text) ?? 0.0;
+    // double totalPrice = double.tryParse(_tblprice.text) ?? 0.0;
     double totalLandPrice = landSize * landPrice;
+    double totalBuildingPrice = buildingSize * buildingPrice;
+    double totaltbPrice = totalLandPrice + totalBuildingPrice;
+
     _tlprice.text = totalLandPrice.toStringAsFixed(2);
+    _tbprice.text = totalBuildingPrice.toStringAsFixed(2);
+    _tblprice.text = totaltbPrice.toStringAsFixed(2);
   }
 
   @override
@@ -65,7 +87,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               SizedBox(width: 15),
               _buildTextFieldColumn(
                 label: "Building Size",
-                controller: TextEditingController(),
+                controller: _bsize,
               ),
               SizedBox(width: 15),
               _buildTextFieldColumn(
@@ -74,9 +96,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               ),
               SizedBox(width: 15),
               _buildTextFieldColumn(
-                label: "Building value USD/sqm",
-                controller: TextEditingController(),
-              ),
+                  label: "Building value USD/sqm", controller: _bprice),
             ],
           ),
           SizedBox(height: 15),
@@ -90,19 +110,13 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               SizedBox(width: 15),
               _buildTextFieldColumn(
                 label: "Building Price/USD",
-                controller: TextEditingController(),
+                controller: _tbprice,
                 readOnly: true,
               ),
               SizedBox(width: 15),
               _buildTextFieldColumn(
-                label: "Total Land Price",
-                controller: TextEditingController(),
-                readOnly: true,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Total Building Price",
-                controller: TextEditingController(),
+                label: "Total Price",
+                controller: _tblprice,
                 readOnly: true,
               ),
               SizedBox(width: 15),
