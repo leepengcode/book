@@ -30,6 +30,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _bsize.addListener(_calculateTotal);
     _bprice.addListener(_calculateTotal);
     _tblprice.addListener(_calculateTotal);
+    _tblprice.addListener(_calculateTotal);
   }
 
   @override
@@ -77,7 +78,6 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
                 label: "Parcel",
                 controller:
                     TextEditingController(text: widget.parcelNumber.toString()),
-                readOnly: true,
               ),
               SizedBox(width: 15),
               _buildTextFieldColumn(
@@ -149,7 +149,6 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
           width: 250,
           child: TextField(
             controller: controller,
-            readOnly: readOnly,
             maxLines: null,
             decoration: InputDecoration(
               filled: true,
