@@ -43,15 +43,15 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
             if (image != null)
               Image.file(
                 image!,
-                width: 500,
-                height: 300,
+                // width: 500,
+                // height: 300,
                 fit: BoxFit.cover,
               )
             else if (imageUrl != null)
               Image.network(
                 imageUrl!,
-                width: 500,
-                height: 300,
+                // width: 500,
+                // height: 300,
                 fit: BoxFit.cover,
               )
           ],
