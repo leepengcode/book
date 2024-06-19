@@ -125,7 +125,7 @@ class _DataPageState extends State<DataPage> {
           sortable: true,
           textAlign: TextAlign.center),
       DatatableHeader(
-          text: "Name",
+          text: "Title",
           value: "name",
           show: true,
           flex: 2,

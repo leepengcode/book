@@ -46,8 +46,10 @@ class SideBar extends StatelessWidget {
                     maxWidth: 120,
                   ),
                   child: Image.asset(
-                    'assets/images/angkor.jpg',
-                    fit: BoxFit.contain,
+                    'assets/images/r_care.png',
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 100,
                   ),
                 ),
                 const Divider(
