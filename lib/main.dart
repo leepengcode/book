@@ -1,4 +1,4 @@
-import 'package:book/Form/form.dart';
+import 'package:book/Form/LeftSideBar.dart';
 import 'package:book/pdf/pdfPage.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +6,14 @@ main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -16,9 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/pdf': (context) => const PdfPage(),
-        '/form': (context) => FormScreen(),
+        '/addnew': (context) => const MyleftSideBar()
       },
-      home: FormScreen(),
+      home: MyleftSideBar(),
     );
   }
 }

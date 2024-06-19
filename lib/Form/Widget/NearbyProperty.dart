@@ -59,7 +59,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     style: THeader(),
                   ),
                   Container(
-                    width: 350,
+                    width: 250,
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
@@ -79,7 +79,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     style: THeader(),
                   ),
                   Container(
-                    width: 350,
+                    width: 250,
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
@@ -99,7 +99,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     style: THeader(),
                   ),
                   Container(
-                    width: 350,
+                    width: 250,
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
@@ -119,7 +119,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     style: THeader(),
                   ),
                   Container(
-                    width: 350,
+                    width: 250,
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
@@ -153,7 +153,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                   style: THeader(),
                 ),
                 Container(
-                  width: 350,
+                  width: 250,
                   child: TextField(
                     maxLines: null,
                     decoration: InputDecoration(

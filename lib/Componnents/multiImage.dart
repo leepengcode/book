@@ -66,7 +66,8 @@ class _MultiPropertyImgPickerState extends State<MultiPropertyImgPicker> {
                       children: [
                         Container(
                           padding: EdgeInsets.all(3),
-                          decoration: BoxDecoration(border: Border.all()),
+                          decoration: BoxDecoration(
+                              border: Border.all(), color: Colors.grey),
                           child: Image.network(
                             imageFileList![index].path,
                             fit: BoxFit.cover,

@@ -146,7 +146,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
           style: THeader(),
         ),
         Container(
-          width: 250,
+          width: 230,
           child: TextField(
             controller: controller,
             maxLines: null,
