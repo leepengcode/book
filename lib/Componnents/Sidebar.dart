@@ -1,5 +1,6 @@
 import 'package:book/Componnents/table.dart';
-import 'package:book/Form/Widget/FormWidget.dart';
+import 'package:book/Form/Screen/Dashboard.dart';
+import 'package:book/Form/Screen/FormWidget.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 
@@ -111,13 +112,10 @@ class SideBar extends StatelessWidget {
               allowImplicitScrolling: true,
               controller: pageController,
               children: [
-                Container(
-                    color: Colors.white,
-                    child: Center(
-                        child: Text(
-                      "Dashboard",
-                      style: TextStyle(fontSize: 30),
-                    ))),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(color: Colors.white, child: Dashboard()),
+                ),
                 Container(
                   color: Colors.white,
                   child: const Center(

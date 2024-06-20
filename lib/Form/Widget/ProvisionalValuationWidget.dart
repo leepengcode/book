@@ -386,12 +386,13 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
               padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
-                  _buildTextFieldColumn(
-                      width: 300,
-                      title: "Fair Market Value (Max\$)",
-                      label: "Enter",
-                      // readOnly: true,
-                      controller: TextEditingController()),
+                  if (widget.ck1 != "Property LAND VALUATION REPORT")
+                    _buildTextFieldColumn(
+                        width: 300,
+                        title: "Fair Market Value (Max\$)",
+                        label: "Enter",
+                        // readOnly: true,
+                        controller: TextEditingController()),
                   SizedBox(
                     width: 25,
                   ),
@@ -423,17 +424,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
     required double width,
     required TextEditingController controller,
     bool readOnly = false,
+    String? Function(String?)? validator,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: THeader(),
+        Row(
+          children: [
+            Text(
+              title,
+              style: THeader(),
+            ),
+            Text(
+              " *",
+              style: TextStyle(color: Colors.red, fontSize: 15),
+            )
+          ],
         ),
         Container(
           width: width,
-          child: TextField(
+          child: TextFormField(
             readOnly: readOnly,
             controller: controller,
             maxLines: null,
@@ -443,6 +453,7 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
               hintText: label,
               border: InputBorder.none,
             ),
+            validator: validator,
           ),
         ),
       ],

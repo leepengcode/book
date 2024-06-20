@@ -204,7 +204,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
           ),
           if (widget.ck1 != "Property LAND VALUATION REPORT")
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start ,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "B. Building",
@@ -308,9 +308,17 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: THeader(),
+        Row(
+          children: [
+            Text(
+              title,
+              style: THeader(),
+            ),
+            Text(
+              " *",
+              style: TextStyle(color: Colors.red, fontSize: 15),
+            )
+          ],
         ),
         Container(
           width: width,

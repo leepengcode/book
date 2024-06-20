@@ -22,9 +22,17 @@ class uploadIDCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Front of ID Card",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Front Of ID Card",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   IdcardPicker(),
                 ],
@@ -35,9 +43,17 @@ class uploadIDCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Back Of ID Card",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Back Of ID Card",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   IdcardPicker(),
                 ],
@@ -53,9 +69,17 @@ class uploadIDCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Front Of ID Card",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Front Of ID Card",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   IdcardPicker(),
                 ],
@@ -66,9 +90,17 @@ class uploadIDCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "Back Of ID Card",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Back Of ID Card",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   IdcardPicker(),
                 ],

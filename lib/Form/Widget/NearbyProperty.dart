@@ -47,9 +47,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
           SizedBox(
             height: 15,
           ),
-          Text(
-            "Condition of property",
-            style: THeader(),
+          Row(
+            children: [
+              Text(
+                "Condition of property",
+                style: THeader(),
+              ),
+              Text(
+                " *",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              )
+            ],
           ),
           Container(
             width: double.infinity,
@@ -65,9 +73,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
           SizedBox(
             height: 15,
           ),
-          Text(
-            "Immediate Environment",
-            style: THeader(),
+          Row(
+            children: [
+              Text(
+                "Immediate Environment",
+                style: THeader(),
+              ),
+              Text(
+                " *",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              )
+            ],
           ),
           Container(
             width: double.infinity,
@@ -97,9 +113,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Strengths",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Strengths",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   Container(
                     width: 250,
@@ -117,9 +141,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Weakness",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Weakness",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   Container(
                     width: 250,
@@ -137,9 +169,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Opportunities",
-                    style: THeader(),
+                  Row(
+                    children: [
+                      Text(
+                        "Opportunities",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
                   Container(
                     width: 250,
@@ -157,10 +197,19 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Threats",
-                    style: THeader(),
+                   Row(
+                    children: [
+                      Text(
+                        "Threats",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
                   ),
+                 
                   Container(
                     width: 250,
                     child: TextField(
@@ -191,10 +240,20 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Market Prices ",
-                  style: THeader(),
-                ),
+                Row(
+                    children: [
+                      
+                      Text(
+                          "Market Prices ",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
+                
                 Container(
                   width: 250,
                   child: TextField(

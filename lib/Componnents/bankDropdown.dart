@@ -27,7 +27,18 @@ class BankDropdown extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: THeader()),
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: THeader(),
+                ),
+                Text(
+                  " *",
+                  style: TextStyle(color: Colors.red, fontSize: 15),
+                )
+              ],
+            ),
             DropdownButtonFormField<String>(
               decoration: InputDecoration(
                   filled: true,

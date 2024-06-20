@@ -52,6 +52,7 @@ dependencies:
   google_maps_flutter: ^2.7.0
   easy_sidemenu: ^0.6.0
   responsive_table: ^0.2.0+2
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

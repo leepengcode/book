@@ -1,5 +1,5 @@
 import 'package:book/Componnents/style.dart';
-import 'package:book/Componnents/textField.dart';
+
 import 'package:flutter/material.dart';
 
 class PropertyInfo_Widget extends StatefulWidget {
@@ -14,6 +14,10 @@ class PropertyInfo_Widget extends StatefulWidget {
 }
 
 class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
+  final _formKey = GlobalKey<FormState>();
+  final _controller = TextEditingController();
+  final _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,66 +40,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Plot Nº",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "North",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter North",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "South",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter South",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "East",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter East",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "West",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter West",
-                  ),
-                ],
-              ),
+              _buildTextFieldColumn(
+                  title: "Plot Nº",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "North",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "South",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "East",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "West",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
             ],
           ),
           SizedBox(
@@ -112,66 +81,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Land title deed Nº",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Land Size(by title deed)",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Total Land Size(by Measurement)",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Type of land : ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Occupant : ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
+              _buildTextFieldColumn(
+                  title: "Land title deed Nº",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Land Size(by title deed",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Total Land Size(by Measurement",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Type of land",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Occupant",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
             ],
           ),
           if (widget.ck1 != "Property LAND VALUATION REPORT")
@@ -192,42 +126,21 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Building Size",
-                          style: THeader(),
-                        ),
-                        textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Building Size",
-                          style: THeader(),
-                        ),
-                        textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Total Building",
-                          style: THeader(),
-                        ),
-                        textField(
-                          hint: "",
-                        ),
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Building Size",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Building Size",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Total Building",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -244,66 +157,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Type of Building ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Age of Building  ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Cost of Construction",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "By owner ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Metal Roof area ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Type of Building",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Age of Building",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Cost of Construction",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "By owner",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Metal Roof area",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -313,66 +191,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Occupied or Vacant",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Disposability",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Quality given as a",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Percentage",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Type of building ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Occupied or Vacant",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Disposability",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Quality given as a",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Percentage",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Type of building",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -389,66 +232,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Floor",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Roof ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Door",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Stair",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Window",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Floor",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Roof",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Door",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Stair",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Window",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -458,30 +266,16 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Ceiling",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Wall",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Ceiling",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Wall",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -498,66 +292,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Floor/Story ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Bathroom",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Room",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Kitchen ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Dining/Living Room ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Floor/Story",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Bathroom",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Room",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Kitchen",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Dining/Living Room",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -567,30 +326,21 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Storage Room ",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Total Accommodation",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Storage Room",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Storage Room",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Total Accommodation",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
                 SizedBox(
@@ -607,72 +357,79 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Water",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Electricity",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Sewerage",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Telecommunications",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Security",
-                          style: THeader(),
-                        ),
-                        const textField(
-                          hint: "Enter",
-                        )
-                      ],
-                    ),
+                    _buildTextFieldColumn(
+                        title: "Water",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Electricity",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Sewerage",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Telecommunications",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
+                    _buildTextFieldColumn(
+                        title: "Security",
+                        label: "",
+                        width: 250,
+                        controller: TextEditingController()),
                   ],
                 ),
               ],
             )
         ],
       ),
+    );
+  }
+
+  Column _buildTextFieldColumn({
+    required String title,
+    required String label,
+    required double width,
+    required TextEditingController controller,
+    bool readOnly = false,
+    String? Function(String?)? validator,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: THeader(),
+            ),
+            Text(
+              " *",
+              style: TextStyle(color: Colors.red, fontSize: 15),
+            )
+          ],
+        ),
+        Container(
+          width: width,
+          child: TextFormField(
+            readOnly: readOnly,
+            controller: controller,
+            maxLines: null,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.grey[200],
+              hintText: label,
+              border: InputBorder.none,
+            ),
+            validator: validator,
+          ),
+        ),
+      ],
     );
   }
 }

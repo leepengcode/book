@@ -31,12 +31,23 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
           const SizedBox(
             height: 10,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
-                  Text("Upload Image"),
+                  Row(
+                    children: [
+                      Text(
+                        "Upload Image",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
                   TDImagePicker(),
                 ],
               ),
@@ -45,7 +56,18 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
               ),
               Column(
                 children: [
-                  Text("Upload Image"),
+                  Row(
+                    children: [
+                      Text(
+                        "Upload Image",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
                   TDImagePicker(),
                 ],
               )
@@ -68,13 +90,24 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
           const SizedBox(
             height: 15,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Upload Layout"),
+                  Row(
+                    children: [
+                      Text(
+                        "Upload Image",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
                   LayerImagePicker(),
                 ],
               ),

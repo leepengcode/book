@@ -31,9 +31,17 @@ class _BranchDropdownState extends State<BranchDropdown> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Select Report",
-              style: THeader(),
+            Row(
+              children: [
+                Text(
+                  "Select Report",
+                  style: THeader(),
+                ),
+                Text(
+                  " *",
+                  style: TextStyle(color: Colors.red, fontSize: 15),
+                )
+              ],
             ),
             DropdownButtonFormField<String>(
               decoration: InputDecoration(

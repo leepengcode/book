@@ -1,7 +1,7 @@
 import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
-class AddressDropdown extends StatelessWidget {
+class AddressDropdown extends StatefulWidget {
   final List<String> headerList;
   final String? selectedVal;
   final ValueChanged<String?> onChanged;
@@ -17,6 +17,11 @@ class AddressDropdown extends StatelessWidget {
   });
 
   @override
+  State<AddressDropdown> createState() => _AddressDropdownState();
+}
+
+class _AddressDropdownState extends State<AddressDropdown> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
@@ -25,35 +30,44 @@ class AddressDropdown extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: THeader(),
+            Row(
+              children: [
+                Text(
+                  widget.title,
+                  style: THeader(),
+                ),
+                Text(
+                  " *",
+                  style: TextStyle(color: Colors.red, fontSize: 15),
+                )
+              ],
             ),
             DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 hintStyle: const TextStyle(height: 2.5),
-                hintText: hint,
+                hintText: widget.hint,
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
                 filled: true,
                 fillColor: Colors.grey[200],
               ),
-              value: selectedVal,
-              items: headerList.isNotEmpty
-                  ? headerList
+              value: widget.selectedVal,
+              items: widget.headerList.isNotEmpty
+                  ? widget.headerList
                       .map((e) => DropdownMenuItem<String>(
                             child: Text(e),
                             value: e,
                           ))
                       .toList()
                   : [],
-              onChanged: onChanged,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please select a value';
-                }
-                return null;
-              },
+              onChanged: widget.onChanged,
+              // validator: (value) {
+              //   if (value == null || value.isEmpty) {
+              //     return 'Please select a value';
+              //   } else {
+              //     return null;
+              //   }
+              // },
             ),
           ],
         ),

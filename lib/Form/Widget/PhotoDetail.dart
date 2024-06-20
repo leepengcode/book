@@ -31,9 +31,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                   "Details of Photos taken at the Site Inspection",
                   style: THeader(),
                 ),
-                Text(
-                  "I. Photo front view of the property",
-                  style: THeader(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "I. Photo front view of the property",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -46,9 +55,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                   "II. Photos inside view of the property",
                   style: THeader(),
                 ),
-                Text(
-                  "1. Photos view of the Flat ",
-                  style: THeader(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "1. Photos view of the Flat ",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -64,9 +82,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "III. Photos Access Road view to the Subject Property",
-                  style: THeader(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "III. Photos Access Road view to the Subject Property",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -84,9 +111,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "IV. Photos surrounding view of the property",
-                  style: THeader(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "IV. Photos surrounding view of the property",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -240,9 +276,17 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                   "Details of Photos taken at the Site Inspection",
                   style: THeader(),
                 ),
-                Text(
-                  "I. Photo front view of the Land",
-                  style: THeader(),
+                Row(
+                  children: [
+                    Text(
+                      "I. Photo front view of the Land",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -251,9 +295,17 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "II. Photos inside view of the Land",
-                  style: THeader(),
+                Row(
+                  children: [
+                    Text(
+                      "II. Photos inside view of the Land",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -269,9 +321,17 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "III. Photos Access Road view to the Subject Land",
-                  style: THeader(),
+                Row(
+                  children: [
+                    Text(
+                      "III. Photos Access Road view to the Subject Land",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,
@@ -289,9 +349,17 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "IV. Photos surrounding view of the Land",
-                  style: THeader(),
+                Row(
+                  children: [
+                    Text(
+                      "IV. Photos surrounding view of the Land",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 15,

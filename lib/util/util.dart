@@ -138,18 +138,18 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   }
 
   //first page
-  // doc.addPage(pw.Page(
-  //   pageTheme: pageTheme,
-  //   build: (final context) {
-  //     return pw.FullPage(
-  //       ignoreMargins: true,
-  //       child: pw.Image(
-  //         coverImage,
-  //         fit: pw.BoxFit.cover,
-  //       ),
-  //     );
-  //   },
-  // ));
+  doc.addPage(pw.Page(
+    pageTheme: pageTheme,
+    build: (final context) {
+      return pw.FullPage(
+        ignoreMargins: true,
+        child: pw.Image(
+          coverImage,
+          fit: pw.BoxFit.cover,
+        ),
+      );
+    },
+  ));
 
   //Sencond page
   doc.addPage(
@@ -204,30 +204,9 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                       pw.Container(
                         child: pw.RichText(
                           text: pw.TextSpan(
-                            text: '[',
+                            text: 'Peng LYYY',
                             style: header2(true), // Base style
-                            children: [
-                              pw.TextSpan(
-                                text: 'MR. ',
-                                style: header2(false),
-                              ),
-                              pw.TextSpan(
-                                text: 'VANNA BONE',
-                                style: header2(true),
-                              ),
-                              pw.TextSpan(
-                                text: ' & ',
-                                style: header2(true),
-                              ),
-                              pw.TextSpan(
-                                text: 'MRS. ',
-                                style: header2(false),
-                              ),
-                              pw.TextSpan(
-                                text: 'VANNA DONE]',
-                                style: header2(true),
-                              ),
-                            ],
+                            children: [],
                           ),
                         ),
                       ),

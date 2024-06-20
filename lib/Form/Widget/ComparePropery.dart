@@ -141,9 +141,17 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: THeader(),
+        Row(
+          children: [
+            Text(
+              label,
+              style: THeader(),
+            ),
+            Text(
+              " *",
+              style: TextStyle(color: Colors.red, fontSize: 15),
+            )
+          ],
         ),
         Container(
           width: 230,
