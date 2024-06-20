@@ -424,7 +424,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
               filled: true,
               fillColor: Colors.grey[200],
               hintText: label,
-              border: InputBorder.none,
+              border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
             validator: validator,
           ),

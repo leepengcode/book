@@ -49,7 +49,8 @@ class _BranchDropdownState extends State<BranchDropdown> {
                 fillColor: Colors.grey[200],
                 hintText: 'Report to',
                 hintStyle: TextStyle(height: 2.5),
-                border: InputBorder.none,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
               ),
               value: selectedBranch,

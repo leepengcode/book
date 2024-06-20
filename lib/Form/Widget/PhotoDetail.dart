@@ -141,10 +141,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           child: TextField(
                             maxLines: null,
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],
@@ -163,10 +165,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           child: TextField(
                             maxLines: null,
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],
@@ -189,10 +193,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           width: 500,
                           child: TextField(
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],
@@ -210,10 +216,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           width: 500,
                           child: TextField(
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],
@@ -236,10 +244,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           width: 500,
                           child: TextField(
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],
@@ -257,10 +267,12 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           width: 500,
                           child: TextField(
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              hintText: "Text",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                            ),
                           ),
                         )
                       ],

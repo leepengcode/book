@@ -113,7 +113,7 @@ class SideBar extends StatelessWidget {
               controller: pageController,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                   child: Container(color: Colors.white, child: Dashboard()),
                 ),
                 Container(

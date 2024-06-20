@@ -43,7 +43,8 @@ class BankDropdown extends StatelessWidget {
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey[200],
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 8)),
               value: selectedBankName,
               onChanged: onBankChanged,
@@ -59,7 +60,8 @@ class BankDropdown extends StatelessWidget {
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey[200],
-                  border: InputBorder.none,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 8)),
               value: selectedBranch,
               onChanged: onBranchChanged,

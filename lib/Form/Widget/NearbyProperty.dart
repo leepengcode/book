@@ -64,10 +64,12 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
             child: TextField(
               maxLines: null,
               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Enter Strengths",
-                  border: InputBorder.none),
+                filled: true,
+                fillColor: Colors.grey[200],
+                hintText: "Enter Strengths",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              ),
             ),
           ),
           SizedBox(
@@ -90,10 +92,12 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
             child: TextField(
               maxLines: null,
               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Enter Strengths",
-                  border: InputBorder.none),
+                filled: true,
+                fillColor: Colors.grey[200],
+                hintText: "Enter Strengths",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              ),
             ),
           ),
           SizedBox(
@@ -130,10 +134,12 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Strengths",
-                          border: InputBorder.none),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
                     ),
                   ),
                 ],
@@ -158,10 +164,12 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Strengths",
-                          border: InputBorder.none),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
                     ),
                   ),
                 ],
@@ -186,10 +194,12 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Strengths",
-                          border: InputBorder.none),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
                     ),
                   ),
                 ],
@@ -197,7 +207,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Row(
+                  Row(
                     children: [
                       Text(
                         "Threats",
@@ -209,16 +219,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                       )
                     ],
                   ),
-                 
                   Container(
                     width: 250,
                     child: TextField(
                       maxLines: null,
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Strengths",
-                          border: InputBorder.none),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
                     ),
                   ),
                 ],
@@ -241,28 +252,28 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                    children: [
-                      
-                      Text(
-                          "Market Prices ",
-                        style: THeader(),
-                      ),
-                      Text(
-                        " *",
-                        style: TextStyle(color: Colors.red, fontSize: 15),
-                      )
-                    ],
-                  ),
-                
+                  children: [
+                    Text(
+                      "Market Prices ",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
+                ),
                 Container(
                   width: 250,
                   child: TextField(
                     maxLines: null,
                     decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        hintText: "Enter",
-                        border: InputBorder.none),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: "Enter",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                    ),
                   ),
                 ),
               ],

@@ -42,7 +42,8 @@ class HeaderDropdown extends StatelessWidget {
               elevation: 16,
               decoration: InputDecoration(
                 hintText: hint,
-                border: InputBorder.none,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
                 filled: true,
                 fillColor: Colors.grey[200], // Replace with your desired color

@@ -15,7 +15,7 @@ class _DashboardState extends State<Dashboard> {
         child: Center(
             child: Column(children: [
       Container(
-        width: double.infinity,
+        width: 1500,
         height: 150,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
               shadowColor: Color.fromARGB(255, 255, 255, 255),
               color: Color.fromARGB(255, 255, 255, 255),
               child: const SizedBox(
-                  width: 400,
+                  width: 300,
                   height: 100,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),
@@ -56,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
               shadowColor: Color.fromARGB(255, 255, 255, 255),
               color: Color.fromARGB(255, 255, 255, 255),
               child: const SizedBox(
-                  width: 400,
+                  width: 300,
                   height: 100,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),
@@ -84,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
               shadowColor: Color.fromARGB(255, 255, 255, 255),
               color: Color.fromARGB(255, 255, 255, 255),
               child: const SizedBox(
-                  width: 400,
+                  width: 300,
                   height: 100,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),
@@ -112,7 +112,7 @@ class _DashboardState extends State<Dashboard> {
               shadowColor: Color.fromARGB(255, 255, 255, 255),
               color: Color.fromARGB(255, 255, 255, 255),
               child: const SizedBox(
-                  width: 400,
+                  width: 300,
                   height: 100,
                   child: Padding(
                       padding: EdgeInsets.all(10.0),

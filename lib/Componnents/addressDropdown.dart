@@ -46,7 +46,8 @@ class _AddressDropdownState extends State<AddressDropdown> {
               decoration: InputDecoration(
                 hintStyle: const TextStyle(height: 2.5),
                 hintText: widget.hint,
-                border: InputBorder.none,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
                 filled: true,
                 fillColor: Colors.grey[200],

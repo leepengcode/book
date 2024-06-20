@@ -162,7 +162,8 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               filled: true,
               fillColor: Colors.grey[200],
               hintText: label,
-              border: InputBorder.none,
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
           ),
         ),

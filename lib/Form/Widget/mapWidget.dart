@@ -70,10 +70,12 @@ class Mapwidget extends StatelessWidget {
             width: 1450,
             child: TextField(
               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Enter Note",
-                  border: InputBorder.none),
+                filled: true,
+                fillColor: Colors.grey[200],
+                hintText: "Enter Note",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              ),
             ),
           )
         ]));
