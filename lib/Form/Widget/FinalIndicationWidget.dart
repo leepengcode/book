@@ -2,10 +2,12 @@ import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
 class FinalIndicationWidget extends StatefulWidget {
+  final String? ck1;
   final int NoLandCount;
   const FinalIndicationWidget({
     super.key,
     required this.NoLandCount,
+    this.ck1,
   });
 
   @override
@@ -200,91 +202,97 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
           SizedBox(
             height: 15,
           ),
-          Text(
-            "B. Building",
-            style: THeader(),
-          ),
-          SizedBox(height: 15),
-          ...buildingInfoList.map((buildingInfo) => Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 20),
-                child: Row(
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "No.",
-                        label: "",
-                        width: 50,
-                        readOnly: true,
-                        controller: TextEditingController(
-                            text: buildingInfo.noCount.toString())),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Size Sqm",
-                        label: "Enter",
-                        width: 220,
-                        controller: buildingInfo.sizeSqm),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Size Sqft",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: buildingInfo.sizeSqft),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Property Value USD/Sqm",
-                        label: "Enter",
-                        width: 220,
-                        controller: buildingInfo.valueUsd),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Property Value",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: buildingInfo.pValue),
+          if (widget.ck1 != "Property LAND VALUATION REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start ,
+              children: [
+                Text(
+                  "B. Building",
+                  style: THeader(),
+                ),
+                SizedBox(height: 15),
+                ...buildingInfoList.map((buildingInfo) => Padding(
+                      padding: const EdgeInsets.only(left: 20, bottom: 20),
+                      child: Row(
+                        children: [
+                          _buildTextFieldColumn(
+                              title: "No.",
+                              label: "",
+                              width: 50,
+                              readOnly: true,
+                              controller: TextEditingController(
+                                  text: buildingInfo.noCount.toString())),
+                          SizedBox(width: 25),
+                          _buildTextFieldColumn(
+                              title: "Size Sqm",
+                              label: "Enter",
+                              width: 220,
+                              controller: buildingInfo.sizeSqm),
+                          SizedBox(width: 25),
+                          _buildTextFieldColumn(
+                              title: "Size Sqft",
+                              label: "",
+                              readOnly: true,
+                              width: 220,
+                              controller: buildingInfo.sizeSqft),
+                          SizedBox(width: 25),
+                          _buildTextFieldColumn(
+                              title: "Property Value USD/Sqm",
+                              label: "Enter",
+                              width: 220,
+                              controller: buildingInfo.valueUsd),
+                          SizedBox(width: 25),
+                          _buildTextFieldColumn(
+                              title: "Property Value",
+                              label: "",
+                              readOnly: true,
+                              width: 220,
+                              controller: buildingInfo.pValue),
+                        ],
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: _addNewBuildingInfo,
+                      icon: Icon(Icons.add),
+                    ),
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
                   ],
                 ),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 50, // Adjust the width as needed
-                height: 1,
-                color: Colors.black,
-              ),
-              IconButton(
-                onPressed: _addNewBuildingInfo,
-                icon: Icon(Icons.add),
-              ),
-              Container(
-                width: 50, // Adjust the width as needed
-                height: 1,
-                color: Colors.black,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 20),
-            child: Row(
-              children: [
-                _buildTextFieldColumn(
-                    title: "Total Size Sqm",
-                    label: "",
-                    readOnly: true,
-                    width: 220,
-                    controller: _totalBuildingSizeSqm),
-                SizedBox(width: 25),
-                _buildTextFieldColumn(
-                    title: "Total Property Value",
-                    label: "",
-                    readOnly: true,
-                    width: 220,
-                    controller: _totalBuildingPValue),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Total Size Sqm",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingSizeSqm),
+                      SizedBox(width: 25),
+                      _buildTextFieldColumn(
+                          title: "Total Property Value",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingPValue),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
+            )
         ],
       ),
     );

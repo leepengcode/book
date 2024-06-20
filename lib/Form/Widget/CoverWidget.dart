@@ -8,7 +8,8 @@ import 'package:book/Componnents/textField.dart';
 import 'package:flutter/material.dart';
 
 class CoverWidget extends StatefulWidget {
-  const CoverWidget({super.key});
+  final ValueChanged<String?>? onChanged;
+  const CoverWidget({super.key, this.onChanged});
 
   @override
   State<CoverWidget> createState() => _MyWidgetState();
@@ -19,7 +20,7 @@ class _MyWidgetState extends State<CoverWidget> {
     "Property [LAND AND BUILDING] VALUATION REPORT",
     "Property LAND VALUATION REPORT",
     "Property OFFICE SPACE VALUATION REPORT",
-    "Property WAREHOUSE REPORT",
+    "Property CONDO REPORT",
   ];
   String? _selectedVal = "";
 
@@ -107,6 +108,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 onChanged: (value) {
                   setState(() {
                     _selectedVal = value!;
+                    widget.onChanged!(_selectedVal.toString());
                   });
                 },
               ),

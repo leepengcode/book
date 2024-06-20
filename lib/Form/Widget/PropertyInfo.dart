@@ -2,11 +2,18 @@ import 'package:book/Componnents/style.dart';
 import 'package:book/Componnents/textField.dart';
 import 'package:flutter/material.dart';
 
-class PropertyInfo_Widget extends StatelessWidget {
+class PropertyInfo_Widget extends StatefulWidget {
+  final String? ck1;
   const PropertyInfo_Widget({
     super.key,
+    this.ck1,
   });
 
+  @override
+  State<PropertyInfo_Widget> createState() => _PropertyInfo_WidgetState();
+}
+
+class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -167,497 +174,503 @@ class PropertyInfo_Widget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "3. Building Size  ",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Building Size",
-                    style: THeader(),
-                  ),
-                  textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Building Size",
-                    style: THeader(),
-                  ),
-                  textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Total Building",
-                    style: THeader(),
-                  ),
-                  textField(
-                    hint: "",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "4. Building Detail",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Type of Building ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Age of Building  ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Cost of Construction",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "By owner ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Metal Roof area ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Occupied or Vacant",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Disposability",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Quality given as a",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Percentage",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Type of building ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "5. Sources of Materials",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Floor",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Roof ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Door",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Stair",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Window",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Ceiling",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Wall",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "6. Internal Description ",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Floor/Story ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Bathroom",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Room",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Kitchen ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Dining/Living Room ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Storage Room ",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Total Accommodation",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "7. Utilities/Facilities Available",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Water",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Electricity",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Sewerage",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Telecommunications",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Security",
-                    style: THeader(),
-                  ),
-                  const textField(
-                    hint: "Enter",
-                  )
-                ],
-              ),
-            ],
-          ),
+          if (widget.ck1 != "Property LAND VALUATION REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "3. Building Size  ",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Building Size",
+                          style: THeader(),
+                        ),
+                        textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Building Size",
+                          style: THeader(),
+                        ),
+                        textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total Building",
+                          style: THeader(),
+                        ),
+                        textField(
+                          hint: "",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "4. Building Detail",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Type of Building ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Age of Building  ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Cost of Construction",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "By owner ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Metal Roof area ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Occupied or Vacant",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Disposability",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Quality given as a",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Percentage",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Type of building ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "5. Sources of Materials",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Floor",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Roof ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Door",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Stair",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Window",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Ceiling",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Wall",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "6. Internal Description ",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Floor/Story ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Bathroom",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Room",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Kitchen ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Dining/Living Room ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Storage Room ",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total Accommodation",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "7. Utilities/Facilities Available",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Water",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Electricity",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Sewerage",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Telecommunications",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Security",
+                          style: THeader(),
+                        ),
+                        const textField(
+                          hint: "Enter",
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            )
         ],
       ),
     );

@@ -9,22 +9,37 @@ import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
 import 'package:flutter/material.dart';
 
-class FormWidget extends StatelessWidget {
+class FormWidget extends StatefulWidget {
   const FormWidget({
     super.key,
   });
 
+  @override
+  State<FormWidget> createState() => _FormWidgetState();
+}
+
+class _FormWidgetState extends State<FormWidget> {
+  var ck1;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
         child: Column(
           children: [
-            CoverWidget(),
+            CoverWidget(
+              onChanged: (value) {
+                setState(() {
+                  ck1 = value.toString();
+                  print("ch1 = ${ck1}\n");
+                });
+              },
+            ),
             const SizedBox(
               height: 25,
             ),
-            const PropertyInfo_Widget(),
+            PropertyInfo_Widget(
+              ck1: ck1,
+            ),
             const SizedBox(
               height: 25,
             ),
@@ -32,7 +47,9 @@ class FormWidget extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const uploadLayoutWidget(),
+            uploadLayoutWidget(
+              ck1: ck1,
+            ),
             const SizedBox(
               height: 25,
             ),
@@ -40,7 +57,9 @@ class FormWidget extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const PhotoDetailWidget(),
+            PhotoDetailWidget(
+              ck1: ck1,
+            ),
             const SizedBox(
               height: 25,
             ),
@@ -50,11 +69,13 @@ class FormWidget extends StatelessWidget {
             ),
             ProvisionalValue(
               NoLandCount: 1,
+              ck1: ck1,
             ),
             SizedBox(
               height: 30,
             ),
             FinalIndicationWidget(
+              ck1: ck1,
               NoLandCount: 1,
             ),
             SizedBox(

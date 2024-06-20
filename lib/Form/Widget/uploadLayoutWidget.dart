@@ -3,11 +3,18 @@ import 'package:book/Componnents/uploadLayer.dart';
 import 'package:book/Componnents/uploadTD.dart';
 import 'package:flutter/material.dart';
 
-class uploadLayoutWidget extends StatelessWidget {
+class uploadLayoutWidget extends StatefulWidget {
+  final String? ck1;
   const uploadLayoutWidget({
     super.key,
+    this.ck1,
   });
 
+  @override
+  State<uploadLayoutWidget> createState() => _uploadLayoutWidgetState();
+}
+
+class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,10 +54,17 @@ class uploadLayoutWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
-            "Land and Building Layout",
-            style: THeader(),
-          ),
+          if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+            Text(
+              "Land and Building Layout",
+              style: THeader(),
+            ),
+          ] else ...[
+            Text(
+              "Land Layout",
+              style: THeader(),
+            ),
+          ],
           const SizedBox(
             height: 15,
           ),

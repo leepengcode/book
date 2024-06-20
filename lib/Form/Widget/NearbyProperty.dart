@@ -41,6 +41,49 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
             borderRadius: BorderRadius.circular(10)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
+            "Inspection Officer’s Report",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "Condition of property",
+            style: THeader(),
+          ),
+          Container(
+            width: double.infinity,
+            child: TextField(
+              maxLines: null,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: "Enter Strengths",
+                  border: InputBorder.none),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "Immediate Environment",
+            style: THeader(),
+          ),
+          Container(
+            width: double.infinity,
+            child: TextField(
+              maxLines: null,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: "Enter Strengths",
+                  border: InputBorder.none),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
             "SWOT",
             style: THeader(),
           ),
