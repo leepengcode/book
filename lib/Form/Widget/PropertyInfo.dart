@@ -87,25 +87,35 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   width: 250,
                   controller: TextEditingController()),
               _buildTextFieldColumn(
-                  title: "Land Size(by title deed",
+                  title: "Land Size(by title deed)",
                   label: "",
                   width: 250,
+                  keytype: TextInputType.number,
                   controller: TextEditingController()),
               _buildTextFieldColumn(
-                  title: "Total Land Size(by Measurement",
+                  title: "Total Land Size(by Measurement)",
                   label: "",
                   width: 250,
+                  keytype: TextInputType.number,
                   controller: TextEditingController()),
               _buildTextFieldColumn(
                   title: "Type of land",
                   label: "",
                   width: 250,
                   controller: TextEditingController()),
-              _buildTextFieldColumn(
-                  title: "Occupant",
-                  label: "",
-                  width: 250,
-                  controller: TextEditingController()),
+              if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+                _buildTextFieldColumn(
+                    title: "Occupant",
+                    label: "",
+                    width: 250,
+                    controller: TextEditingController()),
+              ] else ...[
+                _buildTextFieldColumn(
+                    title: "Type of Tenure",
+                    label: "",
+                    width: 250,
+                    controller: TextEditingController()),
+              ]
             ],
           ),
           if (widget.ck1 != "Property LAND VALUATION REPORT")
@@ -127,19 +137,22 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildTextFieldColumn(
-                        title: "Building Size",
+                        title: "(Flat)Building Size",
                         label: "",
                         width: 250,
+                        keytype: TextInputType.number,
                         controller: TextEditingController()),
                     _buildTextFieldColumn(
                         title: "Building Size",
                         label: "",
+                        keytype: TextInputType.number,
                         width: 250,
                         controller: TextEditingController()),
                     _buildTextFieldColumn(
-                        title: "Total Building",
+                        title: "Total Building Size",
                         label: "",
                         width: 250,
+                        keytype: TextInputType.number,
                         controller: TextEditingController()),
                   ],
                 ),
@@ -331,11 +344,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                         label: "",
                         width: 250,
                         controller: TextEditingController()),
-                    _buildTextFieldColumn(
-                        title: "Storage Room",
-                        label: "",
-                        width: 250,
-                        controller: TextEditingController()),
+                    
                     _buildTextFieldColumn(
                         title: "Total Accommodation",
                         label: "",
@@ -391,14 +400,14 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
     );
   }
 
-  Column _buildTextFieldColumn({
-    required String title,
-    required String label,
-    required double width,
-    required TextEditingController controller,
-    bool readOnly = false,
-    String? Function(String?)? validator,
-  }) {
+  Column _buildTextFieldColumn(
+      {required String title,
+      required String label,
+      required double width,
+      required TextEditingController controller,
+      bool readOnly = false,
+      String? Function(String?)? validator,
+      TextInputType? keytype}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -417,6 +426,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
         Container(
           width: width,
           child: TextFormField(
+            keyboardType: keytype,
             readOnly: readOnly,
             controller: controller,
             maxLines: null,
@@ -425,7 +435,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
               fillColor: Colors.grey[200],
               hintText: label,
               border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
             validator: validator,
           ),

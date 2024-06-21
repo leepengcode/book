@@ -1,3 +1,4 @@
+import 'package:book/Componnents/googlelocation.dart';
 import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
@@ -132,13 +133,7 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Google Location of Comparable Property",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 15,
-          ),
+         
           Text(
             "Provisional Valuation Made by the Inspecting Officer(s)",
             style: THeader(),
@@ -451,8 +446,8 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
               filled: true,
               fillColor: Colors.grey[200],
               hintText: label,
-               border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
             validator: validator,
           ),

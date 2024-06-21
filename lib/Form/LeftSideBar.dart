@@ -1,6 +1,11 @@
 import 'package:book/Componnents/Sidebar.dart';
+import 'package:book/util/util.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class MyleftSideBar extends StatefulWidget {
   const MyleftSideBar({super.key});
@@ -24,6 +29,11 @@ class _MyleftSideBarState extends State<MyleftSideBar> {
 
   @override
   Widget build(BuildContext context) {
+    pw.RichText.debug = true;
+    final actions = <PdfPreviewAction>[
+      if (!kIsWeb)
+        const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -35,8 +45,12 @@ class _MyleftSideBarState extends State<MyleftSideBar> {
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/pdf');
+              onTap: () async {
+                await Printing.layoutPdf(
+                    onLayout: (format) => generatePdf(format, 'ko'));
+                //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
+                //   'name': 'Berlin'
+                // },);
               },
               child: const Icon(
                 Icons.picture_as_pdf,

@@ -113,6 +113,13 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+            "Final Indication",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
             "A. Land",
             style: THeader(),
           ),

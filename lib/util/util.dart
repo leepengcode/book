@@ -8,11 +8,11 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-Future<Uint8List> generatePdf(final PdfPageFormat format) async {
+Future<Uint8List> generatePdf(final PdfPageFormat format, String? name) async {
   final doc = pw.Document(
     title: "FULL REPORT BOOK",
   );
-
+  final pdf = pw.Document(version: PdfVersion.pdf_1_4, compress: true);
   final logoImage = pw.MemoryImage(
     (await rootBundle.load('assets/images/logo.jpg')).buffer.asUint8List(),
   );
@@ -138,7 +138,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   }
 
   //first page
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -152,7 +152,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Sencond page
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -165,7 +165,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                 margin: const pw.EdgeInsets.only(
                     top: 30, right: 25), // Add margin here
                 child: pw.Text(
-                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD ${(name!=null)?name:''}",
                   style: pw.TextStyle(fontSize: 9, font: font),
                 ),
               ),
@@ -322,7 +322,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Third Page
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -472,7 +472,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Fourth page
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -571,7 +571,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Five Page
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -608,7 +608,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                             padding: const pw.EdgeInsets.only(
                                 top: 20, left: -20), // Add margin here
                             child: pw.Text(
-                              "Property [Land and Building] Valuation Report",
+                              "${name} Valuation Report",
                               style: header2(true),
                               textAlign: pw.TextAlign.center,
                             ),
@@ -975,7 +975,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //New Page
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -1771,7 +1771,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page six
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -1838,7 +1838,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page Seven
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -1906,7 +1906,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   // Page Eight
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -1986,7 +1986,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   // Page Ningh
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -2125,7 +2125,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Page ninght
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -2221,7 +2221,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Page Ten
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -2325,7 +2325,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Page Twenty
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -2507,7 +2507,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Page Thirty
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -2718,7 +2718,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page Fourty
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -2896,7 +2896,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page Fifteen
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -3513,7 +3513,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page sixteen
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -3591,7 +3591,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
 
   //Page Seventeen
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
         return pw.FullPage(
@@ -3759,7 +3759,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
       }));
 
   //Page Eighteen
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
         return pw.FullPage(
@@ -4067,7 +4067,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
       }));
 
   //Page Nineteen
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -4119,7 +4119,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                             ),
                           ),
                           pw.SizedBox(height: 10),
-                          pw.Text("Documentation", style: header3()),
+                          pw.Text("pdfumentation", style: header3()),
                           pw.RichText(
                             text: pw.TextSpan(
                               text:
@@ -4151,7 +4151,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
                           pw.RichText(
                             text: pw.TextSpan(
                                 text:
-                                    'Cambodia Angkor Real Estate Co., Ltd. has taken all reasonable measures to ensure the accuracy of this Valuation.  However, all documentation and ancillary information included in this Valuation is intended for reference only.  Some information has been gathered from government departments, outside agencies or private individuals. Therefore, ',
+                                    'Cambodia Angkor Real Estate Co., Ltd. has taken all reasonable measures to ensure the accuracy of this Valuation.  However, all pdfumentation and ancillary information included in this Valuation is intended for reference only.  Some information has been gathered from government departments, outside agencies or private individuals. Therefore, ',
                                 style: body1(),
                                 children: [
                                   pw.TextSpan(
@@ -4181,7 +4181,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page Tweenty
-  doc.addPage(
+  pdf.addPage(
     pw.Page(
       pageTheme: pageTheme,
       build: (final context) {
@@ -4254,7 +4254,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   );
 
   //Page Tweenty One
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -4361,7 +4361,7 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
     },
   ));
 
-  doc.addPage(pw.Page(
+  pdf.addPage(pw.Page(
     pageTheme: pageTheme,
     build: (final context) {
       return pw.FullPage(
@@ -4471,7 +4471,11 @@ Future<Uint8List> generatePdf(final PdfPageFormat format) async {
   ));
   // //Page Tweenty Two
 
-  return doc.save();
+  final pdfBytes = pdf.save();
+  print("object $name\n");
+  // Print the PDF document to the default printer
+  await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdfBytes);
+  return pdf.save();
 }
 
 Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
@@ -4519,30 +4523,30 @@ void showSharedToast(final BuildContext context) {
       const SnackBar(content: Text('Document shared successfully')));
 }
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('PDF Generation Example'),
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              final pdf = await generatePdf(PdfPageFormat.a4);
-              // You can save or share the PDF here
-              await saveAsFile(
-                  context, (format) async => pdf, PdfPageFormat.a4);
-            },
-            child: const Text('Generate PDF'),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('PDF Generation Example'),
+//         ),
+//         body: Center(
+//           child: ElevatedButton(
+//             onPressed: () async {
+//               final pdf = await generatePdf(PdfPageFormat.a4);
+//               // You can save or share the PDF here
+//               await saveAsFile(
+//                   context, (format) async => pdf, PdfPageFormat.a4);
+//             },
+//             child: const Text('Generate PDF'),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

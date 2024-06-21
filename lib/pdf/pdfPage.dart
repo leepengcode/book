@@ -36,16 +36,18 @@ class _PdfPageState extends State<PdfPage> {
       if (!kIsWeb)
         const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
     ];
-
+    // final name = ModalRoute.of(context)!.settings.arguments as Map;
+    // print("object ${name['name']}");
     return Scaffold(
       appBar: AppBar(
         title: Text("PDF"),
       ),
-      body: PdfPreview(
-          maxPageWidth: 700,
-          onPrinted: showPrintedToast,
-          onShared: showSharedToast,
-          build: generatePdf),
+      // body:  PdfPreview(
+      //     maxPageWidth: 700,
+      //     onPrinted: showPrintedToast,
+      //     onShared: showSharedToast,
+
+      //     build: generatePdf),
     );
   }
 }

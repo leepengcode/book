@@ -18,18 +18,13 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        FormFieldState();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/pdf': (context) => const PdfPage(),
+        '/addnew': (context) => const MyleftSideBar()
       },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/pdf': (context) => const PdfPage(),
-          '/addnew': (context) => const MyleftSideBar()
-        },
-        home: MyleftSideBar(),
-      ),
+      home: MyleftSideBar(),
     );
   }
 }

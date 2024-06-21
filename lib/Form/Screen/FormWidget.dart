@@ -1,5 +1,6 @@
 import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
+import 'package:book/Form/Widget/GoogleMap.dart';
 import 'package:book/Form/Widget/NearbyProperty.dart';
 import 'package:book/Form/Widget/PhotoDetail.dart';
 import 'package:book/Form/Widget/PropertyInfo.dart';
@@ -8,6 +9,7 @@ import 'package:book/Form/Widget/mapWidget.dart';
 import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -53,7 +55,7 @@ class _FormWidgetState extends State<FormWidget> {
             const SizedBox(
               height: 25,
             ),
-            const Mapwidget(),
+            // const Mapwidget(),
             const SizedBox(
               height: 25,
             ),
@@ -64,6 +66,10 @@ class _FormWidgetState extends State<FormWidget> {
               height: 25,
             ),
             NearbyPropertyWidget(),
+            SizedBox(
+              height: 25,
+            ),
+            GoogleMapImage(),
             SizedBox(
               height: 25,
             ),

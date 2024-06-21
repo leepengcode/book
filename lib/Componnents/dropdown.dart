@@ -20,7 +20,7 @@ class HeaderDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-      child: Container(
+      child: SizedBox(
         width: 550,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
