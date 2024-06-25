@@ -4,7 +4,7 @@ import 'package:book/Form/Screen/FormWidget.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 
-class SideBar extends StatelessWidget {
+class SideBar extends StatefulWidget {
   const SideBar({
     super.key,
     required this.sideMenu,
@@ -15,6 +15,11 @@ class SideBar extends StatelessWidget {
   final PageController pageController;
 
   @override
+  State<SideBar> createState() => _SideBarState();
+}
+
+class _SideBarState extends State<SideBar> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 5),
@@ -22,7 +27,7 @@ class SideBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SideMenu(
-            controller: sideMenu,
+            controller: widget.sideMenu,
             style: SideMenuStyle(
                 // showTooltip: false,
 
@@ -79,7 +84,7 @@ class SideBar extends StatelessWidget {
               SideMenuItem(
                 title: 'Dashboard',
                 onTap: (index, _) {
-                  sideMenu.changePage(index);
+                  widget.sideMenu.changePage(index);
                 },
                 icon: const Icon(Icons.home),
                 // badgeContent: const Text(
@@ -91,14 +96,14 @@ class SideBar extends StatelessWidget {
               SideMenuItem(
                 title: 'Form',
                 onTap: (index, _) {
-                  sideMenu.changePage(index);
+                  widget.sideMenu.changePage(index);
                 },
                 icon: const Icon(Icons.drive_file_rename_outline_outlined),
               ),
               SideMenuItem(
                 title: 'Book List',
                 onTap: (index, _) {
-                  sideMenu.changePage(index);
+                  widget.sideMenu.changePage(index);
                 },
                 icon: const Icon(Icons.book_rounded),
               ),
@@ -110,15 +115,15 @@ class SideBar extends StatelessWidget {
           Expanded(
             child: PageView(
               allowImplicitScrolling: true,
-              controller: pageController,
+              controller: widget.pageController,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                  padding: EdgeInsets.only(top: 5, left: 10, right: 10),
                   child: Container(color: Colors.white, child: Dashboard()),
                 ),
                 Container(
                   color: Colors.white,
-                  child: const Center(
+                  child: Center(
                     child: Center(child: FormWidget()),
                   ),
                 ),

@@ -1,12 +1,12 @@
 import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
-class BankDropdown extends StatelessWidget {
+class BankDropdown extends StatefulWidget {
   final List<Map<String, dynamic>> banks;
   final String? selectedBankName;
   final String? selectedBranch;
-  final ValueChanged<String?> onBankChanged;
-  final ValueChanged<String?> onBranchChanged;
+  final ValueChanged<String?>? onBankChanged;
+  final ValueChanged<String?>? onBranchChanged;
   final String title;
 
   BankDropdown({
@@ -19,6 +19,11 @@ class BankDropdown extends StatelessWidget {
   });
 
   @override
+  State<BankDropdown> createState() => _BankDropdownState();
+}
+
+class _BankDropdownState extends State<BankDropdown> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
@@ -30,7 +35,7 @@ class BankDropdown extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  title,
+                  widget.title,
                   style: THeader(),
                 ),
                 Text(
@@ -46,9 +51,13 @@ class BankDropdown extends StatelessWidget {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 8)),
-              value: selectedBankName,
-              onChanged: onBankChanged,
-              items: banks.map((bank) {
+              value: widget.selectedBankName,
+              onChanged: (val) {
+                setState(() {
+                  widget.onBankChanged!(val);
+                });
+              },
+              items: widget.banks.map((bank) {
                 return DropdownMenuItem<String>(
                   value: bank['name'],
                   child: Text(bank['name']),
@@ -63,12 +72,16 @@ class BankDropdown extends StatelessWidget {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16)),
                   contentPadding: EdgeInsets.symmetric(horizontal: 8)),
-              value: selectedBranch,
-              onChanged: onBranchChanged,
-              items: selectedBankName != null
-                  ? banks
-                      .firstWhere((bank) => bank['name'] == selectedBankName)[
-                          'branches']
+              value: widget.selectedBranch,
+              onChanged: (val) {
+                setState(() {
+                  widget.onBranchChanged!(val);
+                });
+              },
+              items: widget.selectedBankName != null
+                  ? widget.banks
+                      .firstWhere((bank) =>
+                          bank['name'] == widget.selectedBankName)['branches']
                       .map<DropdownMenuItem<String>>((branch) {
                       return DropdownMenuItem<String>(
                         value: branch,

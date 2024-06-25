@@ -1,13 +1,16 @@
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+typedef OnChangeCallback = void Function(File value);
 
+class ImagePickerWidget extends StatefulWidget {
+  const ImagePickerWidget({Key? key, this.getFile}) : super(key: key);
+  final OnChangeCallback? getFile;
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
 }
@@ -26,7 +29,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         setState(() => this.imageUrl = pickedImage.path);
       } else {
         final imageTemp = io.File(pickedImage.path);
-        setState(() => this.image = imageTemp);
+        setState(() {
+          this.image = imageTemp;
+        });
+        if (image != null) {
+          widget.getFile!(image!);
+        }
       }
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');

@@ -5,11 +5,11 @@ import 'package:book/Form/Widget/NearbyProperty.dart';
 import 'package:book/Form/Widget/PhotoDetail.dart';
 import 'package:book/Form/Widget/PropertyInfo.dart';
 import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
-import 'package:book/Form/Widget/mapWidget.dart';
 import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
+import 'package:book/Model/CoverModel.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -22,6 +22,7 @@ class FormWidget extends StatefulWidget {
 
 class _FormWidgetState extends State<FormWidget> {
   var ck1;
+  Cover? dataCover;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,7 +33,14 @@ class _FormWidgetState extends State<FormWidget> {
               onChanged: (value) {
                 setState(() {
                   ck1 = value.toString();
-                  print("ch1 = ${ck1}\n");
+                });
+              },
+              getForm: (value) {
+                setState(() {
+                  if (value != null) {
+                    print("object ${value.info}");
+                    dataCover = value;
+                  }
                 });
               },
             ),
@@ -88,8 +96,9 @@ class _FormWidgetState extends State<FormWidget> {
               height: 20,
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 print("Save");
+                await InsertCover(dataCover!);
               },
               child: Center(
                   child: Container(
@@ -112,5 +121,22 @@ class _FormWidgetState extends State<FormWidget> {
         ),
       ),
     );
+  }
+
+  Future InsertCover(Cover objCover) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.1.31:8000/api/insertcover'));
+    request.fields.addAll(objCover.toJson().map(
+        (key, value) => MapEntry(key, value != null ? value.toString() : '')));
+    request.files
+        .add(await http.MultipartFile.fromPath('image', objCover.image.path));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
   }
 }

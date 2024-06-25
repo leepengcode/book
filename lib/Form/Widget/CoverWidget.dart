@@ -4,20 +4,28 @@ import 'package:book/Componnents/bankDropdown.dart';
 import 'package:book/Componnents/branchDropdown.dart';
 import 'package:book/Componnents/dropdown.dart';
 import 'package:book/Componnents/style.dart';
-import 'package:book/Provider/InputProvider.dart';
-
+import 'package:book/Model/CoverModel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
+// typedef OnChangeCallback = void Function(Cover value);
 
 class CoverWidget extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
-  const CoverWidget({super.key, this.onChanged});
+  final ValueChanged<Cover?>? getForm;
+  CoverWidget({
+    super.key,
+    this.onChanged,
+    this.getForm,
+  });
 
+  // final OnChangeCallback? objCove;
   @override
   State<CoverWidget> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<CoverWidget> {
+  Cover? objcover;
   final List<String> _HeaderList = [
     "Property [LAND AND BUILDING] VALUATION REPORT",
     "Property LAND VALUATION REPORT",
@@ -111,6 +119,11 @@ class _MyWidgetState extends State<CoverWidget> {
   DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1), () {
+      setState(() {
+        _selectedinfo;
+      });
+    });
     return Container(
       padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
       width: 1500,
@@ -130,11 +143,13 @@ class _MyWidgetState extends State<CoverWidget> {
                 onChanged: (value) {
                   setState(() {
                     _selectedVal = value!;
+                    print("ckeck form$_selectedVal\n");
+                    objcover!.header = _selectedVal.toString();
                     widget.onChanged!(_selectedVal.toString());
                   });
                 },
               ),
-              HeaderDropdown(
+              HeaderDropdown1(
                 hint: "Select Information",
                 title: "Select Information",
                 headerList: _inforList,
@@ -142,6 +157,8 @@ class _MyWidgetState extends State<CoverWidget> {
                 onChanged: (value) {
                   setState(() {
                     _selectedinfo = value!;
+                    objcover!.info = _selectedinfo!;
+                    print("ckeck form2 $value\n");
                   });
                 },
               ),
@@ -152,8 +169,16 @@ class _MyWidgetState extends State<CoverWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BankDropdown(
-                  onBankChanged: _onBankChanged,
-                  onBranchChanged: _onBranchChanged,
+                  onBankChanged: (val) {
+                    setState(() {
+                      _onBankChanged(val);
+                    });
+                  },
+                  onBranchChanged: (val) {
+                    setState(() {
+                      _onBranchChanged(val);
+                    });
+                  },
                   title: "Select Bank",
                   banks: _bankList,
                   selectedBankName: _selectedBankName,
@@ -177,6 +202,11 @@ class _MyWidgetState extends State<CoverWidget> {
                 child: TextFormField(
                   controller: _controller,
                   focusNode: _focusNode,
+                  onChanged: (value) {
+                    setState(() {
+                      objcover!.ownership = value;
+                    });
+                  },
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.grey[200],
@@ -215,7 +245,13 @@ class _MyWidgetState extends State<CoverWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: ImagePickerWidget(),
+                child: ImagePickerWidget(
+                  getFile: (value) {
+                    setState(() {
+                      objcover!.image = value;
+                    });
+                  },
+                ),
               ),
             ],
           ),
@@ -231,29 +267,72 @@ class _MyWidgetState extends State<CoverWidget> {
                 label: "",
                 width: 250,
                 controller: _controller,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    objcover!.ownername = value;
+                  });
+                },
               ),
               _buildTextFieldColumn(
-                  title: "Deep Title",
-                  label: "",
-                  width: 250,
-                  controller: TextEditingController()),
+                title: "Deep Title",
+                label: "",
+                width: 250,
+                controller: TextEditingController(),
+                onChanged: (p0) {
+                  setState(() {
+                    objcover!.deeptitle = p0.toString();
+                  });
+                },
+              ),
               _buildTextFieldColumn(
-                  title: "Property Location",
-                  label: "",
-                  width: 250,
-                  controller: TextEditingController()),
+                title: "Property Location",
+                label: "",
+                width: 250,
+                controller: TextEditingController(),
+                onChanged: (p0) {
+                  setState(() {
+                    objcover!.location = p0.toString();
+                  });
+                },
+              ),
               _buildTextFieldColumn(
-                  title: "Street",
-                  label: "",
-                  width: 250,
-                  controller: TextEditingController())
+                title: "Street",
+                label: "",
+                width: 250,
+                controller: TextEditingController(),
+                onChanged: (p0) {
+                  setState(() {
+                    objcover!.street = p0.toString();
+                  });
+                },
+              )
             ],
           ),
           const SizedBox(
             height: 25,
           ),
-          CascadingDropdown(),
+          CascadingDropdown(
+            getCity: (value) {
+              setState(() {
+                objcover!.cityorprovince = value.toString();
+              });
+            },
+            getDistrict: (value) {
+              setState(() {
+                objcover!.districtorsangkat = value.toString();
+              });
+            },
+            getCommune: (value) {
+              setState(() {
+                objcover!.communeorkhan = value.toString();
+              });
+            },
+            getProvince: (value) {
+              setState(() {
+                objcover!.villageorphum != value.toString();
+              });
+            },
+          ),
           SizedBox(
             height: 25,
           ),
@@ -266,6 +345,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 onChanged: (branch) {
                   setState(() {
                     _selectedbranch = branch;
+                    objcover!.reportto = _selectedbranch.toString();
                   });
                 },
               ),
@@ -296,6 +376,10 @@ class _MyWidgetState extends State<CoverWidget> {
                         if (newDate != null) {
                           setState(() {
                             date = newDate;
+                            String formattedDate =
+                                DateFormat("yyyy-MM-dd").format(date);
+                            objcover!.date = formattedDate;
+                            widget.getForm!(objcover!);
                           });
                         }
                       },
@@ -339,6 +423,9 @@ class _MyWidgetState extends State<CoverWidget> {
           child: TextFormField(
             readOnly: readOnly,
             controller: controller,
+            onChanged: (value) {
+              onChanged!(value);
+            },
             maxLines: null,
             decoration: InputDecoration(
                 filled: true,

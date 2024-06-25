@@ -26,7 +26,19 @@ class AddressData {
   };
 }
 
+typedef OnChangeCallback = void Function(dynamic value);
+
 class CascadingDropdown extends StatefulWidget {
+  final OnChangeCallback? getProvince;
+  final OnChangeCallback? getCity;
+  final OnChangeCallback? getDistrict;
+  final OnChangeCallback? getCommune;
+  const CascadingDropdown(
+      {super.key,
+      this.getProvince,
+      this.getCity,
+      this.getDistrict,
+      this.getCommune});
   @override
   _CascadingDropdownState createState() => _CascadingDropdownState();
 }
@@ -72,6 +84,7 @@ class _CascadingDropdownState extends State<CascadingDropdown> {
           onChanged: (value) {
             setState(() {
               selectedProvince = value;
+              widget.getProvince!(selectedProvince);
               selectedCity = null;
               selectedDistrict = null;
               selectedCommune = null;
@@ -86,6 +99,7 @@ class _CascadingDropdownState extends State<CascadingDropdown> {
           onChanged: (value) {
             setState(() {
               selectedCity = value;
+              widget.getCity!(selectedCity);
               selectedDistrict = null;
               selectedCommune = null;
             });
@@ -99,6 +113,7 @@ class _CascadingDropdownState extends State<CascadingDropdown> {
           onChanged: (value) {
             setState(() {
               selectedDistrict = value;
+              widget.getDistrict!(selectedDistrict);
               selectedCommune = null;
             });
           },
@@ -111,6 +126,7 @@ class _CascadingDropdownState extends State<CascadingDropdown> {
           onChanged: (value) {
             setState(() {
               selectedCommune = value;
+              widget.getCommune!(selectedCommune);
             });
           },
         ),
