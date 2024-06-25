@@ -29,108 +29,108 @@ class AddressData {
 typedef OnChangeCallback = void Function(dynamic value);
 
 class CascadingDropdown extends StatefulWidget {
-  final OnChangeCallback? getProvince;
-  final OnChangeCallback? getCity;
+  final OnChangeCallback? getCityorProvince;
   final OnChangeCallback? getDistrict;
   final OnChangeCallback? getCommune;
+  final OnChangeCallback? getVillage;
   const CascadingDropdown(
       {super.key,
-      this.getProvince,
-      this.getCity,
+      this.getCityorProvince,
       this.getDistrict,
-      this.getCommune});
+      this.getCommune,
+      this.getVillage});
   @override
   _CascadingDropdownState createState() => _CascadingDropdownState();
 }
 
 class _CascadingDropdownState extends State<CascadingDropdown> {
-  String? selectedProvince;
-  String? selectedCity;
+  String? selectedCityorProvince;
+
   String? selectedDistrict;
   String? selectedCommune;
+  String? selectedVillage;
 
   List<String> getProvinces() {
     return AddressData.address.keys.toList();
   }
 
-  List<String> getCities() {
-    if (selectedProvince == null) return [];
-    return AddressData.address[selectedProvince]!.keys.toList();
+  List<String> getCommune() {
+    if (selectedCityorProvince == null) return [];
+    return AddressData.address[selectedCityorProvince]!.keys.toList();
   }
 
-  List<String> getDistricts() {
-    if (selectedProvince == null || selectedCity == null) return [];
-    return AddressData.address[selectedProvince]![selectedCity]!.keys.toList();
+  List<String> getDistrict() {
+    if (selectedCityorProvince == null || selectedCommune == null) return [];
+    return AddressData.address[selectedCityorProvince]![selectedCommune]!.keys
+        .toList();
   }
 
-  List<String> getCommunes() {
-    if (selectedProvince == null ||
-        selectedCity == null ||
+  List<String> getVillage() {
+    if (selectedCityorProvince == null ||
+        selectedCommune == null ||
         selectedDistrict == null) return [];
     return AddressData
-        .address[selectedProvince]![selectedCity]![selectedDistrict]!;
+        .address[selectedCityorProvince]![selectedCommune]![selectedDistrict]!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        AddressDropdown(
-          headerList: getProvinces(),
-          selectedVal: selectedProvince,
-          title: 'Select City/Province',
-          hint: 'Choose a City/province',
-          onChanged: (value) {
-            setState(() {
-              selectedProvince = value;
-              widget.getProvince!(selectedProvince);
-              selectedCity = null;
-              selectedDistrict = null;
-              selectedCommune = null;
-            });
-          },
-        ),
-        AddressDropdown(
-          headerList: getCities(),
-          selectedVal: selectedCity,
-          title: 'Select Commune/Khan',
-          hint: 'Choose a Commune/Khan',
-          onChanged: (value) {
-            setState(() {
-              selectedCity = value;
-              widget.getCity!(selectedCity);
-              selectedDistrict = null;
-              selectedCommune = null;
-            });
-          },
-        ),
-        AddressDropdown(
-          headerList: getDistricts(),
-          selectedVal: selectedDistrict,
-          title: 'Select District/Sangkat',
-          hint: 'Choose a District/Sangkat',
-          onChanged: (value) {
-            setState(() {
-              selectedDistrict = value;
-              widget.getDistrict!(selectedDistrict);
-              selectedCommune = null;
-            });
-          },
-        ),
-        AddressDropdown(
-          headerList: getCommunes(),
-          selectedVal: selectedCommune,
-          title: 'Select Village/Phum',
-          hint: 'Choose a Village/Phum',
-          onChanged: (value) {
-            setState(() {
-              selectedCommune = value;
-              widget.getCommune!(selectedCommune);
-            });
-          },
-        ),
-      ],
-    );
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      AddressDropdown(
+        headerList: getProvinces(),
+        selectedVal: selectedCityorProvince,
+        title: 'Select City/Province',
+        hint: 'Choose a City/province',
+        onChanged: (value) {
+          setState(() {
+            selectedCityorProvince = value;
+            widget.getCityorProvince!(selectedCityorProvince);
+
+            selectedVillage = null;
+            selectedDistrict = null;
+            selectedCommune = null;
+          });
+        },
+      ),
+      AddressDropdown(
+        headerList: getCommune(),
+        selectedVal: selectedCommune,
+        title: 'Select Commune/Khan',
+        hint: 'Choose a Commune/Khan',
+        onChanged: (value) {
+          setState(() {
+            selectedCommune = value;
+            widget.getCommune!(selectedCommune);
+            selectedDistrict = null;
+            selectedVillage = null;
+          });
+        },
+      ),
+      AddressDropdown(
+        headerList: getDistrict(),
+        selectedVal: selectedDistrict,
+        title: 'Select District/Sangkat',
+        hint: 'Choose a District/Sangkat',
+        onChanged: (value) {
+          setState(() {
+            selectedDistrict = value;
+            widget.getDistrict!(selectedDistrict);
+            selectedVillage = null;
+          });
+        },
+      ),
+      AddressDropdown(
+        headerList: getVillage(),
+        selectedVal: selectedVillage,
+        title: 'Select Village/Phum',
+        hint: 'Choose a Village/Phum',
+        onChanged: (value) {
+          setState(() {
+            selectedVillage = value;
+            widget.getVillage!(selectedVillage);
+          });
+        },
+      )
+    ]);
   }
 }

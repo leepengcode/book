@@ -1,80 +1,134 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 
 class Cover {
-  late final String header;
-  late final String info;
-  late final String? bank;
-  late final String? branch;
-  late final String? ownership;
-  File image;
-  late final String ownername;
-  late final String deeptitle;
-  late final String? location;
-  late final String? street;
-  late final String cityorprovince;
-  late final String communeorkhan;
-  late final String districtorsangkat;
-  final String villageorphum;
-  late final String reportto;
-  late final String date;
+  String? header;
+  String? info;
+  String? bank;
+  String? branch;
+  String? ownership;
+  File? image;
+  String? ownername;
+  String? deeptitle;
+  String? location;
+  String? street;
+  String? cityorprovince;
+  String? communeorkhan;
+  String? districtorsangkat;
+  String? villageorphum;
+  String? reportto;
+  String? date;
 
   Cover({
-    required this.header,
-    required this.info,
+    this.header,
+    this.info,
     this.bank,
     this.branch,
     this.ownership,
-    required this.image,
-    required this.ownername,
-    required this.deeptitle,
+    this.image,
+    this.ownername,
+    this.deeptitle,
     this.location,
     this.street,
-    required this.cityorprovince,
-    required this.communeorkhan,
-    required this.districtorsangkat,
-    required this.villageorphum,
-    required this.reportto,
-    required this.date,
+    this.cityorprovince,
+    this.communeorkhan,
+    this.districtorsangkat,
+    this.villageorphum,
+    this.reportto,
+    this.date,
   });
-  factory Cover.fromJson(Map<String, dynamic> json) {
-    return Cover(
-      header: json['header'] ?? '',
-      info: json['info'] ?? '',
-      bank: json['bank'] ?? '',
-      branch: json['branch'] ?? '',
-      ownership: json['ownership'] ?? '',
-      image: json['image'],
-      ownername: json['ownername'] ?? '',
-      deeptitle: json['deeptitle'] ?? '',
-      location: json['location'] ?? '',
-      street: json['street'] ?? '',
-      cityorprovince: json['cityorprovince'] ?? '',
-      communeorkhan: json['communeorkhan'] ?? '',
-      districtorsangkat: json['districtorsangkat'] ?? '',
-      villageorphum: json['villageorphum'] ?? '',
-      reportto: json['reportto'] ?? '',
-      date: json['date'] ?? '',
-    );
-  }
-  Map<dynamic, dynamic> toJson() {
+
+  Map<String, String> toJson() {
     return {
-      'header': header,
-      'info': info,
-      'bank': bank,
-      'branch': branch,
-      'ownership': ownership,
-      // 'image': image,
-      'ownername': ownername,
-      'deeptitle': deeptitle,
-      'location': location,
-      'street': street,
-      'cityorprovince': cityorprovince,
-      'communeorkhan': communeorkhan,
-      'districtorsangkat': districtorsangkat,
-      'villageorphum': villageorphum,
-      'reportto': reportto,
-      'date': date,
+      'header': header ?? '',
+      'info': info ?? '',
+      'bank': bank ?? '',
+      'branch': branch ?? '',
+      'ownership': ownership ?? '',
+      'ownername': ownername ?? '',
+      'deeptitle': deeptitle ?? '',
+      'location': location ?? '',
+      'street': street ?? '',
+      'cityorprovince': cityorprovince ?? '',
+      'communeorkhan': communeorkhan ?? '',
+      'districtorsangkat': districtorsangkat ?? '',
+      'villageorphum': villageorphum ?? '',
+      'reportto': reportto ?? '',
+      'date': date ?? '',
     };
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    // return "${super.toString()} , '+ ' ${image!.path.toString()}";
+    return "${super.toString()} , '+ ' ${image!.path}";
+  }
+  Future<Uint8List> getBlobData(String url) async {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    } else {
+      throw Exception('Failed to load blob data');
+    }
+  }
+
+  Future InsertCover(Cover objCover) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.1.31:8000/api/insertcover'));
+
+    request.fields.addAll(objCover.toJson());
+
+    if (objCover.image != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objCover.image!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objCover.image!.path).readAsBytes();
+      }
+
+      request.files.add(http.MultipartFile.fromBytes(
+        'image',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
 }
+
+// Future<void> insertCover(Cover objCover) async {
+//   var request = http.MultipartRequest(
+//       'POST', Uri.parse('http://192.168.1.31:8000/api/insertcover'));
+
+//   request.fields.addAll(objCover.toJson());
+
+//   if (objCover.image != null) {
+//     request.files.add(await http.MultipartFile.fromPath('image', objCover.image!.path));
+//   }
+
+//   http.StreamedResponse response = await request.send();
+
+//   if (response.statusCode == 201) {
+//     print(await response.stream.bytesToString());
+//   } else {
+//     print(response.reasonPhrase);
+//   }
+
+// }
+
+

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:book/Class/address.dart';
 import 'package:book/Componnents/ImagWidget.dart';
 import 'package:book/Componnents/bankDropdown.dart';
@@ -25,7 +27,17 @@ class CoverWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<CoverWidget> {
-  Cover? objcover;
+  Cover objcover = Cover(
+      header: "header",
+      info: "info",
+      ownername: "ownername",
+      deeptitle: "deeptitle",
+      cityorprovince: "cityorprovince",
+      communeorkhan: "communeorkhan",
+      districtorsangkat: "districtorsangkat",
+      villageorphum: "villageorphum",
+      reportto: "reportto",
+      date: null);
   final List<String> _HeaderList = [
     "Property [LAND AND BUILDING] VALUATION REPORT",
     "Property LAND VALUATION REPORT",
@@ -95,6 +107,7 @@ class _MyWidgetState extends State<CoverWidget> {
   void _onBankChanged(String? value) {
     setState(() {
       _selectedBankName = value;
+      objcover.bank = _selectedBankName;
       _selectedBankBranch = null;
     });
   }
@@ -102,12 +115,13 @@ class _MyWidgetState extends State<CoverWidget> {
   void _onBranchChanged(String? value) {
     setState(() {
       _selectedBankBranch = value;
+      objcover.branch = _selectedBankBranch;
     });
   }
 
-  final _formKey = GlobalKey<FormState>();
-  final _controller = TextEditingController();
-  final _focusNode = FocusNode();
+  // final _formKey = GlobalKey<FormState>();
+  // final _controller = TextEditingController();
+  // final _focusNode = FocusNode();
 
   // @override
   // void dispose() {
@@ -115,6 +129,12 @@ class _MyWidgetState extends State<CoverWidget> {
   //   _focusNode.dispose();
   //   super.dispose();
   // }
+  File? io;
+  final owneShipController = TextEditingController();
+  final ownerNameContoller = TextEditingController();
+  final deepTitleController = TextEditingController();
+  final locationControltter = TextEditingController();
+  final streetController = TextEditingController();
 
   DateTime date = DateTime.now();
   @override
@@ -122,6 +142,11 @@ class _MyWidgetState extends State<CoverWidget> {
     Future.delayed(Duration(milliseconds: 1), () {
       setState(() {
         _selectedinfo;
+        _selectedVal;
+        objcover;
+        objcover.image = io;
+
+        widget.onChanged!(_selectedVal.toString());
       });
     });
     return Container(
@@ -200,11 +225,11 @@ class _MyWidgetState extends State<CoverWidget> {
               child: Container(
                 width: 550,
                 child: TextFormField(
-                  controller: _controller,
-                  focusNode: _focusNode,
+                  controller: owneShipController,
+
                   onChanged: (value) {
                     setState(() {
-                      objcover!.ownership = value;
+                      objcover.ownership = value;
                     });
                   },
                   decoration: InputDecoration(
@@ -248,7 +273,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 child: ImagePickerWidget(
                   getFile: (value) {
                     setState(() {
-                      objcover!.image = value;
+                      io = value;
                     });
                   },
                 ),
@@ -266,10 +291,10 @@ class _MyWidgetState extends State<CoverWidget> {
                 title: "Owner Name",
                 label: "",
                 width: 250,
-                controller: _controller,
+                controller: ownerNameContoller,
                 onChanged: (value) {
                   setState(() {
-                    objcover!.ownername = value;
+                    objcover.ownername = value;
                   });
                 },
               ),
@@ -277,10 +302,10 @@ class _MyWidgetState extends State<CoverWidget> {
                 title: "Deep Title",
                 label: "",
                 width: 250,
-                controller: TextEditingController(),
-                onChanged: (p0) {
+                controller: deepTitleController,
+                onChanged: (value) {
                   setState(() {
-                    objcover!.deeptitle = p0.toString();
+                    objcover.deeptitle = value;
                   });
                 },
               ),
@@ -288,10 +313,10 @@ class _MyWidgetState extends State<CoverWidget> {
                 title: "Property Location",
                 label: "",
                 width: 250,
-                controller: TextEditingController(),
-                onChanged: (p0) {
+                controller: locationControltter,
+                onChanged: (value) {
                   setState(() {
-                    objcover!.location = p0.toString();
+                    objcover.location = value;
                   });
                 },
               ),
@@ -299,10 +324,10 @@ class _MyWidgetState extends State<CoverWidget> {
                 title: "Street",
                 label: "",
                 width: 250,
-                controller: TextEditingController(),
-                onChanged: (p0) {
+                controller: streetController,
+                onChanged: (value) {
                   setState(() {
-                    objcover!.street = p0.toString();
+                    objcover.street = value;
                   });
                 },
               )
@@ -312,24 +337,24 @@ class _MyWidgetState extends State<CoverWidget> {
             height: 25,
           ),
           CascadingDropdown(
-            getCity: (value) {
+            getCityorProvince: (value) {
               setState(() {
-                objcover!.cityorprovince = value.toString();
+                objcover.cityorprovince = value;
               });
             },
             getDistrict: (value) {
               setState(() {
-                objcover!.districtorsangkat = value.toString();
+                objcover.districtorsangkat = value.toString();
               });
             },
             getCommune: (value) {
               setState(() {
-                objcover!.communeorkhan = value.toString();
+                objcover.communeorkhan = value.toString();
               });
             },
-            getProvince: (value) {
+            getVillage: (value) {
               setState(() {
-                objcover!.villageorphum != value.toString();
+                objcover.villageorphum = value.toString();
               });
             },
           ),
@@ -345,7 +370,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 onChanged: (branch) {
                   setState(() {
                     _selectedbranch = branch;
-                    objcover!.reportto = _selectedbranch.toString();
+                    objcover.reportto = _selectedbranch.toString();
                   });
                 },
               ),
@@ -373,15 +398,20 @@ class _MyWidgetState extends State<CoverWidget> {
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
                         );
+
                         if (newDate != null) {
                           setState(() {
                             date = newDate;
                             String formattedDate =
                                 DateFormat("yyyy-MM-dd").format(date);
-                            objcover!.date = formattedDate;
-                            widget.getForm!(objcover!);
+                            objcover.date = formattedDate;
+
+                            widget.getForm!(objcover);
                           });
                         }
+                        // setState(() {
+                        //   print("object Cover ${objcover.toString()}\n");
+                        // });
                       },
                     ),
                   ),

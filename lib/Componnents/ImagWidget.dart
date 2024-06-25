@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-typedef OnChangeCallback = void Function(File value);
+typedef OnChangeCallback = void Function(dynamic value);
 
 class ImagePickerWidget extends StatefulWidget {
   const ImagePickerWidget({Key? key, this.getFile}) : super(key: key);
@@ -16,26 +16,27 @@ class ImagePickerWidget extends StatefulWidget {
 }
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  io.File? image;
+  File? image;
   String? imageUrl;
 
   Future pickImage() async {
     try {
-      final pickedImage =
+      XFile? pickedImage =
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage == null) return;
+      setState(() {
+        imageUrl = pickedImage.path;
+        image = File(pickedImage.path);
+      });
 
-      if (kIsWeb) {
-        setState(() => this.imageUrl = pickedImage.path);
-      } else {
-        final imageTemp = io.File(pickedImage.path);
-        setState(() {
-          this.image = imageTemp;
-        });
-        if (image != null) {
-          widget.getFile!(image!);
-        }
-      }
+      // if (kIsWeb) {
+      //   setState(() => this.imageUrl = pickedImage.path);
+      // } else {
+      //   final imageTemp = io.;
+      //   setState(() {
+      //     image = imageTemp;
+      //   });
+      // }
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -43,19 +44,19 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1), () {
+      setState(() {
+        if (image != null) {
+          widget.getFile!(image!);
+        }
+      });
+    });
     return Stack(
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (image != null)
-              Image.file(
-                image!,
-                // width: 500,
-                // height: 300,
-                fit: BoxFit.cover,
-              )
-            else if (imageUrl != null)
               Image.network(
                 imageUrl!,
                 // width: 500,
@@ -74,8 +75,8 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               height: 300,
               decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
               child: Center(
-                child: image == null && imageUrl == null
-                    ? Icon(
+                child: (image == null)
+                    ? const Icon(
                         Icons.image,
                         size: 50,
                       )
