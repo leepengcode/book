@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+
 class PropertyInfor {
   String? plotno;
   String? north;
@@ -232,5 +234,23 @@ class PropertyInfor {
       'telecom': telecom ?? '',
       'security': security ?? ''
     };
+  }
+
+  Future InsertInfo(PropertyInfor dataInfo) async {
+    var dio = Dio();
+    var response = await dio.request(
+      'http://192.168.1.31:8000/api/insertinfo',
+      options: Options(
+        method: 'POST',
+      ),
+      data: dataInfo.toJson(),
+    );
+    print("statusCode : ${dataInfo.toJson()}\n\n\n\n");
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      print(json.encode(response.data));
+    } else {
+      print("${response.statusMessage}" + "${response.statusCode}");
+    }
   }
 }

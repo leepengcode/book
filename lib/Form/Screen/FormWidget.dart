@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:book/Form/Widget/CoverWidget.dart';
@@ -10,7 +11,10 @@ import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
 import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
 import 'package:book/Model/CoverModel.dart';
+import 'package:book/Model/GoogleMapModep.dart';
+import 'package:book/Model/IDCardModel.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -28,13 +32,25 @@ class _FormWidgetState extends State<FormWidget> {
   var ck1;
   Cover? dataCover;
   PropertyInfor? dataInfo;
+  IDCard? dataIdcard;
+  // Future InsertInfo() async {
+  //   //   var request = http.MultipartRequest(
+  //   //       'POST', Uri.parse('http://192.168.1.31:8000/api/insertinfo'));
+  //   //   request.fields.addAll(dataInfo!.toJson());
+  //   //   http.StreamedResponse response = await request.send();
+  //   //   setState(() {
+  //   //     print("test btn ${response.statusCode}\n");
+  //   //   });
+  //   //   if (response.statusCode == 200 || response.statusCode == 201) {
+  //   //     // print(await response.stream.bytesToString());
+  //   //     print("Success\n");
+  //   //   } else {
+  //   //     print(response.reasonPhrase);
+  //   //   }
+  //   // }
+  // }
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1), () {
-      setState(() {
-        print(" Data ${dataInfo!.bathroom}");
-      });
-    });
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -54,24 +70,31 @@ class _FormWidgetState extends State<FormWidget> {
             //     });
             //   },
             // ),
-            const SizedBox(
-              height: 25,
-            ),
-            PropertyInfo_Widget(
-              getForm: (value) {
-                setState(() {
-                  dataInfo = value;
-                });
-              },
-              ck1: ck1,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            // const uploadIDCard(),
             // const SizedBox(
             //   height: 25,
             // ),
+            // PropertyInfo_Widget(
+            //   getForm: (value) {
+            //     setState(() {
+            //       dataInfo = value;
+            //     });
+            //   },
+            //   ck1: ck1,
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            uploadIDCard(
+              getForm: (value) {
+                if (value != null) {
+                  dataIdcard = value;
+                  //print("kokok\n");
+                }
+              },
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             // uploadLayoutWidget(
             //   ck1: ck1,
             // ),
@@ -112,7 +135,13 @@ class _FormWidgetState extends State<FormWidget> {
             ),
             GestureDetector(
               onTap: () async {
-                await InsertInfo(dataInfo!);
+                await InsertIdCard(dataIdcard!);
+
+                // await PropertyInfor()
+                //   ..InsertInfo(dataInfo!);
+
+                // await Cover()
+                //   ..InsertCover(dataCover!);
               },
               child: Center(
                   child: Container(
@@ -137,28 +166,97 @@ class _FormWidgetState extends State<FormWidget> {
     );
   }
 
-  Future<void> InsertInfo(PropertyInfor objInfo) async {
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://192.168.1.31:8000/api/insertinfo'));
+  Future<Uint8List> getBlobData(String url) async {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    } else {
+      throw Exception('Failed to load blob data');
+    }
+  }
 
-      // Log the request fields for debugging
-      Map<String, String> requestFields = objInfo.toJson();
-      print('Request fields: $requestFields');
+  Future InsertIdCard(IDCard objidcard) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.1.31:8000/api/insertidcard'));
 
-      request.fields.addAll(requestFields);
-
-      http.StreamedResponse response = await request.send();
-
-      if (response.statusCode == 201) {
-        print('Success: ${await response.stream.bytesToString()}');
+    if (objidcard.frontidcard1 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.frontidcard1!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.frontidcard1!.path);
       } else {
-        print('Error: ${response.statusCode} ${response.reasonPhrase}');
-        print('Response: ${await response.stream.bytesToString()}');
+        // For mobile environment
+        cvByte = await File(objidcard.frontidcard1!.path).readAsBytes();
       }
-    } catch (e, stacktrace) {
-      print('Exception: $e');
-      print('Stacktrace: $stacktrace');
+      request.files.add(http.MultipartFile.fromBytes(
+        'frontidcard1',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    if (objidcard.frontidcard2 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.frontidcard2!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.frontidcard2!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objidcard.frontidcard2!.path).readAsBytes();
+      }
+      request.files.add(http.MultipartFile.fromBytes(
+        'frontidcard2',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    if (objidcard.backidcard1 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.backidcard1!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.backidcard1!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objidcard.backidcard1!.path).readAsBytes();
+      }
+      request.files.add(http.MultipartFile.fromBytes(
+        'backidcard1',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    if (objidcard.backidcard2 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.backidcard2!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.backidcard2!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objidcard.backidcard2!.path).readAsBytes();
+      }
+      request.files.add(http.MultipartFile.fromBytes(
+        'backidcard2',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }

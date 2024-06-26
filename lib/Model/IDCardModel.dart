@@ -1,16 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
 class IDCard {
-  var frontidcard1;
-  var frontidcard2;
-  var backidcard1;
-  var backidcard2;
+  File? frontidcard1;
+  File? frontidcard2;
+  File? backidcard1;
+  File? backidcard2;
 
   IDCard({
-    this.frontidcard1,
-    this.frontidcard2,
-    this.backidcard1,
-    this.backidcard2,
+     this.frontidcard1,
+     this.frontidcard2,
+     this.backidcard1,
+     this.backidcard2,
   });
   factory IDCard.fromJson(Map<String, dynamic> json) {
     return IDCard(
@@ -20,12 +21,14 @@ class IDCard {
       backidcard2: json['backidcard2'] ?? '',
     );
   }
-  Map<String, dynamic> toJson() {
-    return {
-      'frontidcard1': frontidcard1,
-      'frontidcard2': frontidcard2,
-      'backidcard1': backidcard1,
-      'backidcard2': backidcard2,
-    };
-  }
+
+  // With file we don't use Tojson
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'frontidcard1': frontidcard1,
+  //     'frontidcard2': frontidcard2,
+  //     'backidcard1': backidcard1,
+  //     'backidcard2': backidcard2,
+  //   };
+  // }
 }

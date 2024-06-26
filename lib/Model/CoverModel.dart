@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -67,6 +66,7 @@ class Cover {
     // return "${super.toString()} , '+ ' ${image!.path.toString()}";
     return "${super.toString()} , '+ ' ${image!.path}";
   }
+
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {

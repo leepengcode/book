@@ -54,6 +54,7 @@ dependencies:
   provider: ^6.1.2
   http: ^1.2.1
   intl: any
+  dio: ^5.4.3+1
 
 dev_dependencies:
   flutter_test:

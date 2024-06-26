@@ -28,15 +28,6 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         imageUrl = pickedImage.path;
         image = File(pickedImage.path);
       });
-
-      // if (kIsWeb) {
-      //   setState(() => this.imageUrl = pickedImage.path);
-      // } else {
-      //   final imageTemp = io.;
-      //   setState(() {
-      //     image = imageTemp;
-      //   });
-      // }
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }

@@ -1,33 +1,34 @@
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
+typedef OnChangeCallback = void Function(dynamic value);
+
 class IdcardPicker extends StatefulWidget {
-  const IdcardPicker({Key? key}) : super(key: key);
+  final OnChangeCallback? getFile;
+  const IdcardPicker({Key? key, this.getFile}) : super(key: key);
 
   @override
   State<IdcardPicker> createState() => _ButtonWidgetState();
 }
 
 class _ButtonWidgetState extends State<IdcardPicker> {
-  io.File? image;
+  File? image;
   String? imageUrl;
 
   Future pickImage() async {
     try {
-      final pickedImage =
+      XFile? pickedImage =
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage == null) return;
-
-      if (kIsWeb) {
-        setState(() => this.imageUrl = pickedImage.path);
-      } else {
-        final imageTemp = io.File(pickedImage.path);
-        setState(() => this.image = imageTemp);
-      }
+      setState(() {
+        imageUrl = pickedImage.path;
+        image = File(pickedImage.path);
+      });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -35,44 +36,51 @@ class _ButtonWidgetState extends State<IdcardPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (image != null)
-              Image.file(
-                image!,
+    Future.delayed(Duration(milliseconds: 10), () {
+      setState(() {
+        if (image != null) {
+          widget.getFile!(image!);
+        }
+      });
+    });
+    return InkWell(
+      onHover: (value) {
+        setState(() {
+          print("testing\n\n\n");
+        });
+      },
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (image != null)
+                Image.network(
+                  imageUrl!,
+                  width: 500,
+                  height: 300,
+                  fit: BoxFit.cover,
+                )
+            ],
+          ),
+          Positioned(
+              child: GestureDetector(
+            onTap: () {
+              pickImage();
+            },
+            child: Container(
                 width: 500,
                 height: 300,
-                fit: BoxFit.cover,
-              )
-            else if (imageUrl != null)
-              Image.network(
-                imageUrl!,
-                width: 500,
-                height: 300,
-                fit: BoxFit.cover,
-              )
-          ],
-        ),
-        Positioned(
-            child: GestureDetector(
-          onTap: () {
-            pickImage();
-          },
-          child: Container(
-              width: 500,
-              height: 300,
-              decoration: BoxDecoration(border: Border.all()),
-              child: image == null && imageUrl == null
-                  ? Icon(
-                      Icons.image,
-                      size: 50,
-                    )
-                  : SizedBox()),
-        ))
-      ],
+                decoration: BoxDecoration(border: Border.all()),
+                child: image == null && imageUrl == null
+                    ? Icon(
+                        Icons.image,
+                        size: 50,
+                      )
+                    : SizedBox()),
+          ))
+        ],
+      ),
     );
   }
 }

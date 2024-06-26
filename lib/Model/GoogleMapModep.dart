@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-class IDCard {
+class GoogleMap {
   var mapimage;
 
-  IDCard({
+  GoogleMap({
     this.mapimage,
-  }); 
-  
-  factory IDCard.fromJson(Map<String, dynamic> json) {
-    return IDCard(
+  });
+
+  factory GoogleMap.fromJson(Map<String, dynamic> json) {
+    return GoogleMap(
       mapimage: json['mapimage'] ?? '',
     );
   }

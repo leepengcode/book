@@ -4,64 +4,63 @@ import 'package:book/Model/PropertyInfoModel.dart';
 import 'package:flutter/material.dart';
 
 class PropertyInfo_Widget extends StatefulWidget {
-  final String? ck1;
-  const PropertyInfo_Widget({
+  PropertyInfo_Widget({
     super.key,
     this.ck1,
     this.getForm,
   });
-
-  final ValueChanged<PropertyInfor?>? getForm;
+  final String? ck1;
+  final ValueChanged<PropertyInfor>? getForm;
   @override
   State<PropertyInfo_Widget> createState() => _PropertyInfo_WidgetState();
 }
 
 class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
-  PropertyInfor objInfo = new PropertyInfor(
-      // bathroom: "Skokok",r
-      // buildingage: "S",
-      // buildingsize: "s",
-      // buildingtype: "w",
-      // byowner: "q",
-      // ceiling: "q",
-      // cost: "w",
-      // diningnlivingroom: "d",
-      // disposability: "d",
-      // door: "d",
-      // east: "d",
-      // electricity: "d",
-      // flatsize: "d",
-      // floor: "d",
-      // floornstory: "d",
-      // kitchen: "d",
-      // landsize: "s",
-      // landtitledeep: "d",
-      // metalroof: "s",
-      // north: "s",
-      // occoupied: "s",
-      // occupant: "s",
-      // percentage: "s",
-      // plotno: "s",
-      // quality: "s",
-      // roof: "s",
-      // room: "s",
-      // security: "dkoko",
-      // severage: "S",
-      // south: "s",
-      // stair: "s",
-      // store: "s",
-      // telecom: "s",
-      // tenure: "s",
-      // total: "s",
-      // totalland: "s",
-      // totalsize: "s",
-      // typeland: "s",
-      // typeofbuilding: "s",
-      // wall: "s",
-      // water: "s",
-      // west: "s",
-      // windows: "s",
-      );
+  PropertyInfor objInfo = PropertyInfor(
+    bathroom: "Skokok",
+    buildingage: "S",
+    buildingsize: "s",
+    buildingtype: "w",
+    byowner: "q",
+    ceiling: "q",
+    cost: "w",
+    diningnlivingroom: "d",
+    disposability: "d",
+    door: "d",
+    east: "d",
+    electricity: "d",
+    flatsize: "d",
+    floor: "d",
+    floornstory: "d",
+    kitchen: "d",
+    landsize: "s",
+    landtitledeep: "d",
+    metalroof: "s",
+    north: "s",
+    occoupied: "s",
+    occupant: "s",
+    percentage: "s",
+    plotno: "s",
+    quality: "s",
+    roof: "s",
+    room: "s",
+    security: "dkoko",
+    severage: "S",
+    south: "s",
+    stair: "s",
+    store: "s",
+    telecom: "s",
+    tenure: "s",
+    total: "s",
+    totalland: "s",
+    totalsize: "s",
+    typeland: "s",
+    typeofbuilding: "s",
+    wall: "s",
+    water: "s",
+    west: "s",
+    windows: "s",
+  );
 
   final _plotno = TextEditingController();
   final _north = TextEditingController();
@@ -109,138 +108,145 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1), () {
-      setState(() {
-        objInfo.plotno = _plotno.text;
-        objInfo.north = _north.text;
-        objInfo.south = _south.text;
-        objInfo.east = _east.text;
-        objInfo.west = _west.text;
-        objInfo.landtitledeep = _landtitledeep.text;
-        objInfo.landsize = _landsize.text;
-        objInfo.totalland = _totalland.text;
-        objInfo.typeland = _typeland.text;
-        objInfo.occupant = _occupant.text;
-        objInfo.tenure = _tenure.text;
-        objInfo.flatsize = _flatsize.text;
-        objInfo.buildingsize = _buildingsize.text;
-        objInfo.totalsize = _totalsize.text;
-        objInfo.buildingtype = _buildingtype.text;
-        objInfo.buildingage = _buildingage.text;
-        objInfo.cost = _cost.text;
-        objInfo.byowner = _byowner.text;
-        objInfo.metalroof = _metalroof.text;
-        objInfo.occoupied = _occoupied.text;
-        objInfo.disposability = _disposability.text;
-        objInfo.quality = _quality.text;
-        objInfo.percentage = _percentage.text;
-        objInfo.typeofbuilding = _typeofbuilding.text;
-        objInfo.floor = _floor.text;
-        objInfo.roof = _roof.text;
-        objInfo.door = _door.text;
-        objInfo.stair = _stair.text;
-        objInfo.windows = _windows.text;
-        objInfo.ceiling = _ceiling.text;
-        objInfo.wall = _wall.text;
-        objInfo.floornstory = _floornstory.text;
-        objInfo.bathroom = _bathroom.text;
-        objInfo.room = _room.text;
-        objInfo.kitchen = _kitchen.text;
-        objInfo.diningnlivingroom = _diningnlivingroom.text;
-        objInfo.store = _store.text;
-        objInfo.total = _total.text;
-        objInfo.water = _water.text;
-        objInfo.electricity = _electricity.text;
-        objInfo.severage = _severage.text;
-        objInfo.telecom = _telecom.text;
-        objInfo.security = _security.text;
-        widget.getForm!(objInfo);
-      });
-    });
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-      width: 1500,
-      decoration: BoxDecoration(
-          color: Colors.blueGrey.shade100,
-          borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "1.Bordered by the following",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildTextFieldColumn(
-                  title: "Plot Nº", label: "", width: 250, controller: _plotno),
-              _buildTextFieldColumn(
-                  title: "North", label: "", width: 250, controller: _north),
-              _buildTextFieldColumn(
-                  title: "South", label: "", width: 250, controller: _south),
-              _buildTextFieldColumn(
-                  title: "East", label: "", width: 250, controller: _east),
-              _buildTextFieldColumn(
-                  title: "West", label: "", width: 250, controller: _west),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "2.Land",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildTextFieldColumn(
-                  title: "Land title deed Nº",
-                  label: "",
-                  width: 250,
-                  controller: _landtitledeep),
-              _buildTextFieldColumn(
-                  title: "Land Size(by title deed)",
-                  label: "",
-                  width: 250,
-                  keytype: TextInputType.number,
-                  controller: _landsize),
-              _buildTextFieldColumn(
-                  title: "Total Land Size(by Measurement)",
-                  label: "",
-                  width: 250,
-                  keytype: TextInputType.number,
-                  controller: _totalland),
-              _buildTextFieldColumn(
-                  title: "Type of land",
-                  label: "",
-                  width: 250,
-                  controller: _typeland),
-              if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+    return InkWell(
+      onFocusChange: (value) {
+        if (value == false) {
+          setState(() {
+            objInfo.plotno = _plotno.text.toString();
+            objInfo.north = _north.text.toString();
+            objInfo.south = _south.text.toString();
+            objInfo.east = _east.text.toString();
+            objInfo.west = _west.text.toString();
+            objInfo.landtitledeep = _landtitledeep.text.toString();
+            objInfo.landsize = _landsize.text.toString();
+            objInfo.totalland = _totalland.text.toString();
+            objInfo.typeland = _typeland.text.toString();
+            objInfo.occupant = _occupant.text.toString();
+            objInfo.tenure = _tenure.text.toString();
+            objInfo.flatsize = _flatsize.text.toString();
+            objInfo.buildingsize = _buildingsize.text.toString();
+            objInfo.totalsize = _totalsize.text.toString();
+            objInfo.buildingtype = _buildingtype.text.toString();
+            objInfo.buildingage = _buildingage.text.toString();
+            objInfo.cost = _cost.text.toString();
+            objInfo.byowner = _byowner.text.toString();
+            objInfo.metalroof = _metalroof.text.toString();
+            objInfo.occoupied = _occoupied.text.toString();
+            objInfo.disposability = _disposability.text.toString();
+            objInfo.quality = _quality.text.toString();
+            objInfo.percentage = _percentage.text.toString();
+            objInfo.typeofbuilding = _typeofbuilding.text.toString();
+            objInfo.floor = _floor.text.toString();
+            objInfo.roof = _roof.text.toString();
+            objInfo.door = _door.text.toString();
+            objInfo.stair = _stair.text.toString();
+            objInfo.windows = _windows.text.toString();
+            objInfo.ceiling = _ceiling.text.toString();
+            objInfo.wall = _wall.text.toString();
+            objInfo.floornstory = _floornstory.text.toString();
+            objInfo.bathroom = _bathroom.text.toString();
+            objInfo.room = _room.text.toString();
+            objInfo.kitchen = _kitchen.text.toString();
+            objInfo.diningnlivingroom = _diningnlivingroom.text.toString();
+            objInfo.store = _store.text.toString();
+            objInfo.total = _total.text.toString();
+            objInfo.water = _water.text.toString();
+            objInfo.electricity = _electricity.text.toString();
+            objInfo.severage = _severage.text.toString();
+            objInfo.telecom = _telecom.text.toString();
+            objInfo.security = _security.text.toString();
+            print("${objInfo.toJson()}\n");
+            widget.getForm!(objInfo);
+          });
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+        width: 1500,
+        decoration: BoxDecoration(
+            color: Colors.blueGrey.shade100,
+            borderRadius: BorderRadius.circular(10)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "1.Bordered by the following",
+              style: THeader(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
                 _buildTextFieldColumn(
-                    title: "Occupant",
+                    title: "Plot Nº",
                     label: "",
                     width: 250,
-                    controller: _occupant),
-              ] else ...[
+                    controller: _plotno),
                 _buildTextFieldColumn(
-                    title: "Type of Tenure",
+                    title: "North", label: "", width: 250, controller: _north),
+                _buildTextFieldColumn(
+                    title: "South", label: "", width: 250, controller: _south),
+                _buildTextFieldColumn(
+                    title: "East", label: "", width: 250, controller: _east),
+                _buildTextFieldColumn(
+                    title: "West", label: "", width: 250, controller: _west),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "2.Land",
+              style: THeader(),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildTextFieldColumn(
+                    title: "Land title deed Nº",
                     label: "",
                     width: 250,
-                    controller: _tenure),
-              ]
-            ],
-          ),
-          if (widget.ck1 != "Property LAND VALUATION REPORT")
+                    controller: _landtitledeep),
+                _buildTextFieldColumn(
+                    title: "Land Size(by title deed)",
+                    label: "",
+                    width: 250,
+                    keytype: TextInputType.number,
+                    controller: _landsize),
+                _buildTextFieldColumn(
+                    title: "Total Land Size(by Measurement)",
+                    label: "",
+                    width: 250,
+                    keytype: TextInputType.number,
+                    controller: _totalland),
+                _buildTextFieldColumn(
+                    title: "Type of land",
+                    label: "",
+                    width: 250,
+                    controller: _typeland),
+                if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+                  _buildTextFieldColumn(
+                      title: "Occupant",
+                      label: "",
+                      width: 250,
+                      controller: _occupant),
+                ] else ...[
+                  _buildTextFieldColumn(
+                      title: "Type of Tenure",
+                      label: "",
+                      width: 250,
+                      controller: _tenure),
+                ]
+              ],
+            ),
+            // if (widget.ck1 != "Property LAND VALUATION REPORT")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -516,7 +522,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                 ),
               ],
             )
-        ],
+          ],
+        ),
       ),
     );
   }

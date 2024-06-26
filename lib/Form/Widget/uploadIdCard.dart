@@ -1,14 +1,39 @@
+import 'dart:io';
+
 import 'package:book/Componnents/IdCard.dart';
 import 'package:book/Componnents/style.dart';
+import 'package:book/Model/IDCardModel.dart';
 import 'package:flutter/material.dart';
 
-class uploadIDCard extends StatelessWidget {
-  const uploadIDCard({
+class uploadIDCard extends StatefulWidget {
+  final ValueChanged<IDCard?>? getForm;
+  uploadIDCard({
     super.key,
+    this.getForm,
   });
 
   @override
+  State<uploadIDCard> createState() => _uploadIDCardState();
+}
+
+class _uploadIDCardState extends State<uploadIDCard> {
+  List<File> io = [];
+  IDCard objIDCard = IDCard();
+  bool ck = false;
+
+  @override
   Widget build(BuildContext context) {
+    setState(() {
+      if (io.length == 4 && ck == false) {
+        objIDCard.frontidcard1 = io[0];
+        objIDCard.backidcard1 = io[1];
+        objIDCard.frontidcard2 = io[2];
+        objIDCard.backidcard2 = io[3];
+        print("kkokokoko ${io.length}\n\n\n");
+        widget.getForm!(objIDCard);
+        ck = true;
+      }
+    });
     return Container(
         padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
         width: 1500,
@@ -34,7 +59,19 @@ class uploadIDCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  IdcardPicker(),
+                  IdcardPicker(
+                    getFile: (value) {
+                      if (io.length == 0) {
+                        setState(() {
+                          if (value != null) {
+                            print("upload card1 ${value.toString()}\n");
+
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
               SizedBox(
@@ -55,7 +92,18 @@ class uploadIDCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  IdcardPicker(),
+                  IdcardPicker(
+                    getFile: (value) {
+                      if (io.length == 1) {
+                        setState(() {
+                          if (value != null) {
+                            print("upload card2 ${value.toString()}\n");
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
             ],
@@ -81,7 +129,18 @@ class uploadIDCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  IdcardPicker(),
+                  IdcardPicker(
+                    getFile: (value) {
+                      if (io.length == 2) {
+                        setState(() {
+                          if (value != null) {
+                            print("upload card3 ${value.toString()}\n");
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
               SizedBox(
@@ -102,7 +161,18 @@ class uploadIDCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  IdcardPicker(),
+                  IdcardPicker(
+                    getFile: (value) {
+                      if (io.length == 3) {
+                        setState(() {
+                          if (value != null) {
+                            print("upload card4 ${value.toString()}\n");
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
             ],
