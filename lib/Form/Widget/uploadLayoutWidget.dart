@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:book/Componnents/style.dart';
-import 'package:book/Componnents/uploadLayer.dart';
+import 'package:book/Componnents/uploadLayout.dart';
 import 'package:book/Componnents/uploadTD.dart';
+import 'package:book/Model/LayoutModel.dart';
 import 'package:flutter/material.dart';
 
 class uploadLayoutWidget extends StatefulWidget {
+  final ValueChanged<Layout?>? getForm;
   final String? ck1;
   const uploadLayoutWidget({
     super.key,
     this.ck1,
+    this.getForm,
   });
 
   @override
@@ -15,8 +20,21 @@ class uploadLayoutWidget extends StatefulWidget {
 }
 
 class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
+  List<File> io = [];
+  Layout objLayoutd = Layout();
+  bool ck = false;
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      if (io.length == 3 && ck == false) {
+        objLayoutd.deepimage1 = io[0];
+        objLayoutd.deepimage2 = io[1];
+        objLayoutd.layoutimage = io[2];
+        print("kkokokoko ${io.length}\n\n\n");
+        widget.getForm!(objLayoutd);
+        ck = true;
+      }
+    });
     return Container(
         padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
         width: 1500,
@@ -48,7 +66,19 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
                       )
                     ],
                   ),
-                  TDImagePicker(),
+                  TDImagePicker(
+                    getFile: (value) {
+                      if (io.length == 0) {
+                        setState(() {
+                          if (value != null) {
+                            print("Upload DT 1 ${value.toString()}\n");
+
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
               SizedBox(
@@ -68,7 +98,19 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
                       )
                     ],
                   ),
-                  TDImagePicker(),
+                  TDImagePicker(
+                    getFile: (value) {
+                      if (io.length == 1) {
+                        setState(() {
+                          if (value != null) {
+                            print("Upload DT 2 ${value.toString()}\n");
+
+                            io.add(value);
+                          }
+                        });
+                      }
+                    },
+                  ),
                 ],
               )
             ],
@@ -108,7 +150,17 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
                       )
                     ],
                   ),
-                  LayerImagePicker(),
+                  LayerImagePicker(
+                    getFile: (value) {
+                      setState(() {
+                        if (value != null) {
+                          if (io.length == 3)
+                            print("Upload Layout ${value.toString()}\n");
+                          io.add(value);
+                        }
+                      });
+                    },
+                  ),
                 ],
               ),
             ],

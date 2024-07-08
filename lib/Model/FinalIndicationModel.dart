@@ -3,32 +3,23 @@ import 'dart:convert';
 
 import 'package:book/Model/FinalIndicationBuildingMdel.dart';
 import 'package:book/Model/FinalIndicationLandMdel.dart';
-
 import 'package:http/http.dart' as http;
-
 
 class FinalIndication {
   final String? totallandsizesqm;
   final String? totallandvalue;
   final String? totalbuildingsizesqm;
   final String? totalbuildingvalue;
-
   List<Land>? land = [];
   List<Building>? building = [];
-
-
-
 
   FinalIndication({
     this.totallandsizesqm,
     this.totallandvalue,
     this.totalbuildingsizesqm,
     this.totalbuildingvalue,
-
     this.land,
     this.building,
-
-
   });
   factory FinalIndication.fromJson(Map<String, dynamic> json) {
     return FinalIndication(
@@ -49,7 +40,6 @@ class FinalIndication {
       'building': building,
     };
   }
-
 
   Future InsertFinal(FinalIndication dataFinalIndic) async {
     var request = http.Request(
@@ -82,5 +72,4 @@ class FinalIndication {
       print(response.reasonPhrase);
     }
   }
-
 }

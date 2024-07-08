@@ -40,14 +40,7 @@ class _ButtonWidgetState extends State<SketMapImagePicker> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (image != null)
-              Image.file(
-                image!,
-                width: 1000,
-                height: 500,
-                fit: BoxFit.cover,
-              )
-            else if (imageUrl != null)
+            if (imageUrl != null)
               Image.network(
                 imageUrl!,
                 width: 1000,
@@ -65,7 +58,7 @@ class _ButtonWidgetState extends State<SketMapImagePicker> {
               width: 1000,
               height: 950,
               decoration: BoxDecoration(border: Border.all()),
-              child: image == null && imageUrl == null
+              child: imageUrl == null
                   ? Icon(
                       Icons.image,
                       size: 50,

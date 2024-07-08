@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-class Land {
+class PLand {
   final String? no;
-  final String? sizesqm;
+  final String? size_sqm;
   final String? minsqm;
   final String? maxsqm;
   final String? totalmin;
   final String? totalmax;
 
-  Land({
+  PLand({
     this.no,
-    this.sizesqm,
+    this.size_sqm,
     this.minsqm,
     this.maxsqm,
     this.totalmin,
@@ -18,10 +18,10 @@ class Land {
   });
 
   // From JSON
-  factory Land.fromJson(Map<String, dynamic> json) {
-    return Land(
+  factory PLand.fromJson(Map<String, dynamic> json) {
+    return PLand(
       no: json['no'] ?? '',
-      sizesqm: json['sizesqm'] ?? '',
+      size_sqm: json['size_sqm'] ?? '',
       minsqm: json['minsqm'] ?? '',
       maxsqm: json['maxsqm'] ?? '',
       totalmin: json['totalmin'] ?? '',
@@ -33,7 +33,7 @@ class Land {
   Map<String, dynamic> toJson() {
     return {
       'no': no,
-      'sizesqm': sizesqm,
+      'size_sqm': size_sqm,
       'minsqm': minsqm,
       'maxsqm': maxsqm,
       'totalmin': totalmin,
