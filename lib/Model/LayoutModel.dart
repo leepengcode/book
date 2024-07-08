@@ -1,11 +1,8 @@
 import 'dart:convert';
-<<<<<<< Updated upstream
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/foundation.dart';
-=======
->>>>>>> Stashed changes
 
 class Layout {
   var deepimage1;
@@ -31,7 +28,6 @@ class Layout {
       'layoutimage': layoutimage,
     };
   }
-<<<<<<< Updated upstream
 
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
@@ -109,6 +105,4 @@ class Layout {
       print(response.reasonPhrase);
     }
   }
-=======
->>>>>>> Stashed changes
 }

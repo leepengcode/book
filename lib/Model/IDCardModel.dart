@@ -1,5 +1,4 @@
 import 'dart:convert';
-<<<<<<< Updated upstream
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -9,14 +8,6 @@ class IDCard {
   File? frontidcard2;
   File? backidcard1;
   File? backidcard2;
-=======
-
-class IDCard {
-  var frontidcard1;
-  var frontidcard2;
-  var backidcard1;
-  var backidcard2;
->>>>>>> Stashed changes
 
   IDCard({
     this.frontidcard1,
@@ -32,7 +23,6 @@ class IDCard {
       backidcard2: json['backidcard2'] ?? '',
     );
   }
-<<<<<<< Updated upstream
 
   // With file we don't use Tojson
   // Map<String, dynamic> toJson() {
@@ -136,14 +126,5 @@ class IDCard {
     } else {
       print(response.reasonPhrase);
     }
-=======
-  Map<String, dynamic> toJson() {
-    return {
-      'frontidcard1': frontidcard1,
-      'frontidcard2': frontidcard2,
-      'backidcard1': backidcard1,
-      'backidcard2': backidcard2,
-    };
->>>>>>> Stashed changes
   }
 }

@@ -3,23 +3,16 @@ import 'dart:convert';
 
 import 'package:book/Model/ProvisionalBuildingMdel.dart';
 import 'package:book/Model/ProvisionalLandMdel.dart';
-<<<<<<< Updated upstream
 import 'package:http/http.dart' as http;
 
 class Provisional {
   final String? name;
-=======
-
-class OfficerReport {
-  final String name;
->>>>>>> Stashed changes
   final String? totallandsizesqm;
   final String? totallandvaluemin;
   final String? totallandvaluemax;
   final String? totalbuildingsizesqm;
   final String? totalbuildingvaluemin;
   final String? totalbuildingvaluemax;
-<<<<<<< Updated upstream
   final String? fair_market;
   final String? fire_insurance;
   final String? force_sale;
@@ -27,19 +20,12 @@ class OfficerReport {
   List<PBuilding>? building = [];
 
   Provisional({
-=======
-  final List<Land>? land;
-  final List<Building>? building;
-
-  OfficerReport({
->>>>>>> Stashed changes
     this.totallandsizesqm,
     this.totallandvaluemin,
     this.totallandvaluemax,
     this.totalbuildingsizesqm,
     this.totalbuildingvaluemin,
     this.totalbuildingvaluemax,
-<<<<<<< Updated upstream
     this.fair_market,
     this.fire_insurance,
     this.force_sale,
@@ -49,14 +35,6 @@ class OfficerReport {
   });
   factory Provisional.fromJson(Map<String, dynamic> json) {
     return Provisional(
-=======
-    required this.name,
-    required this.land,
-    required this.building,
-  });
-  factory OfficerReport.fromJson(Map<String, dynamic> json) {
-    return OfficerReport(
->>>>>>> Stashed changes
         name: json['name'] ?? '',
         totallandsizesqm: json['totallandsizesqm'] ?? '',
         totallandvaluemin: json['totallandvaluemin'] ?? '',
@@ -64,12 +42,9 @@ class OfficerReport {
         totalbuildingsizesqm: json['totalbuildingsizesqm'] ?? '',
         totalbuildingvaluemin: json['totalbuildingvaluemin'] ?? '',
         totalbuildingvaluemax: json['totalbuildingvaluemax'] ?? '',
-<<<<<<< Updated upstream
         fair_market: json['fair_market'] ?? '',
         fire_insurance: json['fire_insurance'] ?? '',
         force_sale: json['force_sale'] ?? '',
-=======
->>>>>>> Stashed changes
         land: [],
         building: []);
   }
@@ -82,7 +57,6 @@ class OfficerReport {
       'totalbuildingsizesqm': totalbuildingsizesqm,
       'totalbuildingvaluemin': totalbuildingvaluemin,
       'totalbuildingvaluemax': totalbuildingvaluemax,
-<<<<<<< Updated upstream
       'fair_market': fair_market ?? '',
       'fire_insurance': fire_insurance ?? '',
       'force_sale': force_sale ?? '',
@@ -128,10 +102,4 @@ class OfficerReport {
       print(response.reasonPhrase);
     }
   }
-=======
-      'land': land,
-      'building': building,
-    };
-  }
->>>>>>> Stashed changes
 }

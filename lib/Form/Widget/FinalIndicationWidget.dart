@@ -114,7 +114,6 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     return InkWell(
       onFocusChange: (value) {
         setState(() {
@@ -233,69 +232,6 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                   width: 50, // Adjust the width as needed
                   height: 1,
                   color: Colors.black,
-=======
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-      width: 1500,
-      decoration: BoxDecoration(
-          color: Colors.blueGrey.shade100,
-          borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Final Indication",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            "A. Land",
-            style: THeader(),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          ...landInfoList.map((landInfo) => Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 20),
-                child: Row(
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "No.",
-                        label: "",
-                        width: 50,
-                        readOnly: true,
-                        controller: TextEditingController(
-                            text: landInfo.noCount.toString())),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Size Sqm",
-                        label: "Enter",
-                        width: 220,
-                        controller: landInfo.sizeSqm),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Size Sqft",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: landInfo.sizeSqft),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Property Value USD/Sqm",
-                        label: "Enter",
-                        width: 220,
-                        controller: landInfo.valueUsd),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Property Value",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: landInfo.pValue),
-                  ],
->>>>>>> Stashed changes
                 ),
               ],
             ),

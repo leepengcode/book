@@ -1,10 +1,6 @@
 import 'dart:convert';
 
-<<<<<<< Updated upstream
 class PBuilding {
-=======
-class Building {
->>>>>>> Stashed changes
   final String? no;
   final String? sizesqm;
   final String? minsqm;
@@ -12,11 +8,7 @@ class Building {
   final String? totalmin;
   final String? totalmax;
 
-<<<<<<< Updated upstream
   PBuilding({
-=======
-  Building({
->>>>>>> Stashed changes
     this.no,
     this.sizesqm,
     this.minsqm,
@@ -26,13 +18,8 @@ class Building {
   });
 
   // From JSON
-<<<<<<< Updated upstream
   factory PBuilding.fromJson(Map<String, dynamic> json) {
     return PBuilding(
-=======
-  factory Building.fromJson(Map<String, dynamic> json) {
-    return Building(
->>>>>>> Stashed changes
       no: json['no'] ?? '',
       sizesqm: json['sizesqm'] ?? '',
       minsqm: json['minsqm'] ?? '',
