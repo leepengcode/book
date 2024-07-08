@@ -8,15 +8,15 @@ import 'package:image_picker/image_picker.dart';
 
 typedef OnChangeCallback = void Function(dynamic value);
 
-class TDImagePicker extends StatefulWidget {
+class LayerImagePicker extends StatefulWidget {
   final OnChangeCallback? getFile;
-  const TDImagePicker({Key? key, this.getFile}) : super(key: key);
+  const LayerImagePicker({Key? key, this.getFile}) : super(key: key);
 
   @override
-  State<TDImagePicker> createState() => _ButtonWidgetState();
+  State<LayerImagePicker> createState() => _ButtonWidgetState();
 }
 
-class _ButtonWidgetState extends State<TDImagePicker> {
+class _ButtonWidgetState extends State<LayerImagePicker> {
   io.File? image;
   String? imageUrl;
 
@@ -57,8 +57,8 @@ class _ButtonWidgetState extends State<TDImagePicker> {
               if (imageUrl != null)
                 Image.network(
                   imageUrl!,
-                  width: 520,
-                  height: 350,
+                  width: 550,
+                  height: 800,
                   fit: BoxFit.cover,
                 )
             ],
@@ -69,8 +69,8 @@ class _ButtonWidgetState extends State<TDImagePicker> {
               pickImage();
             },
             child: Container(
-                width: 520,
-                height: 350,
+                width: 550,
+                height: 800,
                 decoration: BoxDecoration(border: Border.all()),
                 child: image == null && imageUrl == null
                     ? Icon(

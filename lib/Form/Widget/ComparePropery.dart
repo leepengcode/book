@@ -1,12 +1,15 @@
 import 'package:book/Componnents/style.dart';
+import 'package:book/Model/ComparisonModel.dart';
 import 'package:flutter/material.dart';
 
 class ComparePropertyWidget extends StatefulWidget {
+  final ValueChanged<Comparison>? getvalue;
   final int parcelNumber;
 
   const ComparePropertyWidget({
     Key? key,
     required this.parcelNumber,
+    this.getvalue,
   }) : super(key: key);
 
   @override
@@ -21,6 +24,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
   TextEditingController _bprice = TextEditingController();
   TextEditingController _tbprice = TextEditingController();
   TextEditingController _tblprice = TextEditingController();
+  TextEditingController _type = TextEditingController();
 
   @override
   void initState() {
@@ -40,6 +44,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _bsize.removeListener(_calculateTotal);
     _bprice.removeListener(_calculateTotal);
     _tblprice.removeListener(_calculateTotal);
+    _type.removeListener(_calculateTotal);
     _tblprice.dispose();
     _bsize.dispose();
     _bprice.dispose();
@@ -47,6 +52,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _lsize.dispose();
     _lprice.dispose();
     _tlprice.dispose();
+    _type.dispose();
     super.dispose();
   }
 
@@ -63,72 +69,100 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _tlprice.text = totalLandPrice.toStringAsFixed(2);
     _tbprice.text = totalBuildingPrice.toStringAsFixed(2);
     _tblprice.text = totaltbPrice.toStringAsFixed(2);
+
+    objCompa!.parcel = widget.parcelNumber.toString();
+    objCompa!.landsize = _lsize.text;
+    objCompa!.landprice = _lprice.text;
+    objCompa!.landvalue = _tlprice.text;
+    objCompa!.buildingsize = _bsize.text;
+    objCompa!.buildingprice = _bprice.text;
+    objCompa!.buildingvalue = _tbprice.text;
+    objCompa!.totalprice = _tblprice.text;
+    objCompa!.typecompare = _type.text ?? "good";
   }
+
+  Comparison? objCompa = Comparison(
+      parcel: '0',
+      landsize: '0',
+      buildingsize: '0',
+      landvalue: '0',
+      buildingvalue: '0',
+      landprice: '0',
+      buildingprice: '0',
+      totalprice: '0',
+      typecompare: 'New');
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 5.0, bottom: 15.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _buildTextFieldColumn(
-                label: "Parcel",
-                controller:
-                    TextEditingController(text: widget.parcelNumber.toString()),
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Land Size",
-                controller: _lsize,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Building Size",
-                controller: _bsize,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Land value USD/sqm",
-                controller: _lprice,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                  label: "Building value USD/sqm", controller: _bprice),
-            ],
-          ),
-          SizedBox(height: 15),
-          Row(
-            children: [
-              _buildTextFieldColumn(
-                label: "Land Price/USD",
-                controller: _tlprice,
-                readOnly: true,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Building Price/USD",
-                controller: _tbprice,
-                readOnly: true,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Total Price",
-                controller: _tblprice,
-                readOnly: true,
-              ),
-              SizedBox(width: 15),
-              _buildTextFieldColumn(
-                label: "Type of compare",
-                controller: TextEditingController(),
-                readOnly: true,
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-        ],
+    return InkWell(
+      onFocusChange: (value) {
+        if (value == false) {
+          widget.getvalue!(objCompa!);
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5.0, bottom: 15.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildTextFieldColumn(
+                  label: "Parcel",
+                  controller: TextEditingController(
+                      text: widget.parcelNumber.toString()),
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Land Size",
+                  controller: _lsize,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Building Size",
+                  controller: _bsize,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Land value USD/sqm",
+                  controller: _lprice,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                    label: "Building value USD/sqm", controller: _bprice),
+              ],
+            ),
+            SizedBox(height: 15),
+            Row(
+              children: [
+                _buildTextFieldColumn(
+                  label: "Land Price/USD",
+                  controller: _tlprice,
+                  readOnly: true,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Building Price/USD",
+                  controller: _tbprice,
+                  readOnly: true,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Total Price",
+                  controller: _tblprice,
+                  readOnly: true,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "Type of compare",
+                  controller: _type,
+                  readOnly: true,
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
