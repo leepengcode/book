@@ -3,23 +3,36 @@ import 'dart:convert';
 
 import 'package:book/Model/FinalIndicationBuildingMdel.dart';
 import 'package:book/Model/FinalIndicationLandMdel.dart';
+<<<<<<< Updated upstream
 import 'package:http/http.dart' as http;
+=======
+>>>>>>> Stashed changes
 
 class FinalIndication {
   final String? totallandsizesqm;
   final String? totallandvalue;
   final String? totalbuildingsizesqm;
   final String? totalbuildingvalue;
+<<<<<<< Updated upstream
   List<Land>? land = [];
   List<Building>? building = [];
+=======
+  final List<Land>? land;
+  final List<Building>? building;
+>>>>>>> Stashed changes
 
   FinalIndication({
     this.totallandsizesqm,
     this.totallandvalue,
     this.totalbuildingsizesqm,
     this.totalbuildingvalue,
+<<<<<<< Updated upstream
     this.land,
     this.building,
+=======
+    required this.land,
+    required this.building,
+>>>>>>> Stashed changes
   });
   factory FinalIndication.fromJson(Map<String, dynamic> json) {
     return FinalIndication(
@@ -40,6 +53,7 @@ class FinalIndication {
       'building': building,
     };
   }
+<<<<<<< Updated upstream
 
   Future InsertFinal(FinalIndication dataFinalIndic) async {
     var request = http.Request(
@@ -72,4 +86,6 @@ class FinalIndication {
       print(response.reasonPhrase);
     }
   }
+=======
+>>>>>>> Stashed changes
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Comparison {
+<<<<<<< Updated upstream
   late String parcel;
   late String landsize;
   late String buildingsize;
@@ -10,6 +11,17 @@ class Comparison {
   late String buildingprice;
   late String totalprice;
   late String typecompare;
+=======
+  final String parcel;
+  final String landsize;
+  final String buildingsize;
+  final String landvalue;
+  final String buildingvalue;
+  final String landprice;
+  final String buildingprice;
+  final String totalprice;
+  final String typecompare;
+>>>>>>> Stashed changes
 
   Comparison({
     required this.parcel,
@@ -49,7 +61,11 @@ class Comparison {
       'landprice': landprice,
       'buildingprice': buildingprice,
       'totalprice': totalprice,
+<<<<<<< Updated upstream
       'typecompare': typecompare ?? "good",
+=======
+      'typecompare': typecompare,
+>>>>>>> Stashed changes
     };
   }
 }

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
@@ -125,4 +126,24 @@ class Gmap {
       throw Exception('Failed to load blob data');
     }
   }
+=======
+import 'dart:convert';
+
+class IDCard {
+  var mapimage;
+
+  IDCard({
+    this.mapimage,
+  });
+  factory IDCard.fromJson(Map<String, dynamic> json) {
+    return IDCard(
+      mapimage: json['mapimage'] ?? '',
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'mapimage': mapimage,
+    };
+  }
+>>>>>>> Stashed changes
 }

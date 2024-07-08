@@ -24,9 +24,13 @@ import 'package:book/Model/ProvisionalModel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:http/http.dart' as http;
 import 'dart:html' as html;
 import '../Widget/PhotoDetail.dart';
+=======
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+>>>>>>> Stashed changes
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -108,6 +112,7 @@ class _FormWidgetState extends State<FormWidget> {
             const SizedBox(
               height: 25,
             ),
+<<<<<<< Updated upstream
             Mapwidget(
               getForm: (value) {
                 if (value != null) {
@@ -115,6 +120,14 @@ class _FormWidgetState extends State<FormWidget> {
                   dataGmap = value;
                 }
               },
+=======
+            // const Mapwidget(),
+            const SizedBox(
+              height: 25,
+            ),
+            PhotoDetailWidget(
+              ck1: ck1,
+>>>>>>> Stashed changes
             ),
             const SizedBox(
               height: 25,
@@ -158,6 +171,10 @@ class _FormWidgetState extends State<FormWidget> {
                 dataOfficer = value;
               },
             ),
+            SizedBox(
+              height: 25,
+            ),
+            GoogleMapImage(),
             SizedBox(
               height: 25,
             ),

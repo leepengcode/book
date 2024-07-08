@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'package:book/Model/ComparisonModel.dart';
+<<<<<<< Updated upstream
 import 'package:http/http.dart' as http;
 class OfficerReport {
   late String? condition;
@@ -20,6 +21,27 @@ class OfficerReport {
      this.threat,
      this.markrtprice,
     this.comparison,
+=======
+
+class OfficerReport {
+  final String condition;
+  final String immediate;
+  final String strength;
+  final String weakness;
+  final String opportunity;
+  final String threat;
+  final String markrtprice;
+  final List<Comparison> comparison;
+  OfficerReport({
+    required this.condition,
+    required this.immediate,
+    required this.strength,
+    required this.weakness,
+    required this.opportunity,
+    required this.threat,
+    required this.markrtprice,
+    required this.comparison,
+>>>>>>> Stashed changes
   });
   factory OfficerReport.fromJson(Map<String, dynamic> json) {
     return OfficerReport(
@@ -41,6 +63,7 @@ class OfficerReport {
       'opportunity': opportunity,
       'threat': threat,
       'markrtprice': markrtprice,
+<<<<<<< Updated upstream
       'comparisons': comparison
     };
   }
@@ -68,4 +91,9 @@ class OfficerReport {
       print(await response.stream.bytesToString());
     }
   }
+=======
+      'comparison': comparison
+    };
+  }
+>>>>>>> Stashed changes
 }

@@ -108,6 +108,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return InkWell(
       onFocusChange: (value) {
         if (value == false) {
@@ -247,6 +248,107 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
               ],
             ),
             // if (widget.ck1 != "Property LAND VALUATION REPORT")
+=======
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+      width: 1500,
+      decoration: BoxDecoration(
+          color: Colors.blueGrey.shade100,
+          borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "1.Bordered by the following",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildTextFieldColumn(
+                  title: "Plot Nº",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "North",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "South",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "East",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "West",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            "2.Land",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildTextFieldColumn(
+                  title: "Land title deed Nº",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Land Size(by title deed)",
+                  label: "",
+                  width: 250,
+                  keytype: TextInputType.number,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Total Land Size(by Measurement)",
+                  label: "",
+                  width: 250,
+                  keytype: TextInputType.number,
+                  controller: TextEditingController()),
+              _buildTextFieldColumn(
+                  title: "Type of land",
+                  label: "",
+                  width: 250,
+                  controller: TextEditingController()),
+              if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+                _buildTextFieldColumn(
+                    title: "Occupant",
+                    label: "",
+                    width: 250,
+                    controller: TextEditingController()),
+              ] else ...[
+                _buildTextFieldColumn(
+                    title: "Type of Tenure",
+                    label: "",
+                    width: 250,
+                    controller: TextEditingController()),
+              ]
+            ],
+          ),
+          if (widget.ck1 != "Property LAND VALUATION REPORT")
+>>>>>>> Stashed changes
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -269,7 +371,11 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                         label: "",
                         width: 250,
                         keytype: TextInputType.number,
+<<<<<<< Updated upstream
                         controller: _flatsize),
+=======
+                        controller: TextEditingController()),
+>>>>>>> Stashed changes
                     _buildTextFieldColumn(
                         title: "Building Size",
                         label: "",
@@ -281,7 +387,11 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                         label: "",
                         width: 250,
                         keytype: TextInputType.number,
+<<<<<<< Updated upstream
                         controller: _totalsize),
+=======
+                        controller: TextEditingController()),
+>>>>>>> Stashed changes
                   ],
                 ),
                 SizedBox(
@@ -471,7 +581,12 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                         title: "Storage Room",
                         label: "",
                         width: 250,
+<<<<<<< Updated upstream
                         controller: _store),
+=======
+                        controller: TextEditingController()),
+                    
+>>>>>>> Stashed changes
                     _buildTextFieldColumn(
                         title: "Total Accommodation",
                         label: "",
