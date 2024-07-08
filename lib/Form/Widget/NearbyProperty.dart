@@ -1,15 +1,10 @@
 import 'package:book/Componnents/style.dart';
 import 'package:book/Form/Widget/ComparePropery.dart';
-import 'package:book/Model/OfficerReportModel.dart';
 import 'package:flutter/material.dart';
 
-import '../../Model/ComparisonModel.dart';
-
 class NearbyPropertyWidget extends StatefulWidget {
-  final ValueChanged<OfficerReport>? getForm;
   const NearbyPropertyWidget({
     super.key,
-    this.getForm,
   });
 
   @override
@@ -17,17 +12,6 @@ class NearbyPropertyWidget extends StatefulWidget {
 }
 
 class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
-  final _conditionController = TextEditingController();
-  final _immediateController = TextEditingController();
-  final _strengthController = TextEditingController();
-  final _weaknessController = TextEditingController();
-  final _opportunityController = TextEditingController();
-  final _threatController = TextEditingController();
-  final _markrtpriceController = TextEditingController();
-
-  List<Comparison> objComparison = [];
-  OfficerReport? objOfficer;
-
   int parcelCounter = 1;
   List<ComparePropertyWidget> comparePropertyWidgets = [];
 
@@ -35,9 +19,6 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
     setState(() {
       comparePropertyWidgets.add(ComparePropertyWidget(
         parcelNumber: parcelCounter,
-        getvalue: (value) {
-          objComparison.add(value);
-        },
       ));
       parcelCounter++;
     });
@@ -47,291 +28,99 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     addNewComparePropertyWidget();
-    objOfficer = OfficerReport(
-        condition: 'we',
-        immediate: 'we',
-        strength: 'we',
-        weakness: 'we',
-        opportunity: 'we',
-        threat: 'we',
-        markrtprice: 'we',
-        comparison: objComparison);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onFocusChange: (value) {
-        setState(() {
-          widget.getForm!(objOfficer!);
-        });
-      },
-      child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-          width: 1500,
-          decoration: BoxDecoration(
-              color: Colors.blueGrey.shade100,
-              borderRadius: BorderRadius.circular(10)),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              "Inspection Officer’s Report",
-              style: THeader(),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Condition of property",
-                  style: THeader(),
-                ),
-                Text(
-                  " *",
-                  style: TextStyle(color: Colors.red, fontSize: 15),
-                )
-              ],
-            ),
-            Container(
-              width: double.infinity,
-              child: TextField(
-                controller: _conditionController,
-                onChanged: (value) {
-                  setState(() {
-                    objOfficer!.condition = value.toString();
-                  });
-                },
-                maxLines: null,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Enter Condition",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                ),
+    return Container(
+        padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+        width: 1500,
+        decoration: BoxDecoration(
+            color: Colors.blueGrey.shade100,
+            borderRadius: BorderRadius.circular(10)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            "Inspection Officer’s Report",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Text(
+                "Condition of property",
+                style: THeader(),
+              ),
+              Text(
+                " *",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              )
+            ],
+          ),
+          Container(
+            width: double.infinity,
+            child: TextField(
+              maxLines: null,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey[200],
+                hintText: "Enter Strengths",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
               ),
             ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Text(
-                  "Immediate Environment",
-                  style: THeader(),
-                ),
-                Text(
-                  " *",
-                  style: TextStyle(color: Colors.red, fontSize: 15),
-                )
-              ],
-            ),
-            Container(
-              width: double.infinity,
-              child: TextField(
-                controller: _immediateController,
-                onChanged: (value) {
-                  setState(() {
-                    objOfficer!.immediate = value.toString();
-                  });
-                },
-                maxLines: null,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Enter Immediate Environment",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Text(
+                "Immediate Environment",
+                style: THeader(),
+              ),
+              Text(
+                " *",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              )
+            ],
+          ),
+          Container(
+            width: double.infinity,
+            child: TextField(
+              maxLines: null,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey[200],
+                hintText: "Enter Strengths",
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
               ),
             ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              "SWOT",
-              style: THeader(),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Strengths",
-                          style: THeader(),
-                        ),
-                        Text(
-                          " *",
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 250,
-                      child: TextField(
-                        controller: _strengthController,
-                        onChanged: (value) {
-                          setState(() {
-                            objOfficer!.strength = value.toString();
-                          });
-                        },
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Strengths",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Weakness",
-                          style: THeader(),
-                        ),
-                        Text(
-                          " *",
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 250,
-                      child: TextField(
-                        controller: _weaknessController,
-                        onChanged: (value) {
-                          setState(() {
-                            objOfficer!.weakness = value.toString();
-                          });
-                        },
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Weakness",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Opportunities",
-                          style: THeader(),
-                        ),
-                        Text(
-                          " *",
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 250,
-                      child: TextField(
-                        controller: _opportunityController,
-                        onChanged: (value) {
-                          setState(() {
-                            objOfficer!.opportunity = value.toString();
-                          });
-                        },
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Opportunities",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Threats",
-                          style: THeader(),
-                        ),
-                        Text(
-                          " *",
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 250,
-                      child: TextField(
-                        controller: _threatController,
-                        onChanged: (value) {
-                          setState(() {
-                            objOfficer!.threat = value.toString();
-                          });
-                        },
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          hintText: "Enter Threats",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Value of Comparable nearby Property",
-              style: THeader(),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Column(
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "SWOT",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       Text(
-                        "Market Prices ",
+                        "Strengths",
                         style: THeader(),
                       ),
                       Text(
@@ -343,17 +132,11 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                   Container(
                     width: 250,
                     child: TextField(
-                      controller: _markrtpriceController,
-                      onChanged: (value) {
-                        setState(() {
-                          objOfficer!.markrtprice = value.toString();
-                        });
-                      },
                       maxLines: null,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[200],
-                        hintText: "Enter Market Prices",
+                        hintText: "Enter Strengths",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16)),
                       ),
@@ -361,41 +144,174 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Comparisons with nearby Property",
-              style: THeader(),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Column(
-              children: comparePropertyWidgets,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 50, // Adjust the width as needed
-                  height: 1,
-                  color: Colors.black,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Weakness",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
+                  Container(
+                    width: 250,
+                    child: TextField(
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Opportunities",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
+                  Container(
+                    width: 250,
+                    child: TextField(
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Threats",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
+                    ],
+                  ),
+                  Container(
+                    width: 250,
+                    child: TextField(
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        hintText: "Enter Strengths",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "Value of Comparable nearby Property",
+            style: THeader(),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Market Prices ",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
                 ),
-                IconButton(
-                  onPressed: addNewComparePropertyWidget,
-                  icon: Icon(Icons.add),
-                ),
                 Container(
-                  width: 50, // Adjust the width as needed
-                  height: 1,
-                  color: Colors.black,
+                  width: 250,
+                  child: TextField(
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: "Enter",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                    ),
+                  ),
                 ),
               ],
-            )
-          ])),
-    );
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Text(
+            "Comparisons with nearby Property",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Column(
+            children: comparePropertyWidgets,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 50, // Adjust the width as needed
+                height: 1,
+                color: Colors.black,
+              ),
+              IconButton(
+                onPressed: addNewComparePropertyWidget,
+                icon: Icon(Icons.add),
+              ),
+              Container(
+                width: 50, // Adjust the width as needed
+                height: 1,
+                color: Colors.black,
+              ),
+            ],
+          )
+        ]));
   }
 }

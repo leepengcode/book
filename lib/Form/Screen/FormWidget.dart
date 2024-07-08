@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -7,26 +5,19 @@ import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
 import 'package:book/Form/Widget/GoogleMap.dart';
 import 'package:book/Form/Widget/NearbyProperty.dart';
+import 'package:book/Form/Widget/PhotoDetail.dart';
 import 'package:book/Form/Widget/PropertyInfo.dart';
 import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
-import 'package:book/Form/Widget/mapWidget.dart';
 import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
 import 'package:book/Model/CoverModel.dart';
-import 'package:book/Model/FinalIndicationModel.dart';
 import 'package:book/Model/GoogleMapModep.dart';
 import 'package:book/Model/IDCardModel.dart';
-import 'package:book/Model/LayoutModel.dart';
-import 'package:book/Model/OfficerReportModel.dart';
-import 'package:book/Model/PhotoDetailModel.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
-import 'package:book/Model/ProvisionalModel.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:html' as html;
-import '../Widget/PhotoDetail.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -42,177 +33,109 @@ class _FormWidgetState extends State<FormWidget> {
   Cover? dataCover;
   PropertyInfor? dataInfo;
   IDCard? dataIdcard;
-  Layout? dataLayout;
-  OfficerReport? dataOfficer;
-  Gmap? dataGmap;
-
-  List<File>? list_forviewproperty = [];
-  List<File>? list_forinsideproperty = [];
-  List<File>? list_forviewland;
-  PhotoDetail dataPhoto = PhotoDetail();
-
-  Provisional dataProvisional = Provisional();
-  FinalIndication dataFinalIndic = FinalIndication();
-
+  // Future InsertInfo() async {
+  //   //   var request = http.MultipartRequest(
+  //   //       'POST', Uri.parse('http://192.168.1.31:8000/api/insertinfo'));
+  //   //   request.fields.addAll(dataInfo!.toJson());
+  //   //   http.StreamedResponse response = await request.send();
+  //   //   setState(() {
+  //   //     print("test btn ${response.statusCode}\n");
+  //   //   });
+  //   //   if (response.statusCode == 200 || response.statusCode == 201) {
+  //   //     // print(await response.stream.bytesToString());
+  //   //     print("Success\n");
+  //   //   } else {
+  //   //     print(response.reasonPhrase);
+  //   //   }
+  //   // }
+  // }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
         child: Column(
           children: [
-            CoverWidget(
-              onChanged: (value) {
-                setState(() {
-                  ck1 = value.toString();
-                });
-              },
-              getForm: (value) {
-                setState(() {
-                  if (value != null) {
-                    print("object ${value.info}");
-                    dataCover = value;
-                  }
-                });
-              },
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            PropertyInfo_Widget(
-              getForm: (value) {
-                setState(() {
-                  dataInfo = value;
-                });
-              },
-              ck1: ck1,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
+            // CoverWidget(
+            //   onChanged: (value) {
+            //     setState(() {
+            //       ck1 = value.toString();
+            //     });
+            //   },
+            //   getForm: (value) {
+            //     setState(() {
+            //       if (value != null) {
+            //         print("object ${value.info}");
+            //         dataCover = value;
+            //       }
+            //     });
+            //   },
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            // PropertyInfo_Widget(
+            //   getForm: (value) {
+            //     setState(() {
+            //       dataInfo = value;
+            //     });
+            //   },
+            //   ck1: ck1,
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
             uploadIDCard(
               getForm: (value) {
                 if (value != null) {
                   dataIdcard = value;
+                  //print("kokok\n");
                 }
               },
             ),
             const SizedBox(
               height: 25,
             ),
-            uploadLayoutWidget(
-              getForm: (value) {
-                dataLayout = value;
-              },
-              ck1: ck1,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Mapwidget(
-              getForm: (value) {
-                if (value != null) {
-                  print("Value : ${value}");
-                  dataGmap = value;
-                }
-              },
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            if (ck1 != null)
-              PhotoDetailWidget(
-                getForm: (value) {
-                  setState(() {
-                    dataPhoto = value;
-                  });
-                },
-                ck1: ck1,
-                get_viewproperty: (value) {
-                  if (value != null) {
-                    setState(() {
-                      list_forviewproperty = value;
-                    });
-                  }
-                },
-                get_insideproperty: (value) {
-                  if (value != null) {
-                    setState(() {
-                      list_forinsideproperty = value;
-                    });
-                  }
-                },
-                get_viewland: (value) {
-                  if (value != null) {
-                    setState(() {
-                      print("In main get_viewland\n\n");
-                      list_forviewland = value;
-                    });
-                  }
-                },
-              ),
-            const SizedBox(
-              height: 25,
-            ),
-            NearbyPropertyWidget(
-              getForm: (value) {
-                dataOfficer = value;
-              },
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            GoogleMapImage(),
-            SizedBox(
-              height: 25,
-            ),
-            ProvisionalValue(
-              getForm: (value) {
-                setState(() {
-                  if (value != null) {
-                    dataProvisional = value;
-                    print("object");
-                  }
-                });
-              },
-              NoLandCount: 1,
-              ck1: ck1,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            FinalIndicationWidget(
-              getForm: (value) {
-                setState(() {
-                  if (value != null) {
-                    dataFinalIndic = value;
-                  }
-                });
-              },
-              ck1: ck1,
-              NoLandCount: 1,
-            ),
+            // uploadLayoutWidget(
+            //   ck1: ck1,
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            // // const Mapwidget(),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            // PhotoDetailWidget(
+            //   ck1: ck1,
+            // ),
+            // const SizedBox(
+            //   height: 25,
+            // ),
+            // NearbyPropertyWidget(),
+            // SizedBox(
+            //   height: 25,
+            // ),
+            // GoogleMapImage(),
+            // SizedBox(
+            //   height: 25,
+            // ),
+            // ProvisionalValue(
+            //   NoLandCount: 1,
+            //   ck1: ck1,
+            // ),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // FinalIndicationWidget(
+            //   ck1: ck1,
+            //   NoLandCount: 1,
+            // ),
             SizedBox(
               height: 20,
             ),
             GestureDetector(
               onTap: () async {
-                await FinalIndication()
-                  ..InsertFinal(dataFinalIndic);
-                // await Provisional()
-                //   ..InsertProvisional(dataProvisional);
-
-                // await OfficerReport()
-                //   ..InsertOfficer(dataOfficer!);
-
-                // await Gmap()
-                //   ..insertGmap(dataGmap!);
-
-                // await InsertPhoto();
-
-                // await Layout()
-                //   ..InsertLayout(dataLayout!);
-                // await IDCard()
-                //   ..InsertIdCard(dataIdcard!);
+                await InsertIdCard(dataIdcard!);
 
                 // await PropertyInfor()
                 //   ..InsertInfo(dataInfo!);
@@ -252,124 +175,88 @@ class _FormWidgetState extends State<FormWidget> {
     }
   }
 
-  Future<void> InsertPhoto() async {
-    if (list_forviewland == null) {
-      List<String> viewimage = [];
-      List<String> insideimage = [];
-      Future<String> convertToBase64(String path) async {
-        var cvByte = await getBlobData(path);
-        return base64Encode(cvByte);
-      }
+  Future InsertIdCard(IDCard objidcard) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.1.31:8000/api/insertidcard'));
 
-      if (list_forinsideproperty != null &&
-          list_forinsideproperty!.isNotEmpty) {
-        for (var file in list_forinsideproperty!) {
-          var base64Image = await convertToBase64(file.path);
-          insideimage.add(base64Image);
-        }
-        print("insideimage is not null ${insideimage.length}");
+    if (objidcard.frontidcard1 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.frontidcard1!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.frontidcard1!.path);
       } else {
-        print("insideimage is null or empty");
+        // For mobile environment
+        cvByte = await File(objidcard.frontidcard1!.path).readAsBytes();
       }
-
-      if (list_forviewproperty != null && list_forviewproperty!.isNotEmpty) {
-        for (var file in list_forviewproperty!) {
-          var base64Image = await convertToBase64(file.path);
-          viewimage.add(base64Image);
-        }
-        print("viewimage is not null ${viewimage.length}");
-      } else {
-        print("viewimage is null or empty");
-      }
-
-      try {
-        var response = await http.post(
-          Uri.parse("http://192.168.1.31:8000/api/insertphoto"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({
-            'dessurroundin1': dataPhoto.dessurroundin1,
-            'dessurroundin2': dataPhoto.dessurroundin2,
-            'dessurroundin3': dataPhoto.dessurroundin3,
-            'dessurroundin4': dataPhoto.dessurroundin4,
-            'dessurroundin5': dataPhoto.dessurroundin5,
-            'dessurroundin6': dataPhoto.dessurroundin6,
-            'frontviewimage':
-                await convertToBase64(dataPhoto.frontviewimage!.path),
-            'surroundin1': await convertToBase64(dataPhoto.surroundin1!.path),
-            'surroundin2': await convertToBase64(dataPhoto.surroundin2!.path),
-            'surroundin3': await convertToBase64(dataPhoto.surroundin3!.path),
-            'surroundin4': await convertToBase64(dataPhoto.surroundin4!.path),
-            'surroundin5': await convertToBase64(dataPhoto.surroundin5!.path),
-            'surroundin6': await convertToBase64(dataPhoto.surroundin6!.path),
-            'roadviewimage1':
-                await convertToBase64(dataPhoto.roadviewimage1!.path),
-            'roadviewimage2':
-                await convertToBase64(dataPhoto.roadviewimage2!.path),
-            'insideimage': insideimage,
-            'viewimage': viewimage
-          }),
-        );
-
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          print(response.body);
-        } else {
-          print("Error in server ${response.statusCode}, ${response.body}");
-        }
-      } catch (e) {
-        print("Error catch in main $e");
-      }
+      request.files.add(http.MultipartFile.fromBytes(
+        'frontidcard1',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
     } else {
-      List<String> viewland = [];
-      Future<String> convertToBase64(String path) async {
-        var cvByte = await getBlobData(path);
-        return base64Encode(cvByte);
-      }
+      print("Error: No image provided");
+    }
 
-      if (list_forviewland != null && list_forviewland!.isNotEmpty) {
-        for (var file in list_forviewland!) {
-          var base64Image = await convertToBase64(file.path);
-          viewland.add(base64Image);
-        }
-        print("viewland is not null ${viewland.length}");
+    if (objidcard.frontidcard2 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.frontidcard2!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.frontidcard2!.path);
       } else {
-        print("viewland is null or empty");
+        // For mobile environment
+        cvByte = await File(objidcard.frontidcard2!.path).readAsBytes();
       }
+      request.files.add(http.MultipartFile.fromBytes(
+        'frontidcard2',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
 
-      try {
-        var response = await http.post(
-          Uri.parse("http://192.168.1.31:8000/api/insertphoto"),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({
-            'dessurroundin1': dataPhoto.dessurroundin1,
-            'dessurroundin2': dataPhoto.dessurroundin2,
-            'dessurroundin3': dataPhoto.dessurroundin3,
-            'dessurroundin4': dataPhoto.dessurroundin4,
-            'dessurroundin5': dataPhoto.dessurroundin5,
-            'dessurroundin6': dataPhoto.dessurroundin6,
-            'frontviewimage':
-                await convertToBase64(dataPhoto.frontviewimage!.path),
-            'surroundin1': await convertToBase64(dataPhoto.surroundin1!.path),
-            'surroundin2': await convertToBase64(dataPhoto.surroundin2!.path),
-            'surroundin3': await convertToBase64(dataPhoto.surroundin3!.path),
-            'surroundin4': await convertToBase64(dataPhoto.surroundin4!.path),
-            'surroundin5': await convertToBase64(dataPhoto.surroundin5!.path),
-            'surroundin6': await convertToBase64(dataPhoto.surroundin6!.path),
-            'roadviewimage1':
-                await convertToBase64(dataPhoto.roadviewimage1!.path),
-            'roadviewimage2':
-                await convertToBase64(dataPhoto.roadviewimage2!.path),
-            'landimage': viewland,
-          }),
-        );
-
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          print(response.body);
-        } else {
-          print("Error in server ${response.statusCode}, ${response.body}");
-        }
-      } catch (e) {
-        print("Error catch in main $e");
+    if (objidcard.backidcard1 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.backidcard1!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.backidcard1!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objidcard.backidcard1!.path).readAsBytes();
       }
+      request.files.add(http.MultipartFile.fromBytes(
+        'backidcard1',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    if (objidcard.backidcard2 != null) {
+      Uint8List cvByte;
+      if (kIsWeb && objidcard.backidcard2!.path.startsWith('blob:')) {
+        // For web environment
+        cvByte = await getBlobData(objidcard.backidcard2!.path);
+      } else {
+        // For mobile environment
+        cvByte = await File(objidcard.backidcard2!.path).readAsBytes();
+      }
+      request.files.add(http.MultipartFile.fromBytes(
+        'backidcard2',
+        cvByte,
+        filename: 'asdasdasd.jpg',
+      ));
+    } else {
+      print("Error: No image provided");
+    }
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }

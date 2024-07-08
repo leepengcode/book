@@ -37,6 +37,7 @@ class _DataPageState extends State<DataPage> {
     final List source = List.filled(n, Random.secure());
     List<Map<String, dynamic>> temps = [];
     var i = 1;
+    print(i);
     // ignore: unused_local_variable
     for (var data in source) {
       temps.add({

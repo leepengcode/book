@@ -145,6 +145,8 @@ class _MyWidgetState extends State<CoverWidget> {
         _selectedVal;
         objcover;
         objcover.image = io;
+
+        widget.onChanged!(_selectedVal.toString());
       });
     });
     return Container(

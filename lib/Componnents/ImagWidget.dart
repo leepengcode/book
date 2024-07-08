@@ -53,7 +53,6 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 // width: 500,
                 // height: 300,
                 fit: BoxFit.cover,
-                
               )
           ],
         ),
@@ -72,8 +71,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                         Icons.image,
                         size: 50,
                       )
-                    : const SizedBox()
-                    ,
+                    : SizedBox(),
               ),
             ),
           ),

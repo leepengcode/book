@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
-class SketMapImagePicker extends StatefulWidget {
-  const SketMapImagePicker({Key? key}) : super(key: key);
+class LayerImagePicker extends StatefulWidget {
+  const LayerImagePicker({Key? key}) : super(key: key);
 
   @override
-  State<SketMapImagePicker> createState() => _ButtonWidgetState();
+  State<LayerImagePicker> createState() => _ButtonWidgetState();
 }
 
-class _ButtonWidgetState extends State<SketMapImagePicker> {
+class _ButtonWidgetState extends State<LayerImagePicker> {
   io.File? image;
   String? imageUrl;
 
@@ -43,15 +43,15 @@ class _ButtonWidgetState extends State<SketMapImagePicker> {
             if (image != null)
               Image.file(
                 image!,
-                width: 1000,
-                height: 500,
+                width: 550,
+                height: 800,
                 fit: BoxFit.cover,
               )
             else if (imageUrl != null)
               Image.network(
                 imageUrl!,
-                width: 1000,
-                height: 950,
+                width: 550,
+                height: 800,
                 fit: BoxFit.cover,
               )
           ],
@@ -62,8 +62,8 @@ class _ButtonWidgetState extends State<SketMapImagePicker> {
             pickImage();
           },
           child: Container(
-              width: 1000,
-              height: 950,
+              width: 550,
+              height: 800,
               decoration: BoxDecoration(border: Border.all()),
               child: image == null && imageUrl == null
                   ? Icon(
