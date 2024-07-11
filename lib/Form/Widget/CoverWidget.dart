@@ -135,6 +135,7 @@ class _MyWidgetState extends State<CoverWidget> {
   final deepTitleController = TextEditingController();
   final locationControltter = TextEditingController();
   final streetController = TextEditingController();
+  final code = TextEditingController();
 
   DateTime date = DateTime.now();
   @override
@@ -362,6 +363,14 @@ class _MyWidgetState extends State<CoverWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+               Padding(
+                 padding: const EdgeInsets.only(top: 20),
+                 child: _buildTextFieldColumn(title: "Code", label: "Code", width: 400, controller: code,onChanged: (value) {
+                  setState(() {
+                    objcover.code = value;
+                  });
+                },),
+               ),
               BranchDropdown(
                 branches: _branches,
                 selectedBranch: _selectedbranch,
@@ -372,6 +381,7 @@ class _MyWidgetState extends State<CoverWidget> {
                   });
                 },
               ),
+             
               Column(
                 children: [
                   SizedBox(
@@ -414,7 +424,8 @@ class _MyWidgetState extends State<CoverWidget> {
                     ),
                   ),
                 ],
-              )
+              ),
+              
             ],
           ),
         ],

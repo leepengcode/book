@@ -20,6 +20,7 @@ class Cover {
   String? villageorphum;
   String? reportto;
   String? date;
+  String? code;
 
   Cover({
     this.header,
@@ -38,6 +39,7 @@ class Cover {
     this.villageorphum,
     this.reportto,
     this.date,
+    this.code
   });
 
   Map<String, String> toJson() {
@@ -57,6 +59,7 @@ class Cover {
       'villageorphum': villageorphum ?? '',
       'reportto': reportto ?? '',
       'date': date ?? '',
+      'code': code ?? '',
     };
   }
 

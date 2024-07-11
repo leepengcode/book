@@ -12,7 +12,7 @@ class PropertyInfor {
   String? landsize;
   String? totalland;
   String? typeland;
-  String? occupant;
+  // String? occupant;
   String? tenure;
   String? flatsize;
   String? buildingsize;
@@ -46,6 +46,7 @@ class PropertyInfor {
   String? severage;
   String? telecom;
   String? security;
+    String? parking;
   PropertyInfor({
     this.plotno,
     this.north,
@@ -56,7 +57,7 @@ class PropertyInfor {
     this.landsize,
     this.totalland,
     this.typeland,
-    this.occupant,
+    // this.occupant,
     this.tenure,
     this.flatsize,
     this.buildingsize,
@@ -90,6 +91,7 @@ class PropertyInfor {
     this.severage,
     this.telecom,
     this.security,
+    this.parking
   });
 
   Map<String, dynamic> toMap() {
@@ -103,7 +105,7 @@ class PropertyInfor {
       'landsize': landsize,
       'totalland': totalland,
       'typeland': typeland,
-      'occupant': occupant,
+      // 'occupant': occupant,
       'tenure': tenure,
       'flatsize': flatsize,
       'buildingsize': buildingsize,
@@ -137,6 +139,7 @@ class PropertyInfor {
       'severage': severage,
       'telecom': telecom,
       'security': security,
+      'parking': parking,
     };
   }
 
@@ -151,7 +154,7 @@ class PropertyInfor {
       landsize: json['landsize'] ?? '',
       totalland: json['totalland'] ?? '',
       typeland: json['typeland'] ?? '',
-      occupant: json['occupant'] ?? '',
+      // occupant: json['occupant'] ?? '',
       tenure: json['tenure'] ?? '',
       flatsize: json['flatsize'] ?? '',
       buildingsize: json['buildingsize'] ?? '',
@@ -185,6 +188,7 @@ class PropertyInfor {
       severage: json['severage'] ?? '',
       telecom: json['telecom'] ?? '',
       security: json['security'] ?? '',
+      parking: json['parking'] ?? '',
     );
   }
 
@@ -199,7 +203,7 @@ class PropertyInfor {
       'landsize': landsize ?? '',
       'totalland': totalland ?? '',
       'typeland': typeland ?? '',
-      'occupant': occupant ?? '',
+      // 'occupant': occupant ?? '',
       'tenure': tenure ?? '',
       'flatsize': flatsize ?? '',
       'buildingsize': buildingsize ?? '',
@@ -232,7 +236,8 @@ class PropertyInfor {
       'electricity': electricity ?? '',
       'severage': severage ?? '',
       'telecom': telecom ?? '',
-      'security': security ?? ''
+      'security': security ?? '',
+      'parking': parking ?? ''
     };
   }
 

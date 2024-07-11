@@ -127,7 +127,7 @@ class _SideBarState extends State<SideBar> {
                     child: Center(child: FormWidget()),
                   ),
                 ),
-                Container(color: Colors.white, child: DataPage()),
+                // Container(color: Colors.white, child: DataPage()),
               ],
             ),
           ),

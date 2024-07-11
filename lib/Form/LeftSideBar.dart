@@ -30,37 +30,19 @@ class _MyleftSideBarState extends State<MyleftSideBar> {
   @override
   Widget build(BuildContext context) {
     pw.RichText.debug = true;
-    final actions = <PdfPreviewAction>[
-      if (!kIsWeb)
-        const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
-    ];
+    // final actions = <PdfPreviewAction>[
+    //   if (!kIsWeb)
+    //     const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
+    // ];
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text("FILL THE FORM"),
-        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-        centerTitle: true,
-        elevation: 10,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: GestureDetector(
-              onTap: () async {
-                await Printing.layoutPdf(
-                    onLayout: (format) => generatePdf(format, 'ko'));
-                //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
-                //   'name': 'Berlin'
-                // },);
-              },
-              child: const Icon(
-                Icons.picture_as_pdf,
-                color: Colors.white,
-                size: 25,
-              ),
-            ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.blue,
+      //   title: Text("FILL THE FORM"),
+      //   titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      //   centerTitle: true,
+      //   elevation: 10,
+        
+      // ),
       body: SideBar(sideMenu: sideMenu, pageController: pageController),
     );
   }

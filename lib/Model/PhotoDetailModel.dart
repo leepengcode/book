@@ -5,8 +5,8 @@ import 'package:universal_io/io.dart';
 
 class PhotoDetail {
   File? frontviewimage;
-  List<File>? viewimage = [];
-  List<File>? insideimage = [];
+  List<File>? viewimage ;
+  List<File>? insideimage ;
   List<File>? landimage;
   File? roadviewimage1;
   File? roadviewimage2;

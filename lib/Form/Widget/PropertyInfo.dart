@@ -38,7 +38,6 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
     metalroof: "s",
     north: "s",
     occoupied: "s",
-    occupant: "s",
     percentage: "s",
     plotno: "s",
     quality: "s",
@@ -105,6 +104,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
   final _severage = TextEditingController();
   final _telecom = TextEditingController();
   final _security = TextEditingController();
+  final _parking = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             objInfo.landsize = _landsize.text.toString();
             objInfo.totalland = _totalland.text.toString();
             objInfo.typeland = _typeland.text.toString();
-            objInfo.occupant = _occupant.text.toString();
+            // objInfo.occupant = _occupant.text.toString();
             objInfo.tenure = _tenure.text.toString();
             objInfo.flatsize = _flatsize.text.toString();
             objInfo.buildingsize = _buildingsize.text.toString();
@@ -155,6 +155,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             objInfo.severage = _severage.text.toString();
             objInfo.telecom = _telecom.text.toString();
             objInfo.security = _security.text.toString();
+            objInfo.parking = _parking.text.toString();
             print("${objInfo.toJson()}\n");
             widget.getForm!(objInfo);
           });
@@ -231,22 +232,23 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     label: "",
                     width: 250,
                     controller: _typeland),
-                if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
-                  _buildTextFieldColumn(
-                      title: "Occupant",
-                      label: "",
-                      width: 250,
-                      controller: _occupant),
-                ] else ...[
-                  _buildTextFieldColumn(
+                     _buildTextFieldColumn(
                       title: "Type of Tenure",
                       label: "",
                       width: 250,
                       controller: _tenure),
-                ]
+                // if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
+                //   // _buildTextFieldColumn(
+                //   //     title: "Occupant",
+                //   //     label: "",
+                //   //     width: 250,
+                //   //     controller: _occupant),
+                // ] else ...[
+                 
+                // ]
               ],
             ),
-            // if (widget.ck1 != "Property LAND VALUATION REPORT")
+            if (widget.ck1 != "Property LAND VALUATION REPORT")
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -496,28 +498,33 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     _buildTextFieldColumn(
                         title: "Water",
                         label: "",
-                        width: 250,
+                        width: 210,
                         controller: _water),
                     _buildTextFieldColumn(
                         title: "Electricity",
                         label: "",
-                        width: 250,
+                        width: 210,
                         controller: _electricity),
                     _buildTextFieldColumn(
                         title: "Sewerage",
                         label: "",
-                        width: 250,
+                        width: 210,
                         controller: _severage),
                     _buildTextFieldColumn(
                         title: "Telecommunications",
                         label: "",
-                        width: 250,
+                        width: 210,
                         controller: _telecom),
                     _buildTextFieldColumn(
                         title: "Security",
                         label: "",
-                        width: 250,
+                        width: 210,
                         controller: _security),
+                        _buildTextFieldColumn(
+                        title: "Garash/Parking",
+                        label: "",
+                        width: 210,
+                        controller: _parking),
                   ],
                 ),
               ],

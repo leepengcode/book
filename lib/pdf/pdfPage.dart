@@ -32,10 +32,10 @@ class _PdfPageState extends State<PdfPage> {
   @override
   Widget build(BuildContext context) {
     pw.RichText.debug = true;
-    final actions = <PdfPreviewAction>[
-      if (!kIsWeb)
-        const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
-    ];
+    // final actions = <PdfPreviewAction>[
+    //   if (!kIsWeb)
+    //     const PdfPreviewAction(icon: Icon(Icons.save), onPressed: saveAsFile)
+    // ];
     // final name = ModalRoute.of(context)!.settings.arguments as Map;
     // print("object ${name['name']}");
     return Scaffold(
