@@ -1,6 +1,7 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, deprecated_member_use
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:book/Componnents/style.dart';
 import 'package:book/Form/LeftSideBar.dart';
@@ -48,7 +49,10 @@ class MyPDF extends StatefulWidget {
       this.objBuilding,
       this.objfinalmap,
       this.objComparison,
-      required this.objPhotoDetail, this.list_forviewproperty, this.list_forinsideproperty, this.list_forviewland});
+      required this.objPhotoDetail,
+      this.list_forviewproperty,
+      this.list_forinsideproperty,
+      this.list_forviewland});
   final Cover? objCover;
   final PropertyInfor? objPropertyInfor;
   final IDCard? objIdcard;
@@ -65,59 +69,74 @@ class MyPDF extends StatefulWidget {
   final FinalMap? objfinalmap;
   final PhotoDetail objPhotoDetail;
   final List<File>? list_forviewproperty;
-  final List<File>? list_forinsideproperty ;
+  final List<File>? list_forinsideproperty;
   final List<File>? list_forviewland;
   @override
   State<MyPDF> createState() => _MyPDFState();
 }
 
 class _MyPDFState extends State<MyPDF> {
-  List<Uint8List> viewimg = [];
-  List<Uint8List> insideimg=[];
-  @override
-  void initState() {
-    // TODO: implement initState
+  // List<Uint8List> viewimg = [];
+  // List<Uint8List> insideimg = [];
+  // List<Uint8List> viewlandimg = [];
 
-//  print("widget.objPhotoDetail.viewimage!.length ${widget.objPhotoDetail.viewimage!.length}\n");
-    // print("widget.objPhotoDetail!.frontviewimage!.path ${widget.objPhotoDetail.frontviewimage!.path}\n");
-  
-    
-    super.initState();
-  }
-   Uint8List? frontviewimage ;
+  // Uint8List? frontviewimage;
+  // Uint8List? roadviewimage1;
+  // Uint8List? roadviewimage2;
+  // Uint8List? surroundin1;
+  // Uint8List? surroundin2;
+  // Uint8List? surroundin3;
+  // Uint8List? surroundin4;
+  // Uint8List? surroundin5;
+  // Uint8List? surroundin6;
+
   Future formart_to_pdf() async {
-    
-    
-         
-    await Viewimage();
-    await Insideimg();
+    // if (widget.objCover!.header !=
+    //     "Property [LAND AND BUILDING] VALUATION REPORT") {
+    //   await viewland();
+    // } else {
+    //   await Viewimage();
+    //   await Insideimg();
+    // }
+    // frontviewimage =
+    //     await getBlobData(widget.objPhotoDetail.frontviewimage!.path);
+    // roadviewimage1 =
+    //     await getBlobData(widget.objPhotoDetail.roadviewimage1!.path);
+    // roadviewimage2 =
+    //     await getBlobData(widget.objPhotoDetail.roadviewimage2!.path);
+    // surroundin1 = await getBlobData(widget.objPhotoDetail.surroundin1!.path);
+    // surroundin2 = await getBlobData(widget.objPhotoDetail.surroundin2!.path);
+    // surroundin3 = await getBlobData(widget.objPhotoDetail.surroundin3!.path);
+    // surroundin4 = await getBlobData(widget.objPhotoDetail.surroundin4!.path);
+    // surroundin5 = await getBlobData(widget.objPhotoDetail.surroundin5!.path);
+    // surroundin6 = await getBlobData(widget.objPhotoDetail.surroundin6!.path);
     await Printing.layoutPdf(
-                    onLayout: (format) =>
-                    generatePdf(format
-                    //  widget.objCover! ,
-                    //  widget.objPropertyInfor,
-                    //  widget.objIdcard,
-                    //  widget.objLayout,
-                    //   widget.objGmap ,
-                      //  widget.objPhotoDetail
-                       ));
+        onLayout: (format) => generatePdf(format
+            //  widget.objCover! ,
+            //  widget.objPropertyInfor,
+            //  widget.objIdcard,
+            //  widget.objLayout,
+            //   widget.objGmap ,
+            //  widget.objPhotoDetail
+            ));
   }
+
   @override
   Widget build(BuildContext context) {
-   
     // return  MyleftSideBar();
     return FutureBuilder(
-          future: formart_to_pdf(),
-          builder: (context, i) {
-            if (i.hasError) {
-              return Center(child: Text("Error ${i.error}\n"),);
-            }else if(i.hasData){
-              return MyleftSideBar();
-            }else{
-               return Center(child: CircularProgressIndicator());
-            }
-           
-          });
+        future: formart_to_pdf(),
+        builder: (context, i) {
+          if (i.hasError) {
+            return Center(
+              child: Text("Error ${i.error}\n"),
+            );
+          } else if (i.hasData) {
+            return MyleftSideBar();
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 
   Future<Uint8List> getBlobData(String url) async {
@@ -129,49 +148,45 @@ class _MyPDFState extends State<MyPDF> {
     }
   }
 
-  // Future Viewimagetest(List<File> listviewimg) async {
-  //   // List<Uint8List> get_listviewimg =[];
-  //   for (int i = 0; i < listviewimg.length; i++) {
+  // Future Viewimage() async {
+  //   for (int i = 0; i < widget.list_forviewproperty!.length; i++) {
   //     try {
-  //       get_listviewimg.add(await getBlobData(listviewimg[i].path));
+  //       viewimg.add(await getBlobData(widget.list_forviewproperty![i].path));
   //     } catch (e) {
-  //       print("Error loop get_listviewimg\n");
+  //       print("Error loop get_listviewimg $e\n");
   //     }
   //   }
-  //   // return get_listviewimg;
   // }
 
-  Future Viewimage() async {
-   
-    for (int i = 0; i <widget.list_forviewproperty!.length; i++) {
-      try {
-       
-        viewimg.add(await getBlobData(widget.list_forviewproperty![i].path));
-      } catch (e) {
-        print("Error loop get_listviewimg $e\n");
-      }
-    }
-  }
+  // Future Insideimg() async {
+  //   for (int i = 0; i < widget.list_forinsideproperty!.length; i++) {
+  //     try {
+  //       insideimg
+  //           .add(await getBlobData(widget.list_forinsideproperty![i].path));
+  //     } catch (e) {
+  //       print("Error loop get_listinside\n");
+  //     }
+  //   }
+  // }
 
-  Future Insideimg() async {
-    for (int i = 0; i < widget.list_forinsideproperty!.length; i++) {
-      try {
-        insideimg.add(await getBlobData(widget.list_forinsideproperty![i].path));
-      } catch (e) {
-        print("Error loop get_listinside\n");
-      }
-    }
-  
-  }
+  // Future viewland() async {
+  //   for (int i = 0; i < widget.list_forviewland!.length; i++) {
+  //     try {
+  //       viewlandimg.add(await getBlobData(widget.list_forviewland![i].path));
+  //     } catch (e) {
+  //       print("Error loop get_listviewland\n");
+  //     }
+  //   }
+  // }
 
   Future<Uint8List> generatePdf(
-      final PdfPageFormat format,
-      // Cover objCover,
+    final PdfPageFormat format,
+    // Cover objCover,
 //  PropertyInfor? objPropertyInfor,
 //  IDCard? objIdcard ,
 //  Layout? objLayout ,
 //  Gmap? objGmap,
-      ) async {
+  ) async {
     final doc = pw.Document(
       title: "FULL REPORT BOOK",
     );
@@ -184,34 +199,19 @@ class _MyPDFState extends State<MyPDF> {
         (await rootBundle.load('assets/images/cover1.jpg'))
             .buffer
             .asUint8List());
-Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
-// Uint8List fidcard1 =await getBlobData(objIdcard!.frontidcard1!.path);
-// Uint8List fidcard2 =await getBlobData(objIdcard.frontidcard2!.path);
-// Uint8List bidcard1 =await getBlobData(objIdcard.backidcard1!.path);
-// Uint8List bidcard2 =await getBlobData(objIdcard.backidcard2!.path);
+    // Uint8List angkorImage1 = await getBlobData(widget.objCover!.image!.path);
+// Uint8List fidcard1 =await getBlobData(widget.objIdcard!.frontidcard1!.path);
+// Uint8List fidcard2 =await getBlobData(widget.objIdcard.frontidcard2!.path);
+// Uint8List bidcard1 =await getBlobData(widget.objIdcard.backidcard1!.path);
+// Uint8List bidcard2 =await getBlobData(widget.objIdcard.backidcard2!.path);
 
-// Uint8List ownerimg1 =await getBlobData(objLayout!.deepimage1!.path);
-// Uint8List ownerimg2 =await getBlobData(objLayout.deepimage2!.path);
-// Uint8List layoutimg =await getBlobData(objLayout.layoutimage!.path);
+// Uint8List ownerimg1 =await getBlobData(widget.objLayout!.deepimage1!.path);
+// Uint8List ownerimg2 =await getBlobData(widget.objLayout.deepimage2!.path);
+// Uint8List layoutimg =await getBlobData(widget.objLayout.layoutimage!.path);
 
-// Uint8List map1Image =await getBlobData(objGmap!.pmapimage!.path);
-// Uint8List map2Image =await getBlobData(objGmap.apmapimage!.path);
-// Uint8List map3Image =await getBlobData(objGmap.skmapimage!.path);
-
-   
-  frontviewimage =
-       await getBlobData(widget.objPhotoDetail.frontviewimage!.path) ;
-    // List<Uint8List> insideimg = await Insideimg(objPhotoDetail.insideimage!);
-    Uint8List roadviewimage1 =
-        await getBlobData(widget.objPhotoDetail.roadviewimage1!.path);
-    Uint8List roadviewimage2 =
-        await getBlobData(widget.objPhotoDetail.roadviewimage2!.path);
-    Uint8List surroundin1 = await getBlobData(widget.objPhotoDetail.surroundin1!.path);
-    Uint8List surroundin2 = await getBlobData(widget.objPhotoDetail.surroundin2!.path);
-    Uint8List surroundin3 = await getBlobData(widget.objPhotoDetail.surroundin3!.path);
-    Uint8List surroundin4 = await getBlobData(widget.objPhotoDetail.surroundin4!.path);
-    Uint8List surroundin5 = await getBlobData(widget.objPhotoDetail.surroundin5!.path);
-    Uint8List surroundin6 = await getBlobData(widget.objPhotoDetail.surroundin6!.path);
+// Uint8List map1Image =await getBlobData(widget.objGmap!.pmapimage!.path);
+// Uint8List map2Image =await getBlobData(widget.objGmap.apmapimage!.path);
+// Uint8List map3Image =await getBlobData(widget.objGmap.skmapimage!.path);
 
     final ByteData angkor = await rootBundle.load('assets/images/angkor.jpg');
 
@@ -284,6 +284,14 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
           fontWeight: pw.FontWeight.bold);
     }
 
+    pw.TextStyle header6() {
+      return pw.TextStyle(
+          fontSize: 8,
+          font: h_font,
+          color: PdfColors.blue900,
+          fontWeight: pw.FontWeight.bold);
+    }
+
     pw.TextStyle body() {
       return pw.TextStyle(
         fontSize: 11,
@@ -309,196 +317,195 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     }
 
     //first page
-    pdf.addPage(pw.Page(
-      pageTheme: pageTheme,
-      build: (final context) {
-        return pw.FullPage(
-          ignoreMargins: true,
-          child: pw.Image(
-            coverImage,
-            fit: pw.BoxFit.cover,
-          ),
-        );
-      },
-    ));
+    // pdf.addPage(pw.Page(
+    //   pageTheme: pageTheme,
+    //   build: (final context) {
+    //     return pw.FullPage(
+    //       ignoreMargins: true,
+    //       child: pw.Image(
+    //         coverImage,
+    //         fit: pw.BoxFit.cover,
+    //       ),
+    //     );
+    //   },
+    // ));
 
-    //Sencond page
-    pdf.addPage(
-      pw.Page(
-        pageTheme: pageTheme,
-        build: (final context) {
-          return pw.FullPage(
-            ignoreMargins: true,
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              children: [
-                pw.Container(
-                  margin: const pw.EdgeInsets.only(
-                      top: 30, right: 25), // Add margin here
-                  child: pw.Text(
-                    // ignore: unnecessary_null_comparison
-                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD  ${(bank != null) ? bank : ''}",
-                    style: pw.TextStyle(fontSize: 9, font: font),
-                  ),
-                ),
-                pw.Expanded(
-                  child: pw.Container(
-                    margin: const pw.EdgeInsets.only(
-                        top: 5, left: 40, right: 25, bottom: 25),
-                    decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
-                    ),
-                    child: pw.Center(
-                        child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.center,
-                      children: [
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                            top: 25,
-                          ), // Add margin here
-                          child: pw.Text(
-                            "${widget.objCover!.header}\n\n REPORT TO",
-                            style: header1(),
-                            textAlign: pw.TextAlign.center,
-                          ),
-                        ),
-                        if (widget.objCover!.info == "Bank") ...[
-                          pw.Text("\n${widget.objCover!.bank} \n(${widget.objCover!.branch})",
-                              style: header1(), textAlign: pw.TextAlign.center),
-                        ] else ...[
-                          pw.Text("\n${widget.objCover!.ownership}",
-                              style: header1(), textAlign: pw.TextAlign.center),
-                        ],
-
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                              top: 15, bottom: 15), // Add margin here
-                          child: pw.Text("FOR", style: header1()),
-                        ),
-                        pw.Container(
-                          child: pw.RichText(
-                            text: pw.TextSpan(
-                              text: '${widget.objCover!.ownername}',
-                              style: header2(true), // Base style
-                              children: [],
-                            ),
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                            top: 10,
-                          ), // Add margin here
-                          child: pw.RichText(
-                            text: pw.TextSpan(
-                              text: 'Deep Title :',
-                              style: header2(false), // Base style
-                              children: [
-                                pw.TextSpan(
-                                  text: ' ${widget.objCover!.deeptitle}',
-                                  style: header2(true),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // pw.Padding(
-                        //     padding: pw.EdgeInsets.only(
-                        //       left: 60,
-                        //       right: 60,
-                        //       top: 10,
-                        //     ),
-                        //     child: pw.Image(pw.MemoryImage(angkorImage1),
-                        //         fit: pw.BoxFit.cover, height: 280)),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                              top: 15, right: 50, left: 60),
-                          child: pw.RichText(
-                              text: pw.TextSpan(
-                                text: 'Address :',
-                                style: header2(false), // Base style
-                                children: [
-                                  pw.TextSpan(
-                                    text:
-                                        ' ${widget.objCover!.location}, ${widget.objCover!.street}, ${widget.objCover!.cityorprovince}, ${widget.objCover!.communeorkhan}, ${widget.objCover!.districtorsangkat}, ${widget.objCover!.villageorphum}',
-                                    style: header2(true),
-                                  ),
-                                ],
-                              ),
-                              textAlign:
-                                  pw.TextAlign.center), // Add margin here
-                        ),
-                        pw.Padding(
-                          padding:
-                              const pw.EdgeInsets.only(), // Add margin here
-                          child: pw.RichText(
-                            text: pw.TextSpan(
-                              text: '\nREPORTED, ${widget.objCover!.reportto},',
-                              style: header2(true), // Base style
-                            ),
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                            top: 5,
-                          ), // Add margin here
-                          child: pw.RichText(
-                            text: pw.TextSpan(
-                              text: 'ON :',
-                              style: header2(false), // Base style
-                              children: [
-                                pw.TextSpan(
-                                  text: ' ${widget.objCover!.date}',
-                                  style: header2(true),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.RichText(
-                          text: pw.TextSpan(
-                            text: 'By',
-                            style: header2(true), // Base style
-                          ),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.RichText(
-                          text: pw.TextSpan(
-                            text: ' CAMBODIA ANGKOR REAL ESTATE CO.,LTD.',
-                            style: header2(false), // Base style
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                              top: 5), // Add margin here
-                          child: pw.RichText(
-                            text: pw.TextSpan(
-                              text: 'Copy Right by: C-A-R-E',
-                              style: header2(true), // Base style
-                            ),
-                          ),
-                        ),
-                        pw.RichText(
-                          text: pw.TextSpan(
-                            text: '\nNº : ${widget.objCover!.code}',
-                            style: header2(true), // Base style
-                          ),
-                        ),
-                        pw.SizedBox(height: 20),
-                        pw.Text("I", style: header2(false))
-                      ],
-                    )),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
+    // //Sencond page
+    // pdf.addPage(
+    //   pw.Page(
+    //     pageTheme: pageTheme,
+    //     build: (final context) {
+    //       return pw.FullPage(
+    //         ignoreMargins: true,
+    //         child: pw.Column(
+    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
+    //           children: [
+    //             pw.Container(
+    //               margin: const pw.EdgeInsets.only(
+    //                   top: 30, right: 25), // Add margin here
+    //               child: pw.Text(
+    //                 // ignore: unnecessary_null_comparison
+    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD  ${(bank != null) ? bank : ''}",
+    //                 style: pw.TextStyle(fontSize: 9, font: font),
+    //               ),
+    //             ),
+    //             pw.Expanded(
+    //               child: pw.Container(
+    //                 margin: const pw.EdgeInsets.only(
+    //                     top: 5, left: 40, right: 25, bottom: 25),
+    //                 decoration: pw.BoxDecoration(
+    //                   border: pw.Border.all(
+    //                     color: PdfColors.black,
+    //                     width: 2, // Adjust border width as needed
+    //                   ),
+    //                 ),
+    //                 child: pw.Center(
+    //                     child: pw.Column(
+    //                   crossAxisAlignment: pw.CrossAxisAlignment.center,
+    //                   children: [
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                         top: 25,
+    //                       ), // Add margin here
+    //                       child: pw.Text(
+    //                         "${widget.objCover!.header}\n\n REPORT TO",
+    //                         style: header1(),
+    //                         textAlign: pw.TextAlign.center,
+    //                       ),
+    //                     ),
+    //                     if (widget.objCover!.info == "Bank") ...[
+    //                       pw.Text(
+    //                           "\n${widget.objCover!.bank} \n(${widget.objCover!.branch})",
+    //                           style: header1(),
+    //                           textAlign: pw.TextAlign.center),
+    //                     ] else ...[
+    //                       pw.Text("\n${widget.objCover!.ownership}",
+    //                           style: header1(), textAlign: pw.TextAlign.center),
+    //                     ],
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                           top: 15, bottom: 15), // Add margin here
+    //                       child: pw.Text("FOR", style: header1()),
+    //                     ),
+    //                     pw.Container(
+    //                       child: pw.RichText(
+    //                         text: pw.TextSpan(
+    //                           text: '${widget.objCover!.ownername}',
+    //                           style: header2(true), // Base style
+    //                           children: [],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                         top: 10,
+    //                       ), // Add margin here
+    //                       child: pw.RichText(
+    //                         text: pw.TextSpan(
+    //                           text: 'Deep Title :',
+    //                           style: header2(false), // Base style
+    //                           children: [
+    //                             pw.TextSpan(
+    //                               text: ' ${widget.objCover!.deeptitle}',
+    //                               style: header2(true),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     pw.Padding(
+    //                         padding: pw.EdgeInsets.only(
+    //                           left: 60,
+    //                           right: 60,
+    //                           top: 10,
+    //                         ),
+    //                         child: pw.Image(pw.MemoryImage(angkorImage1),
+    //                             fit: pw.BoxFit.cover, height: 280)),
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                           top: 15, right: 50, left: 60),
+    //                       child: pw.RichText(
+    //                           text: pw.TextSpan(
+    //                             text: 'Address :',
+    //                             style: header2(false), // Base style
+    //                             children: [
+    //                               pw.TextSpan(
+    //                                 text:
+    //                                     ' ${widget.objCover!.location}, ${widget.objCover!.street}, ${widget.objCover!.cityorprovince}, ${widget.objCover!.communeorkhan}, ${widget.objCover!.districtorsangkat}, ${widget.objCover!.villageorphum}',
+    //                                 style: header2(true),
+    //                               ),
+    //                             ],
+    //                           ),
+    //                           textAlign:
+    //                               pw.TextAlign.center), // Add margin here
+    //                     ),
+    //                     pw.Padding(
+    //                       padding:
+    //                           const pw.EdgeInsets.only(), // Add margin here
+    //                       child: pw.RichText(
+    //                         text: pw.TextSpan(
+    //                           text: '\nREPORTED, ${widget.objCover!.reportto},',
+    //                           style: header2(true), // Base style
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                         top: 5,
+    //                       ), // Add margin here
+    //                       child: pw.RichText(
+    //                         text: pw.TextSpan(
+    //                           text: 'ON :',
+    //                           style: header2(false), // Base style
+    //                           children: [
+    //                             pw.TextSpan(
+    //                               text: ' ${widget.objCover!.date}',
+    //                               style: header2(true),
+    //                             ),
+    //                           ],
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     pw.SizedBox(height: 5),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(
+    //                         text: 'By',
+    //                         style: header2(true), // Base style
+    //                       ),
+    //                     ),
+    //                     pw.SizedBox(height: 5),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(
+    //                         text: ' CAMBODIA ANGKOR REAL ESTATE CO.,LTD.',
+    //                         style: header2(false), // Base style
+    //                       ),
+    //                     ),
+    //                     pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                           top: 5), // Add margin here
+    //                       child: pw.RichText(
+    //                         text: pw.TextSpan(
+    //                           text: 'Copy Right by: C-A-R-E',
+    //                           style: header2(true), // Base style
+    //                         ),
+    //                       ),
+    //                     ),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(
+    //                         text: '\nNº : ${widget.objCover!.code}',
+    //                         style: header2(true), // Base style
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 )),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );
 
     //Third Page
     // pdf.addPage(
@@ -2504,598 +2511,495 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     // ));
 
     //Page Ten
-    pdf.addPage(pw.Page(
-      pageTheme: pageTheme,
-      build: (final context) {
-        return pw.FullPage(
-          ignoreMargins: true,
-          child: pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.end,
-            children: [
-              pw.Container(
-                margin: const pw.EdgeInsets.only(
-                    top: 30, right: 25), // Add margin here
-                child: pw.Text(
-                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-                  style: pw.TextStyle(fontSize: 9, font: font),
-                ),
-              ),
-              pw.Expanded(
-                flex: 5,
-                child: pw.Container(
-                  margin: const pw.EdgeInsets.only(
-                      top: 10, left: 40, right: 25, bottom: 25),
-                  decoration: pw.BoxDecoration(
-                    border: pw.Border.all(
-                      color: PdfColors.black,
-                      width: 2, // Adjust border width as needed
-                    ),
-                  ),
-                  child: pw.Center(
-                      child: pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                              top: 10, left: 20, right: 20),
-                          child: pw.Column(
-                            mainAxisAlignment: pw.MainAxisAlignment.start,
-                            crossAxisAlignment: pw.CrossAxisAlignment.center,
-                            children: [
-                              pw.Text(
-                                  'Aerial Photograph of Phnom Penh Location',
-                                  style: header2(true),
-                                  textAlign: pw.TextAlign.start),
-                              if (widget.objCover!.header ==
-                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                                pw.Text('I. Photo front view of the Property',
-                                    style: header2(true),
-                                    textAlign: pw.TextAlign.start),
-                              ] else if (widget.objCover!.header ==
-                                  "Property LAND VALUATION REPORT") ...[
-                                pw.Text('I. Photo front view of the Land',
-                                    style: header2(true),
-                                    textAlign: pw.TextAlign.start),
-                              ] else if (widget.objCover!.header ==
-                                  "Property OFFICE SPACE VALUATION REPORT") ...[
-                                pw.Text(
-                                    'I. Photo front view of the Office Space',
-                                    style: header2(true),
-                                    textAlign: pw.TextAlign.start),
-                              ] else ...[
-                                pw.Text('I. Photo front view of the Condo',
-                                    style: header2(true),
-                                    textAlign: pw.TextAlign.start),
-                              ],
-                              pw.Expanded(
-                                flex: 2,
-                                child: pw.Container(
-                                  margin: const pw.EdgeInsets.only(
-                                    top: 3,
-                                  ),
-                                  decoration: pw.BoxDecoration(
-                                      border: pw.Border.all(
-                                        color: PdfColors.black,
-                                        width: 2,
-                                      ),
-                                      image: pw.DecorationImage(
-                                          image:
-                                              pw.MemoryImage(frontviewimage!))),
-                                ),
-                              ),
-                              if (widget.objCover!.header ==
-                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                                pw.Text(
-                                    'II. Photos inside view of the Property',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                                pw.Text('1.Photos view of the Property',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                              ] else if (widget.objCover!.header ==
-                                  "Property LAND VALUATION REPORT") ...[
-                                pw.Text('II. Photos inside view of the Land',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                                pw.Text('1.Photos view of the Land',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                              ] else if (widget.objCover!.header ==
-                                  "Property OFFICE SPACE VALUATION REPORT") ...[
-                                pw.Text(
-                                    'II. Photos inside view of the Office Space',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                                pw.Text('1.Photos view of the Office Space ',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                              ] else ...[
-                                pw.Text('II. Photos inside view of the Condo',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                                pw.Text('1.Photos view of the Condo ',
-                                    style: header3(),
-                                    textAlign: pw.TextAlign.start),
-                              ],
-                              pw.Expanded(
-                                flex: 2,
-                                child: pw.Container(
-                                  margin: const pw.EdgeInsets.only(
-                                      top: 3, bottom: 5),
-                                  decoration: pw.BoxDecoration(
-                                    border: pw.Border.all(
-                                      color: PdfColors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: pw.GridView(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 4,
-                                      mainAxisSpacing: 4,
-                                      children: [
-                                        for(var photo in viewimg )...[
-                                          //  if(photo != null)...[
+//     pdf.addPage(pw.Page(
+//       pageTheme: pageTheme,
+//       build: (final context) {
+//         return pw.FullPage(
+//           ignoreMargins: true,
+//           child: pw.Column(
+//             crossAxisAlignment: pw.CrossAxisAlignment.end,
+//             children: [
+//               pw.Container(
+//                 margin: const pw.EdgeInsets.only(
+//                     top: 30, right: 25), // Add margin here
+//                 child: pw.Text(
+//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+//                   style: pw.TextStyle(fontSize: 9, font: font),
+//                 ),
+//               ),
+//               pw.Expanded(
+//                 flex: 6,
+//                 child: pw.Container(
+//                   margin: const pw.EdgeInsets.only(
+//                       top: 10, left: 40, right: 25, bottom: 25),
+//                   decoration: pw.BoxDecoration(
+//                     border: pw.Border.all(
+//                       color: PdfColors.black,
+//                       width: 2, // Adjust border width as needed
+//                     ),
+//                   ),
+//                   child: pw.Center(
+//                       child: pw.Padding(
+//                           padding: const pw.EdgeInsets.only(
+//                               top: 10, left: 20, right: 20),
+//                           child: pw.Column(
+//                             mainAxisAlignment: pw.MainAxisAlignment.start,
+//                             crossAxisAlignment: pw.CrossAxisAlignment.center,
+//                             children: [
+//                               pw.Text(
+//                                   'Aerial Photograph of Phnom Penh Location',
+//                                   style: header2(true),
+//                                   textAlign: pw.TextAlign.start),
+//                               if (widget.objCover!.header ==
+//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                 pw.Text('I. Photo front view of the Property',
+//                                     style: header2(true),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property LAND VALUATION REPORT") ...[
+//                                 pw.Text('I. Photo front view of the Land',
+//                                     style: header2(true),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'I. Photo front view of the Office Space',
+//                                     style: header2(true),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else ...[
+//                                 pw.Text('I. Photo front view of the Condo',
+//                                     style: header2(true),
+//                                     textAlign: pw.TextAlign.start),
+//                               ],
+//                               pw.Expanded(
+//                                 flex: 2,
+//                                 child: pw.Container(
+//                                   margin: const pw.EdgeInsets.only(
+//                                     top: 3,
+//                                   ),
+//                                   decoration: pw.BoxDecoration(
+//                                       border: pw.Border.all(
+//                                         color: PdfColors.black,
+//                                         width: 2,
+//                                       ),
+//                                       image: pw.DecorationImage(
+//                                           image:
+//                                               pw.MemoryImage(frontviewimage!))),
+//                                 ),
+//                               ),
+//                               if (widget.objCover!.header ==
+//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'II. Photos inside view of the Property',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                                 pw.Text('1.Photos view of the Property',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property LAND VALUATION REPORT") ...[
+//                                 pw.Text('II. Photos inside view of the Land',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                                 pw.Text('1.Photos view of the Land',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'II. Photos inside view of the Office Space',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                                 pw.Text('1.Photos view of the Office Space ',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else ...[
+//                                 pw.Text('II. Photos inside view of the Condo',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                                 pw.Text('1.Photos view of the Condo ',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ],
+//                               if (widget.objCover!.header ==
+//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                 pw.Expanded(
+//                                   flex: 2,
+//                                   child: pw.GridView(
+//                                       crossAxisCount: 2,
+//                                       crossAxisSpacing: 2,
+//                                       mainAxisSpacing: 4,
+//                                       children: [
+//                                         for (var photo in viewimg) ...[
+//                                           pw.Image(pw.MemoryImage(photo),
+//                                               height: 150,
+//                                               width: 700,
+//                                               fit: pw.BoxFit.contain),
+//                                         ]
+//                                       ]),
+//                                 ),
+//                               ] else ...[
+//                                 pw.Expanded(
+//                                   flex: 2,
+//                                   child: pw.GridView(
+//                                       crossAxisCount: 2,
+//                                       crossAxisSpacing: 2,
+//                                       mainAxisSpacing: 4,
+//                                       children: [
+//                                         for (var photo in viewlandimg) ...[
+//                                           pw.Image(pw.MemoryImage(photo),
+//                                               height: 150,
+//                                               width: 700,
+//                                               fit: pw.BoxFit.contain),
+//                                         ]
+//                                       ]),
+//                                 ),
+//                               ],
+//                               pw.SizedBox(height: 20)
+//                             ],
+//                           ) // Add margin here
+//                           )),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     ));
 
-                                            pw.Container(
-                                            decoration: pw.BoxDecoration(
-                                                border: pw.Border.all(
-                                                  color: PdfColors.black,
-                                                  width: 2,
-                                                ),
-                                                image: pw.DecorationImage(
-                                                    image: pw.MemoryImage(
-                                                        photo))),
-                                          ),
-                                          //  ]else ...[
-                                          //   pw.Text("No Image")
-                                          //  ]
-                                        ]
+// // // //Page Ten
 
-                                      ]),
-                                ),
-                              ),
-                              pw.SizedBox(height: 20)
-                            ],
-                          ) // Add margin here
-                          )),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    ));
+//     if (widget.objCover!.header ==
+//         "Property [LAND AND BUILDING] VALUATION REPORT") {
+//       pdf.addPage(pw.Page(
+//         pageTheme: pageTheme,
+//         build: (final context) {
+//           return pw.FullPage(
+//             ignoreMargins: true,
+//             child: pw.Column(
+//               crossAxisAlignment: pw.CrossAxisAlignment.end,
+//               children: [
+//                 pw.Container(
+//                   margin: const pw.EdgeInsets.only(
+//                       top: 30, right: 25), // Add margin here
+//                   child: pw.Text(
+//                     "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+//                     style: pw.TextStyle(fontSize: 9, font: font),
+//                   ),
+//                 ),
+//                 pw.Expanded(
+//                   flex: 5,
+//                   child: pw.Container(
+//                     margin: const pw.EdgeInsets.only(
+//                         top: 10, left: 40, right: 25, bottom: 25),
+//                     decoration: pw.BoxDecoration(
+//                       border: pw.Border.all(
+//                         color: PdfColors.black,
+//                         width: 2, // Adjust border width as needed
+//                       ),
+//                     ),
+//                     child: pw.Center(
+//                         child: pw.Padding(
+//                             padding: const pw.EdgeInsets.only(
+//                                 top: 10, left: 20, right: 20),
+//                             child: pw.Column(
+//                               mainAxisAlignment: pw.MainAxisAlignment.start,
+//                               crossAxisAlignment: pw.CrossAxisAlignment.center,
+//                               children: [
+//                                 if (widget.objCover!.header ==
+//                                     "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                   pw.Text(
+//                                       'II. Photos inside view of the Property',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                   pw.Text(
+//                                       '2.Photos view inside of the Property',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                 ] else if (widget.objCover!.header ==
+//                                     "Property LAND VALUATION REPORT") ...[
+//                                   pw.Text('II. Photos inside view of the Land',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                   pw.Text('2.Photos view inside of the Land',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                 ] else if (widget.objCover!.header ==
+//                                     "Property OFFICE SPACE VALUATION REPORT") ...[
+//                                   pw.Text(
+//                                       'II. Photos inside view of the Office Space',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                   pw.Text(
+//                                       '2.Photos view inside of the Office Space ',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                 ] else ...[
+//                                   pw.Text('II. Photos inside view of the Condo',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                   pw.Text('2.Photos view inside of the Condo ',
+//                                       style: header3(),
+//                                       textAlign: pw.TextAlign.start),
+//                                 ],
+//                                 pw.Expanded(
+//                                   flex: 2,
+//                                   child: pw.GridView(
+//                                       crossAxisCount: 2,
+//                                       crossAxisSpacing: 2,
+//                                       mainAxisSpacing: 4,
+//                                       children: [
+//                                         for (var photo in insideimg) ...[
+//                                           pw.Image(pw.MemoryImage(photo),
+//                                               height: 150,
+//                                               width: 700,
+//                                               fit: pw.BoxFit.contain),
+//                                         ]
+//                                       ]),
+//                                 ),
+//                                 pw.SizedBox(height: 20)
+//                               ],
+//                             ) // Add margin here
+//                             )),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//         },
+//       ));
+//     }
 
-// // //Page Ten
+//     //Page Twenty
+//     pdf.addPage(pw.Page(
+//       pageTheme: pageTheme,
+//       build: (final context) {
+//         return pw.FullPage(
+//           ignoreMargins: true,
+//           child: pw.Column(
+//             crossAxisAlignment: pw.CrossAxisAlignment.end,
+//             children: [
+//               pw.Container(
+//                 margin: const pw.EdgeInsets.only(
+//                   top: 30,
+//                   right: 25,
+//                 ), // Add margin here
+//                 child: pw.Text(
+//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+//                   style: pw.TextStyle(fontSize: 9, font: font),
+//                 ),
+//               ),
+//               pw.Expanded(
+//                 flex: 6,
+//                 child: pw.Container(
+//                   margin: const pw.EdgeInsets.only(
+//                       top: 10, left: 40, right: 25, bottom: 25),
+//                   decoration: pw.BoxDecoration(
+//                     border: pw.Border.all(
+//                       color: PdfColors.black,
+//                       width: 2, // Adjust border width as needed
+//                     ),
+//                   ),
+//                   child: pw.Center(
+//                       child: pw.Padding(
+//                           padding: const pw.EdgeInsets.only(
+//                               top: 10, left: 40, right: 40, bottom: 10),
+//                           child: pw.Column(
+//                             mainAxisAlignment: pw.MainAxisAlignment.start,
+//                             crossAxisAlignment: pw.CrossAxisAlignment.center,
+//                             children: [
+//                               if (widget.objCover!.header ==
+//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'III. Photos view of Access Road to the Property',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property LAND VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'III. Photos view of Access Road to the Land',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'III. Photos view of Access Road to the Office Space',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else ...[
+//                                 pw.Text(
+//                                     'III. Photos view of Access Road to the Condo',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ],
+//                               pw.Expanded(
+//                                 flex: 2,
+//                                 child: pw.Row(
+//                                     mainAxisAlignment:
+//                                         pw.MainAxisAlignment.spaceBetween,
+//                                     children: [
+//                                       pw.Image(pw.MemoryImage(roadviewimage1!),
+//                                           height: 150,
+//                                           width: 700,
+//                                           fit: pw.BoxFit.contain),
+//                                       pw.Image(pw.MemoryImage(roadviewimage2!),
+//                                           height: 150,
+//                                           width: 700,
+//                                           fit: pw.BoxFit.contain),
+//                                     ]),
+//                               ),
+//                               if (widget.objCover!.header ==
+//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'IV. Photos surroundings view of the Property',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property LAND VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'IV. Photos surroundings view of the Land',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else if (widget.objCover!.header ==
+//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+//                                 pw.Text(
+//                                     'IV. Photos surroundings view of the Office Space',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ] else ...[
+//                                 pw.Text(
+//                                     'IV. Photos surroundings view of the Condo',
+//                                     style: header3(),
+//                                     textAlign: pw.TextAlign.start),
+//                               ],
+//                               pw.SizedBox(height: 10),
+//                               pw.Expanded(
+//                                   flex: 2,
+//                                   child: pw.Row(
+//                                       mainAxisAlignment:
+//                                           pw.MainAxisAlignment.spaceBetween,
+//                                       children: [
+//                                         pw.Column(
+//                                             crossAxisAlignment:
+//                                                 pw.CrossAxisAlignment.center,
+//                                             children: [
+//                                               pw.Image(
+//                                                   pw.MemoryImage(surroundin1!),
+//                                                   height: 150,
+//                                                   width: 700,
+//                                                   fit: pw.BoxFit.contain),
+//                                               pw.SizedBox(height: 2),
+//                                               pw.Text(
+//                                                   '${widget.objPhotoDetail.dessurroundin1}',
+//                                                   style: header3(),
+//                                                   textAlign:
+//                                                       pw.TextAlign.start),
+//                                             ]),
+//                                         pw.Column(
+//                                             crossAxisAlignment:
+//                                                 pw.CrossAxisAlignment.center,
+//                                             children: [
+//                                               pw.Image(
+//                                                   pw.MemoryImage(surroundin2!),
+//                                                   height: 150,
+//                                                   width: 700,
+//                                                   fit: pw.BoxFit.contain),
+//                                               pw.SizedBox(height: 2),
+//                                               pw.Text(
+//                                                   '${widget.objPhotoDetail.dessurroundin2}',
+//                                                   style: header3(),
+//                                                   textAlign:
+//                                                       pw.TextAlign.start),
+//                                             ])
+//                                       ])),
+//                               pw.Expanded(
+//                                 flex: 2,
+//                                 child: pw.Row(
+//                                     mainAxisAlignment:
+//                                         pw.MainAxisAlignment.spaceBetween,
+//                                     children: [
+//                                       pw.Column(
+//                                           crossAxisAlignment:
+//                                               pw.CrossAxisAlignment.center,
+//                                           children: [
+//                                             pw.Image(
+//                                                 pw.MemoryImage(surroundin3!),
+//                                                 height: 150,
+//                                                 width: 700,
+//                                                 fit: pw.BoxFit.contain),
+//                                             pw.SizedBox(height: 2),
+//                                             pw.Text(
+//                                                 '${widget.objPhotoDetail.dessurroundin3}',
+//                                                 style: header3(),
+//                                                 textAlign: pw.TextAlign.start),
+//                                           ]),
+//                                       pw.Column(
+//                                           crossAxisAlignment:
+//                                               pw.CrossAxisAlignment.center,
+//                                           children: [
+//                                             pw.Image(
+//                                                 pw.MemoryImage(surroundin4!),
+//                                                 height: 150,
+//                                                 width: 700,
+//                                                 fit: pw.BoxFit.contain),
+//                                             pw.SizedBox(height: 2),
+//                                             pw.Text(
+//                                                 '${widget.objPhotoDetail.dessurroundin4}',
+//                                                 style: header3(),
+//                                                 textAlign: pw.TextAlign.start),
+//                                           ])
+//                                     ]),
+//                               ),
+//                               pw.Expanded(
+//                                 flex: 2,
+//                                 child: pw.Row(
+//                                     mainAxisAlignment:
+//                                         pw.MainAxisAlignment.spaceBetween,
+//                                     children: [
+//                                       pw.Column(
+//                                           crossAxisAlignment:
+//                                               pw.CrossAxisAlignment.center,
+//                                           children: [
+//                                             pw.Image(
+//                                                 pw.MemoryImage(surroundin5!),
+//                                                 height: 150,
+//                                                 width: 700,
+//                                                 fit: pw.BoxFit.contain),
+//                                             pw.SizedBox(height: 2),
+//                                             pw.Text(
+//                                                 '${widget.objPhotoDetail.dessurroundin5}',
+//                                                 style: header3(),
+//                                                 textAlign: pw.TextAlign.start),
+//                                           ]),
+//                                       pw.Column(
+//                                           crossAxisAlignment:
+//                                               pw.CrossAxisAlignment.center,
+//                                           children: [
+//                                             pw.Image(
+//                                                 pw.MemoryImage(surroundin6!),
+//                                                 height: 150,
+//                                                 width: 700,
+//                                                 fit: pw.BoxFit.contain),
+//                                             pw.SizedBox(height: 2),
+//                                             pw.Text(
+//                                                 '${widget.objPhotoDetail.dessurroundin6}',
+//                                                 style: header3(),
+//                                                 textAlign: pw.TextAlign.start),
+//                                           ])
+//                                     ]),
+//                               ),
+//                             ],
+//                           ) // Add margin here
+//                           )),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     ));
 
-    if (widget.objCover!.header == "Property [LAND AND BUILDING] VALUATION REPORT") {
-      pdf.addPage(pw.Page(
-        pageTheme: pageTheme,
-        build: (final context) {
-          return pw.FullPage(
-            ignoreMargins: true,
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              children: [
-                pw.Container(
-                  margin: const pw.EdgeInsets.only(
-                      top: 30, right: 25), // Add margin here
-                  child: pw.Text(
-                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-                    style: pw.TextStyle(fontSize: 9, font: font),
-                  ),
-                ),
-                pw.Expanded(
-                  flex: 5,
-                  child: pw.Container(
-                    margin: const pw.EdgeInsets.only(
-                        top: 10, left: 40, right: 25, bottom: 25),
-                    decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
-                    ),
-                    child: pw.Center(
-                        child: pw.Padding(
-                            padding: const pw.EdgeInsets.only(
-                                top: 10, left: 20, right: 20),
-                            child: pw.Column(
-                              mainAxisAlignment: pw.MainAxisAlignment.start,
-                              crossAxisAlignment: pw.CrossAxisAlignment.center,
-                              children: [
-                                if (widget.objCover!.header ==
-                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                                  pw.Text(
-                                      'II. Photos inside view of the Property',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                  pw.Text(
-                                      '2.Photos view inside of the Property',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                ] else if (widget.objCover!.header ==
-                                    "Property LAND VALUATION REPORT") ...[
-                                  pw.Text('II. Photos inside view of the Land',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                  pw.Text('2.Photos view inside of the Land',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                ] else if (widget.objCover!.header ==
-                                    "Property OFFICE SPACE VALUATION REPORT") ...[
-                                  pw.Text(
-                                      'II. Photos inside view of the Office Space',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                  pw.Text(
-                                      '2.Photos view inside of the Office Space ',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                ] else ...[
-                                  pw.Text('II. Photos inside view of the Condo',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                  pw.Text('2.Photos view inside of the Condo ',
-                                      style: header3(),
-                                      textAlign: pw.TextAlign.start),
-                                ],
-                                pw.Expanded(
-                                  flex: 2,
-                                  child: pw.Container(
-                                    margin: const pw.EdgeInsets.only(
-                                        top: 3, bottom: 5),
-                                    decoration: pw.BoxDecoration(
-                                      border: pw.Border.all(
-                                        color: PdfColors.black,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    // child: pw.GridView(
-                                    //     crossAxisCount: 2,
-                                    //     crossAxisSpacing: 4,
-                                    //     mainAxisSpacing: 4,
-                                    //     children: [
-                                    //       for(var photo in insideimg )...[
-                                    //         if(photo == null)...[
-                                    //           pw.Container(
-                                    //           decoration: pw.BoxDecoration(
-                                    //               border: pw.Border.all(
-                                    //                 color: PdfColors.black,
-                                    //                 width: 2,
-                                    //               ),
-                                    //               image: pw.DecorationImage(
-                                    //                   image: pw.MemoryImage(
-                                    //                       photo))),
-                                    //         ),
-                                    //          ]else ...[
-                                    //           pw.Text("No Image")
-                                    //          ]
-                                    //       ]
-
-                                    //     ])
-                                  ),
-                                ),
-                                pw.SizedBox(height: 20)
-                              ],
-                            ) // Add margin here
-                            )),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ));
-    }
-
-    //Page Twenty
-    // pdf.addPage(pw.Page(
-    //   pageTheme: pageTheme,
-    //   build: (final context) {
-    //     return pw.FullPage(
-    //       ignoreMargins: true,
-    //       child: pw.Column(
-    //         crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //         children: [
-    //           pw.Container(
-    //             margin: const pw.EdgeInsets.only(
-    //               top: 30,
-    //               right: 25,
-    //             ), // Add margin here
-    //             child: pw.Text(
-    //               "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //               style: pw.TextStyle(fontSize: 9, font: font),
-    //             ),
-    //           ),
-    //           pw.Expanded(
-    //             flex: 5,
-    //             child: pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 10, left: 40, right: 25, bottom: 25),
-    //               decoration: pw.BoxDecoration(
-    //                 border: pw.Border.all(
-    //                   color: PdfColors.black,
-    //                   width: 2, // Adjust border width as needed
-    //                 ),
-    //               ),
-    //               child: pw.Center(
-    //                   child: pw.Padding(
-    //                       padding: const pw.EdgeInsets.only(
-    //                           top: 10, left: 20, right: 20, bottom: 20),
-    //                       child: pw.Column(
-    //                         mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                         crossAxisAlignment: pw.CrossAxisAlignment.center,
-    //                         children: [
-    //                           if (objCover.header ==
-    //                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Property',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (objCover.header ==
-    //                               "Property LAND VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Land',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (objCover.header ==
-    //                               "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Office Space',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Condo',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ],
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 3, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.GridView(
-    //                                     crossAxisCount: 2,
-    //                                     crossAxisSpacing: 4,
-    //                                     mainAxisSpacing: 4,
-    //                                     children: [
-    //                                       pw.Container(
-    //                                         decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width: 2,
-    //                                             ),
-    //                                             image: pw.DecorationImage(
-    //                                                 image: pw.MemoryImage(
-    //                                                     roadviewimage1))),
-    //                                       ),
-    //                                       pw.Container(
-    //                                         decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width: 2,
-    //                                             ),
-    //                                             image: pw.DecorationImage(
-    //                                                 image: pw.MemoryImage(
-    //                                                     roadviewimage2))),
-    //                                       ),
-    //                                     ])),
-    //                           ),
-    //                           if (objCover.header ==
-    //                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Property',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (objCover.header ==
-    //                               "Property LAND VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Land',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (objCover.header ==
-    //                               "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Office Space',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Condo',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ],
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 3, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.GridView(
-    //                                     crossAxisCount: 2,
-    //                                     crossAxisSpacing: 4,
-    //                                     mainAxisSpacing: 4,
-    //                                     children: [
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin1))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin1}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ]),
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin2))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin2}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ])
-    //                                     ])),
-    //                           ),
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 3, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.GridView(
-    //                                     crossAxisCount: 2,
-    //                                     crossAxisSpacing: 4,
-    //                                     mainAxisSpacing: 4,
-    //                                     children: [
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin3))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin3}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ]),
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin4))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin4}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ])
-    //                                     ])),
-    //                           ),
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 3, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.GridView(
-    //                                     crossAxisCount: 2,
-    //                                     crossAxisSpacing: 4,
-    //                                     mainAxisSpacing: 4,
-    //                                     children: [
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin5))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin5}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ]),
-    //                                       pw.Column(
-    //                                           crossAxisAlignment:
-    //                                               pw.CrossAxisAlignment.center,
-    //                                           children: [
-    //                                             pw.Container(
-    //                                               decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width: 2,
-    //                                                   ),
-    //                                                   image: pw.DecorationImage(
-    //                                                       image: pw.MemoryImage(
-    //                                                           surroundin6))),
-    //                                             ),
-    //                                             pw.Text(
-    //                                                 '${objPhotoDetail.dessurroundin6}',
-    //                                                 style: header3(),
-    //                                                 textAlign:
-    //                                                     pw.TextAlign.start),
-    //                                           ])
-    //                                     ])),
-    //                           ),
-    //                         ],
-    //                       ) // Add margin here
-    //                       )),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // ));
-
-    //Page Thirty
+    // Page Thirty
     // pdf.addPage(
     //   pw.Page(
     //     pageTheme: pageTheme,
@@ -3141,12 +3045,40 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                         pw.SizedBox(height: 10),
     //                         pw.RichText(
     //                           text: pw.TextSpan(
-    //                             text:
-    //                                 'The Subject Property [Land and Building] was inspected by an appraisal team from Cambodia Angkor Real Estate Co., Ltd. on ',
+    //                             text: 'The Subject Property ',
     //                             style: body1(), // Base style
     //                             children: [
+    //                               if (widget.objCover!.header ==
+    //                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+    //                                 pw.TextSpan(
+    //                                   text: ' [Land and Building] ',
+    //                                   style: header2(true),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property LAND VALUATION REPORT") ...[
+    //                                 pw.TextSpan(
+    //                                   text: ' [Land] ',
+    //                                   style: header2(true),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+    //                                 pw.TextSpan(
+    //                                   text: ' [Office Space] ',
+    //                                   style: header2(true),
+    //                                 ),
+    //                               ] else ...[
+    //                                 pw.TextSpan(
+    //                                   text: ' [Condo] ',
+    //                                   style: header2(true),
+    //                                 ),
+    //                               ],
     //                               pw.TextSpan(
-    //                                 text: '24th May 2024. ',
+    //                                 text:
+    //                                     'was inspected by an appraisal team from Cambodia Angkor Real Estate Co., Ltd. on ',
+    //                                 style: header2(true),
+    //                               ),
+    //                               pw.TextSpan(
+    //                                 text: '${widget.objCover!.date}. ',
     //                                 style: header2(true),
     //                               ),
     //                               pw.TextSpan(
@@ -3157,17 +3089,17 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                             ],
     //                           ),
     //                         ),
-    //                         pw.Text("\nCondition of property", style: header3()),
+    //                         pw.Text("\nCondition of property",
+    //                             style: header3()),
     //                         pw.RichText(
     //                           text: pw.TextSpan(
-    //                             text:
-    //                                 'The property is located along Street 335 about 25 meters from Beung Salang Primary School. The subject land size is 468.00sqm. It is next to a flat on the North and South boundary.',
+    //                             text: '${widget.objOfficerReport!.condition}',
     //                             style: body1(), // Base style
     //                           ),
     //                         ),
-    //                         pw.Text("\nImmediate Environment", style: header3()),
-    //                         pw.Text(
-    //                             "The subject property is surrounded by residential, shops, private companies, schools, restaurants, condo and other business activities.",
+    //                         pw.Text("\nImmediate Environment",
+    //                             style: header3()),
+    //                         pw.Text("${widget.objOfficerReport!.immediate}",
     //                             style: body1()),
     //                         pw.Padding(
     //                           padding: const pw.EdgeInsets.only(
@@ -3192,7 +3124,8 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                 decoration: pw.BoxDecoration(
     //                                   border: pw.Border.all(
     //                                     color: PdfColors.black,
-    //                                     width: 2, // Adjust border width as needed
+    //                                     width:
+    //                                         2, // Adjust border width as needed
     //                                   ),
     //                                 ),
     //                                 child: pw.Row(children: [
@@ -3219,7 +3152,10 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                         ),
     //                                       ),
     //                                       pw.Expanded(
-    //                                           flex: 6, child: pw.Container()),
+    //                                           flex: 6,
+    //                                           child: pw.Container(
+    //                                               child: pw.Text(
+    //                                                   '${widget.objOfficerReport!.strength}'))),
     //                                       pw.Expanded(
     //                                           flex: 1,
     //                                           child: pw.Container(
@@ -3231,13 +3167,14 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                               ),
     //                                             ),
     //                                             child: pw.Center(
-    //                                               child: pw.Text("Opportunities",
+    //                                               child: pw.Text(
+    //                                                   "Opportunities",
     //                                                   style: header2(false)),
     //                                             ),
     //                                           )),
     //                                       pw.Expanded(
-    //                                           flex: 3,
-    //                                           child: pw.Container(
+    //                                         flex: 3,
+    //                                         child: pw.Container(
     //                                             decoration: pw.BoxDecoration(
     //                                               border: pw.Border.all(
     //                                                 color: PdfColors.black,
@@ -3245,7 +3182,9 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                                     2, // Adjust border width as needed
     //                                               ),
     //                                             ),
-    //                                           ))
+    //                                             child: pw.Text(
+    //                                                 '${widget.objOfficerReport!.opportunity}')),
+    //                                       )
     //                                     ],
     //                                   ))),
     //                                   pw.Expanded(
@@ -3253,16 +3192,17 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                           child: pw.Column(
     //                                     children: [
     //                                       pw.Expanded(
-    //                                           flex: 1,
-    //                                           child: pw.Container(
-    //                                             child: pw.Center(
-    //                                               child: pw.Text("Weakness",
-    //                                                   style: header2(false)),
-    //                                             ),
-    //                                           )),
+    //                                         flex: 1,
+    //                                         child: pw.Container(
+    //                                           child: pw.Center(
+    //                                             child: pw.Text("Weakness",
+    //                                                 style: header2(false)),
+    //                                           ),
+    //                                         ),
+    //                                       ),
     //                                       pw.Expanded(
-    //                                           flex: 6,
-    //                                           child: pw.Container(
+    //                                         flex: 6,
+    //                                         child: pw.Container(
     //                                             decoration: pw.BoxDecoration(
     //                                               border: pw.Border.all(
     //                                                 color: PdfColors.black,
@@ -3270,7 +3210,9 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                                     2, // Adjust border width as needed
     //                                               ),
     //                                             ),
-    //                                           )),
+    //                                             child: pw.Text(
+    //                                                 '${widget.objOfficerReport!.weakness}')),
+    //                                       ),
     //                                       pw.Expanded(
     //                                           flex: 1,
     //                                           child: pw.Container(
@@ -3282,16 +3224,18 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //                                       pw.Expanded(
     //                                           flex: 3,
     //                                           child: pw.Container(
-    //                                             width: 225, // Set a fixed width
-    //                                             height: 255, // Set a
-    //                                             decoration: pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width:
-    //                                                     2, // Adjust border width as needed
+    //                                               width:
+    //                                                   225, // Set a fixed width
+    //                                               height: 255, // Set a
+    //                                               decoration: pw.BoxDecoration(
+    //                                                 border: pw.Border.all(
+    //                                                   color: PdfColors.black,
+    //                                                   width:
+    //                                                       2, // Adjust border width as needed
+    //                                                 ),
     //                                               ),
-    //                                             ),
-    //                                           ))
+    //                                               child: pw.Text(
+    //                                                   '${widget.objOfficerReport!.threat}')))
     //                                     ],
     //                                   ))),
     //                                 ])))
@@ -3484,622 +3428,282 @@ Uint8List angkorImage1 =await getBlobData(widget.objCover!.image!.path);
     //   ),
     // );
 
-    //Page Fifteen
-    // pdf.addPage(
-    //   pw.Page(
-    //     pageTheme: pageTheme,
-    //     build: (final context) {
-    //       return pw.FullPage(
-    //         ignoreMargins: true,
-    //         child: pw.Column(
-    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //           children: [
-    //             pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 30, right: 25), // Add margin here
-    //               child: pw.Text(
-    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                 style: pw.TextStyle(fontSize: 9, font: font),
-    //               ),
-    //             ),
-    //             pw.Expanded(
-    //               child: pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 5, left: 40, right: 25, bottom: 25),
-    //                 decoration: pw.BoxDecoration(
-    //                   border: pw.Border.all(
-    //                     color: PdfColors.black,
-    //                     width: 2, // Adjust border width as needed
-    //                   ),
-    //                 ),
-    //                 child: pw.Container(
-    //                     padding: pw.EdgeInsets.only(left: 40, right: 20),
-    //                     child: pw.Column(
-    //                       crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                       // mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                       children: [
-    //                         pw.Padding(
-    //                           padding: const pw.EdgeInsets.only(
-    //                               top: 20, left: -20), // Add margin here
-    //                           child: pw.Text(
-    //                             "Value of Comparable nearby Property",
-    //                             style: header1(),
-    //                             textAlign: pw.TextAlign.start,
-    //                           ),
-    //                         ),
-    //                         pw.SizedBox(height: 10),
-    //                         pw.RichText(
-    //                           text: pw.TextSpan(
-    //                             text: 'Market Prices',
-    //                             style: header4(), // Base style
-    //                           ),
-    //                         ),
-    //                         pw.RichText(
-    //                           text: pw.TextSpan(
-    //                             text:
-    //                                 'The market price of land and Building in Cambodia differs region to region depending on a number of factors, particularly the location and whether the site has development approval.  The location usually affects how fast the value of the subject land or Building rises in a given period.In the area near the Subject Property [Land and Building], Cambodia Angkor Real Estate Co. Ltd. estimates that, in general, property of a similar size and nature to the Subject Property [Land and Building]is currently worth around:',
-    //                             style: body1(), // Base style
-    //                           ),
-    //                         ),
-    //                         pw.SizedBox(height: 10),
-    //                         pw.Text("\$400 - 250 / sqm",
-    //                             style: header2(false),
-    //                             textAlign: pw.TextAlign.center),
-    //                         pw.SizedBox(height: 10),
-    //                         pw.RichText(
-    //                           text: pw.TextSpan(
-    //                             text: 'Comparisons with nearby Property',
-    //                             style: header4(), // Base style
-    //                           ),
-    //                         ),
-    //                         pw.RichText(
-    //                           text: pw.TextSpan(
-    //                             text:
-    //                                 'In preparing the Sales Comparable, the Valuer gathered both sold and on market properties verified and analyzed each sale. Utilized secondary data to support market trends as well as other factors pertinent to this assignment.',
-    //                             style: body1(), // Base style
-    //                           ),
-    //                         ),
-    //                         pw.SizedBox(height: 10),
-    //                         pw.RichText(
-    //                           text: pw.TextSpan(
-    //                             text:
-    //                                 'The chart below summarizes sales from which land value can be estimated. The following comparable were considered most representative of the land activity in the area of the subject property.',
-    //                             style: body1(), // Base style
-    //                           ),
-    //                         ),
-    //                         pw.Expanded(
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 10, left: -15, bottom: 20),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2, // Adjust border width as needed
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.Row(children: [
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Column(
-    //                                             children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration: pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                             ],
-    //                                           ))),
-    //                                 ])))
-    //                       ],
-    //                     )),
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+    // Page Fifteen
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 30, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Container(
+                        padding: pw.EdgeInsets.only(left: 40, right: 20),
+                        child: pw.Column(
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          // mainAxisAlignment: pw.MainAxisAlignment.start,
+                          children: [
+                            pw.Padding(
+                              padding: const pw.EdgeInsets.only(
+                                  top: 20, left: -20), // Add margin here
+                              child: pw.Text(
+                                "Value of Comparable nearby Property",
+                                style: header1(),
+                                textAlign: pw.TextAlign.start,
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text: 'Market Prices',
+                                style: header4(), // Base style
+                              ),
+                            ),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'The market price of land and Building in Cambodia differs region to region depending on a number of factors, particularly the location and whether the site has development approval.  The location usually affects how fast the value of the subject land or Building rises in a given period.In the area near the Subject Property [Land and Building], Cambodia Angkor Real Estate Co. Ltd. estimates that, in general, property of a similar size and nature to the Subject Property [Land and Building]is currently worth around:',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("\$400 - 250 / sqm",
+                                style: header2(false),
+                                textAlign: pw.TextAlign.center),
+                            pw.SizedBox(height: 10),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text: 'Comparisons with nearby Property',
+                                style: header4(), // Base style
+                              ),
+                            ),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'In preparing the Sales Comparable, the Valuer gathered both sold and on market properties verified and analyzed each sale. Utilized secondary data to support market trends as well as other factors pertinent to this assignment.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'The chart below summarizes sales from which land value can be estimated. The following comparable were considered most representative of the land activity in the area of the subject property.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.Container(
+                                // decoration: pw.BoxDecoration(
+                                //     border: pw.Border.all(
+                                //   width: 1,
+                                // )),
+                                width: double.infinity,
+                                child: pw.Column(
+                                  children: [
+                                    pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            "\t\t Parcel \t\t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            "\t\t\t\t    Type of Property   \t\t\t\t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            "\t Size (sqm) \t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            " Subject Value in USD / sqm ",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            " \t\t\tPrice / USD \t\t\t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            "\t \t\t\t\tTotal Price\t\t\t\t \t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                        pw.Container(
+                                          height: 80,
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                            width: 1,
+                                          )),
+                                          child: pw.Text(
+                                            "\t Type of compare \t",
+                                            style: header6(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            //   pw.Table.fromTextArray(
+                            //     headerStyle:
+                            //         pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                            //     headers: [
+                            //       'Parcel',
+                            //       'Type of Property',
+                            //       'Size (sqm)',
+                            //       'Subject Value in USD / sqm',
+                            //       'Price / USD',
+                            //       'Total Price',
+                            //       'Type of compare',
+                            //     ],
+                            //     headerCount: 2,
+                            //     data: [
+                            //       [
+                            //         '1',
+                            //         TableRow(children: [Text("data")])
+                            //       ],
+                            //       [
+                            //         '1',
+                            //         'Land',
+                            //         '73',
+                            //         '\$981',
+                            //         '\$71,613',
+                            //         '\$85,053',
+                            //         'Sold (2022)'
+                            //       ],
+                            //       ['', 'Flat', '64', '\$210', '\$13,440', '', ''],
+                            //       [
+                            //         '2',
+                            //         'Land',
+                            //         '73',
+                            //         '\$912',
+                            //         '\$66,576',
+                            //         '\$80,016',
+                            //         'Sold (2022)'
+                            //       ],
+                            //       ['', 'Flat', '64', '\$210', '\$13,440', '', ''],
+                            //       [
+                            //         '3',
+                            //         'Land',
+                            //         '73',
+                            //         '\$1,040',
+                            //         '\$75,920',
+                            //         '\$98,000',
+                            //         'On Market (Medium)'
+                            //       ],
+                            //       ['', 'Flat', '96', '\$230', '\$22,080', '', ''],
+                            //       [
+                            //         '4',
+                            //         'Land',
+                            //         '73',
+                            //         '\$1,068',
+                            //         '\$77,964',
+                            //         '\$100,044',
+                            //         'On Market (Medium)'
+                            //       ],
+                            //       ['', 'Flat', '96', '\$230', '\$22,080', '', ''],
+                            //       [
+                            //         '5',
+                            //         'Land',
+                            //         '80',
+                            //         '\$1,642',
+                            //         '\$131,360',
+                            //         '\$170,000',
+                            //         'On Market (Medium)'
+                            //       ],
+                            //       [
+                            //         '',
+                            //         'Flat',
+                            //         '168',
+                            //         '\$230',
+                            //         '\$38,640',
+                            //         '',
+                            //         ''
+                            //       ],
+                            //     ],
+                            //   ),
+                            //   // pw.Table(
+                            //   //     border: pw.TableBorder.all(width: 1),
+                            //   //     children: [
+                            //   //       pw.TableRow(repeat: true, children: [
+                            //   //         pw.Text("reportedItems[i][0]",
+                            //   //             style: pw.TextStyle(fontSize: 6)),
+                            //   //         pw.Text("reportedItems[i][0]"),
+                            //   //       ]),
+
+                            //   //     ]),
+                          ],
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
     // //Page sixteen
     // pdf.addPage(pw.Page(

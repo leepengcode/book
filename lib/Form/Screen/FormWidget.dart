@@ -82,244 +82,243 @@ class _FormWidgetState extends State<FormWidget> {
       //     ),
       //   ],
       // ),
-       body: CustomScrollView(
+      body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            pinned: false,
-            snap: true,
-            floating: true,
-            expandedHeight: 50.0,
-            actions:[GestureDetector(
-              onTap: () async {
-                setState(() {
-                  dataPhoto;
-                   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-                    MyPDF(objCover: dataCover,
-                    //  objPropertyInfor: dataInfo,
-                    //   objIdcard: dataIdcard,
-                    //   objLayout: dataLayout,
-                    //   objGmap: dataGmap,
-                       objPhotoDetail: dataPhoto,
-                       list_forviewproperty: list_forviewproperty,
-                       list_forinsideproperty: list_forinsideproperty,
-                       list_forviewland: list_forviewland,
-                       ),));
-                });
-               
-                // await Printing.layoutPdf(
-                //     onLayout: (format) => generatePdf(format, 'ko' ));
-                //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
-                //   'name': 'Berlin'
-                // },);
-              },
-              child: const Icon(
-                Icons.picture_as_pdf,
-                color: Colors.black,
-                size: 25,
-              ),
-            ),]
-          ),
+              pinned: false,
+              snap: true,
+              floating: true,
+              expandedHeight: 50.0,
+              actions: [
+                GestureDetector(
+                  onTap: () async {
+                    setState(() {
+                      dataPhoto;
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyPDF(
+                          objCover: dataCover,
+                          //  objPropertyInfor: dataInfo,
+                          //   objIdcard: dataIdcard,
+                          //   objLayout: dataLayout,
+                          //   objGmap: dataGmap,
+                          objPhotoDetail: dataPhoto,
+                          list_forviewproperty: list_forviewproperty,
+                          list_forinsideproperty: list_forinsideproperty,
+                          list_forviewland: list_forviewland,
+                        ),
+                      ));
+                    });
 
+                    // await Printing.layoutPdf(
+                    //     onLayout: (format) => generatePdf(format, 'ko' ));
+                    //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
+                    //   'name': 'Berlin'
+                    // },);
+                  },
+                  child: const Icon(
+                    Icons.picture_as_pdf,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                ),
+              ]),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return Column(
-            children: [
-               
-              CoverWidget(
-                onChanged: (value) {
-                  setState(() {
-                    ck1 = value.toString();
-                  });
-                },
-                getForm: (value) {
-                  setState(() {
-                    if (value != null) {
-                      print("object ${value.info}");
-                      dataCover = value;
-                    }
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              // PropertyInfo_Widget(
-              //   getForm: (value) {
-              //     setState(() {
-              //       dataInfo = value;
-              //     });
-              //   },
-              //   ck1: ck1,
-              // ),
-              // const SizedBox(
-              //   height: 25,
-              // ),
-              // uploadIDCard(
-              //   getForm: (value) {
-              //     if (value != null) {
-              //       dataIdcard = value;
-              //     }
-              //   },
-              // ),
-              // const SizedBox(
-              //   height: 25,
-              // ),
-              // uploadLayoutWidget(
-              //   getForm: (value) {
-              //     dataLayout = value;
-              //   },
-              //   ck1: ck1,
-              // ),
-              // const SizedBox(
-              //   height: 25,
-              // ),
-              // Mapwidget(
-              //   getForm: (value) {
-              //     if (value != null) {
-              //       print("Value : ${value}");
-              //       dataGmap = value;
-              //     }
-              //   },
-              // ),
-              // const SizedBox(
-              //   height: 25,
-              // ),
-              if (ck1 != null)
-                PhotoDetailWidget(
-                  getForm: (value) {
-                    setState(() {
-                      dataPhoto = value;
-                      print("frontviewimage ${dataPhoto.frontviewimage}\n");
-                    });
-                  },
-                  ck1: ck1,
-                  get_viewproperty: (value) {
-                    if (value != null) {
-                      setState(() {
-                        list_forviewproperty = value;
-                        dataPhoto.viewimage=value;
-                          print("In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
-                      });
-                    }
-                  },
-                  get_insideproperty: (value) {
-                    if (value != null) {
-                      setState(() { 
-                        list_forinsideproperty = value;
-                             dataPhoto.insideimage=value;
-                          print("In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
-                       
-                   
-                      });
-                    }
-                  },
-                  get_viewland: (value) {
-                    if (value != null) {
-                      setState(() {
-                        print("In main get_viewland\n\n");
-                        list_forviewland = value;
-                        dataPhoto.landimage=list_forviewland;
-                      });
-                    }
-                  },
-                ),
-              const SizedBox(
-                height: 25,
-              ),
-              // NearbyPropertyWidget(
-              //   getForm: (value) {
-              //     dataOfficer = value;
-              //   },
-              // ),
-              // SizedBox(
-              //   height: 25,
-              // ),
-              // GoogleMapImage(
-              //   getFile: (value) {
-              //    setState(() {
-              //       datafinalmap = value;
-              //    });
-              //   },
-              // ),
-              // SizedBox(
-              //   height: 25,
-              // ),
-              // ProvisionalValue(
-              //   getForm: (value) {
-              //     setState(() {
-              //       if (value != null) {
-              //         dataProvisional = value;
-              //       }
-              //     });
-              //   },
-              //   NoLandCount: 1,
-              //   ck1: ck1,
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // FinalIndicationWidget(
-              //   getForm: (value) {
-              //     setState(() {
-              //       if (value != null) {
-              //         dataFinalIndic = value;
-              //       }
-              //     });
-              //   },
-              //   ck1: ck1,
-              //   NoLandCount: 1,
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              GestureDetector(
-                onTap: () async {
-      
-                  // await FinalMap().. InsertFinalMap(datafinalmap!);
-      
-                  // await FinalIndication()
-                  //   ..InsertFinal(dataFinalIndic);
-                  // await Provisional()
-                  //   ..InsertProvisional(dataProvisional);
-      
-                  // await OfficerReport()
-                  //   ..InsertOfficer(dataOfficer!);
-      
-                  // await Gmap()
-                  //   ..insertGmap(dataGmap!);
-      
-                  // await InsertPhoto();
-      
-                  // await Layout()
-                  //   ..InsertLayout(dataLayout!);
-                  // await IDCard()
-                  //   ..InsertIdCard(dataIdcard!);
-      
-                  // await PropertyInfor()
-                  //   ..InsertInfo(dataInfo!);
-      
-                  // await Cover()
-                  //   ..InsertCover(dataCover!);
-                },
-                child: Center(
-                    child: Container(
-                  width: 150,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.blue),
-                  child: Center(
-                      child: Text(
-                    "Save",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
-                )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+                  children: [
+                    CoverWidget(
+                      onChanged: (value) {
+                        setState(() {
+                          ck1 = value.toString();
+                        });
+                      },
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            print("object ${value.info}");
+                            dataCover = value;
+                          }
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    // PropertyInfo_Widget(
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       dataInfo = value;
+                    //     });
+                    //   },
+                    //   ck1: ck1,
+                    // ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
+                    // uploadIDCard(
+                    //   getForm: (value) {
+                    //     if (value != null) {
+                    //       dataIdcard = value;
+                    //     }
+                    //   },
+                    // ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
+                    // uploadLayoutWidget(
+                    //   getForm: (value) {
+                    //     dataLayout = value;
+                    //   },
+                    //   ck1: ck1,
+                    // ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
+                    // Mapwidget(
+                    //   getForm: (value) {
+                    //     if (value != null) {
+                    //       print("Value : ${value}");
+                    //       dataGmap = value;
+                    //     }
+                    //   },
+                    // ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
+                    // if (ck1 != null)
+                    //   PhotoDetailWidget(
+                    //     getForm: (value) {
+                    //       setState(() {
+                    //         dataPhoto = value;
+                    //         print("frontviewimage ${dataPhoto.frontviewimage}\n");
+                    //       });
+                    //     },
+                    //     ck1: ck1,
+                    //     get_viewproperty: (value) {
+                    //       if (value != null) {
+                    //         setState(() {
+                    //           list_forviewproperty = value;
+                    //           dataPhoto.viewimage=value;
+                    //             print("In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
+                    //         });
+                    //       }
+                    //     },
+                    //     get_insideproperty: (value) {
+                    //       if (value != null) {
+                    //         setState(() {
+                    //           list_forinsideproperty = value;
+                    //                dataPhoto.insideimage=value;
+                    //             print("In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
+
+                    //         });
+                    //       }
+                    //     },
+                    //     get_viewland: (value) {
+                    //       if (value != null) {
+                    //         setState(() {
+                    //           print("In main get_viewland\n\n");
+                    //           list_forviewland = value;
+                    //           dataPhoto.landimage=list_forviewland;
+                    //         });
+                    //       }
+                    //     },
+                    //   ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    NearbyPropertyWidget(
+                      getForm: (value) {
+                        dataOfficer = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    // GoogleMapImage(
+                    //   getFile: (value) {
+                    //    setState(() {
+                    //       datafinalmap = value;
+                    //    });
+                    //   },
+                    // ),
+                    // SizedBox(
+                    //   height: 25,
+                    // ),
+                    // ProvisionalValue(
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       if (value != null) {
+                    //         dataProvisional = value;
+                    //       }
+                    //     });
+                    //   },
+                    //   NoLandCount: 1,
+                    //   ck1: ck1,
+                    // ),
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
+                    // FinalIndicationWidget(
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       if (value != null) {
+                    //         dataFinalIndic = value;
+                    //       }
+                    //     });
+                    //   },
+                    //   ck1: ck1,
+                    //   NoLandCount: 1,
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    GestureDetector(
+                      onTap: () async {
+                        // await FinalMap().. InsertFinalMap(datafinalmap!);
+
+                        // await FinalIndication()
+                        //   ..InsertFinal(dataFinalIndic);
+                        // await Provisional()
+                        //   ..InsertProvisional(dataProvisional);
+
+                        // await OfficerReport()
+                        //   ..InsertOfficer(dataOfficer!);
+
+                        // await Gmap()
+                        //   ..insertGmap(dataGmap!);
+
+                        // await InsertPhoto();
+
+                        // await Layout()
+                        //   ..InsertLayout(dataLayout!);
+                        // await IDCard()
+                        //   ..InsertIdCard(dataIdcard!);
+
+                        // await PropertyInfor()
+                        //   ..InsertInfo(dataInfo!);
+
+                        // await Cover()
+                        //   ..InsertCover(dataCover!);
+                      },
+                      child: Center(
+                          child: Container(
+                        width: 150,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue),
+                        child: Center(
+                            child: Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )),
+                      )),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 );
               },
               childCount: 1,
@@ -331,7 +330,7 @@ class _FormWidgetState extends State<FormWidget> {
       //   child: Center(
       //     child: Column(
       //       children: [
-               
+
       //         CoverWidget(
       //           onChanged: (value) {
       //             setState(() {
@@ -473,30 +472,30 @@ class _FormWidgetState extends State<FormWidget> {
       //         ),
       //         GestureDetector(
       //           onTap: () async {
-      
+
       //             // await FinalMap().. InsertFinalMap(datafinalmap!);
-      
+
       //             // await FinalIndication()
       //             //   ..InsertFinal(dataFinalIndic);
       //             // await Provisional()
       //             //   ..InsertProvisional(dataProvisional);
-      
+
       //             // await OfficerReport()
       //             //   ..InsertOfficer(dataOfficer!);
-      
+
       //             // await Gmap()
       //             //   ..insertGmap(dataGmap!);
-      
+
       //             // await InsertPhoto();
-      
+
       //             // await Layout()
       //             //   ..InsertLayout(dataLayout!);
       //             // await IDCard()
       //             //   ..InsertIdCard(dataIdcard!);
-      
+
       //             // await PropertyInfor()
       //             //   ..InsertInfo(dataInfo!);
-      
+
       //             // await Cover()
       //             //   ..InsertCover(dataCover!);
       //           },
@@ -523,9 +522,6 @@ class _FormWidgetState extends State<FormWidget> {
       // ),
     );
   }
-
-  
-
 
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
