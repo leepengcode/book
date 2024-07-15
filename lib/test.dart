@@ -5,23 +5,6 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter PDF Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
 class MyHomePage extends StatelessWidget {
   final font = PdfGoogleFonts.notoSansAdlamRegular();
   final h_font = PdfGoogleFonts.notoSansAdlamBold();
@@ -107,13 +90,14 @@ class MyHomePage extends StatelessWidget {
                                     ),
                                     pw.Row(children: [
                                       pw.Expanded(
-                                          flex: 2,
+                                          flex: 3,
                                           child: pw.Container(
                                               height: 30,
                                               decoration: pw.BoxDecoration(
                                                   border: pw.Border.all()),
                                               child: pw.Center(
-                                                  child: pw.Text("Parcel")))),
+                                                  child: pw.Text(
+                                                      "Subject Property")))),
                                       pw.Expanded(
                                           flex: 4,
                                           child: pw.Container(
@@ -122,25 +106,25 @@ class MyHomePage extends StatelessWidget {
                                                   border: pw.Border.all()),
                                               child: pw.Center(
                                                   child: pw.Text(
-                                                      "Type Of Propery")))),
+                                                      "Floor/Unit No.")))),
                                       pw.Expanded(
                                           flex: 3,
-                                          child: pw.Container(
-                                              height: 30,
-                                              decoration: pw.BoxDecoration(
-                                                  border: pw.Border.all()),
-                                              child: pw.Center(
-                                                  child:
-                                                      pw.Text("Sixe (sqm)")))),
-                                      pw.Expanded(
-                                          flex: 7,
                                           child: pw.Container(
                                               height: 30,
                                               decoration: pw.BoxDecoration(
                                                   border: pw.Border.all()),
                                               child: pw.Center(
                                                   child: pw.Text(
-                                                      "Subject Value in USD / sqm")))),
+                                                      "No.of Bebroom")))),
+                                      pw.Expanded(
+                                          flex: 4,
+                                          child: pw.Container(
+                                              height: 30,
+                                              decoration: pw.BoxDecoration(
+                                                  border: pw.Border.all()),
+                                              child: pw.Center(
+                                                  child: pw.Text(
+                                                      "Gross Area (Sqm)")))),
                                       pw.Expanded(
                                           flex: 3,
                                           child: pw.Container(
@@ -149,7 +133,7 @@ class MyHomePage extends StatelessWidget {
                                                   border: pw.Border.all()),
                                               child: pw.Center(
                                                   child:
-                                                      pw.Text("Price / USD")))),
+                                                      pw.Text("\$/sqm(Min)")))),
                                       pw.Expanded(
                                           flex: 3,
                                           child: pw.Container(
@@ -158,7 +142,24 @@ class MyHomePage extends StatelessWidget {
                                                   border: pw.Border.all()),
                                               child: pw.Center(
                                                   child:
-                                                      pw.Text("Total Price"))))
+                                                      pw.Text("Total(\$)")))),
+                                      pw.Expanded(
+                                          flex: 3,
+                                          child: pw.Container(
+                                              height: 30,
+                                              decoration: pw.BoxDecoration(
+                                                  border: pw.Border.all()),
+                                              child: pw.Center(
+                                                  child:
+                                                      pw.Text("\$/sqm(Max)")))),
+                                      pw.Expanded(
+                                          flex: 3,
+                                          child: pw.Container(
+                                              height: 30,
+                                              decoration: pw.BoxDecoration(
+                                                  border: pw.Border.all()),
+                                              child: pw.Center(
+                                                  child: pw.Text("Total(\$)"))))
                                     ]),
                                     pw.Container(
                                       width: double.infinity,
@@ -168,51 +169,16 @@ class MyHomePage extends StatelessWidget {
                                       child: pw.Row(
                                         children: [
                                           pw.Expanded(
-                                            flex: 2,
-                                            child: pw.Container(
-                                              decoration: pw.BoxDecoration(
-                                                border: pw.Border(
-                                                  left: pw.BorderSide(width: 1),
-                                                ),
-                                              ),
-                                              child: pw.Center(
-                                                child: pw.Text("1"),
-                                              ),
-                                            ),
-                                          ),
-                                          pw.Expanded(
                                             flex: 20,
                                             child: pw.Column(
                                               crossAxisAlignment:
                                                   pw.CrossAxisAlignment.center,
                                               children: [
-                                                pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                    border: pw.Border.all(),
-                                                  ),
-                                                  child: pw.Center(
-                                                    child: pw.Text(
-                                                        "Type Of Property"),
-                                                  ),
-                                                ),
                                                 pw.Row(
                                                     mainAxisAlignment: pw
                                                         .MainAxisAlignment
                                                         .center,
                                                     children: [
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Type Of Propery")))),
                                                       pw.Expanded(
                                                           flex: 3,
                                                           child: pw.Container(
@@ -224,9 +190,21 @@ class MyHomePage extends StatelessWidget {
                                                                           .all()),
                                                               child: pw.Center(
                                                                   child: pw.Text(
+                                                                      "Type Of Propery")))),
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
                                                                       "Sixe (sqm)")))),
                                                       pw.Expanded(
-                                                          flex: 7,
+                                                          flex: 3,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -237,6 +215,18 @@ class MyHomePage extends StatelessWidget {
                                                               child: pw.Center(
                                                                   child: pw.Text(
                                                                       "Subject Value in USD / sqm")))),
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "Price / USD")))),
                                                       pw.Expanded(
                                                           flex: 3,
                                                           child: pw.Container(
@@ -249,6 +239,30 @@ class MyHomePage extends StatelessWidget {
                                                               child: pw.Center(
                                                                   child: pw.Text(
                                                                       "Price / USD")))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "Price / USD")))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "Total Price")))),
                                                       pw.Expanded(
                                                           flex: 3,
                                                           child: pw.Container(
@@ -268,7 +282,7 @@ class MyHomePage extends StatelessWidget {
                                                         .center,
                                                     children: [
                                                       pw.Expanded(
-                                                          flex: 4,
+                                                          flex: 10,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -280,102 +294,6 @@ class MyHomePage extends StatelessWidget {
                                                                   child: pw.Text(
                                                                       "Type Of Propery")))),
                                                       pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Sixe (sqm)")))),
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Subject Value in USD / sqm")))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Price / USD")))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Total Price"))))
-                                                    ]),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    pw.Container(
-                                      width: double.infinity,
-                                      decoration: pw.BoxDecoration(
-                                        border: pw.Border.all(),
-                                      ),
-                                      child: pw.Row(
-                                        children: [
-                                          pw.Expanded(
-                                            flex: 2,
-                                            child: pw.Container(
-                                              decoration: pw.BoxDecoration(
-                                                border: pw.Border(
-                                                  left: pw.BorderSide(width: 1),
-                                                ),
-                                              ),
-                                              child: pw.Center(
-                                                child: pw.Text("1"),
-                                              ),
-                                            ),
-                                          ),
-                                          pw.Expanded(
-                                            flex: 20,
-                                            child: pw.Column(
-                                              crossAxisAlignment:
-                                                  pw.CrossAxisAlignment.center,
-                                              children: [
-                                                pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                    border: pw.Border.all(),
-                                                  ),
-                                                  child: pw.Center(
-                                                    child: pw.Text(
-                                                        "Type Of Property"),
-                                                  ),
-                                                ),
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
                                                           flex: 4,
                                                           child: pw.Container(
                                                               height: 25,
@@ -386,33 +304,9 @@ class MyHomePage extends StatelessWidget {
                                                                           .all()),
                                                               child: pw.Center(
                                                                   child: pw.Text(
-                                                                      "Type Of Propery")))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
                                                                       "Sixe (sqm)")))),
                                                       pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Subject Value in USD / sqm")))),
-                                                      pw.Expanded(
-                                                          flex: 3,
+                                                          flex: 6,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -424,7 +318,7 @@ class MyHomePage extends StatelessWidget {
                                                                   child: pw.Text(
                                                                       "Price / USD")))),
                                                       pw.Expanded(
-                                                          flex: 3,
+                                                          flex: 6,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -442,7 +336,7 @@ class MyHomePage extends StatelessWidget {
                                                         .center,
                                                     children: [
                                                       pw.Expanded(
-                                                          flex: 4,
+                                                          flex: 14,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -454,31 +348,7 @@ class MyHomePage extends StatelessWidget {
                                                                   child: pw.Text(
                                                                       "Type Of Propery")))),
                                                       pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Sixe (sqm)")))),
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Subject Value in USD / sqm")))),
-                                                      pw.Expanded(
-                                                          flex: 3,
+                                                          flex: 6,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -490,7 +360,7 @@ class MyHomePage extends StatelessWidget {
                                                                   child: pw.Text(
                                                                       "Price / USD")))),
                                                       pw.Expanded(
-                                                          flex: 3,
+                                                          flex: 6,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw

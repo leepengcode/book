@@ -2,6 +2,9 @@ import 'dart:convert';
 
 class Comparison {
   late String parcel;
+  late String typeofproperty1;
+  late String typeofproperty2;
+  late String location;
   late String landsize;
   late String buildingsize;
   late String landvalue;
@@ -13,6 +16,9 @@ class Comparison {
 
   Comparison({
     required this.parcel,
+    required this.typeofproperty1,
+    required this.typeofproperty2,
+    required this.location,
     required this.landsize,
     required this.buildingsize,
     required this.landvalue,
@@ -27,6 +33,9 @@ class Comparison {
   factory Comparison.fromJson(Map<String, dynamic> json) {
     return Comparison(
       parcel: json['parcel'] ?? '',
+      typeofproperty1: json['typeofproperty1'] ?? '',
+      typeofproperty2: json['typeofproperty2'] ?? '',
+      location: json['location'] ?? '',
       landsize: json['landsize'] ?? '',
       buildingsize: json['buildingsize'] ?? '',
       landvalue: json['landvalue'] ?? '',
@@ -43,6 +52,9 @@ class Comparison {
     return {
       'parcel': parcel,
       'landsize': landsize,
+      'typeofproperty1': typeofproperty1,
+      'typeofproperty2': typeofproperty2,
+      'location': location,
       'buildingsize': buildingsize,
       'landvalue': landvalue,
       'buildingvalue': buildingvalue,

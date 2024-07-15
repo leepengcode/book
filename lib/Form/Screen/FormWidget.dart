@@ -12,6 +12,7 @@ import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
 import 'package:book/Form/Widget/mapWidget.dart';
 import 'package:book/Form/Widget/uploadIdCard.dart';
 import 'package:book/Form/Widget/uploadLayoutWidget.dart';
+import 'package:book/Model/ComparisonModel.dart';
 import 'package:book/Model/CoverModel.dart';
 import 'package:book/Model/FinalIndicationModel.dart';
 import 'package:book/Model/FinalMapModel.dart';
@@ -48,7 +49,7 @@ class _FormWidgetState extends State<FormWidget> {
   OfficerReport? dataOfficer;
   Gmap? dataGmap;
   FinalMap? datafinalmap;
-
+  Comparison? dataComparison;
   List<File>? list_forviewproperty = [];
   List<File>? list_forinsideproperty = [];
   List<File>? list_forviewland;
@@ -94,6 +95,7 @@ class _FormWidgetState extends State<FormWidget> {
                   onTap: () async {
                     setState(() {
                       dataPhoto;
+
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MyPDF(
                           objCover: dataCover,
@@ -101,6 +103,9 @@ class _FormWidgetState extends State<FormWidget> {
                           //   objIdcard: dataIdcard,
                           //   objLayout: dataLayout,
                           //   objGmap: dataGmap,
+                          objProvisional: dataProvisional,
+                          objfinalmap: datafinalmap,
+                          objOfficerReport: dataOfficer,
                           objPhotoDetail: dataPhoto,
                           list_forviewproperty: list_forviewproperty,
                           list_forinsideproperty: list_forinsideproperty,
@@ -127,24 +132,24 @@ class _FormWidgetState extends State<FormWidget> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
-                    CoverWidget(
-                      onChanged: (value) {
-                        setState(() {
-                          ck1 = value.toString();
-                        });
-                      },
-                      getForm: (value) {
-                        setState(() {
-                          if (value != null) {
-                            print("object ${value.info}");
-                            dataCover = value;
-                          }
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
+                    // CoverWidget(
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       ck1 = value.toString();
+                    //     });
+                    //   },
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       if (value != null) {
+                    //         print("object ${value.info}");
+                    //         dataCover = value;
+                    //       }
+                    //     });
+                    //   },
+                    // ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
                     // PropertyInfo_Widget(
                     //   getForm: (value) {
                     //     setState(() {
@@ -224,41 +229,44 @@ class _FormWidgetState extends State<FormWidget> {
                     //       }
                     //     },
                     //   ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    NearbyPropertyWidget(
-                      getForm: (value) {
-                        dataOfficer = value;
-                      },
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    // GoogleMapImage(
-                    //   getFile: (value) {
-                    //    setState(() {
-                    //       datafinalmap = value;
-                    //    });
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
+                    // NearbyPropertyWidget(
+                    //   getForm: (value) {
+                    //     dataOfficer = value;
                     //   },
                     // ),
                     // SizedBox(
                     //   height: 25,
                     // ),
-                    // ProvisionalValue(
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       if (value != null) {
-                    //         dataProvisional = value;
-                    //       }
-                    //     });
+                    // GoogleMapImage(
+                    //   getFile: (value) {
+                    //     if (value != null) {
+                    //       setState(() {
+                    //         print("test2\n ${value!.Finalmap!.path}\n");
+                    //         datafinalmap = value;
+                    //       });
+                    //     }
                     //   },
-                    //   NoLandCount: 1,
-                    //   ck1: ck1,
                     // ),
                     // SizedBox(
-                    //   height: 30,
+                    //   height: 25,
                     // ),
+                    ProvisionalValue(
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            dataProvisional = value;
+                          }
+                        });
+                      },
+                      NoLandCount: 1,
+                      ck1: ck1,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     // FinalIndicationWidget(
                     //   getForm: (value) {
                     //     setState(() {

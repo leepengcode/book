@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 typedef OnChangeCallback = void Function(dynamic value);
 
 class GoogleMapImage extends StatefulWidget {
-   final OnChangeCallback? getFile;
+  final OnChangeCallback? getFile;
   const GoogleMapImage({super.key, this.getFile});
 
   @override
@@ -19,9 +19,8 @@ class GoogleMapImage extends StatefulWidget {
 }
 
 class _GoogleMapState extends State<GoogleMapImage> {
-
-FinalMap objfinalmap = FinalMap(Finalmap: null);
-   File? image;
+  FinalMap objfinalmap = FinalMap(Finalmap: null);
+  File? image;
   String? imageUrl;
   Future<File?> pickImage(String? check_Calling) async {
     File? image;
@@ -46,11 +45,9 @@ FinalMap objfinalmap = FinalMap(Finalmap: null);
 
   File? map;
 
-
   @override
   Widget build(BuildContext context) {
-     
-    return  Container(
+    return Container(
         padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
         width: 1500,
         decoration: BoxDecoration(
@@ -79,7 +76,7 @@ FinalMap objfinalmap = FinalMap(Finalmap: null);
                           fit: BoxFit.cover,
                         )
                     ],
-                  ), 
+                  ),
                   Positioned(
                       child: GestureDetector(
                           onTap: () async {
@@ -100,7 +97,7 @@ FinalMap objfinalmap = FinalMap(Finalmap: null);
                           ))),
                 ],
               )),
-              InkWell(
+          InkWell(
               onTap: () {
                 setState(() {
                   widget.getFile!(objfinalmap);

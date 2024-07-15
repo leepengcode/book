@@ -25,6 +25,9 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
   TextEditingController _tbprice = TextEditingController();
   TextEditingController _tblprice = TextEditingController();
   TextEditingController _type = TextEditingController();
+  TextEditingController _typeofproperty1 = TextEditingController();
+  TextEditingController _typeofproperty2 = TextEditingController();
+  TextEditingController _location = TextEditingController();
 
   @override
   void initState() {
@@ -53,6 +56,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _lprice.dispose();
     _tlprice.dispose();
     _type.dispose();
+    _location.dispose();
     super.dispose();
   }
 
@@ -71,6 +75,9 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     _tblprice.text = totaltbPrice.toStringAsFixed(2);
 
     objCompa!.parcel = widget.parcelNumber.toString();
+    objCompa!.typeofproperty1 = _typeofproperty1.text;
+    objCompa!.typeofproperty2 = _typeofproperty2.text;
+    objCompa!.location = _location.text;
     objCompa!.landsize = _lsize.text;
     objCompa!.landprice = _lprice.text;
     objCompa!.landvalue = _tlprice.text;
@@ -90,14 +97,21 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
       landprice: '0',
       buildingprice: '0',
       totalprice: '0',
-      typecompare: 'New');
+      typecompare: 'New',
+      typeofproperty1: '0',
+      typeofproperty2: '0',
+      location: '0');
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onFocusChange: (value) {
-        if (value == false) {
-          widget.getvalue!(objCompa!);
+        if (_location != null && value == false) {
+          print("location in comp ${_location.text}\n");
+          setState(() {
+            objCompa!.location = _location.text;
+            widget.getvalue!(objCompa!);
+          });
         }
       },
       child: Padding(
@@ -109,55 +123,81 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               children: [
                 _buildTextFieldColumn(
                   label: "Parcel",
+                  readOnly: true,
+                  width: 50,
                   controller: TextEditingController(
                       text: widget.parcelNumber.toString()),
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
+                  label: "type of property1",
+                  width: 200,
+                  controller: _typeofproperty1,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
+                  label: "type of property2",
+                  width: 200,
+                  controller: _typeofproperty2,
+                ),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
                   label: "Land Size",
+                  width: 230,
                   controller: _lsize,
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Building Size",
+                  width: 230,
                   controller: _bsize,
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Land value USD/sqm",
+                  width: 230,
                   controller: _lprice,
                 ),
-                SizedBox(width: 15),
-                _buildTextFieldColumn(
-                    label: "Building value USD/sqm", controller: _bprice),
               ],
             ),
             SizedBox(height: 15),
             Row(
               children: [
                 _buildTextFieldColumn(
+                    width: 230,
+                    label: "Building value USD/sqm",
+                    controller: _bprice),
+                SizedBox(width: 15),
+                _buildTextFieldColumn(
                   label: "Land Price/USD",
                   controller: _tlprice,
+                  width: 230,
                   readOnly: true,
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Building Price/USD",
+                  width: 230,
                   controller: _tbprice,
                   readOnly: true,
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Total Price",
+                  width: 230,
                   controller: _tblprice,
                   readOnly: true,
                 ),
                 SizedBox(width: 15),
                 _buildTextFieldColumn(
-                  label: "Type of compare",
-                  controller: _type,
-                  readOnly: true,
-                ),
+                    label: "Type of compare", width: 230, controller: _type),
+              ],
+            ),
+            SizedBox(height: 15),
+            Row(
+              children: [
+                _buildTextFieldColumn(
+                    width: 500, label: "location", controller: _location),
               ],
             ),
             SizedBox(height: 20),
@@ -171,6 +211,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     required String label,
     required TextEditingController controller,
     bool readOnly = false,
+    double? width,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,10 +229,11 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
           ],
         ),
         Container(
-          width: 230,
+          width: width,
           child: TextField(
             controller: controller,
             maxLines: null,
+            readOnly: readOnly,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[200],

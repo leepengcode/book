@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:book/Model/ComparisonModel.dart';
 import 'package:http/http.dart' as http;
+
 class OfficerReport {
   late String? condition;
   late String? immediate;
@@ -10,15 +11,15 @@ class OfficerReport {
   late String? opportunity;
   late String? threat;
   late String? markrtprice;
-  List? comparison;
+  List<Comparison>? comparison;
   OfficerReport({
-     this.condition,
-     this.immediate,
-     this.strength,
-     this.weakness,
-     this.opportunity,
-     this.threat,
-     this.markrtprice,
+    this.condition,
+    this.immediate,
+    this.strength,
+    this.weakness,
+    this.opportunity,
+    this.threat,
+    this.markrtprice,
     this.comparison,
   });
   factory OfficerReport.fromJson(Map<String, dynamic> json) {
@@ -44,10 +45,10 @@ class OfficerReport {
       'comparisons': comparison
     };
   }
+
   Future InsertOfficer(OfficerReport objOfficer) async {
     var request = http.Request(
         'POST', Uri.parse('http://192.168.1.31:8000/api/insert-officer'));
-    
 
     request.body = jsonEncode({
       'condition': objOfficer.condition,

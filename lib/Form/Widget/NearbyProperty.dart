@@ -36,6 +36,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
       comparePropertyWidgets.add(ComparePropertyWidget(
         parcelNumber: parcelCounter,
         getvalue: (value) {
+          print("location ${value.location}\n");
           objComparison.add(value);
         },
       ));
@@ -69,9 +70,13 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onFocusChange: (value) {
-        setState(() {
-          widget.getForm!(objOfficer!);
-        });
+        if (value == false) {
+          setState(() {
+            objComparison;
+            print("objComparison.length : ${objComparison.length}\n");
+            widget.getForm!(objOfficer!);
+          });
+        }
       },
       child: Container(
           padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
