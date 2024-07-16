@@ -103,6 +103,7 @@ class _FormWidgetState extends State<FormWidget> {
                           //   objIdcard: dataIdcard,
                           //   objLayout: dataLayout,
                           //   objGmap: dataGmap,
+                          objFinalIndication: dataFinalIndic,
                           objProvisional: dataProvisional,
                           objfinalmap: datafinalmap,
                           objOfficerReport: dataOfficer,
@@ -132,24 +133,24 @@ class _FormWidgetState extends State<FormWidget> {
               (BuildContext context, int index) {
                 return Column(
                   children: [
-                    // CoverWidget(
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       ck1 = value.toString();
-                    //     });
-                    //   },
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       if (value != null) {
-                    //         print("object ${value.info}");
-                    //         dataCover = value;
-                    //       }
-                    //     });
-                    //   },
-                    // ),
-                    // const SizedBox(
-                    //   height: 25,
-                    // ),
+                    CoverWidget(
+                      onChanged: (value) {
+                        setState(() {
+                          ck1 = value.toString();
+                        });
+                      },
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            print("object ${value.info}");
+                            dataCover = value;
+                          }
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     // PropertyInfo_Widget(
                     //   getForm: (value) {
                     //     setState(() {
@@ -253,34 +254,34 @@ class _FormWidgetState extends State<FormWidget> {
                     // SizedBox(
                     //   height: 25,
                     // ),
-                    ProvisionalValue(
-                      getForm: (value) {
-                        setState(() {
-                          if (value != null) {
-                            dataProvisional = value;
-                          }
-                        });
-                      },
-                      NoLandCount: 1,
-                      ck1: ck1,
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    // FinalIndicationWidget(
+                    // ProvisionalValue(
                     //   getForm: (value) {
                     //     setState(() {
                     //       if (value != null) {
-                    //         dataFinalIndic = value;
+                    //         dataProvisional = value;
                     //       }
                     //     });
                     //   },
-                    //   ck1: ck1,
                     //   NoLandCount: 1,
+                    //   ck1: ck1,
                     // ),
                     // SizedBox(
-                    //   height: 20,
+                    //   height: 30,
                     // ),
+                    FinalIndicationWidget(
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            dataFinalIndic = value;
+                          }
+                        });
+                      },
+                      ck1: ck1,
+                      NoLandCount: 1,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     GestureDetector(
                       onTap: () async {
                         // await FinalMap().. InsertFinalMap(datafinalmap!);
