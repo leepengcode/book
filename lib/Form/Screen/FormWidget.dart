@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
 import 'package:book/Form/Widget/GoogleMap.dart';
+import 'package:book/Form/Widget/InspatorWidget.dart';
 import 'package:book/Form/Widget/NearbyProperty.dart';
 import 'package:book/Form/Widget/PropertyInfo.dart';
 import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
@@ -148,9 +149,9 @@ class _FormWidgetState extends State<FormWidget> {
                         });
                       },
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
+                    // const SizedBox(
+                    //   height: 25,
+                    // ),
                     // PropertyInfo_Widget(
                     //   getForm: (value) {
                     //     setState(() {
@@ -265,9 +266,9 @@ class _FormWidgetState extends State<FormWidget> {
                     //   NoLandCount: 1,
                     //   ck1: ck1,
                     // ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     FinalIndicationWidget(
                       getForm: (value) {
                         setState(() {
@@ -282,12 +283,13 @@ class _FormWidgetState extends State<FormWidget> {
                     SizedBox(
                       height: 20,
                     ),
+
                     GestureDetector(
                       onTap: () async {
                         // await FinalMap().. InsertFinalMap(datafinalmap!);
 
-                        // await FinalIndication()
-                        //   ..InsertFinal(dataFinalIndic);
+                        await FinalIndication()
+                          ..InsertFinal(dataFinalIndic);
                         // await Provisional()
                         //   ..InsertProvisional(dataProvisional);
 

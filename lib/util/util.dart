@@ -3189,7 +3189,7 @@ class _MyPDFState extends State<MyPDF> {
     //                               pw.TextSpan(
     //                                 text:
     //                                     'was inspected by an appraisal team from Cambodia Angkor Real Estate Co., Ltd. on ',
-    //                                 style: header2(true),
+    //                                 style: body1(),
     //                               ),
     //                               pw.TextSpan(
     //                                 text: '${widget.objCover!.date}. ',
@@ -3231,128 +3231,178 @@ class _MyPDFState extends State<MyPDF> {
     //                             style: body1(), // Base style
     //                           ),
     //                         ),
-    //                         pw.Expanded(
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 5, right: 20, bottom: 25),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width:
-    //                                         2, // Adjust border width as needed
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.Row(children: [
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           child: pw.Column(
+    //                         pw.SizedBox(height: 10),
+    //                         pw.Container(
+    //                             decoration:
+    //                                 pw.BoxDecoration(border: pw.Border.all()),
+    //                             width: double.infinity,
+    //                             child: pw.Column(
+    //                               crossAxisAlignment:
+    //                                   pw.CrossAxisAlignment.start,
+    //                               children: [
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
     //                                     children: [
     //                                       pw.Expanded(
-    //                                         flex: 1,
-    //                                         child: pw.Container(
-    //                                           width: 225, // Set a fixed width
-    //                                           height: 255, // Set a fixed height
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width:
-    //                                                   2, // Adjust border width as needed
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Center(
-    //                                             child: pw.Text("Strengths",
-    //                                                 style: header2(false)),
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                       pw.Expanded(
-    //                                           flex: 6,
+    //                                           flex: 5,
     //                                           child: pw.Container(
-    //                                               child: pw.Text(
-    //                                                   '${widget.objOfficerReport!.strength}'))),
-    //                                       pw.Expanded(
-    //                                           flex: 1,
-    //                                           child: pw.Container(
-    //                                             decoration: pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width:
-    //                                                     2, // Adjust border width as needed
-    //                                               ),
-    //                                             ),
-    //                                             child: pw.Center(
-    //                                               child: pw.Text(
-    //                                                   "Opportunities",
-    //                                                   style: header2(false)),
-    //                                             ),
-    //                                           )),
-    //                                       pw.Expanded(
-    //                                         flex: 3,
-    //                                         child: pw.Container(
-    //                                             decoration: pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width:
-    //                                                     2, // Adjust border width as needed
-    //                                               ),
-    //                                             ),
-    //                                             child: pw.Text(
-    //                                                 '${widget.objOfficerReport!.opportunity}')),
-    //                                       )
-    //                                     ],
-    //                                   ))),
-    //                                   pw.Expanded(
-    //                                       child: pw.Container(
-    //                                           child: pw.Column(
-    //                                     children: [
-    //                                       pw.Expanded(
-    //                                         flex: 1,
-    //                                         child: pw.Container(
-    //                                           child: pw.Center(
-    //                                             child: pw.Text("Weakness",
-    //                                                 style: header2(false)),
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                       pw.Expanded(
-    //                                         flex: 6,
-    //                                         child: pw.Container(
-    //                                             decoration: pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width:
-    //                                                     2, // Adjust border width as needed
-    //                                               ),
-    //                                             ),
-    //                                             child: pw.Text(
-    //                                                 '${widget.objOfficerReport!.weakness}')),
-    //                                       ),
-    //                                       pw.Expanded(
-    //                                           flex: 1,
-    //                                           child: pw.Container(
-    //                                             child: pw.Center(
-    //                                               child: pw.Text("Threats",
-    //                                                   style: header2(false)),
-    //                                             ),
-    //                                           )),
-    //                                       pw.Expanded(
-    //                                           flex: 3,
-    //                                           child: pw.Container(
-    //                                               width:
-    //                                                   225, // Set a fixed width
-    //                                               height: 255, // Set a
+    //                                               height: 25,
     //                                               decoration: pw.BoxDecoration(
-    //                                                 border: pw.Border.all(
-    //                                                   color: PdfColors.black,
-    //                                                   width:
-    //                                                       2, // Adjust border width as needed
-    //                                                 ),
-    //                                               ),
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Strenght",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 15))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Waekness",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 15)))))
+    //                                     ]),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.start,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.start,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               padding: pw.EdgeInsets.only(
+    //                                                   left: 10,
+    //                                                   top: 5,
+    //                                                   right: 10,
+    //                                                   bottom: 5),
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border(
+    //                                                 left:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 right:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 top:
+    //                                                     pw.BorderSide(width: 1),
+    //                                               )),
     //                                               child: pw.Text(
-    //                                                   '${widget.objOfficerReport!.threat}')))
-    //                                     ],
-    //                                   ))),
-    //                                 ])))
+    //                                                   "${widget.objOfficerReport!.strength}",
+    //                                                   style: pw.TextStyle(
+    //                                                       fontSize: 15),
+    //                                                   textAlign:
+    //                                                       pw.TextAlign.start))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               padding: pw.EdgeInsets.only(
+    //                                                   left: 10,
+    //                                                   top: 5,
+    //                                                   right: 10,
+    //                                                   bottom: 5),
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border(
+    //                                                 left:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 right:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 top:
+    //                                                     pw.BorderSide(width: 1),
+    //                                               )),
+    //                                               child: pw.Text(
+    //                                                   "${widget.objOfficerReport!.weakness}",
+    //                                                   style: pw.TextStyle(
+    //                                                       fontSize: 15),
+    //                                                   textAlign:
+    //                                                       pw.TextAlign.start)))
+    //                                     ]),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Opportunities",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 15))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Threats",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 15)))))
+    //                                     ]),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.start,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.start,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               padding: pw.EdgeInsets.only(
+    //                                                   left: 10,
+    //                                                   top: 5,
+    //                                                   right: 10,
+    //                                                   bottom: 5),
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border(
+    //                                                 left:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 right:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 top:
+    //                                                     pw.BorderSide(width: 1),
+    //                                               )),
+    //                                               child: pw.Text(
+    //                                                   "${widget.objOfficerReport!.opportunity}",
+    //                                                   style: pw.TextStyle(
+    //                                                       fontSize: 15),
+    //                                                   textAlign:
+    //                                                       pw.TextAlign.start))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               padding: pw.EdgeInsets.only(
+    //                                                   left: 10,
+    //                                                   top: 5,
+    //                                                   right: 10,
+    //                                                   bottom: 5),
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border(
+    //                                                 left:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 right:
+    //                                                     pw.BorderSide(width: 1),
+    //                                                 top:
+    //                                                     pw.BorderSide(width: 1),
+    //                                               )),
+    //                                               child: pw.Text(
+    //                                                   "${widget.objOfficerReport!.threat}",
+    //                                                   style: pw.TextStyle(
+    //                                                       fontSize: 15),
+    //                                                   textAlign:
+    //                                                       pw.TextAlign.start)))
+    //                                     ]),
+    //                               ],
+    //                             ))
     //                       ],
     //                     )),
     //               ),
@@ -3601,7 +3651,7 @@ class _MyPDFState extends State<MyPDF> {
     //                         ),
     //                         pw.SizedBox(height: 10),
     //                         pw.Text(
-    //                             "${widget.objOfficerReport!.markrtprice} / sqm",
+    //                             "${numformat.format(double.parse(widget.objOfficerReport!.markrtprice.toString()))} / sqm",
     //                             style: header2(false),
     //                             textAlign: pw.TextAlign.center),
     //                         pw.SizedBox(height: 10),
@@ -3631,7 +3681,7 @@ class _MyPDFState extends State<MyPDF> {
     //                           pw.Expanded(
     //                               flex: 2,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child:
@@ -3639,7 +3689,7 @@ class _MyPDFState extends State<MyPDF> {
     //                           pw.Expanded(
     //                               flex: 4,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child: pw.Center(
@@ -3647,32 +3697,35 @@ class _MyPDFState extends State<MyPDF> {
     //                           pw.Expanded(
     //                               flex: 3,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child: pw.Center(
     //                                       child: pw.Text("Sixe (sqm)")))),
     //                           pw.Expanded(
-    //                               flex: 7,
+    //                               flex: 6,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child: pw.Center(
     //                                       child: pw.Text(
-    //                                           "Subject Value in USD / sqm")))),
+    //                                           "Subject Value in USD / sqm",
+    //                                           style: pw.TextStyle(),
+    //                                           textAlign:
+    //                                               pw.TextAlign.center)))),
     //                           pw.Expanded(
     //                               flex: 3,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child: pw.Center(
     //                                       child: pw.Text("Price / USD")))),
     //                           pw.Expanded(
-    //                               flex: 3,
+    //                               flex: 4,
     //                               child: pw.Container(
-    //                                   height: 25,
+    //                                   height: 30,
     //                                   decoration: pw.BoxDecoration(
     //                                       border: pw.Border.all()),
     //                                   child: pw.Center(
@@ -3717,7 +3770,10 @@ class _MyPDFState extends State<MyPDF> {
     //                                             ),
     //                                             child: pw.Center(
     //                                               child: pw.Text(
-    //                                                   "${widget.objOfficerReport!.comparison![i].location}"),
+    //                                                   "${widget.objOfficerReport!.comparison![i].location}",
+    //                                                   style: pw.TextStyle(),
+    //                                                   textAlign:
+    //                                                       pw.TextAlign.start),
     //                                             ),
     //                                           ),
     //                                           pw.Row(
@@ -3747,9 +3803,9 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].landprice}")))),
+    //                                                                 "${((widget.objOfficerReport!.comparison![i].landprice))}")))),
     //                                                 pw.Expanded(
-    //                                                     flex: 7,
+    //                                                     flex: 6,
     //                                                     child: pw.Container(
     //                                                         height: 25,
     //                                                         decoration: pw
@@ -3759,7 +3815,7 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].landvalue}")))),
+    //                                                                 "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landvalue.toString()))}")))),
     //                                                 pw.Expanded(
     //                                                     flex: 3,
     //                                                     child: pw.Container(
@@ -3771,9 +3827,9 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].landprice}")))),
+    //                                                                 "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landprice))}")))),
     //                                                 pw.Expanded(
-    //                                                     flex: 3,
+    //                                                     flex: 4,
     //                                                     child: pw.Container(
     //                                                         height: 25,
     //                                                         decoration: pw.BoxDecoration(
@@ -3794,7 +3850,12 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                   top: 20),
     //                                                           child: pw.Center(
     //                                                               child: pw.Text(
-    //                                                                   "${widget.objOfficerReport!.comparison![i].totalprice}")),
+    //                                                                   "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].totalprice))}",
+    //                                                                   style: pw
+    //                                                                       .TextStyle(),
+    //                                                                   textAlign: pw
+    //                                                                       .TextAlign
+    //                                                                       .center)),
     //                                                         )))
     //                                               ]),
     //                                           pw.Row(
@@ -3824,9 +3885,9 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].buildingsize}")))),
+    //                                                                 "${((widget.objOfficerReport!.comparison![i].buildingsize))}")))),
     //                                                 pw.Expanded(
-    //                                                     flex: 7,
+    //                                                     flex: 6,
     //                                                     child: pw.Container(
     //                                                         height: 25,
     //                                                         decoration: pw
@@ -3836,7 +3897,18 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].buildingvalue}")))),
+    //                                                                 "${numformat.format(double.parse(
+    //                                                                   widget
+    //                                                                       .objOfficerReport!
+    //                                                                       .comparison![
+    //                                                                           i]
+    //                                                                       .buildingvalue,
+    //                                                                 ))}",
+    //                                                                 style: pw
+    //                                                                     .TextStyle(),
+    //                                                                 textAlign: pw
+    //                                                                     .TextAlign
+    //                                                                     .center)))),
     //                                                 pw.Expanded(
     //                                                     flex: 3,
     //                                                     child: pw.Container(
@@ -3848,9 +3920,9 @@ class _MyPDFState extends State<MyPDF> {
     //                                                                     .all()),
     //                                                         child: pw.Center(
     //                                                             child: pw.Text(
-    //                                                                 "${widget.objOfficerReport!.comparison![i].buildingprice}")))),
+    //                                                                 "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].buildingprice))}")))),
     //                                                 pw.Expanded(
-    //                                                     flex: 3,
+    //                                                     flex: 4,
     //                                                     child: pw.Container(
     //                                                         height: 25,
     //                                                         decoration: pw
@@ -7514,9 +7586,9 @@ class _MyPDFState extends State<MyPDF> {
                                         ],
                                       ),
                                     ),
-                                    ] else if (widget.objCover!.header ==
-                                        "Property CONDO REPORT") ...[
-                                      pw.SizedBox(height: 10),
+                                  ] else if (widget.objCover!.header ==
+                                      "Property CONDO REPORT") ...[
+                                    pw.SizedBox(height: 10),
                                     pw.Row(
                                       mainAxisAlignment:
                                           pw.MainAxisAlignment.center,
@@ -8022,7 +8094,6 @@ class _MyPDFState extends State<MyPDF> {
                                         ],
                                       ),
                                     ),
-                              
                                   ],
                                   pw.Expanded(
                                       child: pw.Container(

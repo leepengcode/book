@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/FinalIndicationBuildingMdel.dart';
 import 'package:book/Model/FinalIndicationLandMdel.dart';
 import 'package:book/Model/FinalIndicationModel.dart';
 import 'package:book/Model/ProvisionalLandMdel.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 typedef OnChangeCallback = void Function(dynamic value);
 
@@ -33,12 +37,18 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   TextEditingController _totalLandPValue = TextEditingController();
   TextEditingController _totalBuildingSizeSqm = TextEditingController();
   TextEditingController _totalBuildingPValue = TextEditingController();
-
+  String _controllby = "";
+  String _verifyby = "";
+  String _issuedate = "";
+  String _expiredate = "";
+  DateTime date1 = DateTime.now();
+  DateTime date2 = DateTime.now();
   @override
   void initState() {
     super.initState();
     _addNewLandInfo(); // Initialize with the first row
     _addNewBuildingInfo(); // Initialize with the first row
+    fetchDropDownItems();
   }
 
   void _addNewLandInfo() {
@@ -114,6 +124,35 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
     }
   }
 
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  String? selectedValue1;
+  String? selectedValue2;
+  List<String> dropDownItems = [];
+  bool isLoading = true;
+  Future<void> fetchDropDownItems() async {
+    try {
+      final response = await http
+          .get(Uri.parse('http://192.168.1.31:8000/api/getallinspactor'));
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        if (jsonResponse['data'] != null) {
+          final items = (jsonResponse['data'] as List)
+              .map((item) => item['name'].toString())
+              .toList();
+          setState(() {
+            dropDownItems = items;
+            isLoading = false;
+          });
+        }
+      } else {
+        print('Error: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print('Exception: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -125,6 +164,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                 totallandvalue: _totalLandPValue.text,
                 totalbuildingsizesqm: _totalBuildingSizeSqm.text,
                 totalbuildingvalue: _totalBuildingPValue.text,
+                controlled_by: _controllby,
+                verified_by: _verifyby,
+                issus_date: _issuedate,
+                expiry_date: _expiredate,
                 land: objland,
                 building: objbuilding);
             widget.getForm(obj);
@@ -135,6 +178,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                 totallandvalue: _totalLandPValue.text,
                 totalbuildingsizesqm: _totalBuildingSizeSqm.text,
                 totalbuildingvalue: _totalBuildingPValue.text,
+                controlled_by: _controllby,
+                verified_by: _verifyby,
+                issus_date: _issuedate,
+                expiry_date: _expiredate,
                 land: objland);
             widget.getForm(obj);
           }
@@ -702,7 +749,192 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                     ),
                   ),
                 ],
-              )
+              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 400,
+                  child: Form(
+                    key: _formKey1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 10),
+                          const Text(
+                            "Controlled by",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 20),
+                          isLoading
+                              ? const CircularProgressIndicator()
+                              : DropdownButtonFormField<String>(
+                                  value: selectedValue1,
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Select an option',
+                                  ),
+                                  items: dropDownItems.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      selectedValue1 = newValue;
+                                      _controllby = newValue.toString();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Required field";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          const SizedBox(height: 50),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 400,
+                  child: Form(
+                    key: _formKey2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 10),
+                          const Text(
+                            "Verifired by",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 20),
+                          isLoading
+                              ? const CircularProgressIndicator()
+                              : DropdownButtonFormField<String>(
+                                  value: selectedValue2,
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Select an option',
+                                  ),
+                                  items: dropDownItems.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      selectedValue2 = newValue;
+                                      _verifyby = newValue.toString();
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Required field";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          const SizedBox(height: 50),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          '${date1.day}/${date1.month}/${date1.year}',
+                          style: THeader(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: ElevatedButton(
+                        child: const Text(
+                          "Issus Date",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          DateTime? newDate = await showDatePicker(
+                            context: context,
+                            initialDate: date1,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+
+                          if (newDate != null) {
+                            setState(() {
+                              date1 = newDate;
+                              String formattedDate =
+                                  DateFormat("yyyy-MM-dd").format(date1);
+                              _issuedate = formattedDate;
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 20),
+                Column(
+                  children: [
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          '${date2.day}/${date2.month}/${date2.year}',
+                          style: THeader(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: ElevatedButton(
+                        child: const Text(
+                          "Expiry Date",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          DateTime? newDate = await showDatePicker(
+                            context: context,
+                            initialDate: date2,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+
+                          if (newDate != null) {
+                            setState(() {
+                              date2 = newDate;
+                              String formattedDate =
+                                  DateFormat("yyyy-MM-dd").format(date2);
+                              _expiredate = formattedDate;
+                              print("Data ${_expiredate}");
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),

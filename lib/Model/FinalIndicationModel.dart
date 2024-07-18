@@ -10,23 +10,34 @@ class FinalIndication {
   final String? totallandvalue;
   final String? totalbuildingsizesqm;
   final String? totalbuildingvalue;
+  final String? controlled_by;
+  final String? verified_by;
+  final String? issus_date;
+  final String? expiry_date;
   List<Land>? land = [];
   List<Building>? building = [];
 
-  FinalIndication({
-    this.totallandsizesqm,
-    this.totallandvalue,
-    this.totalbuildingsizesqm,
-    this.totalbuildingvalue,
-    this.land,
-    this.building,
-  });
+  FinalIndication(
+      {this.totallandsizesqm,
+      this.totallandvalue,
+      this.totalbuildingsizesqm,
+      this.totalbuildingvalue,
+      this.land,
+      this.building,
+      this.controlled_by,
+      this.verified_by,
+      this.issus_date,
+      this.expiry_date});
   factory FinalIndication.fromJson(Map<String, dynamic> json) {
     return FinalIndication(
         totallandsizesqm: json['totallandsizesqm'] ?? '',
         totallandvalue: json['totallandvalue'] ?? '',
         totalbuildingsizesqm: json['totallandsizesqm'] ?? '',
         totalbuildingvalue: json['totallandvalue'] ?? '',
+        controlled_by: json['controlled_by'] ?? '',
+        verified_by: json['verified_by'] ?? '',
+        issus_date: json['issus_date'] ?? '',
+        expiry_date: json['expiry_date'] ?? '',
         land: [],
         building: []);
   }
@@ -36,6 +47,10 @@ class FinalIndication {
       'totallandvalue': totallandvalue,
       'totalbuildingsizesqm': totallandsizesqm,
       'totalbuildingvalue': totallandvalue,
+      'controlled_by': totallandvalue,
+      'verified_by': totallandvalue,
+      'issus_date': totallandvalue,
+      'expiry_date': totallandvalue,
       'land': land,
       'building': building,
     };
@@ -50,6 +65,10 @@ class FinalIndication {
         'totallandvalue': dataFinalIndic.totallandvalue,
         'totalbuildingsizesqm': dataFinalIndic.totallandsizesqm,
         'totalbuildingvalue': dataFinalIndic.totallandvalue,
+        'controlled_by': dataFinalIndic.controlled_by,
+        'verified_by': dataFinalIndic.verified_by,
+        'issus_date': dataFinalIndic.issus_date,
+        'expiry_date': dataFinalIndic.expiry_date,
         'land': dataFinalIndic.land!.toList(),
         // 'building': dataFinalIndic.building,
       });
@@ -59,6 +78,10 @@ class FinalIndication {
         'totallandvalue': dataFinalIndic.totallandvalue,
         'totalbuildingsizesqm': dataFinalIndic.totallandsizesqm,
         'totalbuildingvalue': dataFinalIndic.totallandvalue,
+        'controlled_by': dataFinalIndic.controlled_by,
+        'verified_by': dataFinalIndic.verified_by,
+        'issus_date': dataFinalIndic.issus_date,
+        'expiry_date': dataFinalIndic.expiry_date,
         'land': dataFinalIndic.land!.toList(),
         'building': dataFinalIndic.building!.toList(),
       });
@@ -70,6 +93,7 @@ class FinalIndication {
       print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
+      print(await response.stream.bytesToString());
     }
   }
 }
