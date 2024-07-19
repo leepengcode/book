@@ -6086,6 +6086,7 @@ class _MyPDFState extends State<MyPDF> {
     //           ));
     //     }));
 
+    var parts = widget.objFinalIndication!.verified_by.toString().split('24k');
     // //Page Eighteen
     pdf.addPage(pw.Page(
         pageTheme: pageTheme,
@@ -6116,12 +6117,10 @@ class _MyPDFState extends State<MyPDF> {
                     child: pw.Center(
                       child: pw.Padding(
                           padding: const pw.EdgeInsets.only(
-                              top: 20, left: 15, right: 15),
+                              top: 10, left: 15, right: 15),
                           child: pw.Padding(
                               padding: pw.EdgeInsets.only(left: 20, bottom: 50),
                               child: pw.Column(
-                                // mainAxisAlignment: pw.MainAxisAlignment.start,
-                                // crossAxisAlignment: pw.CrossAxisAlignment.start,
                                 children: [
                                   pw.Text(
                                       'Final Indication of Subject Property Market Value',
@@ -8095,161 +8094,259 @@ class _MyPDFState extends State<MyPDF> {
                                       ),
                                     ),
                                   ],
-                                  pw.Expanded(
-                                      child: pw.Container(
-                                          margin: const pw.EdgeInsets.only(
-                                              top: 5, right: 15, bottom: 25),
-                                          decoration: pw.BoxDecoration(
-                                            border: pw.Border.all(
-                                              color: PdfColors.black,
-                                              width:
-                                                  2, // Adjust border width as needed
+
+                                  // Controlled Table
+                                  pw.SizedBox(height: 5),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 25,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
                                             ),
-                                          ),
-                                          child: pw.Row(children: [
-                                            pw.Expanded(
-                                                child: pw.Container(
-                                                    child: pw.Column(
-                                              children: [
-                                                pw.Expanded(
-                                                  flex: 2,
-                                                  child: pw.Container(
-                                                    width:
-                                                        255, // Set a fixed width
-                                                    height:
-                                                        255, // Set a fixed height
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                      border: pw.Border.all(
-                                                        color: PdfColors.black,
-                                                        width:
-                                                            2, // Adjust border width as needed
-                                                      ),
-                                                    ),
-                                                    child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Controlled by:",
-                                                          style:
-                                                              header2(false)),
-                                                    ),
+                                            child: pw.Center(
+                                              child: pw.Text("Controlled By",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 10,
                                                   ),
-                                                ),
-                                                pw.Expanded(
-                                                    flex: 4,
-                                                    child: pw.Container()),
-                                                pw.Expanded(
-                                                    flex: 5,
-                                                    child: pw.Container(
-                                                      decoration:
-                                                          pw.BoxDecoration(
-                                                        border: pw.Border.all(
-                                                          color:
-                                                              PdfColors.black,
-                                                          width:
-                                                              2, // Adjust border width as needed
-                                                        ),
-                                                      ),
-                                                    )),
-                                              ],
-                                            ))),
-                                            pw.Expanded(
-                                                child: pw.Container(
-                                                    child: pw.Column(
-                                              children: [
-                                                pw.Expanded(
-                                                    flex: 2,
-                                                    child: pw.Container(
-                                                      child: pw.Center(
-                                                        child: pw.Text(
-                                                            "Verified By:",
-                                                            style:
-                                                                header2(false)),
-                                                      ),
-                                                    )),
-                                                pw.Expanded(
-                                                    flex: 4,
-                                                    child: pw.Container(
-                                                      decoration:
-                                                          pw.BoxDecoration(
-                                                        border: pw.Border.all(
-                                                          color:
-                                                              PdfColors.black,
-                                                          width:
-                                                              2, // Adjust border width as needed
-                                                        ),
-                                                      ),
-                                                    )),
-                                                pw.Expanded(
-                                                    flex: 5,
-                                                    child: pw.Container(
-                                                      width:
-                                                          225, // Set a fixed width
-                                                      height: 255, // Set a
-                                                    )),
-                                              ],
-                                            ))),
-                                          ]))),
-                                  pw.Expanded(
-                                      child: pw.Container(
-                                          margin: const pw.EdgeInsets.only(
-                                              right: 15, bottom: 10),
-                                          decoration: pw.BoxDecoration(
-                                            border: pw.Border.all(
-                                              color: PdfColors.black,
-                                              width:
-                                                  2, // Adjust border width as needed
+                                                  textAlign:
+                                                      pw.TextAlign.center),
                                             ),
                                           ),
-                                          child: pw.Column(
-                                            children: [
-                                              pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Container(
-                                                      child: pw.Text(
-                                                          "Company Seal of Cambodia Angkor Real Estate Co., Ltd.",
-                                                          style: header3(),
-                                                          textAlign: pw
-                                                              .TextAlign
-                                                              .center))),
-                                              pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Container(
-                                                      width: double.infinity,
-                                                      decoration:
-                                                          pw.BoxDecoration(
-                                                        border: pw.Border.all(
-                                                          color:
-                                                              PdfColors.black,
-                                                          width:
-                                                              2, // Adjust border width as needed
-                                                        ),
-                                                      ),
-                                                      child: pw.Text(
-                                                          "Chief Executive Officer License No. V-07-013-04",
-                                                          style: header3(),
-                                                          textAlign: pw
-                                                              .TextAlign
-                                                              .center))),
-                                              pw.Expanded(
-                                                  flex: 4,
-                                                  child: pw.Container(
-                                                    child: pw.Stack(
-                                                      children: [
-                                                        pw.Positioned(
-                                                          bottom: 10,
-                                                          right: 10,
-                                                          child: pw.Text(
-                                                              "THY DEN",
-                                                              style: header2(
-                                                                  true)),
-                                                        )
-                                                      ],
+                                        ),
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 25,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text("Verified By",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 43,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Column(
+                                              mainAxisAlignment:
+                                                  pw.MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  pw.CrossAxisAlignment.center,
+                                              children: [
+                                                pw.Text(
+                                                    '${widget.objFinalIndication!.controlled_by}',
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
                                                     ),
-                                                  ))
-                                            ],
-                                          ))),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                                pw.SizedBox(height: 3),
+                                                pw.Text("Position",
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                                pw.SizedBox(height: 3),
+                                                pw.Text("Liscense No. ",
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 43,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Column(
+                                              mainAxisAlignment:
+                                                  pw.MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  pw.CrossAxisAlignment.center,
+                                              children: [
+                                                pw.Text("${parts[0]}",
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                                pw.SizedBox(height: 3),
+                                                pw.Text("${parts[1]}",
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                                pw.SizedBox(height: 3),
+                                                pw.Text("${parts[2]}",
+                                                    style: pw.TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                    textAlign:
+                                                        pw.TextAlign.center),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 70,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text("",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                        pw.Expanded(
+                                          flex: 5,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 70,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text("",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 10,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 10,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 30,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text(
+                                                  "Company Seal of Cambodia Angkor Real Estate Co., Ltd",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 9,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 30,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text(
+                                                  "Chief Executive Officer License No. V-07-013-04",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          pw.CrossAxisAlignment.center,
+                                      children: [
+                                        pw.Expanded(
+                                          flex: 10,
+                                          child: pw.Container(
+                                            alignment: pw.Alignment.center,
+                                            height: 90,
+                                            decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(),
+                                            ),
+                                            child: pw.Center(
+                                              child: pw.Text("",
+                                                  style: pw.TextStyle(
+                                                    fontSize: 16,
+                                                  ),
+                                                  textAlign:
+                                                      pw.TextAlign.center),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+
                                   pw.Padding(
-                                      padding: pw.EdgeInsets.only(right: 15),
+                                      padding: pw.EdgeInsets.only(right: 10),
                                       child: pw.Row(
                                           mainAxisAlignment:
                                               pw.MainAxisAlignment.spaceBetween,
@@ -8257,16 +8354,18 @@ class _MyPDFState extends State<MyPDF> {
                                             pw.Row(children: [
                                               pw.Text('Issue Date: ',
                                                   style: header2(true)),
-                                              pw.Text('27th May 2024',
+                                              pw.Text(
+                                                  '${widget.objFinalIndication!.issus_date}',
                                                   style: header2(false))
                                             ]),
                                             pw.Row(children: [
                                               pw.Text('Expiry Date: ',
                                                   style: header2(true)),
-                                              pw.Text('27th May 2025',
+                                              pw.Text(
+                                                  '${widget.objFinalIndication!.expiry_date}',
                                                   style: header2(false))
                                             ])
-                                          ]))
+                                          ])),
                                 ],
                               ) // Add margin here
                               )),

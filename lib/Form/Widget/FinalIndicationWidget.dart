@@ -6,6 +6,7 @@ import 'package:book/Model/FinalIndicationLandMdel.dart';
 import 'package:book/Model/FinalIndicationModel.dart';
 import 'package:book/Model/ProvisionalLandMdel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -40,7 +41,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   String _controllby = "";
   String _verifyby = "";
   String _issuedate = "";
-  String _expiredate = "";
+  var _expiredate;
   DateTime date1 = DateTime.now();
   DateTime date2 = DateTime.now();
   @override
@@ -128,7 +129,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   final _formKey2 = GlobalKey<FormState>();
   String? selectedValue1;
   String? selectedValue2;
-  List<String> dropDownItems = [];
+  List? dropDownItems;
   bool isLoading = true;
   Future<void> fetchDropDownItems() async {
     try {
@@ -141,7 +142,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
               .map((item) => item['name'].toString())
               .toList();
           setState(() {
-            dropDownItems = items;
+            dropDownItems = jsonResponse['data'];
             isLoading = false;
           });
         }
@@ -240,6 +241,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                           _buildTextFieldColumn(
                               title: "Size Sqm",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 220,
                               controller: landInfo.sizeSqm),
                           SizedBox(width: 25),
@@ -247,11 +252,19 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                               title: "Size Sqft",
                               label: "",
                               readOnly: true,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 220,
                               controller: landInfo.sizeSqft),
                           SizedBox(width: 25),
                           _buildTextFieldColumn(
                               title: "Property Value USD/Sqm",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               label: "Enter",
                               width: 220,
                               controller: landInfo.valueUsd),
@@ -260,6 +273,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                               title: "Property Value",
                               label: "",
                               readOnly: true,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 220,
                               controller: landInfo.pValue),
                         ],
@@ -306,13 +323,6 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                   ],
                 ),
               ),
-            ],
-            SizedBox(
-              height: 15,
-            ),
-            if (widget.ck1 != "Property LAND VALUATION REPORT" &&
-                widget.ck1 != "Property OFFICE SPACE VALUATION REPORT" &&
-                widget.ck1 != "Property CONDO REPORT")
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -349,6 +359,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                               _buildTextFieldColumn(
                                   title: "Size Sqm",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 220,
                                   controller: buildingInfo.sizeSqm),
                               SizedBox(width: 25),
@@ -356,6 +370,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                   title: "Size Sqft",
                                   label: "",
                                   readOnly: true,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 220,
                                   controller: buildingInfo.sizeSqft),
                               SizedBox(width: 25),
@@ -363,12 +381,20 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                   title: "Property Value USD/Sqm",
                                   label: "Enter",
                                   width: 220,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   controller: buildingInfo.valueUsd),
                               SizedBox(width: 25),
                               _buildTextFieldColumn(
                                   title: "Property Value",
                                   label: "",
                                   readOnly: true,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 220,
                                   controller: buildingInfo.pValue),
                             ],
@@ -417,6 +443,10 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                   ),
                 ],
               ),
+            ],
+            SizedBox(
+              height: 15,
+            ),
             if (widget.ck1 == "Property LAND VALUATION REPORT")
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -776,16 +806,21 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                     border: OutlineInputBorder(),
                                     labelText: 'Select an option',
                                   ),
-                                  items: dropDownItems.map((String value) {
+                                  items: dropDownItems!.map((value) {
                                     return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
+                                      value: value['name'].toString(),
+                                      child: Text('${value['name']}'),
+                                      onTap: () {
+                                        print("object \n");
+                                        _controllby =
+                                            "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
+                                      },
                                     );
                                   }).toList(),
                                   onChanged: (newValue) {
                                     setState(() {
-                                      selectedValue1 = newValue;
-                                      _controllby = newValue.toString();
+                                      // selectedValue1 = newValue;
+                                      print("test get data ${newValue}\n");
                                     });
                                   },
                                   validator: (value) {
@@ -824,16 +859,22 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                     border: OutlineInputBorder(),
                                     labelText: 'Select an option',
                                   ),
-                                  items: dropDownItems.map((String value) {
+                                  items: dropDownItems!.map((value) {
                                     return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
+                                      value: value['name'].toString(),
+                                      child: Text('${value['name']}'),
+                                      onTap: () {
+                                        print(
+                                            "object2 ${value['name']} 24k ${value['position']} 24k ${value['license_no']}\n");
+                                        _verifyby =
+                                            "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
+                                      },
                                     );
                                   }).toList(),
                                   onChanged: (newValue) {
                                     setState(() {
-                                      selectedValue2 = newValue;
-                                      _verifyby = newValue.toString();
+                                      // selectedValue2 = newValue;
+                                      // _verifyby = newValue.toString();
                                     });
                                   },
                                   validator: (value) {
@@ -881,7 +922,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                             setState(() {
                               date1 = newDate;
                               String formattedDate =
-                                  DateFormat("yyyy-MM-dd").format(date1);
+                                  DateFormat("yyyy-MMM-dd").format(date1);
                               _issuedate = formattedDate;
                             });
                           }
@@ -913,19 +954,28 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                         ),
                         onPressed: () async {
                           DateTime? newDate = await showDatePicker(
-                            context: context,
-                            initialDate: date2,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2100),
-                          );
-
+                              context: context,
+                              initialDate: date2,
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime(2100),
+                              selectableDayPredicate: (v) {
+                                _expiredate =
+                                    DateFormat("yyyy-MM-dd").format(v);
+                                return true;
+                              });
                           if (newDate != null) {
                             setState(() {
                               date2 = newDate;
-                              String formattedDate =
-                                  DateFormat("yyyy-MM-dd").format(date2);
-                              _expiredate = formattedDate;
-                              print("Data ${_expiredate}");
+                              // _expiredate =
+                              //     DateFormat("yyyy-MMM-dd").format(date2);
+                              print("_expiredate ; $_expiredate\n");
+                              _expiredate;
+
+                              // print("_expiredate = $_expiredate\n");
+                            });
+                            setState(() {
+                              _expiredate;
+                              _expiredate;
                             });
                           }
                         },
@@ -946,7 +996,9 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
     required String label,
     required double width,
     required TextEditingController controller,
+    TextInputType keyboardType = TextInputType.text,
     bool readOnly = false,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -966,6 +1018,8 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
         Container(
           width: width,
           child: TextField(
+            keyboardType: keyboardType,
+            inputFormatters: inputFormatters,
             readOnly: readOnly,
             controller: controller,
             maxLines: null,
