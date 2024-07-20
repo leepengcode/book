@@ -143,15 +143,16 @@ class _FormWidgetState extends State<FormWidget> {
                       getForm: (value) {
                         setState(() {
                           if (value != null) {
-                            print("object ${value.info}");
+                            print("object ${value.toJson()}");
                             dataCover = value;
                           }
                         });
                       },
                     ),
-                    // const SizedBox(
-                    //   height: 25,
-                    // ),
+                    Container(
+                      height: 25,
+                      color: Colors.black,
+                    ),
                     // PropertyInfo_Widget(
                     //   getForm: (value) {
                     //     setState(() {
@@ -198,7 +199,8 @@ class _FormWidgetState extends State<FormWidget> {
                     //     getForm: (value) {
                     //       setState(() {
                     //         dataPhoto = value;
-                    //         print("frontviewimage ${dataPhoto.frontviewimage}\n");
+                    //         print(
+                    //             "frontviewimage ${dataPhoto.frontviewimage}\n");
                     //       });
                     //     },
                     //     ck1: ck1,
@@ -206,8 +208,9 @@ class _FormWidgetState extends State<FormWidget> {
                     //       if (value != null) {
                     //         setState(() {
                     //           list_forviewproperty = value;
-                    //           dataPhoto.viewimage=value;
-                    //             print("In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
+                    //           dataPhoto.viewimage = value;
+                    //           print(
+                    //               "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
                     //         });
                     //       }
                     //     },
@@ -215,9 +218,9 @@ class _FormWidgetState extends State<FormWidget> {
                     //       if (value != null) {
                     //         setState(() {
                     //           list_forinsideproperty = value;
-                    //                dataPhoto.insideimage=value;
-                    //             print("In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
-
+                    //           dataPhoto.insideimage = value;
+                    //           print(
+                    //               "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
                     //         });
                     //       }
                     //     },
@@ -226,7 +229,7 @@ class _FormWidgetState extends State<FormWidget> {
                     //         setState(() {
                     //           print("In main get_viewland\n\n");
                     //           list_forviewland = value;
-                    //           dataPhoto.landimage=list_forviewland;
+                    //           dataPhoto.landimage = list_forviewland;
                     //         });
                     //       }
                     //     },
@@ -266,30 +269,29 @@ class _FormWidgetState extends State<FormWidget> {
                     //   NoLandCount: 1,
                     //   ck1: ck1,
                     // ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FinalIndicationWidget(
-                      getForm: (value) {
-                        setState(() {
-                          if (value != null) {
-                            dataFinalIndic = value;
-                          }
-                        });
-                      },
-                      ck1: ck1,
-                      NoLandCount: 1,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
+                    // FinalIndicationWidget(
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       if (value != null) {
+                    //         dataFinalIndic = value;
+                    //       }
+                    //     });
+                    //   },
+                    //   ck1: ck1,
+                    //   NoLandCount: 1,
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     GestureDetector(
                       onTap: () async {
                         // await FinalMap().. InsertFinalMap(datafinalmap!);
 
-                        await FinalIndication()
-                          ..InsertFinal(dataFinalIndic);
+                        // await FinalIndication()
+                        //   ..InsertFinal(dataFinalIndic);
                         // await Provisional()
                         //   ..InsertProvisional(dataProvisional);
 
@@ -309,8 +311,7 @@ class _FormWidgetState extends State<FormWidget> {
                         // await PropertyInfor()
                         //   ..InsertInfo(dataInfo!);
 
-                        // await Cover()
-                        //   ..InsertCover(dataCover!);
+                        await Cover().InsertCover(dataCover!);
                       },
                       child: Center(
                           child: Container(

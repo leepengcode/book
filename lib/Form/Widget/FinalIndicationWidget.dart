@@ -968,14 +968,8 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                               date2 = newDate;
                               // _expiredate =
                               //     DateFormat("yyyy-MMM-dd").format(date2);
-                              print("_expiredate ; $_expiredate\n");
-                              _expiredate;
 
                               // print("_expiredate = $_expiredate\n");
-                            });
-                            setState(() {
-                              _expiredate;
-                              _expiredate;
                             });
                           }
                         },

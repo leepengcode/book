@@ -140,299 +140,307 @@ class _MyWidgetState extends State<CoverWidget> {
   DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1), () {
-      setState(() {
-        _selectedinfo;
-        _selectedVal;
-        objcover;
-        objcover.image = io;
-      });
-    });
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-      width: 1500,
-      decoration: BoxDecoration(
-          color: Colors.blueGrey.shade100,
-          borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              HeaderDropdown(
-                hint: "Select Header",
-                title: "Select Header",
-                headerList: _HeaderList,
-                selectedVal: _selectedVal!,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedVal = value!;
-                    print("ckeck form$_selectedVal\n");
-                    objcover!.header = _selectedVal.toString();
-                    widget.onChanged!(_selectedVal.toString());
-                  });
-                },
-              ),
-              HeaderDropdown1(
-                hint: "Select Information",
-                title: "Select Information",
-                headerList: _inforList,
-                selectedVal: _selectedinfo!,
-                onChanged: (value) {
-                  setState(() {
-                    _selectedinfo = value!;
-                    objcover!.info = _selectedinfo!;
-                    print("ckeck form2 $value\n");
-                  });
-                },
-              ),
-            ],
-          ),
-          if (_selectedinfo == "Bank") ...[
+    return InkWell(
+      onFocusChange: (value) {
+        setState(() {
+          if (value == false &&
+              _selectedinfo != '' &&
+              _selectedVal != '' &&
+              objcover.date != null &&
+              io != null) {
+            print("objcover ${objcover.toJson()}");
+            _selectedinfo;
+            _selectedVal;
+            objcover;
+            objcover.image = io;
+            widget.getForm!(objcover);
+          }
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+        width: 1500,
+        decoration: BoxDecoration(
+            color: Colors.blueGrey.shade100,
+            borderRadius: BorderRadius.circular(10)),
+        child: Column(
+          children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BankDropdown(
-                  onBankChanged: (val) {
+                HeaderDropdown(
+                  hint: "Select Header",
+                  title: "Select Header",
+                  headerList: _HeaderList,
+                  selectedVal: _selectedVal!,
+                  onChanged: (value) {
                     setState(() {
-                      _onBankChanged(val);
+                      _selectedVal = value!;
+                      print("ckeck form$_selectedVal\n");
+                      objcover.header = _selectedVal.toString();
+                      widget.onChanged!(_selectedVal.toString());
                     });
                   },
-                  onBranchChanged: (val) {
+                ),
+                HeaderDropdown1(
+                  hint: "Select Information",
+                  title: "Select Information",
+                  headerList: _inforList,
+                  selectedVal: _selectedinfo!,
+                  onChanged: (value) {
                     setState(() {
-                      _onBranchChanged(val);
+                      _selectedinfo = value!;
+                      objcover.info = _selectedinfo!;
+                      print("ckeck form2 $value\n");
                     });
                   },
-                  title: "Select Bank",
-                  banks: _bankList,
-                  selectedBankName: _selectedBankName,
-                  selectedBranch: _selectedBankBranch,
                 ),
               ],
             ),
-          ] else ...[
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Ownership",
-              style: THeader(),
-              textAlign: TextAlign.start,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
-              child: Container(
-                width: 550,
-                child: TextFormField(
-                  controller: owneShipController,
-
-                  onChanged: (value) {
-                    setState(() {
-                      objcover.ownership = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    hintText: "Ownership Name",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                  ),
-                  // validator: (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //     return 'Please enter some text';
-                  //   }
-                  //   return null;
-                  // },
-                ),
-              ),
-            ),
-          ],
-          const SizedBox(
-            height: 25,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            if (_selectedinfo == "Bank") ...[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Select Image",
-                    style: THeader(),
+                  BankDropdown(
+                    onBankChanged: (val) {
+                      setState(() {
+                        _onBankChanged(val);
+                      });
+                    },
+                    onBranchChanged: (val) {
+                      setState(() {
+                        _onBranchChanged(val);
+                      });
+                    },
+                    title: "Select Bank",
+                    banks: _bankList,
+                    selectedBankName: _selectedBankName,
+                    selectedBranch: _selectedBankBranch,
                   ),
-                  Text(
-                    " *",
-                    style: TextStyle(color: Colors.red, fontSize: 15),
-                  )
                 ],
               ),
+            ] else ...[
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Ownership",
+                style: THeader(),
+                textAlign: TextAlign.start,
+              ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: ImagePickerWidget(
-                  getFile: (value) {
-                    setState(() {
-                      io = value;
-                    });
-                  },
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+                child: Container(
+                  width: 550,
+                  child: TextFormField(
+                    controller: owneShipController,
+
+                    onChanged: (value) {
+                      setState(() {
+                        objcover.ownership = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: "Ownership Name",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                    ),
+                    // validator: (value) {
+                    //   if (value == null || value.isEmpty) {
+                    //     return 'Please enter some text';
+                    //   }
+                    //   return null;
+                    // },
+                  ),
                 ),
               ),
             ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildTextFieldColumn(
-                title: "Owner Name",
-                label: "",
-                width: 250,
-                controller: ownerNameContoller,
-                onChanged: (value) {
-                  setState(() {
-                    objcover.ownername = value;
-                  });
-                },
-              ),
-              _buildTextFieldColumn(
-                title: "Deep Title",
-                label: "",
-                width: 250,
-                controller: deepTitleController,
-                onChanged: (value) {
-                  setState(() {
-                    objcover.deeptitle = value;
-                  });
-                },
-              ),
-              _buildTextFieldColumn(
-                title: "Property Location",
-                label: "",
-                width: 250,
-                controller: locationControltter,
-                onChanged: (value) {
-                  setState(() {
-                    objcover.location = value;
-                  });
-                },
-              ),
-              _buildTextFieldColumn(
-                title: "Street",
-                label: "",
-                width: 250,
-                controller: streetController,
-                onChanged: (value) {
-                  setState(() {
-                    objcover.street = value;
-                  });
-                },
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          CascadingDropdown(
-            getCityorProvince: (value) {
-              setState(() {
-                objcover.cityorprovince = value;
-              });
-            },
-            getDistrict: (value) {
-              setState(() {
-                objcover.districtorsangkat = value.toString();
-              });
-            },
-            getCommune: (value) {
-              setState(() {
-                objcover.communeorkhan = value.toString();
-              });
-            },
-            getVillage: (value) {
-              setState(() {
-                objcover.villageorphum = value.toString();
-              });
-            },
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: _buildTextFieldColumn(
-                  title: "Code",
-                  label: "Code",
-                  width: 400,
-                  controller: code,
+            const SizedBox(
+              height: 25,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Select Image",
+                      style: THeader(),
+                    ),
+                    Text(
+                      " *",
+                      style: TextStyle(color: Colors.red, fontSize: 15),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ImagePickerWidget(
+                    getFile: (value) {
+                      setState(() {
+                        io = value;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildTextFieldColumn(
+                  title: "Owner Name",
+                  label: "",
+                  width: 250,
+                  controller: ownerNameContoller,
                   onChanged: (value) {
                     setState(() {
-                      objcover.code = value;
+                      objcover.ownername = value;
                     });
                   },
                 ),
-              ),
-              BranchDropdown(
-                branches: _branches,
-                selectedBranch: _selectedbranch,
-                onChanged: (branch) {
-                  setState(() {
-                    _selectedbranch = branch;
-                    objcover.reportto = _selectedbranch.toString();
-                  });
-                },
-              ),
-              Column(
-                children: [
-                  SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        '${date.day}/${date.month}/${date.year}',
-                        style: THeader(),
+                _buildTextFieldColumn(
+                  title: "Deep Title",
+                  label: "",
+                  width: 250,
+                  controller: deepTitleController,
+                  onChanged: (value) {
+                    setState(() {
+                      objcover.deeptitle = value;
+                    });
+                  },
+                ),
+                _buildTextFieldColumn(
+                  title: "Property Location",
+                  label: "",
+                  width: 250,
+                  controller: locationControltter,
+                  onChanged: (value) {
+                    setState(() {
+                      objcover.location = value;
+                    });
+                  },
+                ),
+                _buildTextFieldColumn(
+                  title: "Street",
+                  label: "",
+                  width: 250,
+                  controller: streetController,
+                  onChanged: (value) {
+                    setState(() {
+                      objcover.street = value;
+                    });
+                  },
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            CascadingDropdown(
+              getCityorProvince: (value) {
+                setState(() {
+                  objcover.cityorprovince = value;
+                });
+              },
+              getDistrict: (value) {
+                setState(() {
+                  objcover.districtorsangkat = value.toString();
+                });
+              },
+              getCommune: (value) {
+                setState(() {
+                  objcover.communeorkhan = value.toString();
+                });
+              },
+              getVillage: (value) {
+                setState(() {
+                  objcover.villageorphum = value.toString();
+                });
+              },
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: _buildTextFieldColumn(
+                    title: "Code",
+                    label: "Code",
+                    width: 400,
+                    controller: code,
+                    onChanged: (value) {
+                      setState(() {
+                        objcover.code = value;
+                      });
+                    },
+                  ),
+                ),
+                BranchDropdown(
+                  branches: _branches,
+                  selectedBranch: _selectedbranch,
+                  onChanged: (branch) {
+                    setState(() {
+                      _selectedbranch = branch;
+                      objcover.reportto = _selectedbranch.toString();
+                    });
+                  },
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          '${date.day}/${date.month}/${date.year}',
+                          style: THeader(),
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    child: ElevatedButton(
-                      child: const Text(
-                        "Select Date",
-                        style: TextStyle(color: Colors.black),
+                    Container(
+                      child: ElevatedButton(
+                        child: const Text(
+                          "Select Date",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          DateTime? newDate = await showDatePicker(
+                            context: context,
+                            initialDate: date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+
+                          if (newDate != null) {
+                            setState(() {
+                              date = newDate;
+                              String formattedDate =
+                                  DateFormat("yyyy-MM-dd").format(date);
+                              objcover.date = formattedDate;
+                            });
+                          }
+                          // setState(() {
+                          //   print("object Cover ${objcover.toString()}\n");
+                          // });
+                        },
                       ),
-                      onPressed: () async {
-                        DateTime? newDate = await showDatePicker(
-                          context: context,
-                          initialDate: date,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                        );
-
-                        if (newDate != null) {
-                          setState(() {
-                            date = newDate;
-                            String formattedDate =
-                                DateFormat("yyyy-MM-dd").format(date);
-                            objcover.date = formattedDate;
-
-                            widget.getForm!(objcover);
-                          });
-                        }
-                        // setState(() {
-                        //   print("object Cover ${objcover.toString()}\n");
-                        // });
-                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

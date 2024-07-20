@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 
 class Cover {
@@ -22,25 +23,24 @@ class Cover {
   String? date;
   String? code;
 
-  Cover({
-    this.header,
-    this.info,
-    this.bank,
-    this.branch,
-    this.ownership,
-    this.image,
-    this.ownername,
-    this.deeptitle,
-    this.location,
-    this.street,
-    this.cityorprovince,
-    this.communeorkhan,
-    this.districtorsangkat,
-    this.villageorphum,
-    this.reportto,
-    this.date,
-    this.code
-  });
+  Cover(
+      {this.header,
+      this.info,
+      this.bank,
+      this.branch,
+      this.ownership,
+      this.image,
+      this.ownername,
+      this.deeptitle,
+      this.location,
+      this.street,
+      this.cityorprovince,
+      this.communeorkhan,
+      this.districtorsangkat,
+      this.villageorphum,
+      this.reportto,
+      this.date,
+      this.code});
 
   Map<String, String> toJson() {
     return {
@@ -73,11 +73,23 @@ class Cover {
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
+      // Uint8List cvByte = await CompressFile_to_Uint8List(response.bodyBytes);
       return response.bodyBytes;
     } else {
       throw Exception('Failed to load blob data');
     }
   }
+
+  // Future<Uint8List> CompressFile_to_Uint8List(Uint8List list) async {
+  //   var result = await FlutterImageCompress.compressWithList(
+  //     list,
+  //     quality: 80,
+  //     rotate: 90,
+  //     format: CompressFormat.png,
+  //   );
+
+  //   return result;
+  // }
 
   Future InsertCover(Cover objCover) async {
     var request = http.MultipartRequest(
@@ -89,6 +101,7 @@ class Cover {
       Uint8List cvByte;
       if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
         // For web environment
+
         cvByte = await getBlobData(objCover.image!.path);
       } else {
         // For mobile environment
@@ -98,7 +111,7 @@ class Cover {
       request.files.add(http.MultipartFile.fromBytes(
         'image',
         cvByte,
-        filename: 'asdasdasd.jpg',
+        filename: 'care.jpg',
       ));
     } else {
       print("Error: No image provided");
@@ -108,8 +121,10 @@ class Cover {
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+      print("object done");
     } else {
-      print(response.reasonPhrase);
+      print(response.statusCode);
+      print("object not done");
     }
   }
 }
