@@ -5,22 +5,22 @@ import 'package:http/http.dart' as http;
 
 class IDCard {
   File? frontidcard1;
-  File? frontidcard2;
+  // File? frontidcard2;
   File? backidcard1;
-  File? backidcard2;
+  // File? backidcard2;
 
   IDCard({
     this.frontidcard1,
-    this.frontidcard2,
+    // this.frontidcard2,
     this.backidcard1,
-    this.backidcard2,
+    // this.backidcard2,
   });
   factory IDCard.fromJson(Map<String, dynamic> json) {
     return IDCard(
       frontidcard1: json['frontidcard1'] ?? '',
-      frontidcard2: json['frontidcard2'] ?? '',
+      // frontidcard2: json['frontidcard2'] ?? '',
       backidcard1: json['backidcard1'] ?? '',
-      backidcard2: json['backidcard2'] ?? '',
+      // backidcard2: json['backidcard2'] ?? '',
     );
   }
 
@@ -65,23 +65,23 @@ class IDCard {
       print("Error: No image provided");
     }
 
-    if (objidcard.frontidcard2 != null) {
-      Uint8List cvByte;
-      if (kIsWeb && objidcard.frontidcard2!.path.startsWith('blob:')) {
-        // For web environment
-        cvByte = await getBlobData(objidcard.frontidcard2!.path);
-      } else {
-        // For mobile environment
-        cvByte = await File(objidcard.frontidcard2!.path).readAsBytes();
-      }
-      request.files.add(http.MultipartFile.fromBytes(
-        'frontidcard2',
-        cvByte,
-        filename: 'asdasdasd.jpg',
-      ));
-    } else {
-      print("Error: No image provided");
-    }
+    // if (objidcard.frontidcard2 != null) {
+    //   Uint8List cvByte;
+    //   if (kIsWeb && objidcard.frontidcard2!.path.startsWith('blob:')) {
+    //     // For web environment
+    //     cvByte = await getBlobData(objidcard.frontidcard2!.path);
+    //   } else {
+    //     // For mobile environment
+    //     cvByte = await File(objidcard.frontidcard2!.path).readAsBytes();
+    //   }
+    //   request.files.add(http.MultipartFile.fromBytes(
+    //     'frontidcard2',
+    //     cvByte,
+    //     filename: 'asdasdasd.jpg',
+    //   ));
+    // } else {
+    //   print("Error: No image provided");
+    // }
 
     if (objidcard.backidcard1 != null) {
       Uint8List cvByte;
@@ -101,23 +101,23 @@ class IDCard {
       print("Error: No image provided");
     }
 
-    if (objidcard.backidcard2 != null) {
-      Uint8List cvByte;
-      if (kIsWeb && objidcard.backidcard2!.path.startsWith('blob:')) {
-        // For web environment
-        cvByte = await getBlobData(objidcard.backidcard2!.path);
-      } else {
-        // For mobile environment
-        cvByte = await File(objidcard.backidcard2!.path).readAsBytes();
-      }
-      request.files.add(http.MultipartFile.fromBytes(
-        'backidcard2',
-        cvByte,
-        filename: 'asdasdasd.jpg',
-      ));
-    } else {
-      print("Error: No image provided");
-    }
+    // if (objidcard.backidcard2 != null) {
+    //   Uint8List cvByte;
+    //   if (kIsWeb && objidcard.backidcard2!.path.startsWith('blob:')) {
+    //     // For web environment
+    //     cvByte = await getBlobData(objidcard.backidcard2!.path);
+    //   } else {
+    //     // For mobile environment
+    //     cvByte = await File(objidcard.backidcard2!.path).readAsBytes();
+    //   }
+    //   request.files.add(http.MultipartFile.fromBytes(
+    //     'backidcard2',
+    //     cvByte,
+    //     filename: 'asdasdasd.jpg',
+    //   ));
+    // } else {
+    //   print("Error: No image provided");
+    // }
 
     http.StreamedResponse response = await request.send();
 

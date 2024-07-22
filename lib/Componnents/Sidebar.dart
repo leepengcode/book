@@ -105,7 +105,9 @@ class _SideBarState extends State<SideBar> {
                 onTap: (index, _) {
                   widget.sideMenu.changePage(index);
                 },
-                icon: const Icon(Icons.book_rounded),
+                icon: const Icon(
+                  Icons.book_rounded,
+                ),
               ),
             ],
           ),

@@ -72,6 +72,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
   final _typeland = TextEditingController();
   final _occupant = TextEditingController();
   final _tenure = TextEditingController();
+  final _deepnumber = TextEditingController();
+  final _unit = TextEditingController();
   final _flatsize = TextEditingController();
   final _buildingsize = TextEditingController();
   final _totalsize = TextEditingController();
@@ -112,6 +114,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
       onFocusChange: (value) {
         if (value == false) {
           setState(() {
+            _parking;
             objInfo.plotno = _plotno.text.toString();
             objInfo.north = _north.text.toString();
             objInfo.south = _south.text.toString();
@@ -123,6 +126,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             objInfo.typeland = _typeland.text.toString();
             // objInfo.occupant = _occupant.text.toString();
             objInfo.tenure = _tenure.text.toString();
+            objInfo.deepnumber = _deepnumber.text.toString();
+            objInfo.unit = _unit.text.toString();
             objInfo.flatsize = _flatsize.text.toString();
             objInfo.buildingsize = _buildingsize.text.toString();
             objInfo.totalsize = _totalsize.text.toString();
@@ -232,11 +237,11 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     label: "",
                     width: 250,
                     controller: _typeland),
-                     _buildTextFieldColumn(
-                      title: "Type of Tenure",
-                      label: "",
-                      width: 250,
-                      controller: _tenure),
+                _buildTextFieldColumn(
+                    title: "Type of Tenure",
+                    label: "",
+                    width: 250,
+                    controller: _tenure),
                 // if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
                 //   // _buildTextFieldColumn(
                 //   //     title: "Occupant",
@@ -244,291 +249,307 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                 //   //     width: 250,
                 //   //     controller: _occupant),
                 // ] else ...[
-                 
+
                 // ]
               ],
             ),
             if (widget.ck1 != "Property LAND VALUATION REPORT")
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "3. Building Size  ",
-                  style: THeader(),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "(Flat)Building Size",
-                        label: "",
-                        width: 250,
-                        keytype: TextInputType.number,
-                        controller: _flatsize),
-                    _buildTextFieldColumn(
-                        title: "Building Size",
-                        label: "",
-                        keytype: TextInputType.number,
-                        width: 250,
-                        controller: _buildingsize),
-                    _buildTextFieldColumn(
-                        title: "Total Building Size",
-                        label: "",
-                        width: 250,
-                        keytype: TextInputType.number,
-                        controller: _totalsize),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "4. Building Detail",
-                  style: THeader(),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Type of Building",
-                        label: "",
-                        width: 250,
-                        controller: _buildingtype),
-                    _buildTextFieldColumn(
-                        title: "Age of Building",
-                        label: "",
-                        width: 250,
-                        controller: _buildingage),
-                    _buildTextFieldColumn(
-                        title: "Cost of Construction",
-                        label: "",
-                        width: 250,
-                        controller: _cost),
-                    _buildTextFieldColumn(
-                        title: "By owner",
-                        label: "",
-                        width: 250,
-                        controller: _byowner),
-                    _buildTextFieldColumn(
-                        title: "Metal Roof area",
-                        label: "",
-                        width: 250,
-                        controller: _metalroof),
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Occupied or Vacant",
-                        label: "",
-                        width: 250,
-                        controller: _occoupied),
-                    _buildTextFieldColumn(
-                        title: "Disposability",
-                        label: "",
-                        width: 250,
-                        controller: _disposability),
-                    _buildTextFieldColumn(
-                        title: "Quality given as a",
-                        label: "",
-                        width: 250,
-                        controller: _quality),
-                    _buildTextFieldColumn(
-                        title: "Percentage",
-                        label: "",
-                        width: 250,
-                        controller: _percentage),
-                    _buildTextFieldColumn(
-                        title: "Type of building",
-                        label: "",
-                        width: 250,
-                        controller: _typeofbuilding),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "5. Sources of Materials",
-                  style: THeader(),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Floor",
-                        label: "",
-                        width: 250,
-                        controller: _floor),
-                    _buildTextFieldColumn(
-                        title: "Roof",
-                        label: "",
-                        width: 250,
-                        controller: _roof),
-                    _buildTextFieldColumn(
-                        title: "Door",
-                        label: "",
-                        width: 250,
-                        controller: _door),
-                    _buildTextFieldColumn(
-                        title: "Stair",
-                        label: "",
-                        width: 250,
-                        controller: _stair),
-                    _buildTextFieldColumn(
-                        title: "Window",
-                        label: "",
-                        width: 250,
-                        controller: _windows),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Ceiling",
-                        label: "",
-                        width: 250,
-                        controller: _ceiling),
-                    _buildTextFieldColumn(
-                        title: "Wall",
-                        label: "",
-                        width: 250,
-                        controller: _wall),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "6. Internal Description ",
-                  style: THeader(),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Floor/Story",
-                        label: "",
-                        width: 250,
-                        controller: _floornstory),
-                    _buildTextFieldColumn(
-                        title: "Bathroom",
-                        label: "",
-                        width: 250,
-                        controller: _bathroom),
-                    _buildTextFieldColumn(
-                        title: "Room",
-                        label: "",
-                        width: 250,
-                        controller: _room),
-                    _buildTextFieldColumn(
-                        title: "Kitchen",
-                        label: "",
-                        width: 250,
-                        controller: _kitchen),
-                    _buildTextFieldColumn(
-                        title: "Dining/Living Room",
-                        label: "",
-                        width: 250,
-                        controller: _diningnlivingroom),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Storage Room",
-                        label: "",
-                        width: 250,
-                        controller: _store),
-                    _buildTextFieldColumn(
-                        title: "Total Accommodation",
-                        label: "",
-                        width: 250,
-                        controller: _total),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "7. Utilities/Facilities Available",
-                  style: THeader(),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Water",
-                        label: "",
-                        width: 210,
-                        controller: _water),
-                    _buildTextFieldColumn(
-                        title: "Electricity",
-                        label: "",
-                        width: 210,
-                        controller: _electricity),
-                    _buildTextFieldColumn(
-                        title: "Sewerage",
-                        label: "",
-                        width: 210,
-                        controller: _severage),
-                    _buildTextFieldColumn(
-                        title: "Telecommunications",
-                        label: "",
-                        width: 210,
-                        controller: _telecom),
-                    _buildTextFieldColumn(
-                        title: "Security",
-                        label: "",
-                        width: 210,
-                        controller: _security),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "3. Building Size  ",
+                    style: THeader(),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  if (widget.ck1 ==
+                      "Property OFFICE SPACE VALUATION REPORT") ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
                         _buildTextFieldColumn(
-                        title: "Garash/Parking",
-                        label: "",
-                        width: 210,
-                        controller: _parking),
+                            title: "Title Deep Number",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _deepnumber),
+                        _buildTextFieldColumn(
+                            title: "Unit/Floor",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _unit),
+                        _buildTextFieldColumn(
+                            title: "Building Size",
+                            label: "",
+                            keytype: TextInputType.number,
+                            width: 250,
+                            controller: _flatsize),
+                      ],
+                    ),
+                  ] else if (widget.ck1 ==
+                      "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // _buildTextFieldColumn(
+                        //     title: "(Flat)Building Size",
+                        //     label: "",
+                        //     width: 250,
+                        //     keytype: TextInputType.number,
+                        //     controller: _flatsize),
+                        _buildTextFieldColumn(
+                            title: "Building Size",
+                            label: "",
+                            keytype: TextInputType.number,
+                            width: 250,
+                            controller: _flatsize),
+                        // _buildTextFieldColumn(
+                        //     title: "Total Building Size",
+                        //     label: "",
+                        //     width: 250,
+                        //     keytype: TextInputType.number,
+                        //     controller: _totalsize),
+                      ],
+                    ),
+                  ] else if (widget.ck1 == "Property CONDO REPORT") ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildTextFieldColumn(
+                            title: "Title Deep Number",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _deepnumber),
+                        _buildTextFieldColumn(
+                            title: "Unit/Floor",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _unit),
+                        _buildTextFieldColumn(
+                            title: "Building Size",
+                            label: "",
+                            keytype: TextInputType.number,
+                            width: 250,
+                            controller: _flatsize),
+                      ],
+                    ),
                   ],
-                ),
-              ],
-            )
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Occupied or Vacant",
+                          label: "",
+                          width: 250,
+                          controller: _occoupied),
+                      _buildTextFieldColumn(
+                          title: "Disposability",
+                          label: "",
+                          width: 250,
+                          controller: _disposability),
+                      _buildTextFieldColumn(
+                          title: "Quality given as a",
+                          label: "",
+                          width: 250,
+                          controller: _quality),
+                      _buildTextFieldColumn(
+                          title: "Percentage",
+                          label: "",
+                          width: 250,
+                          controller: _percentage),
+                      _buildTextFieldColumn(
+                          title: "Type of building",
+                          label: "",
+                          width: 250,
+                          controller: _typeofbuilding),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "5. Sources of Materials",
+                    style: THeader(),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Floor",
+                          label: "",
+                          width: 250,
+                          controller: _floor),
+                      _buildTextFieldColumn(
+                          title: "Roof",
+                          label: "",
+                          width: 250,
+                          controller: _roof),
+                      _buildTextFieldColumn(
+                          title: "Door",
+                          label: "",
+                          width: 250,
+                          controller: _door),
+                      _buildTextFieldColumn(
+                          title: "Stair",
+                          label: "",
+                          width: 250,
+                          controller: _stair),
+                      _buildTextFieldColumn(
+                          title: "Window",
+                          label: "",
+                          width: 250,
+                          controller: _windows),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Ceiling",
+                          label: "",
+                          width: 250,
+                          controller: _ceiling),
+                      _buildTextFieldColumn(
+                          title: "Wall",
+                          label: "",
+                          width: 250,
+                          controller: _wall),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  if (widget.ck1 != "Property OFFICE SPACE VALUATION REPORT" &&
+                      widget.ck1 != "Property CONDO REPORT") ...[
+                    Text(
+                      "6. Internal Description ",
+                      style: THeader(),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildTextFieldColumn(
+                            title: "Floor/Story",
+                            label: "",
+                            width: 250,
+                            controller: _floornstory),
+                        _buildTextFieldColumn(
+                            title: "Bathroom",
+                            label: "",
+                            width: 250,
+                            controller: _bathroom),
+                        _buildTextFieldColumn(
+                            title: "Room",
+                            label: "",
+                            width: 250,
+                            controller: _room),
+                        _buildTextFieldColumn(
+                            title: "Kitchen",
+                            label: "",
+                            width: 250,
+                            controller: _kitchen),
+                        _buildTextFieldColumn(
+                            title: "Dining/Living Room",
+                            label: "",
+                            width: 250,
+                            controller: _diningnlivingroom),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildTextFieldColumn(
+                            title: "Storage Room",
+                            label: "",
+                            width: 250,
+                            controller: _store),
+                        _buildTextFieldColumn(
+                            title: "Total Accommodation",
+                            label: "",
+                            width: 250,
+                            controller: _total),
+                      ],
+                    ),
+                  ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "7. Utilities/Facilities Available",
+                    style: THeader(),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Water",
+                          label: "",
+                          width: 210,
+                          controller: _water),
+                      _buildTextFieldColumn(
+                          title: "Electricity",
+                          label: "",
+                          width: 210,
+                          controller: _electricity),
+                      _buildTextFieldColumn(
+                          title: "Sewerage",
+                          label: "",
+                          width: 210,
+                          controller: _severage),
+                      _buildTextFieldColumn(
+                          title: "Telecommunications",
+                          label: "",
+                          width: 210,
+                          controller: _telecom),
+                      _buildTextFieldColumn(
+                          title: "Security",
+                          label: "",
+                          width: 210,
+                          controller: _security),
+                      _buildTextFieldColumn(
+                          title: "Garash/Parking",
+                          label: "",
+                          width: 210,
+                          controller: _parking),
+                    ],
+                  ),
+                ],
+              )
           ],
         ),
       ),

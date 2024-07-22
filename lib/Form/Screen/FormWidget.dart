@@ -100,27 +100,21 @@ class _FormWidgetState extends State<FormWidget> {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MyPDF(
                           objCover: dataCover,
-                          //  objPropertyInfor: dataInfo,
-                          //   objIdcard: dataIdcard,
-                          //   objLayout: dataLayout,
+                          objPropertyInfor: dataInfo,
+                          objIdcard: dataIdcard,
+                          // objLayout: dataLayout,
                           //   objGmap: dataGmap,
-                          objFinalIndication: dataFinalIndic,
-                          objProvisional: dataProvisional,
-                          objfinalmap: datafinalmap,
-                          objOfficerReport: dataOfficer,
-                          objPhotoDetail: dataPhoto,
-                          list_forviewproperty: list_forviewproperty,
-                          list_forinsideproperty: list_forinsideproperty,
-                          list_forviewland: list_forviewland,
+                          // objFinalIndication: dataFinalIndic,
+                          // objProvisional: dataProvisional,
+                          // objfinalmap: datafinalmap,
+                          // objOfficerReport: dataOfficer,
+                          // objPhotoDetail: dataPhoto,
+                          // list_forviewproperty: list_forviewproperty,
+                          // list_forinsideproperty: list_forinsideproperty,
+                          // list_forviewland: list_forviewland,
                         ),
                       ));
                     });
-
-                    // await Printing.layoutPdf(
-                    //     onLayout: (format) => generatePdf(format, 'ko' ));
-                    //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
-                    //   'name': 'Berlin'
-                    // },);
                   },
                   child: const Icon(
                     Icons.picture_as_pdf,
@@ -143,14 +137,13 @@ class _FormWidgetState extends State<FormWidget> {
                       getForm: (value) {
                         setState(() {
                           if (value != null) {
-                            print("object ${value.toJson()}");
                             dataCover = value;
                           }
                         });
                       },
                     ),
                     Container(
-                      height: 25,
+                      height: 10,
                       color: Colors.black,
                     ),
                     // PropertyInfo_Widget(
@@ -161,27 +154,33 @@ class _FormWidgetState extends State<FormWidget> {
                     //   },
                     //   ck1: ck1,
                     // ),
-                    // const SizedBox(
-                    //   height: 25,
-                    // ),
-                    // uploadIDCard(
-                    //   getForm: (value) {
-                    //     if (value != null) {
-                    //       dataIdcard = value;
-                    //     }
-                    //   },
-                    // ),
-                    // const SizedBox(
-                    //   height: 25,
-                    // ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
+
+                    uploadIDCard(
+                      getForm: (value) {
+                        if (value != null) {
+                          setState(() {
+                            dataIdcard = value;
+                          });
+                        }
+                      },
+                    ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
                     // uploadLayoutWidget(
                     //   getForm: (value) {
                     //     dataLayout = value;
                     //   },
                     //   ck1: ck1,
                     // ),
-                    // const SizedBox(
-                    //   height: 25,
+                    // Container(
+                    //   height: 10,
+                    //   color: Colors.black,
                     // ),
                     // Mapwidget(
                     //   getForm: (value) {
@@ -305,8 +304,7 @@ class _FormWidgetState extends State<FormWidget> {
 
                         // await Layout()
                         //   ..InsertLayout(dataLayout!);
-                        // await IDCard()
-                        //   ..InsertIdCard(dataIdcard!);
+                        await IDCard().InsertIdCard(dataIdcard!);
 
                         // await PropertyInfor()
                         //   ..InsertInfo(dataInfo!);

@@ -138,6 +138,7 @@ class _MyWidgetState extends State<CoverWidget> {
   final code = TextEditingController();
 
   DateTime date = DateTime.now();
+  bool ck = false;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -147,13 +148,14 @@ class _MyWidgetState extends State<CoverWidget> {
               _selectedinfo != '' &&
               _selectedVal != '' &&
               objcover.date != null &&
-              io != null) {
-            print("objcover ${objcover.toJson()}");
+              io != null &&
+              ck == false) {
             _selectedinfo;
             _selectedVal;
             objcover;
             objcover.image = io;
             widget.getForm!(objcover);
+            ck = true;
           }
         });
       },
