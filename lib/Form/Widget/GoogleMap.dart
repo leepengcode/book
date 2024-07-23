@@ -84,6 +84,7 @@ class _GoogleMapState extends State<GoogleMapImage> {
                             setState(() {
                               map;
                               objfinalmap.Finalmap = map;
+                              widget.getFile!(objfinalmap);
                             });
                           },
                           child: Container(
@@ -97,17 +98,6 @@ class _GoogleMapState extends State<GoogleMapImage> {
                           ))),
                 ],
               )),
-          InkWell(
-              onTap: () {
-                setState(() {
-                  widget.getFile!(objfinalmap);
-                });
-
-                // Wrap widget.getForm call in a try-catch block
-              },
-              child: Center(
-                child: Text("Tesing get"),
-              ))
         ]));
   }
 }

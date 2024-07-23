@@ -205,6 +205,7 @@ class _MapwidgetState extends State<Mapwidget> {
                             setState(() {
                               skmapimage;
                               objGmap.skmapimage = skmapimage;
+                              widget.getForm(objGmap);
                             });
                           },
                           child: Container(
@@ -218,17 +219,6 @@ class _MapwidgetState extends State<Mapwidget> {
                           )))
                 ],
               )),
-          InkWell(
-              onTap: () {
-                setState(() {
-                  widget.getForm(objGmap);
-                });
-
-                // Wrap widget.getForm call in a try-catch block
-              },
-              child: Center(
-                child: Text("Tesing get"),
-              ))
         ]));
   }
 }

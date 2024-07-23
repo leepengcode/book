@@ -28,6 +28,7 @@ class _ButtonWidgetState extends State<IdcardPicker> {
       setState(() {
         imageUrl = pickedImage.path;
         image = File(pickedImage.path);
+        widget.getFile!(image!);
       });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
@@ -36,51 +37,37 @@ class _ButtonWidgetState extends State<IdcardPicker> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 10), () {
-      setState(() {
-        if (image != null) {
-          widget.getFile!(image!);
-        }
-      });
-    });
-    return InkWell(
-      onHover: (value) {
-        setState(() {
-          print("testing\n\n\n");
-        });
-      },
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (image != null)
-                Image.network(
-                  imageUrl!,
-                  width: 500,
-                  height: 300,
-                  fit: BoxFit.cover,
-                )
-            ],
-          ),
-          Positioned(
-              child: GestureDetector(
-            onTap: () {
-              pickImage();
-            },
-            child: Container(
+    return Stack(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (image != null)
+              Image.network(
+                imageUrl!,
                 width: 500,
                 height: 300,
-                decoration: BoxDecoration(border: Border.all()),
-                child: image == null && imageUrl == null
-                    ? Icon(
-                        Icons.image,
-                        size: 50,
-                      )
-                    : SizedBox()),
-          ))
-        ],
-      ),
+                fit: BoxFit.cover,
+              )
+          ],
+        ),
+        Positioned(
+            child: GestureDetector(
+          onTap: () {
+            pickImage();
+          },
+          child: Container(
+              width: 500,
+              height: 300,
+              decoration: BoxDecoration(border: Border.all()),
+              child: image == null && imageUrl == null
+                  ? Icon(
+                      Icons.image,
+                      size: 50,
+                    )
+                  : SizedBox()),
+        ))
+      ],
     );
   }
 }

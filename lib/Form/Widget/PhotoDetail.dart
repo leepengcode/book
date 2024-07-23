@@ -83,7 +83,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
       } else {
         setState(() {
           imageUrl = pickedImage.path;
-          print("object $check_Calling : $imageUrl\n");
+          // print("object $check_Calling : $imageUrl\n");
           image = File(pickedImage.path);
         });
         return image!;
@@ -922,6 +922,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                   setState(() {
                                     surround6_lan6;
                                     objPhotoDetail.surroundin6 = surround6_lan6;
+                                    widget.getForm(objPhotoDetail);
                                   });
                                 },
                                 child: Container(
@@ -949,6 +950,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               setState(() {
                                 objPhotoDetail.dessurroundin6 =
                                     value.toString();
+                                widget.getForm(objPhotoDetail);
                               });
                             },
                             decoration: InputDecoration(
@@ -960,17 +962,6 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             ),
                           ),
                         ),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                widget.getForm(objPhotoDetail);
-                              });
-
-                              // Wrap widget.getForm call in a try-catch block
-                            },
-                            child: Center(
-                              child: Text("Tesing get"),
-                            ))
                       ],
                     )
                   ],
@@ -1650,6 +1641,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               setState(() {
                                 objPhotoDetail.dessurroundin6 =
                                     value.toString();
+                                widget.getForm(objPhotoDetail);
                               });
                             },
                             decoration: InputDecoration(
@@ -1663,17 +1655,6 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                     )
                   ],
                 ),
-                InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.getForm(objPhotoDetail);
-                      });
-
-                      // Wrap widget.getForm call in a try-catch block
-                    },
-                    child: Center(
-                      child: Text("Tesing get"),
-                    ))
               ],
             )
           ]

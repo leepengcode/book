@@ -100,12 +100,12 @@ class _FormWidgetState extends State<FormWidget> {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MyPDF(
                           objCover: dataCover,
-                          objPropertyInfor: dataInfo,
-                          objIdcard: dataIdcard,
+                          // objPropertyInfor: dataInfo,
+                          // objIdcard: dataIdcard,
                           // objLayout: dataLayout,
-                          //   objGmap: dataGmap,
+                          // objGmap: dataGmap,
                           // objFinalIndication: dataFinalIndic,
-                          // objProvisional: dataProvisional,
+                          objProvisional: dataProvisional,
                           // objfinalmap: datafinalmap,
                           // objOfficerReport: dataOfficer,
                           // objPhotoDetail: dataPhoto,
@@ -154,24 +154,24 @@ class _FormWidgetState extends State<FormWidget> {
                     //   },
                     //   ck1: ck1,
                     // ),
-                    Container(
-                      height: 10,
-                      color: Colors.black,
-                    ),
+                    // Container(
+                    //   height: 10,
+                    //   color: Colors.black,
+                    // ),
 
-                    uploadIDCard(
-                      getForm: (value) {
-                        if (value != null) {
-                          setState(() {
-                            dataIdcard = value;
-                          });
-                        }
-                      },
-                    ),
-                    Container(
-                      height: 10,
-                      color: Colors.black,
-                    ),
+                    // uploadIDCard(
+                    //   getForm: (value) {
+                    //     if (value != null) {
+                    //       setState(() {
+                    //         dataIdcard = value;
+                    //       });
+                    //     }
+                    //   },
+                    // ),
+                    // Container(
+                    //   height: 10,
+                    //   color: Colors.black,
+                    // ),
                     // uploadLayoutWidget(
                     //   getForm: (value) {
                     //     dataLayout = value;
@@ -190,9 +190,11 @@ class _FormWidgetState extends State<FormWidget> {
                     //     }
                     //   },
                     // ),
-                    // const SizedBox(
-                    //   height: 25,
+                    // Container(
+                    //   height: 10,
+                    //   color: Colors.black,
                     // ),
+
                     // if (ck1 != null)
                     //   PhotoDetailWidget(
                     //     getForm: (value) {
@@ -233,9 +235,11 @@ class _FormWidgetState extends State<FormWidget> {
                     //       }
                     //     },
                     //   ),
-                    // const SizedBox(
-                    //   height: 25,
+                    // Container(
+                    //   height: 10,
+                    //   color: Colors.black,
                     // ),
+
                     // NearbyPropertyWidget(
                     //   getForm: (value) {
                     //     dataOfficer = value;
@@ -257,20 +261,20 @@ class _FormWidgetState extends State<FormWidget> {
                     // SizedBox(
                     //   height: 25,
                     // ),
-                    // ProvisionalValue(
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       if (value != null) {
-                    //         dataProvisional = value;
-                    //       }
-                    //     });
-                    //   },
-                    //   NoLandCount: 1,
-                    //   ck1: ck1,
-                    // ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
+                    ProvisionalValue(
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            dataProvisional = value;
+                          }
+                        });
+                      },
+                      NoLandCount: 1,
+                      ck1: ck1,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     // FinalIndicationWidget(
                     //   getForm: (value) {
                     //     setState(() {
@@ -287,24 +291,22 @@ class _FormWidgetState extends State<FormWidget> {
                     // ),
                     GestureDetector(
                       onTap: () async {
-                        // await FinalMap().. InsertFinalMap(datafinalmap!);
+                        // await FinalMap().InsertFinalMap(datafinalmap!);
 
                         // await FinalIndication()
                         //   ..InsertFinal(dataFinalIndic);
-                        // await Provisional()
-                        //   ..InsertProvisional(dataProvisional);
+                        await Provisional()
+                          ..InsertProvisional(dataProvisional);
 
                         // await OfficerReport()
                         //   ..InsertOfficer(dataOfficer!);
 
-                        // await Gmap()
-                        //   ..insertGmap(dataGmap!);
+                        // await Gmap().insertGmap(dataGmap!);
 
                         // await InsertPhoto();
 
-                        // await Layout()
-                        //   ..InsertLayout(dataLayout!);
-                        await IDCard().InsertIdCard(dataIdcard!);
+                        // await Layout().InsertLayout(dataLayout!);
+                        // await IDCard().InsertIdCard(dataIdcard!);
 
                         // await PropertyInfor()
                         //   ..InsertInfo(dataInfo!);
