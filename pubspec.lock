@@ -153,6 +153,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3+1"
+  dotted_line:
+    dependency: transitive
+    description:
+      name: dotted_line
+      sha256: c931ba331656154711d9420f369f80cf9e8869ca9933ae5fb35b7669bcbe7d2e
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
   dropdown_button2:
     dependency: "direct main"
     description:
@@ -762,6 +770,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
+  stepper_page_view:
+    dependency: "direct main"
+    description:
+      name: stepper_page_view
+      sha256: e09a8e419e06b5d7b3ac7a8354b8be7b253b3488031de0bc9f8b2199eb7bf72e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   stream_channel:
     dependency: transitive
     description:

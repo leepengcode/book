@@ -95,7 +95,7 @@ class _FormWidgetState extends State<FormWidget> {
                 GestureDetector(
                   onTap: () async {
                     setState(() {
-                      dataPhoto;
+                      // dataPhoto;
 
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MyPDF(
@@ -105,7 +105,7 @@ class _FormWidgetState extends State<FormWidget> {
                           // objLayout: dataLayout,
                           // objGmap: dataGmap,
                           // objFinalIndication: dataFinalIndic,
-                          objProvisional: dataProvisional,
+                          // objProvisional: dataProvisional,
                           // objfinalmap: datafinalmap,
                           // objOfficerReport: dataOfficer,
                           // objPhotoDetail: dataPhoto,
@@ -261,25 +261,24 @@ class _FormWidgetState extends State<FormWidget> {
                     // SizedBox(
                     //   height: 25,
                     // ),
-                    ProvisionalValue(
-                      getForm: (value) {
-                        setState(() {
-                          if (value != null) {
-                            dataProvisional = value;
-                          }
-                        });
-                      },
-                      NoLandCount: 1,
-                      ck1: ck1,
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
+                    // ProvisionalValue(
+                    //   getForm: (value) {
+                    //     setState(() {
+                    //       dataProvisional = value;
+                    //     });
+                    //   },
+                    //   NoLandCount: 1,
+                    //   ck1: ck1,
+                    // ),
+                    // SizedBox(
+                    //   height: 30,
+                    // ),
                     // FinalIndicationWidget(
                     //   getForm: (value) {
                     //     setState(() {
                     //       if (value != null) {
                     //         dataFinalIndic = value;
+                    //         print("in form ${dataFinalIndic.expiry_date}");
                     //       }
                     //     });
                     //   },
@@ -288,15 +287,14 @@ class _FormWidgetState extends State<FormWidget> {
                     // ),
                     // SizedBox(
                     //   height: 20,
-                    // ),
+                    //),
                     GestureDetector(
                       onTap: () async {
+                        await Cover().InsertCover(dataCover!);
                         // await FinalMap().InsertFinalMap(datafinalmap!);
 
-                        // await FinalIndication()
-                        //   ..InsertFinal(dataFinalIndic);
-                        await Provisional()
-                          ..InsertProvisional(dataProvisional);
+                        // await FinalIndication().InsertFinal(dataFinalIndic);
+                        // await Provisional().InsertProvisional(dataProvisional);
 
                         // await OfficerReport()
                         //   ..InsertOfficer(dataOfficer!);
@@ -310,8 +308,6 @@ class _FormWidgetState extends State<FormWidget> {
 
                         // await PropertyInfor()
                         //   ..InsertInfo(dataInfo!);
-
-                        await Cover().InsertCover(dataCover!);
                       },
                       child: Center(
                           child: Container(

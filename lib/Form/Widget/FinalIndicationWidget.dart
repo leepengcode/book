@@ -47,6 +47,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   @override
   void initState() {
     super.initState();
+    date2;
     _addNewLandInfo(); // Initialize with the first row
     _addNewBuildingInfo(); // Initialize with the first row
     fetchDropDownItems();
@@ -154,27 +155,31 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
     }
   }
 
+  FinalIndication? obj;
+  bool ckeck = false;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onFocusChange: (value) {
+    if (!ckeck) {
+      Future.delayed(Duration(seconds: 1), () {
         setState(() {
-          if (value == false && _totalBuildingSizeSqm.text != '') {
-            FinalIndication obj = FinalIndication(
-                totallandsizesqm: _totalLandSizeSqm.text,
-                totallandvalue: _totalLandPValue.text,
-                totalbuildingsizesqm: _totalBuildingSizeSqm.text,
-                totalbuildingvalue: _totalBuildingPValue.text,
-                controlled_by: _controllby,
-                verified_by: _verifyby,
-                issus_date: _issuedate,
-                expiry_date: _expiredate,
-                land: objland,
-                building: objbuilding);
-            widget.getForm(obj);
+          if (_expiredate != null && _totalBuildingSizeSqm.text != '') {
+            obj = new FinalIndication(
+              totallandsizesqm: _totalLandSizeSqm.text,
+              totallandvalue: _totalLandPValue.text,
+              totalbuildingsizesqm: _totalBuildingSizeSqm.text,
+              totalbuildingvalue: _totalBuildingPValue.text,
+              controlled_by: _controllby,
+              verified_by: _verifyby,
+              issus_date: _issuedate,
+              expiry_date: DateFormat("yyyy-MMM-dd").format(date2).toString(),
+              land: objland,
+              building: objbuilding,
+            );
+            widget.getForm(obj!);
+            ckeck = true;
           }
-          if (value == false && _totalBuildingSizeSqm.text == '') {
-            FinalIndication obj = FinalIndication(
+          if (_expiredate != null && _totalBuildingSizeSqm.text == '') {
+            obj = new FinalIndication(
                 totallandsizesqm: _totalLandSizeSqm.text,
                 totallandvalue: _totalLandPValue.text,
                 totalbuildingsizesqm: _totalBuildingSizeSqm.text,
@@ -182,805 +187,802 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                 controlled_by: _controllby,
                 verified_by: _verifyby,
                 issus_date: _issuedate,
-                expiry_date: _expiredate,
+                expiry_date: DateFormat("yyyy-MMM-dd").format(date2).toString(),
                 land: objland);
-            widget.getForm(obj);
+            widget.getForm(obj!);
+            ckeck = true;
           }
         });
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
-        decoration: BoxDecoration(
-            color: Colors.blueGrey.shade100,
-            borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      });
+    }
+
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
+      width: 1500,
+      decoration: BoxDecoration(
+          color: Colors.blueGrey.shade100,
+          borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Final Indication",
+            style: THeader(),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          if (widget.ck1 ==
+              "Property [LAND AND BUILDING] VALUATION REPORT") ...[
             Text(
-              "Final Indication",
+              "A. Land",
               style: THeader(),
             ),
             SizedBox(
               height: 15,
             ),
-            if (widget.ck1 ==
-                "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-              Text(
-                "A. Land",
-                style: THeader(),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              ...landInfoList.map((landInfo) => InkWell(
-                    onFocusChange: (value) {
-                      setState(() {
-                        if (value == false) {
-                          objland.add(Land(
-                              no: landInfo.noCount.toString(),
-                              sizesqm: landInfo.sizeSqm.text,
-                              sizesqft: landInfo.sizeSqft.text,
-                              valuesqm: landInfo.valueUsd.text,
-                              propertyvalue: landInfo.pValue.text));
-                        }
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 20),
-                      child: Row(
-                        children: [
-                          _buildTextFieldColumn(
-                              title: "No.",
-                              label: "",
-                              width: 50,
-                              readOnly: true,
-                              controller: TextEditingController(
-                                  text: landInfo.noCount.toString())),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Size Sqm",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 220,
-                              controller: landInfo.sizeSqm),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Size Sqft",
-                              label: "",
-                              readOnly: true,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 220,
-                              controller: landInfo.sizeSqft),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Property Value USD/Sqm",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              label: "Enter",
-                              width: 220,
-                              controller: landInfo.valueUsd),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Property Value",
-                              label: "",
-                              readOnly: true,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 220,
-                              controller: landInfo.pValue),
-                        ],
-                      ),
-                    ),
-                  )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    width: 50, // Adjust the width as needed
-                    height: 1,
-                    color: Colors.black,
-                  ),
-                  IconButton(
-                    onPressed: _addNewLandInfo,
-                    icon: Icon(Icons.add),
-                  ),
-                  Container(
-                    width: 50, // Adjust the width as needed
-                    height: 1,
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 20),
-                child: Row(
-                  children: [
-                    _buildTextFieldColumn(
-                        title: "Total Size Sqm",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: _totalLandSizeSqm),
-                    SizedBox(width: 25),
-                    _buildTextFieldColumn(
-                        title: "Total Property Value",
-                        label: "",
-                        readOnly: true,
-                        width: 220,
-                        controller: _totalLandPValue),
-                  ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "B. Building",
-                    style: THeader(),
-                  ),
-                  SizedBox(height: 15),
-                  ...buildingInfoList.map((buildingInfo) => InkWell(
-                        onFocusChange: (value) {
-                          setState(() {
-                            if (value == false) {
-                              objbuilding.add(Building(
-                                  no: buildingInfo.noCount.toString(),
-                                  sizesqm: buildingInfo.sizeSqm.text,
-                                  sizesqft: buildingInfo.sizeSqft.text,
-                                  valuesqm: buildingInfo.valueUsd.text,
-                                  propertyvalue: buildingInfo.pValue.text));
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                  title: "No.",
-                                  label: "",
-                                  width: 50,
-                                  readOnly: true,
-                                  controller: TextEditingController(
-                                      text: buildingInfo.noCount.toString())),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqm",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 220,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqft",
-                                  label: "",
-                                  readOnly: true,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 220,
-                                  controller: buildingInfo.sizeSqft),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value USD/Sqm",
-                                  label: "Enter",
-                                  width: 220,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  controller: buildingInfo.valueUsd),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value",
-                                  label: "",
-                                  readOnly: true,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 220,
-                                  controller: buildingInfo.pValue),
-                            ],
-                          ),
-                        ),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                      IconButton(
-                        onPressed: _addNewBuildingInfo,
-                        icon: Icon(Icons.add),
-                      ),
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                  Padding(
+            ...landInfoList.map((landInfo) => InkWell(
+                  onFocusChange: (value) {
+                    setState(() {
+                      if (value == false) {
+                        objland.add(Land(
+                            no: landInfo.noCount.toString(),
+                            sizesqm: landInfo.sizeSqm.text,
+                            sizesqft: landInfo.sizeSqft.text,
+                            valuesqm: landInfo.valueUsd.text,
+                            propertyvalue: landInfo.pValue.text));
+                      }
+                    });
+                  },
+                  child: Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
                     child: Row(
                       children: [
                         _buildTextFieldColumn(
-                            title: "Total Size Sqm",
+                            title: "No.",
                             label: "",
+                            width: 50,
                             readOnly: true,
-                            width: 220,
-                            controller: _totalBuildingSizeSqm),
+                            controller: TextEditingController(
+                                text: landInfo.noCount.toString())),
                         SizedBox(width: 25),
                         _buildTextFieldColumn(
-                            title: "Total Property Value",
+                            title: "Size Sqm",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 220,
+                            controller: landInfo.sizeSqm),
+                        SizedBox(width: 25),
+                        _buildTextFieldColumn(
+                            title: "Size Sqft",
                             label: "",
                             readOnly: true,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             width: 220,
-                            controller: _totalBuildingPValue),
+                            controller: landInfo.sizeSqft),
+                        SizedBox(width: 25),
+                        _buildTextFieldColumn(
+                            title: "Property Value USD/Sqm",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            label: "Enter",
+                            width: 220,
+                            controller: landInfo.valueUsd),
+                        SizedBox(width: 25),
+                        _buildTextFieldColumn(
+                            title: "Property Value",
+                            label: "",
+                            readOnly: true,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 220,
+                            controller: landInfo.pValue),
                       ],
                     ),
                   ),
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 50, // Adjust the width as needed
+                  height: 1,
+                  color: Colors.black,
+                ),
+                IconButton(
+                  onPressed: _addNewLandInfo,
+                  icon: Icon(Icons.add),
+                ),
+                Container(
+                  width: 50, // Adjust the width as needed
+                  height: 1,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 20),
+              child: Row(
+                children: [
+                  _buildTextFieldColumn(
+                      title: "Total Size Sqm",
+                      label: "",
+                      readOnly: true,
+                      width: 220,
+                      controller: _totalLandSizeSqm),
+                  SizedBox(width: 25),
+                  _buildTextFieldColumn(
+                      title: "Total Property Value",
+                      label: "",
+                      readOnly: true,
+                      width: 220,
+                      controller: _totalLandPValue),
                 ],
               ),
-            ],
-            SizedBox(
-              height: 15,
             ),
-            if (widget.ck1 == "Property LAND VALUATION REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "B. Building",
+                  style: THeader(),
+                ),
+                SizedBox(height: 15),
+                ...buildingInfoList.map((buildingInfo) => InkWell(
+                      onFocusChange: (value) {
+                        setState(() {
+                          if (value == false) {
+                            objbuilding.add(Building(
+                                no: buildingInfo.noCount.toString(),
+                                sizesqm: buildingInfo.sizeSqm.text,
+                                sizesqft: buildingInfo.sizeSqft.text,
+                                valuesqm: buildingInfo.valueUsd.text,
+                                propertyvalue: buildingInfo.pValue.text));
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 20),
+                        child: Row(
+                          children: [
+                            _buildTextFieldColumn(
+                                title: "No.",
+                                label: "",
+                                width: 50,
+                                readOnly: true,
+                                controller: TextEditingController(
+                                    text: buildingInfo.noCount.toString())),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqm",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 220,
+                                controller: buildingInfo.sizeSqm),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqft",
+                                label: "",
+                                readOnly: true,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 220,
+                                controller: buildingInfo.sizeSqft),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value USD/Sqm",
+                                label: "Enter",
+                                width: 220,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                controller: buildingInfo.valueUsd),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value",
+                                label: "",
+                                readOnly: true,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 220,
+                                controller: buildingInfo.pValue),
+                          ],
+                        ),
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: _addNewBuildingInfo,
+                      icon: Icon(Icons.add),
+                    ),
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Total Size Sqm",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingSizeSqm),
+                      SizedBox(width: 25),
+                      _buildTextFieldColumn(
+                          title: "Total Property Value",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingPValue),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+          SizedBox(
+            height: 15,
+          ),
+          if (widget.ck1 == "Property LAND VALUATION REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "A. Land",
+                  style: THeader(),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                ...landInfoList.map((landInfo) => InkWell(
+                      onFocusChange: (value) {
+                        setState(() {
+                          if (value == false) {
+                            objland.add(Land(
+                                no: landInfo.noCount.toString(),
+                                sizesqm: landInfo.sizeSqm.text,
+                                sizesqft: landInfo.sizeSqft.text,
+                                valuesqm: landInfo.valueUsd.text,
+                                propertyvalue: landInfo.pValue.text));
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 20),
+                        child: Row(
+                          children: [
+                            _buildTextFieldColumn(
+                                title: "No.",
+                                label: "",
+                                width: 50,
+                                readOnly: true,
+                                controller: TextEditingController(
+                                    text: landInfo.noCount.toString())),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqm",
+                                label: "Enter",
+                                width: 220,
+                                controller: landInfo.sizeSqm),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqft",
+                                label: "",
+                                readOnly: true,
+                                width: 220,
+                                controller: landInfo.sizeSqft),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value USD/Sqm",
+                                label: "Enter",
+                                width: 220,
+                                controller: landInfo.valueUsd),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value",
+                                label: "",
+                                readOnly: true,
+                                width: 220,
+                                controller: landInfo.pValue),
+                          ],
+                        ),
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: _addNewLandInfo,
+                      icon: Icon(Icons.add),
+                    ),
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Total Size Sqm",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalLandSizeSqm),
+                      SizedBox(width: 25),
+                      _buildTextFieldColumn(
+                          title: "Total Property Value",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalLandPValue),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          if (widget.ck1 == "Property OFFICE SPACE VALUATION REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "A. Office Space",
+                  style: THeader(),
+                ),
+                SizedBox(height: 15),
+                ...buildingInfoList.map((buildingInfo) => InkWell(
+                      onFocusChange: (value) {
+                        setState(() {
+                          if (value == false) {
+                            objbuilding.add(Building(
+                                no: buildingInfo.noCount.toString(),
+                                sizesqm: buildingInfo.sizeSqm.text,
+                                sizesqft: buildingInfo.sizeSqft.text,
+                                valuesqm: buildingInfo.valueUsd.text,
+                                propertyvalue: buildingInfo.pValue.text,
+                                floorno: buildingInfo.floorno.text,
+                                bedroomno: buildingInfo.bedroomno.text));
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 20),
+                        child: Row(
+                          children: [
+                            _buildTextFieldColumn(
+                              title: "Floor No",
+                              label: "",
+                              width: 180,
+                              controller: buildingInfo.floorno,
+                            ),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                              title: "Bedroom No",
+                              label: "",
+                              width: 180,
+                              controller: buildingInfo.bedroomno,
+                            ),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Gross Area",
+                                label: "Enter",
+                                width: 180,
+                                controller: buildingInfo.sizeSqm),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqft",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.sizeSqft),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value USD/Sqm",
+                                label: "Enter",
+                                width: 180,
+                                controller: buildingInfo.valueUsd),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.pValue),
+                          ],
+                        ),
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: _addNewBuildingInfo,
+                      icon: Icon(Icons.add),
+                    ),
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Total Size Sqm",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingSizeSqm),
+                      SizedBox(width: 25),
+                      _buildTextFieldColumn(
+                          title: "Total Property Value",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingPValue),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          if (widget.ck1 == "Property CONDO REPORT")
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "A. Condo",
+                  style: THeader(),
+                ),
+                SizedBox(height: 15),
+                ...buildingInfoList.map((buildingInfo) => InkWell(
+                      onFocusChange: (value) {
+                        setState(() {
+                          if (value == false) {
+                            objbuilding.add(Building(
+                                no: buildingInfo.noCount.toString(),
+                                sizesqm: buildingInfo.sizeSqm.text,
+                                sizesqft: buildingInfo.sizeSqft.text,
+                                valuesqm: buildingInfo.valueUsd.text,
+                                propertyvalue: buildingInfo.pValue.text,
+                                floorno: buildingInfo.floorno.text,
+                                bedroomno: buildingInfo.bedroomno.text));
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 20),
+                        child: Row(
+                          children: [
+                            _buildTextFieldColumn(
+                              title: "Floor No",
+                              label: "",
+                              width: 180,
+                              controller: buildingInfo.floorno,
+                            ),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                              title: "Bedroom No",
+                              label: "",
+                              width: 180,
+                              controller: buildingInfo.bedroomno,
+                            ),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Gross Area",
+                                label: "Enter",
+                                width: 180,
+                                controller: buildingInfo.sizeSqm),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Size Sqft",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.sizeSqft),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value USD/Sqm",
+                                label: "Enter",
+                                width: 180,
+                                controller: buildingInfo.valueUsd),
+                            SizedBox(width: 25),
+                            _buildTextFieldColumn(
+                                title: "Property Value",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.pValue),
+                          ],
+                        ),
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: _addNewBuildingInfo,
+                      icon: Icon(Icons.add),
+                    ),
+                    Container(
+                      width: 50, // Adjust the width as needed
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 20),
+                  child: Row(
+                    children: [
+                      _buildTextFieldColumn(
+                          title: "Total Size Sqm",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingSizeSqm),
+                      SizedBox(width: 25),
+                      _buildTextFieldColumn(
+                          title: "Total Property Value",
+                          label: "",
+                          readOnly: true,
+                          width: 220,
+                          controller: _totalBuildingPValue),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 400,
+                child: Form(
+                  key: _formKey1,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        const Text(
+                          "Controlled by",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 20),
+                        isLoading
+                            ? const CircularProgressIndicator()
+                            : DropdownButtonFormField<String>(
+                                value: selectedValue1,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Select an option',
+                                ),
+                                items: dropDownItems!.map((value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value['name'].toString(),
+                                    child: Text('${value['name']}'),
+                                    onTap: () {
+                                      print("object \n");
+                                      _controllby =
+                                          "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
+                                    },
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    // selectedValue1 = newValue;
+                                    print("test get data ${newValue}\n");
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "Required field";
+                                  }
+                                  return null;
+                                },
+                              ),
+                        const SizedBox(height: 50),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 400,
+                child: Form(
+                  key: _formKey2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        const Text(
+                          "Verifired by",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 20),
+                        isLoading
+                            ? const CircularProgressIndicator()
+                            : DropdownButtonFormField<String>(
+                                value: selectedValue2,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Select an option',
+                                ),
+                                items: dropDownItems!.map((value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value['name'].toString(),
+                                    child: Text('${value['name']}'),
+                                    onTap: () {
+                                      print(
+                                          "object2 ${value['name']} 24k ${value['position']} 24k ${value['license_no']}\n");
+                                      _verifyby =
+                                          "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
+                                    },
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    // selectedValue2 = newValue;
+                                    // _verifyby = newValue.toString();
+                                  });
+                                },
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "Required field";
+                                  }
+                                  return null;
+                                },
+                              ),
+                        const SizedBox(height: 50),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "A. Land",
-                    style: THeader(),
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '${date1.day}/${date1.month}/${date1.year}',
+                        style: THeader(),
+                      ),
+                    ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
-                  ...landInfoList.map((landInfo) => InkWell(
-                        onFocusChange: (value) {
-                          setState(() {
-                            if (value == false) {
-                              objland.add(Land(
-                                  no: landInfo.noCount.toString(),
-                                  sizesqm: landInfo.sizeSqm.text,
-                                  sizesqft: landInfo.sizeSqft.text,
-                                  valuesqm: landInfo.valueUsd.text,
-                                  propertyvalue: landInfo.pValue.text));
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                  title: "No.",
-                                  label: "",
-                                  width: 50,
-                                  readOnly: true,
-                                  controller: TextEditingController(
-                                      text: landInfo.noCount.toString())),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqm",
-                                  label: "Enter",
-                                  width: 220,
-                                  controller: landInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqft",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 220,
-                                  controller: landInfo.sizeSqft),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value USD/Sqm",
-                                  label: "Enter",
-                                  width: 220,
-                                  controller: landInfo.valueUsd),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 220,
-                                  controller: landInfo.pValue),
-                            ],
-                          ),
-                        ),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
+                  Container(
+                    child: ElevatedButton(
+                      child: const Text(
+                        "Issus Date",
+                        style: TextStyle(color: Colors.black),
                       ),
-                      IconButton(
-                        onPressed: _addNewLandInfo,
-                        icon: Icon(Icons.add),
-                      ),
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
-                      children: [
-                        _buildTextFieldColumn(
-                            title: "Total Size Sqm",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalLandSizeSqm),
-                        SizedBox(width: 25),
-                        _buildTextFieldColumn(
-                            title: "Total Property Value",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalLandPValue),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            if (widget.ck1 == "Property OFFICE SPACE VALUATION REPORT")
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "A. Office Space",
-                    style: THeader(),
-                  ),
-                  SizedBox(height: 15),
-                  ...buildingInfoList.map((buildingInfo) => InkWell(
-                        onFocusChange: (value) {
-                          setState(() {
-                            if (value == false) {
-                              objbuilding.add(Building(
-                                  no: buildingInfo.noCount.toString(),
-                                  sizesqm: buildingInfo.sizeSqm.text,
-                                  sizesqft: buildingInfo.sizeSqft.text,
-                                  valuesqm: buildingInfo.valueUsd.text,
-                                  propertyvalue: buildingInfo.pValue.text,
-                                  floorno: buildingInfo.floorno.text,
-                                  bedroomno: buildingInfo.bedroomno.text));
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                title: "Floor No",
-                                label: "",
-                                width: 180,
-                                controller: buildingInfo.floorno,
-                              ),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                title: "Bedroom No",
-                                label: "",
-                                width: 180,
-                                controller: buildingInfo.bedroomno,
-                              ),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Gross Area",
-                                  label: "Enter",
-                                  width: 180,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqft",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 180,
-                                  controller: buildingInfo.sizeSqft),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value USD/Sqm",
-                                  label: "Enter",
-                                  width: 180,
-                                  controller: buildingInfo.valueUsd),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 180,
-                                  controller: buildingInfo.pValue),
-                            ],
-                          ),
-                        ),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                      IconButton(
-                        onPressed: _addNewBuildingInfo,
-                        icon: Icon(Icons.add),
-                      ),
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
-                      children: [
-                        _buildTextFieldColumn(
-                            title: "Total Size Sqm",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalBuildingSizeSqm),
-                        SizedBox(width: 25),
-                        _buildTextFieldColumn(
-                            title: "Total Property Value",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalBuildingPValue),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            if (widget.ck1 == "Property CONDO REPORT")
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "A. Condo",
-                    style: THeader(),
-                  ),
-                  SizedBox(height: 15),
-                  ...buildingInfoList.map((buildingInfo) => InkWell(
-                        onFocusChange: (value) {
-                          setState(() {
-                            if (value == false) {
-                              objbuilding.add(Building(
-                                  no: buildingInfo.noCount.toString(),
-                                  sizesqm: buildingInfo.sizeSqm.text,
-                                  sizesqft: buildingInfo.sizeSqft.text,
-                                  valuesqm: buildingInfo.valueUsd.text,
-                                  propertyvalue: buildingInfo.pValue.text,
-                                  floorno: buildingInfo.floorno.text,
-                                  bedroomno: buildingInfo.bedroomno.text));
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                title: "Floor No",
-                                label: "",
-                                width: 180,
-                                controller: buildingInfo.floorno,
-                              ),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                title: "Bedroom No",
-                                label: "",
-                                width: 180,
-                                controller: buildingInfo.bedroomno,
-                              ),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Gross Area",
-                                  label: "Enter",
-                                  width: 180,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqft",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 180,
-                                  controller: buildingInfo.sizeSqft),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value USD/Sqm",
-                                  label: "Enter",
-                                  width: 180,
-                                  controller: buildingInfo.valueUsd),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Property Value",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 180,
-                                  controller: buildingInfo.pValue),
-                            ],
-                          ),
-                        ),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                      IconButton(
-                        onPressed: _addNewBuildingInfo,
-                        icon: Icon(Icons.add),
-                      ),
-                      Container(
-                        width: 50, // Adjust the width as needed
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
-                      children: [
-                        _buildTextFieldColumn(
-                            title: "Total Size Sqm",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalBuildingSizeSqm),
-                        SizedBox(width: 25),
-                        _buildTextFieldColumn(
-                            title: "Total Property Value",
-                            label: "",
-                            readOnly: true,
-                            width: 220,
-                            controller: _totalBuildingPValue),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: 400,
-                  child: Form(
-                    key: _formKey1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          const Text(
-                            "Controlled by",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 20),
-                          isLoading
-                              ? const CircularProgressIndicator()
-                              : DropdownButtonFormField<String>(
-                                  value: selectedValue1,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Select an option',
-                                  ),
-                                  items: dropDownItems!.map((value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value['name'].toString(),
-                                      child: Text('${value['name']}'),
-                                      onTap: () {
-                                        print("object \n");
-                                        _controllby =
-                                            "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
-                                      },
-                                    );
-                                  }).toList(),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      // selectedValue1 = newValue;
-                                      print("test get data ${newValue}\n");
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (value == null) {
-                                      return "Required field";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                          const SizedBox(height: 50),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 400,
-                  child: Form(
-                    key: _formKey2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          const Text(
-                            "Verifired by",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 20),
-                          isLoading
-                              ? const CircularProgressIndicator()
-                              : DropdownButtonFormField<String>(
-                                  value: selectedValue2,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Select an option',
-                                  ),
-                                  items: dropDownItems!.map((value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value['name'].toString(),
-                                      child: Text('${value['name']}'),
-                                      onTap: () {
-                                        print(
-                                            "object2 ${value['name']} 24k ${value['position']} 24k ${value['license_no']}\n");
-                                        _verifyby =
-                                            "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
-                                      },
-                                    );
-                                  }).toList(),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      // selectedValue2 = newValue;
-                                      // _verifyby = newValue.toString();
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (value == null) {
-                                      return "Required field";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                          const SizedBox(height: 50),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          '${date1.day}/${date1.month}/${date1.year}',
-                          style: THeader(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      child: ElevatedButton(
-                        child: const Text(
-                          "Issus Date",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () async {
-                          DateTime? newDate = await showDatePicker(
-                            context: context,
-                            initialDate: date1,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2100),
-                          );
+                      onPressed: () async {
+                        DateTime? newDate = await showDatePicker(
+                          context: context,
+                          initialDate: date1,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                        );
 
-                          if (newDate != null) {
-                            setState(() {
-                              date1 = newDate;
-                              String formattedDate =
-                                  DateFormat("yyyy-MMM-dd").format(date1);
-                              _issuedate = formattedDate;
-                            });
-                          }
-                        },
+                        if (newDate != null) {
+                          setState(() {
+                            date1 = newDate;
+                            String formattedDate =
+                                DateFormat("yyyy-MMM-dd").format(date1);
+                            _issuedate = formattedDate;
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 20),
+              Column(
+                children: [
+                  SizedBox(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        '${date2.day}/${date2.month}/${date2.year}',
+                        style: THeader(),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(width: 20),
-                Column(
-                  children: [
-                    SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          '${date2.day}/${date2.month}/${date2.year}',
-                          style: THeader(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      child: ElevatedButton(
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: ElevatedButton(
                         child: const Text(
                           "Expiry Date",
                           style: TextStyle(color: Colors.black),
                         ),
                         onPressed: () async {
                           DateTime? newDate = await showDatePicker(
-                              context: context,
-                              initialDate: date2,
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(2100),
-                              selectableDayPredicate: (v) {
-                                _expiredate =
-                                    DateFormat("yyyy-MM-dd").format(v);
-                                return true;
-                              });
+                            context: context,
+                            initialDate: date2,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+
                           if (newDate != null) {
                             setState(() {
                               date2 = newDate;
-                              // _expiredate =
-                              //     DateFormat("yyyy-MMM-dd").format(date2);
-
-                              // print("_expiredate = $_expiredate\n");
+                              String formattedDate =
+                                  DateFormat("yyyy-MMM-dd").format(date2);
+                              _expiredate = formattedDate;
                             });
                           }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+                        }),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

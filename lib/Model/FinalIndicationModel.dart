@@ -60,6 +60,7 @@ class FinalIndication {
     var request = http.Request(
         'POST', Uri.parse('http://192.168.1.31:8000/api/insertfinal'));
     if (dataFinalIndic.totalbuildingsizesqm == '') {
+      print('in API ${dataFinalIndic.expiry_date}');
       request.body = jsonEncode({
         'totallandsizesqm': dataFinalIndic.totallandsizesqm,
         'totallandvalue': dataFinalIndic.totallandvalue,

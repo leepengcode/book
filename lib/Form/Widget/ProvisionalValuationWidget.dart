@@ -838,15 +838,15 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                 child: Row(
                   children: [
                     if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
-                      _buildTextFieldColumn(
-                          width: 300,
-                          title: "Fair Market Value (Max\$)",
-                          label: "Enter",
-                          // readOnly: true,
-                          controller: _fairmarket),
-                      SizedBox(
-                        width: 25,
-                      ),
+                      // _buildTextFieldColumn(
+                      //     width: 300,
+                      //     title: "Fair Market Value (Max\$)",
+                      //     label: "Enter",
+                      //     // readOnly: true,
+                      //     controller: _fairmarket),
+                      // SizedBox(
+                      //   width: 25,
+                      // ),
                       _buildTextFieldColumn(
                           width: 300,
                           title: "Fire Insurance Value",

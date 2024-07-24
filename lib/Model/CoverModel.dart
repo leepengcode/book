@@ -63,12 +63,12 @@ class Cover {
     };
   }
 
-  @override
-  String toString() {
-    // TODO: implement toString
-    // return "${super.toString()} , '+ ' ${image!.path.toString()}";
-    return "${super.toString()} , '+ ' ${image!.path}";
-  }
+  // @override
+  // String toString() {
+  //   // TODO: implement toString
+  //   // return "${super.toString()} , '+ ' ${image!.path.toString()}";
+  //   return "${super.toString()} , '+ ' ${image!.path}";
+  // }
 
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
@@ -79,17 +79,6 @@ class Cover {
       throw Exception('Failed to load blob data');
     }
   }
-
-  // Future<Uint8List> CompressFile_to_Uint8List(Uint8List list) async {
-  //   var result = await FlutterImageCompress.compressWithList(
-  //     list,
-  //     quality: 80,
-  //     rotate: 90,
-  //     format: CompressFormat.png,
-  //   );
-
-  //   return result;
-  // }
 
   Future InsertCover(Cover objCover) async {
     var request = http.MultipartRequest(
@@ -128,25 +117,3 @@ class Cover {
     }
   }
 }
-
-// Future<void> insertCover(Cover objCover) async {
-//   var request = http.MultipartRequest(
-//       'POST', Uri.parse('http://192.168.1.31:8000/api/insertcover'));
-
-//   request.fields.addAll(objCover.toJson());
-
-//   if (objCover.image != null) {
-//     request.files.add(await http.MultipartFile.fromPath('image', objCover.image!.path));
-//   }
-
-//   http.StreamedResponse response = await request.send();
-
-//   if (response.statusCode == 201) {
-//     print(await response.stream.bytesToString());
-//   } else {
-//     print(response.reasonPhrase);
-//   }
-
-// }
-
-

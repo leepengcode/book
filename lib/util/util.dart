@@ -130,6 +130,7 @@ class _MyPDFState extends State<MyPDF> {
   }
 
   var numformat = NumberFormat("###,###.00");
+
   String convertNumberToWords(int number) {
     if (number == 0) return 'Zero';
     if (number < 0) return 'Minus ${convertNumberToWords(-number)}';
@@ -207,8 +208,22 @@ class _MyPDFState extends State<MyPDF> {
   String convertToMoneyWords(double number) {
     final formatter = NumberFormat("###,###.00", "en_US");
     String formattedNumber = formatter.format(number);
-    String numberInWords = convertNumberToWords(number.toInt());
-    return "$numberInWords US Dollars";
+
+    // Separate the integer and decimal parts
+    int integerPart = number.toInt();
+    int decimalPart = ((number - integerPart) * 100).toInt();
+
+    // Convert both parts to words
+    String integerPartInWords = convertNumberToWords(integerPart);
+    String decimalPartInWords = convertNumberToWords(decimalPart);
+
+    // Construct final string
+    String result = "$integerPartInWords Dollar${integerPart != 1 ? 's' : ''}";
+    if (decimalPart > 0) {
+      result += " and $decimalPartInWords Cent${decimalPart != 1 ? 's' : ''}";
+    }
+
+    return result;
   }
 
   @override
@@ -286,6 +301,7 @@ class _MyPDFState extends State<MyPDF> {
     // String moneyInWords = "";
     // String landinWord = "";
     // String officespaceinword = "";
+    // String condoinword = "";
     // if (widget.objCover!.header ==
     //     "Property [LAND AND BUILDING] VALUATION REPORT") {
     //   double totalValue =
@@ -302,11 +318,20 @@ class _MyPDFState extends State<MyPDF> {
     //   double totalofficespace = double.parse(
     //       widget.objFinalIndication!.totalbuildingvalue.toString());
     //   officespaceinword = convertToMoneyWords(totalofficespace);
+    // } else if (widget.objCover!.header == "Property CONDO REPORT") {
+    //   double totalofficespace = double.parse(
+    //       widget.objFinalIndication!.totalbuildingvalue.toString());
+    //   condoinword = convertToMoneyWords(totalofficespace);
     // }
 
-    double fireinsurant =
-        double.parse(widget.objProvisional!.fire_insurance.toString());
-    String fireinWord = convertToMoneyWords(fireinsurant);
+    // double fireinsurant = 0.0;
+    // String fireinWord = "";
+    // if (widget.objCover!.header != "Property LAND VALUATION REPORT") {
+    //   fireinsurant =
+    //       double.parse(widget.objProvisional!.fire_insurance.toString());
+    //   fireinWord = convertToMoneyWords(fireinsurant);
+    //   print(fireinWord);
+    // }
 
     // Uint8List fidcard1 =
     //     await getBlobData(widget.objIdcard!.frontidcard1!.path);
@@ -616,270 +641,253 @@ class _MyPDFState extends State<MyPDF> {
     );
 
     // //Third Page
-    // // pdf.addPage(
-    //   pw.Page(
-    //     pageTheme: pageTheme,
-    //     build: (final context) {
-    //       return pw.FullPage(
-    //         ignoreMargins: true,
-    //         child: pw.Column(
-    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //           children: [
-    //             pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 25, right: 25), // Add margin here
-    //               child: pw.Text(
-    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                 style: pw.TextStyle(fontSize: 9, font: font),
-    //               ),
-    //             ),
-    //             pw.Expanded(
-    //               child: pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 5, left: 40, right: 25, bottom: 25),
-    //                 decoration: pw.BoxDecoration(
-    //                   border: pw.Border.all(
-    //                     color: PdfColors.black,
-    //                     width: 2, // Adjust border width as needed
-    //                   ),
-    //                 ),
-    //                 child: pw.Center(
-    //                     child: pw.Column(
-    //                   crossAxisAlignment: pw.CrossAxisAlignment.center,
-    //                   // mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                   children: [
-    //                     pw.Padding(
-    //                       padding: const pw.EdgeInsets.only(
-    //                         top: 25,
-    //                       ), // Add margin here
-    //                       child: pw.Text(
-    //                         "Contents",
-    //                         style: header1(),
-    //                         textAlign: pw.TextAlign.center,
-    //                       ),
-    //                     ),
-    //                     pw.Text("General Information)",
-    //                         style: header1(), textAlign: pw.TextAlign.center),
-    //                     pw.Container(
-    //                       padding: pw.EdgeInsets.only(left: 15, right: 15),
-    //                       child: pw.Row(
-    //                           mainAxisAlignment:
-    //                               pw.MainAxisAlignment.spaceBetween,
-    //                           children: [
-    //                             pw.Text("\nSubject",
-    //                                 style: header1(),
-    //                                 textAlign: pw.TextAlign.center),
-    //                             pw.Text("\nPage",
-    //                                 style: header1(),
-    //                                 textAlign: pw.TextAlign.center),
-    //                           ]),
-    //                     ),
-    //                     pw.Text(
-    //                         "\nIntroduction ............................................................................................................................................ -1 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                       "\n${widget.objCover!.header} ",
-    //                       style: header2(true),
-    //                       textAlign: pw.TextAlign.center,
-    //                     ),
-    //                     if (widget.objCover!.header ==
-    //                         "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                       pw.Text(
-    //                           "\n${widget.objCover!.header} ..................................................................... -2 -",
-    //                           style: body(),
-    //                           textAlign: pw.TextAlign.center),
-    //                     ] else ...[
-    //                       pw.Text(
-    //                           "\n${widget.objCover!.header} ..................................................................... -2 -",
-    //                           style: body(),
-    //                           textAlign: pw.TextAlign.center),
-    //                     ],
-    //                     pw.Text(
-    //                         "\nOwner's Indentification Card ............................................................................................................... -5 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nCopy Title Deed ...................................................................................................................................... -6 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     if (widget.objCover!.header ==
-    //                         "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                       pw.Text(
-    //                           "\nLand and Building Layout .................................................................................................................. -10 -",
-    //                           style: body(),
-    //                           textAlign: pw.TextAlign.center),
-    //                     ] else ...[
-    //                       pw.Text(
-    //                           "\nLand Layout ................................................................................................................................ -10 -",
-    //                           style: body(),
-    //                           textAlign: pw.TextAlign.center),
-    //                     ],
-    //                     pw.Text(
-    //                         "\nCambodia Map & Location Map In Phnom Penh ............................................................................ -11 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nAerial Photograph Of Phnom Penh Loacation ................................................................................. -12 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nDetails Of Photos Taken At The Site Inspection ............................................................................... -13 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nInspaction Officer's Report ................................................................................................................. -18 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nProposed Developments Affecting The Value Of The Subject Land .............................................. -19 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nValue Of Comparable Nearby Property ............................................................................................ -20 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nProvisional Valuation Made By The Inspecting Officer(S) ............................................................. -22 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                       "\nFinal Valuation",
-    //                       style: header2(true),
-    //                       textAlign: pw.TextAlign.center,
-    //                     ),
-    //                     pw.Text(
-    //                         "\nFinal Indication Of Subject Property Market Value ....................................................................... -23 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                       "\nAppendix",
-    //                       style: header2(true),
-    //                       textAlign: pw.TextAlign.center,
-    //                     ),
-    //                     pw.Text(
-    //                         "\nC.A.R.E Limiting Terms, Condition & Liability .............................................................................. -24 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate ..................... -26 - ",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.Text(
-    //                         "\nLicenses and Certificate Property Valuation ................................................................................. -27 -",
-    //                         style: body(),
-    //                         textAlign: pw.TextAlign.center),
-    //                     pw.SizedBox(height: 20),
-    //                   ],
-    //                 )),
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(top: 25, right: 25),
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2,
+                      ),
+                    ),
+                    child: pw.Center(
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.center,
+                        children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(top: 25),
+                            child: pw.Text(
+                              "Contents",
+                              style: header1(),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Text("General Information",
+                              style: header1(), textAlign: pw.TextAlign.center),
+                          pw.Container(
+                            padding:
+                                const pw.EdgeInsets.only(left: 15, right: 15),
+                            child: pw.Row(
+                              mainAxisAlignment:
+                                  pw.MainAxisAlignment.spaceBetween,
+                              children: [
+                                pw.Text("Subject",
+                                    style: header1(),
+                                    textAlign: pw.TextAlign.center),
+                                pw.Text("Page",
+                                    style: header1(),
+                                    textAlign: pw.TextAlign.center),
+                              ],
+                            ),
+                          ),
+                          pw.Text(
+                              "Introduction ............................................................................................................................................ -1 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                            "\n${widget.objCover!.header}",
+                            style: header2(true),
+                            textAlign: pw.TextAlign.center,
+                          ),
+                          pw.Text(
+                              "\n${widget.objCover!.header} ..................................................................... -2 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nOwner's Identification Card ............................................................................................................... -5 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nCopy Title Deed ...................................................................................................................................... -6 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\n${widget.objCover!.header == "Property [LAND AND BUILDING] VALUATION REPORT" ? "Land and Building Layout" : "Land Layout"} .................................................................................................................. -10 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................ -11 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nAerial Photograph Of Phnom Penh Loacation ................................................................................. -12 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nDetails Of Photos Taken At The Site Inspection ............................................................................... -13 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nInspaction Officer's Report ................................................................................................................. -18 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. -19 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nValue Of Comparable Nearby Property ............................................................................................ -20 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nProvisional Valuation Made By The Inspecting Officer(S) ............................................................. -22 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                            "\nFinal Valuation",
+                            style: header2(true),
+                            textAlign: pw.TextAlign.center,
+                          ),
+                          pw.Text(
+                              "\nFinal Indication Of Subject Property Market Value ....................................................................... -23 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                            "\nAppendix",
+                            style: header2(true),
+                            textAlign: pw.TextAlign.center,
+                          ),
+                          pw.Text(
+                              "\nC.A.R.E Limiting Terms, Condition & Liability .............................................................................. -24 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate ..................... -26 - ",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.Text(
+                              "\nLicenses and Certificate Property Valuation ................................................................................. -27 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
     // //Fourth page
-    // pdf.addPage(
-    //   pw.Page(
-    //     pageTheme: pageTheme,
-    //     build: (final context) {
-    //       return pw.FullPage(
-    //         ignoreMargins: true,
-    //         child: pw.Column(
-    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //           children: [
-    //             pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 25, right: 25), // Add margin here
-    //               child: pw.Text(
-    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                 style: pw.TextStyle(fontSize: 9, font: font),
-    //               ),
-    //             ),
-    //             pw.Expanded(
-    //               child: pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 5, left: 40, right: 25, bottom: 25),
-    //                 decoration: pw.BoxDecoration(
-    //                   border: pw.Border.all(
-    //                     color: PdfColors.black,
-    //                     width: 2, // Adjust border width as needed
-    //                   ),
-    //                 ),
-    //                 child: pw.Container(
-    //                     padding: pw.EdgeInsets.only(left: 40, right: 20),
-    //                     child: pw.Column(
-    //                       crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                       // mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                       children: [
-    //                         pw.Padding(
-    //                           padding: const pw.EdgeInsets.only(
-    //                               top: 25, left: -20), // Add margin here
-    //                           child: pw.Text(
-    //                             "Introduction",
-    //                             style: header1(),
-    //                             textAlign: pw.TextAlign.center,
-    //                           ),
-    //                         ),
-    //                         pw.Text(
-    //                           "\nDerivation of fair and just open market value of land or property is an essential part of any real estate transaction. Evaluating land or property involves detailed analysis of the Subject Land or Subject Property (the land or property for sale or rent that is the subject of the evaluation) and a similar analysis of neighboring land or property.  Additional factors which may have a bearing on the true value of the Subject Land or Property, such as location; access; and the provision of utilities, are included in the evaluation. A professional real estate evaluation benefits the buyer and the seller",
-    //                           style: body1(),
-    //                           textAlign: pw.TextAlign.start,
-    //                         ),
-    //                         pw.Text("\nPurpose Of Appraisal",
-    //                             style: header2(true)),
-    //                         pw.Text(
-    //                             "The appraisal of the Subject Property is for the purpose of deriving an open market value as at the time of valuation.",
-    //                             style: body1()),
-    //                         pw.Text("\nDate of Valuation",
-    //                             style: header2(true)),
-    //                         pw.Text(
-    //                             "The date of valuation is the date the valuation report is signed by the relevant officers of C-A-R-E and stamped with the Company Seal.",
-    //                             style: body1()),
-    //                         pw.Text("\nMarket Comparison Method",
-    //                             style: header2(true)),
-    //                         pw.Container(
-    //                           child: pw.RichText(
-    //                             text: pw.TextSpan(
-    //                               text:
-    //                                   'This method of valuation estimates the value of a Subject Property by comparing it with similar properties in the same location that have already sold. ',
-    //                               style: body1(), // Base style
-    //                               children: [
-    //                                 pw.TextSpan(
-    //                                   text: 'Relative Comparison Analysis',
-    //                                   style: header2(true),
-    //                                 ),
-    //                                 pw.TextSpan(
-    //                                   text:
-    //                                       'is a qualitative analysis method, used in sales comparisons, that concentrates on applying the most suitable and effective comparison methods to the best available data in order to produce the most accurate valuation result possible.   ',
-    //                                   style: body1(),
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                         ),
-    //                         pw.Text("\nCost Method ", style: header2(true)),
-    //                         pw.Text(
-    //                             "This approach estimates the value of a given property by calculating the cost of replacing or reproducing a structure on the land, considering depreciation and site value or established by considering comparable sales transactions. ",
-    //                             style: body1()),
-    //                         pw.Text("\nResidual Method", style: header2(true)),
-    //                         pw.Text(
-    //                             "This method is use to determine the market value of the property, remaining from value of the completed development, measured in terms of Gross Development Value after deducting cost of redevelopment. Construction costs and other expenses for development of property together with assumed allowance for developer’s profit, sale incomes after development are being calculated. ",
-    //                             style: body1()),
-    //                       ],
-    //                     )),
-    //               ),
-    //             ),
-    //             pw.SizedBox(height: 20)
-    //           ],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Container(
+                        padding: pw.EdgeInsets.only(left: 40, right: 20),
+                        child: pw.Column(
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          // mainAxisAlignment: pw.MainAxisAlignment.center,
+                          children: [
+                            pw.Padding(
+                              padding: const pw.EdgeInsets.only(
+                                  top: 25, left: -20), // Add margin here
+                              child: pw.Text(
+                                "Introduction",
+                                style: header1(),
+                                textAlign: pw.TextAlign.center,
+                              ),
+                            ),
+                            pw.Text(
+                              "\nDerivation of fair and just open market value of land or property is an essential part of any real estate transaction. Evaluating land or property involves detailed analysis of the Subject Land or Subject Property (the land or property for sale or rent that is the subject of the evaluation) and a similar analysis of neighboring land or property.  Additional factors which may have a bearing on the true value of the Subject Land or Property, such as location; access; and the provision of utilities, are included in the evaluation. A professional real estate evaluation benefits the buyer and the seller",
+                              style: body1(),
+                              textAlign: pw.TextAlign.start,
+                            ),
+                            pw.Text("\nPurpose Of Appraisal",
+                                style: header2(true)),
+                            pw.Text(
+                                "The appraisal of the Subject Property is for the purpose of deriving an open market value as at the time of valuation.",
+                                style: body1()),
+                            pw.Text("\nDate of Valuation",
+                                style: header2(true)),
+                            pw.Text(
+                                "The date of valuation is the date the valuation report is signed by the relevant officers of C-A-R-E and stamped with the Company Seal.",
+                                style: body1()),
+                            pw.Text("\nMarket Comparison Method",
+                                style: header2(true)),
+                            pw.Container(
+                              child: pw.RichText(
+                                text: pw.TextSpan(
+                                  text:
+                                      'This method of valuation estimates the value of a Subject Property by comparing it with similar properties in the same location that have already sold. ',
+                                  style: body1(), // Base style
+                                  children: [
+                                    pw.TextSpan(
+                                      text: 'Relative Comparison Analysis',
+                                      style: header2(true),
+                                    ),
+                                    pw.TextSpan(
+                                      text:
+                                          'is a qualitative analysis method, used in sales comparisons, that concentrates on applying the most suitable and effective comparison methods to the best available data in order to produce the most accurate valuation result possible.   ',
+                                      style: body1(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            pw.Text("\nCost Method ", style: header2(true)),
+                            pw.Text(
+                                "This approach estimates the value of a given property by calculating the cost of replacing or reproducing a structure on the land, considering depreciation and site value or established by considering comparable sales transactions. ",
+                                style: body1()),
+                            pw.Text("\nResidual Method", style: header2(true)),
+                            pw.Text(
+                                "This method is use to determine the market value of the property, remaining from value of the completed development, measured in terms of Gross Development Value after deducting cost of redevelopment. Construction costs and other expenses for development of property together with assumed allowance for developer’s profit, sale incomes after development are being calculated. ",
+                                style: body1()),
+                          ],
+                        )),
+                  ),
+                ),
+                pw.SizedBox(height: 20)
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
     // //Five Page
     // pdf.addPage(pw.Page(
@@ -4533,4333 +4541,4581 @@ class _MyPDFState extends State<MyPDF> {
     // ));
 
     //Page Seventeen
-    pdf.addPage(pw.Page(
-        pageTheme: pageTheme,
-        build: (final context) {
-          return pw.FullPage(
-              ignoreMargins: true,
-              child: pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.end,
-                children: [
-                  pw.Container(
-                    margin: const pw.EdgeInsets.only(
-                        top: 25, right: 25), // Add margin here
-                    child: pw.Text(
-                      "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-                      style: pw.TextStyle(fontSize: 9, font: font),
-                    ),
-                  ),
-                  pw.Expanded(
-                      child: pw.Container(
-                    margin: const pw.EdgeInsets.only(
-                        top: 5, left: 40, right: 25, bottom: 25),
-                    decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
-                    ),
-                    child: pw.Center(
-                      child: pw.Padding(
-                          padding: const pw.EdgeInsets.only(
-                              top: 20, left: 15, right: 15),
-                          child: pw.Padding(
-                              padding: pw.EdgeInsets.only(
-                                  left: 15, bottom: 50, right: 15),
-                              child: pw.Column(
-                                // mainAxisAlignment: pw.MainAxisAlignment.start,
-                                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                                children: [
-                                  pw.Padding(
-                                    padding: pw.EdgeInsets.only(left: -20),
-                                    child: pw.Text(
-                                        'Provisional Valuation Made by the Inspection Officer(s)',
-                                        style: header1(),
-                                        textAlign: pw.TextAlign.start),
-                                  ),
-                                  pw.SizedBox(height: 15),
-                                  pw.RichText(
-                                    text: pw.TextSpan(
-                                      text:
-                                          'The Subject Property [Land and Building] is in area of Phnom Penh. The Inspection Officer’s provisional evaluation after the detail and careful study of a number of comparable sales, and have taken into account the economic conditions at the time of valuation and have arrived at the opinion that the current market value of the Subject Property [Land and Building] researched by ',
-                                      style: body1(), // Base style
-                                      children: [
-                                        pw.TextSpan(
-                                          text:
-                                              '${widget.objProvisional!.name}',
-                                          style: header2(true),
-                                        ),
-                                        pw.TextSpan(
-                                          text: ' are as follows:',
-                                          style: body1(),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  if (widget.objCover!.header ==
-                                      "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                                    pw.SizedBox(height: 10),
-                                    pw.Row(
-                                        mainAxisAlignment:
-                                            pw.MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.center,
-                                        children: [
-                                          pw.Expanded(
-                                              flex: 2,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("No",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 5,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Subject Property",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("Size Sqm",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "\$/sqm(Min)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Total(\$)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "\$/sqm(Max)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Total(\$)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10)))))
-                                        ]),
-                                    pw.Container(
-                                      width: double.infinity,
-                                      decoration: pw.BoxDecoration(
-                                        border: pw.Border.all(),
-                                      ),
-                                      child: pw.Row(
-                                        children: [
-                                          pw.Expanded(
-                                            flex: 20,
-                                            child: pw.Column(
-                                              crossAxisAlignment:
-                                                  pw.CrossAxisAlignment.center,
-                                              children: [
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .start,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 20,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "A.Land")))),
-                                                    ]),
-                                                for (int i = 0;
-                                                    i <
-                                                        widget.objProvisional!
-                                                            .land!.length;
-                                                    i++)
-                                                  pw.Row(
-                                                      mainAxisAlignment: pw
-                                                          .MainAxisAlignment
-                                                          .center,
-                                                      crossAxisAlignment: pw
-                                                          .CrossAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        pw.Expanded(
-                                                            flex: 2,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${widget.objProvisional!.land![i].no}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 5,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "Land",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.land![i].size_sqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.land![i].minsqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.land![i].totalmin.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.land![i].maxsqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.land![i].totalmax.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10)))))
-                                                      ]),
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Total",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totallandsizesqm.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 8,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10)))))
-                                                    ]),
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .start,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .start,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 20,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "B.Building")))),
-                                                    ]),
-                                                for (int i = 0;
-                                                    i <
-                                                        widget.objProvisional!
-                                                            .building!.length;
-                                                    i++)
-                                                  pw.Row(
-                                                      mainAxisAlignment: pw
-                                                          .MainAxisAlignment
-                                                          .center,
-                                                      crossAxisAlignment: pw
-                                                          .CrossAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        pw.Expanded(
-                                                            flex: 2,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${widget.objProvisional!.building![i].no}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 5,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "Building",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.building![i].sizesqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.building![i].minsqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmin.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.building![i].maxsqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 4,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmax.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10)))))
-                                                      ]),
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Total",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totalbuildingsizesqm.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 8,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10)))))
-                                                    ]),
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 10,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Fair Market Value",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 7,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      " ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) + double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 8,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) + double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()))}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10)))))
-                                                    ])
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ] else if (widget.objCover!.header ==
-                                      "Property LAND VALUATION REPORT") ...[
-                                    pw.SizedBox(height: 10),
-                                    pw.Row(
-                                        mainAxisAlignment:
-                                            pw.MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.center,
-                                        children: [
-                                          pw.Expanded(
-                                              flex: 2,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("No",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 5,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Subject Property",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("Size Sqm",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "\$/sqm(Min)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Total(\$)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "\$/sqm(Max)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Total(\$)",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10)))))
-                                        ]),
-                                    for (int i = 0;
-                                        i < widget.objProvisional!.land!.length;
-                                        i++)
-                                      pw.Row(
-                                          mainAxisAlignment:
-                                              pw.MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              pw.CrossAxisAlignment.center,
-                                          children: [
-                                            pw.Expanded(
-                                                flex: 2,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${widget.objProvisional!.land![i].no}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 5,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text("Land",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 3,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objProvisional!.land![i].size_sqm.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 3,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objProvisional!.land![i].minsqm.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 4,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objProvisional!.land![i].totalmin.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 4,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objProvisional!.land![i].maxsqm.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 4,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objProvisional!.land![i].totalmax.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10)))))
-                                          ]),
-                                    pw.Row(
-                                        mainAxisAlignment:
-                                            pw.MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.center,
-                                        children: [
-                                          pw.Expanded(
-                                              flex: 7,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("Total",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "${numformat.format(double.parse(widget.objProvisional!.totallandsizesqm.toString()))}",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 7,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()))}",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 8,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "${numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()))}",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10)))))
-                                        ]),
-                                    pw.Row(
-                                        mainAxisAlignment:
-                                            pw.MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.center,
-                                        children: [
-                                          pw.Expanded(
-                                              flex: 10,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "Fair Market Value",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 7,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          " ${double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) + double.parse(widget.objProvisional!.totalbuildingvaluemin.toString())}",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10))))),
-                                          pw.Expanded(
-                                              flex: 8,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border: pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "${double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) + double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())}",
-                                                          style: pw.TextStyle(
-                                                              fontSize: 10)))))
-                                        ])
-                                  ] else if (widget.objCover!.header ==
-                                      "Property OFFICE SPACE VALUATION REPORT") ...[
-                                    pw.SizedBox(height: 10),
-                                    pw.Row(
-                                      mainAxisAlignment:
-                                          pw.MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          pw.CrossAxisAlignment.center,
-                                      children: [
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            alignment: pw.Alignment.center,
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Subject Property",
-                                                  style: pw.TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 4,
-                                          child: pw.Container(
-                                            alignment: pw.Alignment.center,
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Floor/Unit No.",
-                                                  style: pw.TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("No.of Bedroom",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 4,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Gross Area (Sqm)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("\$/sqm(Min)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Total(\$)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("\$/sqm(Max)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Total(\$)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    pw.Container(
-                                      width: double.infinity,
-                                      decoration: pw.BoxDecoration(
-                                        border: pw.Border.all(),
-                                      ),
-                                      child: pw.Row(
-                                        children: [
-                                          pw.Expanded(
-                                            flex: 20,
-                                            child: pw.Column(
-                                              crossAxisAlignment:
-                                                  pw.CrossAxisAlignment.center,
-                                              children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        widget.objProvisional!
-                                                            .building!.length;
-                                                    i++)
-                                                  pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "Office Space",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objProvisional!.building![i].floorno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objProvisional!.building![i].bedroomno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].sizesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].minsqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmin.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].maxsqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmax.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 10,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Total",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingsizesqm.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 14,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Fair Market Value",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${double.parse(widget.objProvisional!.totalbuildingvaluemin.toString())}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ] else if (widget.objCover!.header ==
-                                      "Property CONDO REPORT") ...[
-                                    pw.SizedBox(height: 10),
-                                    pw.Row(
-                                      mainAxisAlignment:
-                                          pw.MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          pw.CrossAxisAlignment.center,
-                                      children: [
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            alignment: pw.Alignment.center,
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Subject Property",
-                                                  style: pw.TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 4,
-                                          child: pw.Container(
-                                            alignment: pw.Alignment.center,
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Floor/Unit No.",
-                                                  style: pw.TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("No.of Bedroom",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 4,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Gross Area (Sqm)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("\$/sqm(Min)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Total(\$)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("\$/sqm(Max)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 3,
-                                          child: pw.Container(
-                                            height: 25,
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border.all(),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text("Total(\$)",
-                                                  style: pw.TextStyle(
-                                                      fontSize: 10),
-                                                  textAlign:
-                                                      pw.TextAlign.center),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    pw.Container(
-                                      width: double.infinity,
-                                      decoration: pw.BoxDecoration(
-                                        border: pw.Border.all(),
-                                      ),
-                                      child: pw.Row(
-                                        children: [
-                                          pw.Expanded(
-                                            flex: 20,
-                                            child: pw.Column(
-                                              crossAxisAlignment:
-                                                  pw.CrossAxisAlignment.center,
-                                              children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        widget.objProvisional!
-                                                            .building!.length;
-                                                    i++)
-                                                  pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "Unit Condo",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${widget.objProvisional!.building![i].floorno}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${widget.objProvisional!.building![i].bedroomno}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].sizesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].minsqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmin.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].maxsqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objProvisional!.building![i].totalmax.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 10,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Total",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingsizesqm.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 14,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Fair Market Value",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 6,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()))}",
-                                                              style:
-                                                                  pw.TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                  pw.SizedBox(height: 10),
-                                  if (widget.objCover!.header !=
-                                      "Property LAND VALUATION REPORT") ...[
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text: 'Fire Insurance',
-                                        style: header2(true), // Base style
-                                      ),
-                                    ),
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text:
-                                            'Based on the methodical collection of data for our inspection to the Subject Building, the current estimated value for Fire Insurance is as follow:',
-                                        style: body(), // Base style
-                                      ),
-                                    ),
-                                    pw.SizedBox(height: 20),
-                                    pw.Row(children: [
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text: 'Fire Insurance Value : ',
-                                          style: header2(true), // Base style
-                                        ),
-                                      ),
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text:
-                                              '\$${numformat.format(double.parse(widget.objProvisional!.fire_insurance.toString()))}',
-                                          style: header2(false), // Base style
-                                        ),
-                                      ),
-                                    ]),
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text: fireinWord,
-                                        style: header2(false), // Base style
-                                      ),
-                                    ),
-                                  ],
-                                  pw.SizedBox(height: 20),
-                                  pw.RichText(
-                                    text: pw.TextSpan(
-                                      text: 'Force Sale Value',
-                                      style: header2(true), // Base style
-                                    ),
-                                  ),
-                                  pw.RichText(
-                                    text: pw.TextSpan(
-                                      text:
-                                          'In attempt to get a current force sale value where clients sell off foreclosed the subject property quickly, the estimated value for Force Sale is as follow:',
-                                      style: body(), // Base style
-                                    ),
-                                  ),
-                                  pw.SizedBox(height: 20),
-                                  // if(widget.objCover!.header == "")
-                                  pw.Row(children: [
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text: 'Force Sale Value : ',
-                                        style: header2(true), // Base style
-                                      ),
-                                    ),
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text:
-                                            '\$ ${numformat.format((double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100))))} to \$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
-                                        style: header2(false), // Base style
-                                      ),
-                                    ),
-                                  ]),
-                                  pw.SizedBox(height: 25),
-                                  pw.Row(
-                                    crossAxisAlignment:
-                                        pw.CrossAxisAlignment.start,
-                                    children: [
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text: 'Please Note: ',
-                                          style: header2(true), // Base style
-                                        ),
-                                      ),
-                                      pw.Expanded(
-                                        child: pw.RichText(
-                                          text: pw.TextSpan(
-                                            text:
-                                                'This is a provisional valuation made without recourse to other parties or to Other valuation data help by Cambodia Angkor Real Estate Co. Ltd.',
-                                            style: body(), // Base style
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ) // Add margin here
-                              )),
-                    ),
-                  )),
-                ],
-              ));
-        }));
+    // pdf.addPage(pw.Page(
+    //     pageTheme: pageTheme,
+    //     build: (final context) {
+    //       return pw.FullPage(
+    //           ignoreMargins: true,
+    //           child: pw.Column(
+    //             crossAxisAlignment: pw.CrossAxisAlignment.end,
+    //             children: [
+    //               pw.Container(
+    //                 margin: const pw.EdgeInsets.only(
+    //                     top: 25, right: 25), // Add margin here
+    //                 child: pw.Text(
+    //                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+    //                   style: pw.TextStyle(fontSize: 9, font: font),
+    //                 ),
+    //               ),
+    //               pw.Expanded(
+    //                   child: pw.Container(
+    //                 margin: const pw.EdgeInsets.only(
+    //                     top: 5, left: 40, right: 25, bottom: 25),
+    //                 decoration: pw.BoxDecoration(
+    //                   border: pw.Border.all(
+    //                     color: PdfColors.black,
+    //                     width: 2, // Adjust border width as needed
+    //                   ),
+    //                 ),
+    //                 child: pw.Center(
+    //                   child: pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                           top: 20, left: 15, right: 15),
+    //                       child: pw.Padding(
+    //                           padding: pw.EdgeInsets.only(
+    //                               left: 15, bottom: 50, right: 15),
+    //                           child: pw.Column(
+    //                             // mainAxisAlignment: pw.MainAxisAlignment.start,
+    //                             crossAxisAlignment: pw.CrossAxisAlignment.start,
+    //                             children: [
+    //                               pw.Padding(
+    //                                 padding: pw.EdgeInsets.only(left: -20),
+    //                                 child: pw.Text(
+    //                                     'Provisional Valuation Made by the Inspection Officer(s)',
+    //                                     style: header1(),
+    //                                     textAlign: pw.TextAlign.start),
+    //                               ),
+    //                               pw.SizedBox(height: 15),
+    //                               pw.RichText(
+    //                                 text: pw.TextSpan(
+    //                                   text:
+    //                                       'The Subject Property [Land and Building] is in area of Phnom Penh. The Inspection Officer’s provisional evaluation after the detail and careful study of a number of comparable sales, and have taken into account the economic conditions at the time of valuation and have arrived at the opinion that the current market value of the Subject Property [Land and Building] researched by ',
+    //                                   style: body1(), // Base style
+    //                                   children: [
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           '${widget.objProvisional!.name}',
+    //                                       style: header2(true),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text: ' are as follows:',
+    //                                       style: body1(),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                               ),
+    //                               if (widget.objCover!.header ==
+    //                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 2,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("No",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Subject Property",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Size Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "\$/sqm(Min)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Total(\$)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "\$/sqm(Max)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Total(\$)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10)))))
+    //                                     ]),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .start,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .start,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 20,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "A.Land")))),
+    //                                                 ]),
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget.objProvisional!
+    //                                                         .land!.length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                   mainAxisAlignment: pw
+    //                                                       .MainAxisAlignment
+    //                                                       .center,
+    //                                                   crossAxisAlignment: pw
+    //                                                       .CrossAxisAlignment
+    //                                                       .center,
+    //                                                   children: [
+    //                                                     pw.Expanded(
+    //                                                         flex: 2,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${widget.objProvisional!.land![i].no}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 5,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "Land",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .land![i]
+    //                                                                         .size_sqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .land![i]
+    //                                                                         .minsqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .land![i]
+    //                                                                         .totalmin
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .land![i]
+    //                                                                         .maxsqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .land![i]
+    //                                                                         .totalmax
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10)))))
+    //                                                   ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "Total",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totallandsizesqm
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totallandvaluemin
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 8,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totallandvaluemax
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10)))))
+    //                                                 ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .start,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .start,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 20,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "B.Building")))),
+    //                                                 ]),
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget.objProvisional!
+    //                                                         .building!.length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                   mainAxisAlignment: pw
+    //                                                       .MainAxisAlignment
+    //                                                       .center,
+    //                                                   crossAxisAlignment: pw
+    //                                                       .CrossAxisAlignment
+    //                                                       .center,
+    //                                                   children: [
+    //                                                     pw.Expanded(
+    //                                                         flex: 2,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${widget.objProvisional!.building![i].no}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 5,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "Building",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .building![i]
+    //                                                                         .sizesqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .building![i]
+    //                                                                         .minsqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .building![i]
+    //                                                                         .totalmin
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .building![i]
+    //                                                                         .maxsqm
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 4,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw.Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     numformat.format(double.parse(widget
+    //                                                                         .objProvisional!
+    //                                                                         .building![i]
+    //                                                                         .totalmax
+    //                                                                         .toString())),
+    //                                                                     style: pw.TextStyle(fontSize: 10)))))
+    //                                                   ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "Total",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totalbuildingsizesqm
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totalbuildingvaluemin
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 8,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw.BoxDecoration(
+    //                                                               border: pw.Border
+    //                                                                   .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(double.parse(widget
+    //                                                                       .objProvisional!
+    //                                                                       .totalbuildingvaluemax
+    //                                                                       .toString())),
+    //                                                                   style:
+    //                                                                       pw.TextStyle(fontSize: 10)))))
+    //                                                 ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 10,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "Fair Market Value",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   " ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) + double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 8,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   numformat.format(
+    //                                                                       double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) +
+    //                                                                           double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())),
+    //                                                                   style: pw.TextStyle(fontSize: 10)))))
+    //                                                 ])
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property LAND VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 2,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("No",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Subject Property",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Size Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "\$/sqm(Min)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Total(\$)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "\$/sqm(Max)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 4,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Total(\$)",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10)))))
+    //                                     ]),
+    //                                 for (int i = 0;
+    //                                     i < widget.objProvisional!.land!.length;
+    //                                     i++)
+    //                                   pw.Row(
+    //                                       mainAxisAlignment:
+    //                                           pw.MainAxisAlignment.center,
+    //                                       crossAxisAlignment:
+    //                                           pw.CrossAxisAlignment.center,
+    //                                       children: [
+    //                                         pw.Expanded(
+    //                                             flex: 2,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${widget.objProvisional!.land![i].no}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 5,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text("Land",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 3,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration: pw.BoxDecoration(
+    //                                                     border:
+    //                                                         pw.Border.all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         numformat.format(
+    //                                                             double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .land![i]
+    //                                                                 .size_sqm
+    //                                                                 .toString())),
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 3,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration: pw.BoxDecoration(
+    //                                                     border:
+    //                                                         pw.Border.all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         numformat.format(
+    //                                                             double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .land![i]
+    //                                                                 .minsqm
+    //                                                                 .toString())),
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 4,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration: pw.BoxDecoration(
+    //                                                     border:
+    //                                                         pw.Border.all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         numformat.format(
+    //                                                             double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .land![i]
+    //                                                                 .totalmin
+    //                                                                 .toString())),
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 4,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration: pw.BoxDecoration(
+    //                                                     border:
+    //                                                         pw.Border.all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         numformat.format(
+    //                                                             double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .land![i]
+    //                                                                 .maxsqm
+    //                                                                 .toString())),
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 4,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration: pw.BoxDecoration(
+    //                                                     border:
+    //                                                         pw.Border.all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         numformat.format(
+    //                                                             double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .land![i]
+    //                                                                 .totalmax
+    //                                                                 .toString())),
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10)))))
+    //                                       ]),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 7,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Total",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       numformat.format(
+    //                                                           double.parse(widget
+    //                                                               .objProvisional!
+    //                                                               .totallandsizesqm
+    //                                                               .toString())),
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 7,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       numformat.format(
+    //                                                           double.parse(widget
+    //                                                               .objProvisional!
+    //                                                               .totallandvaluemin
+    //                                                               .toString())),
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 8,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       numformat.format(
+    //                                                           double.parse(widget
+    //                                                               .objProvisional!
+    //                                                               .totallandvaluemax
+    //                                                               .toString())),
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10)))))
+    //                                     ]),
+    //                                 // pw.Row(
+    //                                 //     mainAxisAlignment:
+    //                                 //         pw.MainAxisAlignment.center,
+    //                                 //     crossAxisAlignment:
+    //                                 //         pw.CrossAxisAlignment.center,
+    //                                 //     children: [
+    //                                 //       pw.Expanded(
+    //                                 //           flex: 10,
+    //                                 //           child: pw.Container(
+    //                                 //               height: 25,
+    //                                 //               decoration: pw.BoxDecoration(
+    //                                 //                   border: pw.Border.all()),
+    //                                 //               child: pw.Center(
+    //                                 //                   child: pw.Text(
+    //                                 //                       "Fair Market Value",
+    //                                 //                       style: pw.TextStyle(
+    //                                 //                           fontSize: 10))))),
+    //                                 //       pw.Expanded(
+    //                                 //           flex: 7,
+    //                                 //           child: pw.Container(
+    //                                 //               height: 25,
+    //                                 //               decoration: pw.BoxDecoration(
+    //                                 //                   border: pw.Border.all()),
+    //                                 //               child: pw.Center(
+    //                                 //                   child: pw.Text(
+    //                                 //                       " ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()) + double.parse(widget.objProvisional!.totallandvaluemin.toString()))}",
+    //                                 //                       style: pw.TextStyle(
+    //                                 //                           fontSize: 10))))),
+    //                                 //       pw.Expanded(
+    //                                 //           flex: 8,
+    //                                 //           child: pw.Container(
+    //                                 //               height: 25,
+    //                                 //               decoration: pw.BoxDecoration(
+    //                                 //                   border: pw.Border.all()),
+    //                                 //               child: pw.Center(
+    //                                 //                   child: pw.Text(
+    //                                 //                       numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()) +
+    //                                 //                           double.parse(widget
+    //                                 //                               .objProvisional!
+    //                                 //                               .totallandvaluemax
+    //                                 //                               .toString())),
+    //                                 //                       style: pw.TextStyle(
+    //                                 //                           fontSize: 10)))))
+    //                                 //     ])
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 10,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                             "Fair Market Value",
+    //                                             style:
+    //                                                 pw.TextStyle(fontSize: 10),
+    //                                           ),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 7,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                             numformat.format(
+    //                                               double.parse(widget
+    //                                                       .objProvisional!
+    //                                                       .totallandvaluemin
+    //                                                       .toString()) +
+    //                                                   double.parse(widget
+    //                                                       .objProvisional!
+    //                                                       .totallandvaluemin
+    //                                                       .toString()),
+    //                                             ),
+    //                                             style:
+    //                                                 pw.TextStyle(fontSize: 10),
+    //                                           ),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 8,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                             numformat.format(
+    //                                               double.parse(widget
+    //                                                       .objProvisional!
+    //                                                       .totallandvaluemax
+    //                                                       .toString()) +
+    //                                                   double.parse(widget
+    //                                                       .objProvisional!
+    //                                                       .totallandvaluemax
+    //                                                       .toString()),
+    //                                             ),
+    //                                             style:
+    //                                                 pw.TextStyle(fontSize: 10),
+    //                                           ),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 )
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Subject Property",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Floor/Unit No.",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("No.of Bedroom",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Gross Area (Sqm)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("\$/sqm(Min)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Total(\$)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("\$/sqm(Max)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Total(\$)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget.objProvisional!
+    //                                                         .building!.length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "Office Space",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objProvisional!.building![i].floorno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objProvisional!.building![i].bedroomno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .sizesqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .minsqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .building![
+    //                                                                     i]
+    //                                                                 .totalmin
+    //                                                                 .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .maxsqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .building![
+    //                                                                     i]
+    //                                                                 .totalmax
+    //                                                                 .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ],
+    //                                               ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Total",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 4,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingsizesqm
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemin
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemax
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 14,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Fair Market Value",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${double.parse(widget.objProvisional!.totalbuildingvaluemin.toString())}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property CONDO REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Subject Property",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Floor/Unit No.",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("No.of Bedroom",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Gross Area (Sqm)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("\$/sqm(Min)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Total(\$)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("\$/sqm(Max)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Total(\$)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget.objProvisional!
+    //                                                         .building!.length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "Unit Condo",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${widget.objProvisional!.building![i].floorno}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${widget.objProvisional!.building![i].bedroomno}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .sizesqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .minsqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .building![
+    //                                                                     i]
+    //                                                                 .totalmin
+    //                                                                 .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(
+    //                                                                 double.parse(widget
+    //                                                                     .objProvisional!
+    //                                                                     .building![
+    //                                                                         i]
+    //                                                                     .maxsqm
+    //                                                                     .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             numformat.format(double.parse(widget
+    //                                                                 .objProvisional!
+    //                                                                 .building![
+    //                                                                     i]
+    //                                                                 .totalmax
+    //                                                                 .toString())),
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ],
+    //                                               ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Total",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 4,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingsizesqm
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemin
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemax
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 14,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Fair Market Value",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemin
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 6,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           numformat.format(
+    //                                                               double.parse(widget
+    //                                                                   .objProvisional!
+    //                                                                   .totalbuildingvaluemax
+    //                                                                   .toString())),
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ],
+    //                               pw.SizedBox(height: 10),
+    //                               if (widget.objCover!.header !=
+    //                                   "Property LAND VALUATION REPORT") ...[
+    //                                 pw.RichText(
+    //                                   text: pw.TextSpan(
+    //                                     text: 'Fire Insurance',
+    //                                     style: header2(true), // Base style
+    //                                   ),
+    //                                 ),
+    //                                 pw.RichText(
+    //                                   text: pw.TextSpan(
+    //                                     text:
+    //                                         'Based on the methodical collection of data for our inspection to the Subject Building, the current estimated value for Fire Insurance is as follow:',
+    //                                     style: body(), // Base style
+    //                                   ),
+    //                                 ),
+    //                                 pw.SizedBox(height: 20),
+    //                                 pw.Row(children: [
+    //                                   pw.RichText(
+    //                                     text: pw.TextSpan(
+    //                                       text: 'Fire Insurance Value : ',
+    //                                       style: header2(true), // Base style
+    //                                     ),
+    //                                   ),
+    //                                   pw.RichText(
+    //                                     text: pw.TextSpan(
+    //                                       text:
+    //                                           '\$${numformat.format(double.parse(widget.objProvisional!.fire_insurance.toString()))}',
+    //                                       style: header2(false), // Base style
+    //                                     ),
+    //                                   ),
+    //                                 ]),
+    //                                 pw.RichText(
+    //                                   text: pw.TextSpan(
+    //                                     text: fireinWord,
+    //                                     style: header2(false), // Base style
+    //                                   ),
+    //                                 ),
+    //                               ],
+    //                               pw.SizedBox(height: 20),
+    //                               pw.RichText(
+    //                                 text: pw.TextSpan(
+    //                                   text: 'Force Sale Value',
+    //                                   style: header2(true), // Base style
+    //                                 ),
+    //                               ),
+    //                               pw.RichText(
+    //                                 text: pw.TextSpan(
+    //                                   text:
+    //                                       'In attempt to get a current force sale value where clients sell off foreclosed the subject property quickly, the estimated value for Force Sale is as follow:',
+    //                                   style: body(), // Base style
+    //                                 ),
+    //                               ),
+    //                               pw.SizedBox(height: 20),
+    //                               pw.Row(
+    //                                 children: [
+    //                                   pw.RichText(
+    //                                     text: pw.TextSpan(
+    //                                       text: 'Force Sale Value : ',
+    //                                       style: header2(true), // Base style
+    //                                     ),
+    //                                   ),
+    //                                   pw.RichText(
+    //                                     text: pw.TextSpan(
+    //                                       children: [
+    //                                         if(widget.objCover!.header != "Property LAND VALUATION REPORT")...[
+    //                                           pw.TextSpan(
+    //                                           text:
+    //                                               '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+    //                                           style:
+    //                                               header2(false), // Base style
+    //                                         ),
+    //                                         pw.TextSpan(
+    //                                           text: ' to ',
+    //                                           style: header2(
+    //                                               true), // Base style for "to"
+    //                                         ),
+    //                                         pw.TextSpan(
+    //                                           text:
+    //                                               '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+    //                                           style:
+    //                                               header2(false), // Base style
+    //                                         ),
+    //                                         ]else...[
+    //                                           pw.TextSpan(
+    //                                           text:
+    //                                               '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()) - (double.parse(widget.objProvisional!.totallandvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+    //                                           style:
+    //                                               header2(false), // Base style
+    //                                         ),
+    //                                         pw.TextSpan(
+    //                                           text: ' to ',
+    //                                           style: header2(
+    //                                               true), // Base style for "to"
+    //                                         ),
+    //                                         pw.TextSpan(
+    //                                           text:
+    //                                               '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()) - (double.parse(widget.objProvisional!.totallandvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+    //                                           style:
+    //                                               header2(false), // Base style
+    //                                         ),
+    //                                         ]
 
-    //  var parts = widget.objFinalIndication!.verified_by.toString().split('24k');
-//     // //Page Eighteen
-//     pdf.addPage(pw.Page(
-//         pageTheme: pageTheme,
-//         build: (final context) {
-//           return pw.FullPage(
-//               ignoreMargins: true,
-//               child: pw.Column(
-//                 crossAxisAlignment: pw.CrossAxisAlignment.end,
-//                 children: [
-//                   pw.Container(
-//                     margin: const pw.EdgeInsets.only(
-//                         top: 25, right: 25), // Add margin here
-//                     child: pw.Text(
-//                       "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                       style: pw.TextStyle(fontSize: 9, font: font),
-//                     ),
-//                   ),
-//                   pw.Expanded(
-//                       child: pw.Container(
-//                     margin: const pw.EdgeInsets.only(
-//                         top: 5, left: 40, right: 25, bottom: 25),
-//                     decoration: pw.BoxDecoration(
-//                       border: pw.Border.all(
-//                         color: PdfColors.black,
-//                         width: 2, // Adjust border width as needed
-//                       ),
-//                     ),
-//                     child: pw.Center(
-//                       child: pw.Padding(
-//                           padding: const pw.EdgeInsets.only(
-//                               top: 10, left: 15, right: 15),
-//                           child: pw.Padding(
-//                               padding: pw.EdgeInsets.only(left: 20, bottom: 50),
-//                               child: pw.Column(
-//                                 children: [
-//                                   pw.Text(
-//                                       'Final Indication of Subject Property Market Value',
-//                                       style: header1(),
-//                                       textAlign: pw.TextAlign.center),
-//                                   pw.SizedBox(height: 20),
-//                                   pw.RichText(
-//                                     text: pw.TextSpan(
-//                                       text: '        ',
-//                                       style: body(), // Base style
-//                                       children: [
-//                                         pw.TextSpan(
-//                                           text:
-//                                               'Cambodia Angkor Real Estate Co.,Ltd ',
-//                                           style: b_body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               'having considered the local and national market prices of similar property, hereby makes the following evaluation of the ',
-//                                           style: body(),
-//                                         ),
-//                                         if (widget.objCover!.header ==
-//                                             "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                               text: ' [Land and Building] ',
-//                                               style: b_body()),
-//                                         ] else if (widget.objCover!.header ==
-//                                             "Property LAND VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                               text: ' [Land] ',
-//                                               style: b_body()),
-//                                         ] else if (widget.objCover!.header ==
-//                                             "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                               text: ' [Office Space] ',
-//                                               style: b_body()),
-//                                         ] else ...[
-//                                           pw.TextSpan(
-//                                               text: ' [Condo] ',
-//                                               style: b_body()),
-//                                         ],
-//                                         pw.TextSpan(
-//                                           text:
-//                                               ' that is the subject of this report.  ',
-//                                           style: body(),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                   pw.SizedBox(height: 10),
-//                                   // Test
-//                                   pw.RichText(
-//                                     text: pw.TextSpan(
-//                                       text: '        ',
-//                                       style: body(), // Base style
-//                                       children: [
-//                                         pw.TextSpan(
-//                                             text:
-//                                                 'Cambodia Angkor Real Estate Co.,Ltd ',
-//                                             style: b_body()),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               '\thaving undertaken all reasonable measures to ensure the accuracy of the information contained in this ',
-//                                           style: body(),
-//                                         ),
-//                                         if (widget.objCover!.header ==
-//                                             "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                             text: ' [Land and Building] ',
-//                                             style: b_body(),
-//                                           ),
-//                                         ] else if (widget.objCover!.header ==
-//                                             "Property LAND VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                             text: ' [Land] ',
-//                                             style: b_body(),
-//                                           ),
-//                                         ] else if (widget.objCover!.header ==
-//                                             "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                           pw.TextSpan(
-//                                             text: ' [Office Space] ',
-//                                             style: b_body(),
-//                                           ),
-//                                         ] else ...[
-//                                           pw.TextSpan(
-//                                             text: ' [Condo] ',
-//                                             style: b_body(),
-//                                           ),
-//                                         ],
-//                                         pw.TextSpan(
-//                                           text: 'owned by  ',
-//                                           style: body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               '${widget.objCover!.ownername} ',
-//                                           style: b_body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text: 'with Title Deed No: ',
-//                                           style: body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               '${widget.objCover!.deeptitle} ',
-//                                           style: b_body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               'located in residential and commercial area, certifies that the ',
-//                                           style: body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text: 'Property Valuation ',
-//                                           style: b_body(),
-//                                         ),
-//                                         pw.TextSpan(
-//                                           text:
-//                                               'is true and accurate as of the date of this report.',
-//                                           style: body(),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                   if (widget.objCover!.header ==
-//                                       "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                     pw.SizedBox(height: 10),
-//                                     pw.Row(
-//                                         mainAxisAlignment:
-//                                             pw.MainAxisAlignment.center,
-//                                         crossAxisAlignment:
-//                                             pw.CrossAxisAlignment.center,
-//                                         children: [
-//                                           pw.Expanded(
-//                                               flex: 2,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text("No",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 5,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Subject Property",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 3,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text("Size Sqm",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 3,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Size Sqft",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 6,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Property Value USD/Sqm",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 6,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Property Value",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                         ]),
-//                                     pw.Container(
-//                                       width: double.infinity,
-//                                       decoration: pw.BoxDecoration(
-//                                         border: pw.Border.all(),
-//                                       ),
-//                                       child: pw.Row(
-//                                         children: [
-//                                           pw.Expanded(
-//                                             flex: 20,
-//                                             child: pw.Column(
-//                                               crossAxisAlignment:
-//                                                   pw.CrossAxisAlignment.center,
-//                                               children: [
-//                                                 pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .start,
-//                                                     crossAxisAlignment: pw
-//                                                         .CrossAxisAlignment
-//                                                         .start,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                           flex: 20,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "A.Land")))),
-//                                                     ]),
-//                                                 for (int i = 0;
-//                                                     i <
-//                                                         widget
-//                                                             .objFinalIndication!
-//                                                             .land!
-//                                                             .length;
-//                                                     i++)
-//                                                   pw.Row(
-//                                                       mainAxisAlignment: pw
-//                                                           .MainAxisAlignment
-//                                                           .center,
-//                                                       crossAxisAlignment: pw
-//                                                           .CrossAxisAlignment
-//                                                           .center,
-//                                                       children: [
-//                                                         pw.Expanded(
-//                                                             flex: 2,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${widget.objFinalIndication!.land![i].no}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 5,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "Land",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 3,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 3,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 6,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 6,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                       ]),
-//                                                 pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .center,
-//                                                     crossAxisAlignment: pw
-//                                                         .CrossAxisAlignment
-//                                                         .center,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                           flex: 7,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "Total",
-//                                                                       style: pw.TextStyle(
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 3,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.totallandsizesqm.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 3,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.land![0].sizesqft.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 12,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10)))))
-//                                                     ]),
-//                                                 pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .start,
-//                                                     crossAxisAlignment: pw
-//                                                         .CrossAxisAlignment
-//                                                         .start,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                           flex: 20,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "B.Building")))),
-//                                                     ]),
-//                                                 for (int i = 0;
-//                                                     i <
-//                                                         widget
-//                                                             .objFinalIndication!
-//                                                             .building!
-//                                                             .length;
-//                                                     i++)
-//                                                   pw.Row(
-//                                                       mainAxisAlignment: pw
-//                                                           .MainAxisAlignment
-//                                                           .center,
-//                                                       crossAxisAlignment: pw
-//                                                           .CrossAxisAlignment
-//                                                           .center,
-//                                                       children: [
-//                                                         pw.Expanded(
-//                                                             flex: 2,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${widget.objFinalIndication!.building![i].no}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 5,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "Building",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 3,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 3,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 6,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                         pw.Expanded(
-//                                                             flex: 6,
-//                                                             child: pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw.BoxDecoration(
-//                                                                     border: pw
-//                                                                             .Border
-//                                                                         .all()),
-//                                                                 child: pw.Center(
-//                                                                     child: pw.Text(
-//                                                                         "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-//                                                                         style: pw.TextStyle(
-//                                                                             fontSize:
-//                                                                                 10))))),
-//                                                       ]),
-//                                                 pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .center,
-//                                                     crossAxisAlignment: pw
-//                                                         .CrossAxisAlignment
-//                                                         .center,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                           flex: 7,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "Total",
-//                                                                       style: pw.TextStyle(
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 3,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 3,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.building![0].sizesqft.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10))))),
-//                                                       pw.Expanded(
-//                                                           flex: 12,
-//                                                           child: pw.Container(
-//                                                               height: 25,
-//                                                               decoration: pw
-//                                                                   .BoxDecoration(
-//                                                                       border: pw
-//                                                                               .Border
-//                                                                           .all()),
-//                                                               child: pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                                       style: pw.TextStyle(
-//                                                                           color: PdfColors
-//                                                                               .red,
-//                                                                           fontSize:
-//                                                                               10)))))
-//                                                     ]),
-//                                                 pw.Row(
-//                                                   mainAxisAlignment: pw
-//                                                       .MainAxisAlignment.center,
-//                                                   crossAxisAlignment: pw
-//                                                       .CrossAxisAlignment
-//                                                       .center,
-//                                                   children: [
-//                                                     pw.Expanded(
-//                                                       flex: 7,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                             "Fair Market Value",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize: 10),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 18,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         child: pw.Column(
-//                                                           mainAxisAlignment: pw
-//                                                               .MainAxisAlignment
-//                                                               .start,
-//                                                           children: [
-//                                                             pw.Expanded(
-//                                                               flex: 18,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child:
-//                                                                       pw.Text(
-//                                                                     "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()) + double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                                     style: pw.TextStyle(
-//                                                                         color: PdfColors
-//                                                                             .red,
-//                                                                         fontSize:
-//                                                                             10,
-//                                                                         decoration: pw
-//                                                                             .TextDecoration
-//                                                                             .underline),
-//                                                                   ),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                             pw.Expanded(
-//                                                               flex: 18,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child:
-//                                                                       pw.Text(
-//                                                                     moneyInWords,
-//                                                                     style: pw
-//                                                                         .TextStyle(
-//                                                                       color: PdfColors
-//                                                                           .red,
-//                                                                       fontSize:
-//                                                                           10,
-//                                                                       decoration: pw
-//                                                                           .TextDecoration
-//                                                                           .underline,
-//                                                                     ),
-//                                                                   ),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                           ],
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 )
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ] else if (widget.objCover!.header ==
-//                                       "Property LAND VALUATION REPORT") ...[
-//                                     pw.SizedBox(height: 10),
-//                                     pw.Row(
-//                                         mainAxisAlignment:
-//                                             pw.MainAxisAlignment.center,
-//                                         crossAxisAlignment:
-//                                             pw.CrossAxisAlignment.center,
-//                                         children: [
-//                                           pw.Expanded(
-//                                               flex: 2,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text("No",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 5,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Subject Property",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 3,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text("Size Sqm",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 3,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Size Sqft",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 6,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Property Value USD/Sqm",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                           pw.Expanded(
-//                                               flex: 6,
-//                                               child: pw.Container(
-//                                                   height: 25,
-//                                                   decoration: pw.BoxDecoration(
-//                                                       border: pw.Border.all()),
-//                                                   child: pw.Center(
-//                                                       child: pw.Text(
-//                                                           "Property Value",
-//                                                           style: pw.TextStyle(
-//                                                               fontSize: 10))))),
-//                                         ]),
-//                                     for (int i = 0;
-//                                         i <
-//                                             widget.objFinalIndication!.land!
-//                                                 .length;
-//                                         i++)
-//                                       pw.Row(
-//                                           mainAxisAlignment:
-//                                               pw.MainAxisAlignment.center,
-//                                           crossAxisAlignment:
-//                                               pw.CrossAxisAlignment.center,
-//                                           children: [
-//                                             pw.Expanded(
-//                                                 flex: 2,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text(
-//                                                             "${widget.objFinalIndication!.land![i].no}",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                             pw.Expanded(
-//                                                 flex: 5,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text("Land",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                             pw.Expanded(
-//                                                 flex: 3,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text(
-//                                                             "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                             pw.Expanded(
-//                                                 flex: 3,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text(
-//                                                             "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                             pw.Expanded(
-//                                                 flex: 6,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text(
-//                                                             "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                             pw.Expanded(
-//                                                 flex: 6,
-//                                                 child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                             border: pw.Border
-//                                                                 .all()),
-//                                                     child: pw.Center(
-//                                                         child: pw.Text(
-//                                                             "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize:
-//                                                                     10))))),
-//                                           ]),
-//                                     pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 7,
-//                                           child: pw.Container(
-//                                             height: 50,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text(
-//                                                 "Fair Market Value",
-//                                                 style:
-//                                                     pw.TextStyle(fontSize: 10),
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 18,
-//                                           child: pw.Container(
-//                                             height: 50,
-//                                             child: pw.Column(
-//                                               mainAxisAlignment:
-//                                                   pw.MainAxisAlignment.start,
-//                                               children: [
-//                                                 pw.Expanded(
-//                                                   flex: 18,
-//                                                   child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                       border: pw.Border.all(),
-//                                                     ),
-//                                                     child: pw.Center(
-//                                                       child: pw.Text(
-//                                                         "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()))}",
-//                                                         style: pw.TextStyle(
-//                                                             color:
-//                                                                 PdfColors.red,
-//                                                             fontSize: 10,
-//                                                             decoration: pw
-//                                                                 .TextDecoration
-//                                                                 .underline),
-//                                                       ),
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                                 pw.Expanded(
-//                                                   flex: 18,
-//                                                   child: pw.Container(
-//                                                     height: 25,
-//                                                     decoration:
-//                                                         pw.BoxDecoration(
-//                                                       border: pw.Border.all(),
-//                                                     ),
-//                                                     child: pw.Center(
-//                                                       child: pw.Text(
-//                                                         landinWord,
-//                                                         style: pw.TextStyle(
-//                                                           color: PdfColors.red,
-//                                                           fontSize: 10,
-//                                                           decoration: pw
-//                                                               .TextDecoration
-//                                                               .underline,
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     )
-//                                   ] else if (widget.objCover!.header ==
-//                                       "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                     pw.SizedBox(height: 10),
-//                                     pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 4,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Subject Property",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Floor/Unit No.",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("No.of Bedroom",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Gross Area (Sqm)",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Size Sqft",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text(
-//                                                   "Property Value USD/Sqm",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Property Value",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     pw.Container(
-//                                       width: double.infinity,
-//                                       decoration: pw.BoxDecoration(
-//                                         border: pw.Border.all(),
-//                                       ),
-//                                       child: pw.Row(
-//                                         children: [
-//                                           pw.Expanded(
-//                                             flex: 20,
-//                                             child: pw.Column(
-//                                               crossAxisAlignment:
-//                                                   pw.CrossAxisAlignment.center,
-//                                               children: [
-//                                                 for (int i = 0;
-//                                                     i <
-//                                                         widget
-//                                                             .objFinalIndication!
-//                                                             .building!
-//                                                             .length;
-//                                                     i++)
-//                                                   pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .center,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                         flex: 4,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "Office Space",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${(widget.objFinalIndication!.building![i].floorno)}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${(widget.objFinalIndication!.building![i].bedroomno)}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 5,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 5,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                     ],
-//                                                   ),
-//                                                 pw.Row(
-//                                                   mainAxisAlignment: pw
-//                                                       .MainAxisAlignment.center,
-//                                                   children: [
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "Total",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 3,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 3,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${widget.objFinalIndication!.building![0].sizesqft.toString()}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 ),
-//                                                 pw.Row(
-//                                                   mainAxisAlignment: pw
-//                                                       .MainAxisAlignment.center,
-//                                                   crossAxisAlignment: pw
-//                                                       .CrossAxisAlignment
-//                                                       .center,
-//                                                   children: [
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                             "Fair Market Value",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize: 10),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 16,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         child: pw.Column(
-//                                                           mainAxisAlignment: pw
-//                                                               .MainAxisAlignment
-//                                                               .start,
-//                                                           children: [
-//                                                             pw.Expanded(
-//                                                               flex: 16,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child:
-//                                                                       pw.Text(
-//                                                                     "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                                     style: pw.TextStyle(
-//                                                                         color: PdfColors
-//                                                                             .red,
-//                                                                         fontSize:
-//                                                                             10,
-//                                                                         decoration: pw
-//                                                                             .TextDecoration
-//                                                                             .underline),
-//                                                                   ),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                             pw.Expanded(
-//                                                               flex: 16,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       officespaceinword,
-//                                                                       style: pw
-//                                                                           .TextStyle(
-//                                                                         color: PdfColors
-//                                                                             .red,
-//                                                                         fontSize:
-//                                                                             10,
-//                                                                         decoration: pw
-//                                                                             .TextDecoration
-//                                                                             .underline,
-//                                                                       ),
-//                                                                       textAlign: pw
-//                                                                           .TextAlign
-//                                                                           .center),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                           ],
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 )
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ] else if (widget.objCover!.header ==
-//                                       "Property CONDO REPORT") ...[
-//                                     pw.SizedBox(height: 10),
-//                                     pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 4,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Subject Property",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Floor/Unit No.",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("No.of Bedroom",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Gross Area (Sqm)",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 3,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Size Sqft",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text(
-//                                                   "Property Value USD/Sqm",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Property Value",
-//                                                   style: pw.TextStyle(
-//                                                       fontSize: 10),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     pw.Container(
-//                                       width: double.infinity,
-//                                       decoration: pw.BoxDecoration(
-//                                         border: pw.Border.all(),
-//                                       ),
-//                                       child: pw.Row(
-//                                         children: [
-//                                           pw.Expanded(
-//                                             flex: 20,
-//                                             child: pw.Column(
-//                                               crossAxisAlignment:
-//                                                   pw.CrossAxisAlignment.center,
-//                                               children: [
-//                                                 for (int i = 0;
-//                                                     i <
-//                                                         widget
-//                                                             .objFinalIndication!
-//                                                             .building!
-//                                                             .length;
-//                                                     i++)
-//                                                   pw.Row(
-//                                                     mainAxisAlignment: pw
-//                                                         .MainAxisAlignment
-//                                                         .center,
-//                                                     children: [
-//                                                       pw.Expanded(
-//                                                         flex: 4,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "Condo",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${(widget.objFinalIndication!.building![i].floorno)}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${(widget.objFinalIndication!.building![i].bedroomno)}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 3,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 5,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                       pw.Expanded(
-//                                                         flex: 5,
-//                                                         child: pw.Container(
-//                                                           height: 25,
-//                                                           decoration:
-//                                                               pw.BoxDecoration(
-//                                                             border:
-//                                                                 pw.Border.all(),
-//                                                           ),
-//                                                           child: pw.Center(
-//                                                             child: pw.Text(
-//                                                                 "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-//                                                                 style: pw
-//                                                                     .TextStyle(
-//                                                                         fontSize:
-//                                                                             10),
-//                                                                 textAlign: pw
-//                                                                     .TextAlign
-//                                                                     .center),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                     ],
-//                                                   ),
-//                                                 pw.Row(
-//                                                   mainAxisAlignment: pw
-//                                                       .MainAxisAlignment.center,
-//                                                   children: [
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "Total",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 3,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 3,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${widget.objFinalIndication!.building![0].sizesqft.toString()}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 25,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                               "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                               style:
-//                                                                   pw.TextStyle(
-//                                                                       fontSize:
-//                                                                           10),
-//                                                               textAlign: pw
-//                                                                   .TextAlign
-//                                                                   .center),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 ),
-//                                                 pw.Row(
-//                                                   mainAxisAlignment: pw
-//                                                       .MainAxisAlignment.center,
-//                                                   crossAxisAlignment: pw
-//                                                       .CrossAxisAlignment
-//                                                       .center,
-//                                                   children: [
-//                                                     pw.Expanded(
-//                                                       flex: 10,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         decoration:
-//                                                             pw.BoxDecoration(
-//                                                           border:
-//                                                               pw.Border.all(),
-//                                                         ),
-//                                                         child: pw.Center(
-//                                                           child: pw.Text(
-//                                                             "Fair Market Value",
-//                                                             style: pw.TextStyle(
-//                                                                 fontSize: 10),
-//                                                           ),
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     pw.Expanded(
-//                                                       flex: 16,
-//                                                       child: pw.Container(
-//                                                         height: 50,
-//                                                         child: pw.Column(
-//                                                           mainAxisAlignment: pw
-//                                                               .MainAxisAlignment
-//                                                               .start,
-//                                                           children: [
-//                                                             pw.Expanded(
-//                                                               flex: 16,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child:
-//                                                                       pw.Text(
-//                                                                     "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
-//                                                                     style: pw.TextStyle(
-//                                                                         color: PdfColors
-//                                                                             .red,
-//                                                                         fontSize:
-//                                                                             10,
-//                                                                         decoration: pw
-//                                                                             .TextDecoration
-//                                                                             .underline),
-//                                                                   ),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                             pw.Expanded(
-//                                                               flex: 16,
-//                                                               child:
-//                                                                   pw.Container(
-//                                                                 height: 25,
-//                                                                 decoration: pw
-//                                                                     .BoxDecoration(
-//                                                                   border:
-//                                                                       pw.Border
-//                                                                           .all(),
-//                                                                 ),
-//                                                                 child:
-//                                                                     pw.Center(
-//                                                                   child: pw.Text(
-//                                                                       officespaceinword,
-//                                                                       style: pw
-//                                                                           .TextStyle(
-//                                                                         color: PdfColors
-//                                                                             .red,
-//                                                                         fontSize:
-//                                                                             10,
-//                                                                         decoration: pw
-//                                                                             .TextDecoration
-//                                                                             .underline,
-//                                                                       ),
-//                                                                       textAlign: pw
-//                                                                           .TextAlign
-//                                                                           .center),
-//                                                                 ),
-//                                                               ),
-//                                                             ),
-//                                                           ],
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                   ],
-//                                                 )
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ],
-//                                   // Controlled Table
-//                                   pw.SizedBox(height: 5),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Controlled By",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 25,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("Verified By",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 43,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Column(
-//                                               mainAxisAlignment:
-//                                                   pw.MainAxisAlignment.center,
-//                                               crossAxisAlignment:
-//                                                   pw.CrossAxisAlignment.center,
-//                                               children: [
-//                                                 pw.Text(
-//                                                     '${widget.objFinalIndication!.controlled_by}',
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                                 pw.SizedBox(height: 3),
-//                                                 pw.Text("Position",
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                                 pw.SizedBox(height: 3),
-//                                                 pw.Text("Liscense No. ",
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 43,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Column(
-//                                               mainAxisAlignment:
-//                                                   pw.MainAxisAlignment.center,
-//                                               crossAxisAlignment:
-//                                                   pw.CrossAxisAlignment.center,
-//                                               children: [
-//                                                 pw.Text("${parts[0]}",
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                                 pw.SizedBox(height: 3),
-//                                                 pw.Text("${parts[1]}",
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                                 pw.SizedBox(height: 3),
-//                                                 pw.Text("${parts[2]}",
-//                                                     style: pw.TextStyle(
-//                                                       fontSize: 10,
-//                                                     ),
-//                                                     textAlign:
-//                                                         pw.TextAlign.center),
-//                                               ],
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 70,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         pw.Expanded(
-//                                           flex: 5,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 70,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 10,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 10,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 30,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text(
-//                                                   "Company Seal of Cambodia Angkor Real Estate Co., Ltd",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 14,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 9,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 30,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text(
-//                                                   "Chief Executive Officer License No. V-07-013-04",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 14,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Row(
-//                                       mainAxisAlignment:
-//                                           pw.MainAxisAlignment.center,
-//                                       crossAxisAlignment:
-//                                           pw.CrossAxisAlignment.center,
-//                                       children: [
-//                                         pw.Expanded(
-//                                           flex: 10,
-//                                           child: pw.Container(
-//                                             alignment: pw.Alignment.center,
-//                                             height: 90,
-//                                             decoration: pw.BoxDecoration(
-//                                               border: pw.Border.all(),
-//                                             ),
-//                                             child: pw.Center(
-//                                               child: pw.Text("",
-//                                                   style: pw.TextStyle(
-//                                                     fontSize: 16,
-//                                                   ),
-//                                                   textAlign:
-//                                                       pw.TextAlign.center),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ]),
-//                                   pw.Padding(
-//                                       padding: pw.EdgeInsets.only(right: 10),
-//                                       child: pw.Row(
-//                                           mainAxisAlignment:
-//                                               pw.MainAxisAlignment.spaceBetween,
-//                                           children: [
-//                                             pw.Row(children: [
-//                                               pw.Text('Issue Date: ',
-//                                                   style: header2(true)),
-//                                               pw.Text(
-//                                                   '${widget.objFinalIndication!.issus_date}',
-//                                                   style: header2(false))
-//                                             ]),
-//                                             pw.Row(children: [
-//                                               pw.Text('Expiry Date: ',
-//                                                   style: header2(true)),
-//                                               pw.Text(
-//                                                   '${widget.objFinalIndication!.expiry_date}',
-//                                                   style: header2(false))
-//                                             ])
-//                                           ])),
-//                                 ],
-//                               ) // Add margin here
-//                               )),
-//                     ),
-//                   )),
-//                 ],
-//               ));
-//         }));
+    //                                       ],
+    //                                     ),
+    //                                   ),
+    //                                 ],
+    //                               ),
+
+    //                               pw.SizedBox(height: 25),
+    //                               pw.Row(
+    //                                 crossAxisAlignment:
+    //                                     pw.CrossAxisAlignment.start,
+    //                                 children: [
+    //                                   pw.RichText(
+    //                                     text: pw.TextSpan(
+    //                                       text: 'Please Note: ',
+    //                                       style: header2(true), // Base style
+    //                                     ),
+    //                                   ),
+    //                                   pw.Expanded(
+    //                                     child: pw.RichText(
+    //                                       text: pw.TextSpan(
+    //                                         text:
+    //                                             'This is a provisional valuation made without recourse to other parties or to Other valuation data help by Cambodia Angkor Real Estate Co. Ltd.',
+    //                                         style: body(), // Base style
+    //                                       ),
+    //                                     ),
+    //                                   ),
+    //                                 ],
+    //                               ),
+    //                             ],
+    //                           ) // Add margin here
+    //                           )),
+    //                 ),
+    //               )),
+    //             ],
+    //           ));
+    //     }));
+
+    // var parts = widget.objFinalIndication!.verified_by.toString().split('24k');
+    // var controll =
+    //     widget.objFinalIndication!.controlled_by.toString().split('24k');
+    // // //Page Eighteen
+    // pdf.addPage(pw.Page(
+    //     pageTheme: pageTheme,
+    //     build: (final context) {
+    //       return pw.FullPage(
+    //           ignoreMargins: true,
+    //           child: pw.Column(
+    //             crossAxisAlignment: pw.CrossAxisAlignment.end,
+    //             children: [
+    //               pw.Container(
+    //                 margin: const pw.EdgeInsets.only(
+    //                     top: 25, right: 25), // Add margin here
+    //                 child: pw.Text(
+    //                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+    //                   style: pw.TextStyle(fontSize: 9, font: font),
+    //                 ),
+    //               ),
+    //               pw.Expanded(
+    //                   child: pw.Container(
+    //                 margin: const pw.EdgeInsets.only(
+    //                     top: 5, left: 40, right: 25, bottom: 25),
+    //                 decoration: pw.BoxDecoration(
+    //                   border: pw.Border.all(
+    //                     color: PdfColors.black,
+    //                     width: 2, // Adjust border width as needed
+    //                   ),
+    //                 ),
+    //                 child: pw.Center(
+    //                   child: pw.Padding(
+    //                       padding: const pw.EdgeInsets.only(
+    //                           top: 10, left: 15, right: 15),
+    //                       child: pw.Padding(
+    //                           padding: pw.EdgeInsets.only(left: 20, bottom: 50),
+    //                           child: pw.Column(
+    //                             children: [
+    //                               pw.Text(
+    //                                   'Final Indication of Subject Property Market Value',
+    //                                   style: header1(),
+    //                                   textAlign: pw.TextAlign.center),
+    //                               pw.SizedBox(height: 20),
+    //                               pw.RichText(
+    //                                 text: pw.TextSpan(
+    //                                   text: '        ',
+    //                                   style: body(), // Base style
+    //                                   children: [
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           'Cambodia Angkor Real Estate Co.,Ltd ',
+    //                                       style: b_body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           'having considered the local and national market prices of similar property, hereby makes the following evaluation of the ',
+    //                                       style: body(),
+    //                                     ),
+    //                                     if (widget.objCover!.header ==
+    //                                         "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                           text: ' [Land and Building] ',
+    //                                           style: b_body()),
+    //                                     ] else if (widget.objCover!.header ==
+    //                                         "Property LAND VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                           text: ' [Land] ',
+    //                                           style: b_body()),
+    //                                     ] else if (widget.objCover!.header ==
+    //                                         "Property OFFICE SPACE VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                           text: ' [Office Space] ',
+    //                                           style: b_body()),
+    //                                     ] else ...[
+    //                                       pw.TextSpan(
+    //                                           text: ' [Condo] ',
+    //                                           style: b_body()),
+    //                                     ],
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           ' that is the subject of this report.  ',
+    //                                       style: body(),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                               ),
+    //                               pw.SizedBox(height: 10),
+    //                               // Test
+    //                               pw.RichText(
+    //                                 text: pw.TextSpan(
+    //                                   text: '        ',
+    //                                   style: body(), // Base style
+    //                                   children: [
+    //                                     pw.TextSpan(
+    //                                         text:
+    //                                             'Cambodia Angkor Real Estate Co.,Ltd ',
+    //                                         style: b_body()),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           '\thaving undertaken all reasonable measures to ensure the accuracy of the information contained in this ',
+    //                                       style: body(),
+    //                                     ),
+    //                                     if (widget.objCover!.header ==
+    //                                         "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                         text: ' [Land and Building] ',
+    //                                         style: b_body(),
+    //                                       ),
+    //                                     ] else if (widget.objCover!.header ==
+    //                                         "Property LAND VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                         text: ' [Land] ',
+    //                                         style: b_body(),
+    //                                       ),
+    //                                     ] else if (widget.objCover!.header ==
+    //                                         "Property OFFICE SPACE VALUATION REPORT") ...[
+    //                                       pw.TextSpan(
+    //                                         text: ' [Office Space] ',
+    //                                         style: b_body(),
+    //                                       ),
+    //                                     ] else ...[
+    //                                       pw.TextSpan(
+    //                                         text: ' [Condo] ',
+    //                                         style: b_body(),
+    //                                       ),
+    //                                     ],
+    //                                     pw.TextSpan(
+    //                                       text: 'owned by  ',
+    //                                       style: body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           '${widget.objCover!.ownername} ',
+    //                                       style: b_body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text: 'with Title Deed No: ',
+    //                                       style: body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           '${widget.objCover!.deeptitle} ',
+    //                                       style: b_body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           'located in residential and commercial area, certifies that the ',
+    //                                       style: body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text: 'Property Valuation ',
+    //                                       style: b_body(),
+    //                                     ),
+    //                                     pw.TextSpan(
+    //                                       text:
+    //                                           'is true and accurate as of the date of this report.',
+    //                                       style: body(),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                               ),
+    //                               if (widget.objCover!.header ==
+    //                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 2,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("No",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Subject Property",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Size Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Size Sqft",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 6,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Property Value USD/Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 6,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Property Value",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                     ]),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .start,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .start,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 20,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "A.Land")))),
+    //                                                 ]),
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget
+    //                                                         .objFinalIndication!
+    //                                                         .land!
+    //                                                         .length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                   mainAxisAlignment: pw
+    //                                                       .MainAxisAlignment
+    //                                                       .center,
+    //                                                   crossAxisAlignment: pw
+    //                                                       .CrossAxisAlignment
+    //                                                       .center,
+    //                                                   children: [
+    //                                                     pw.Expanded(
+    //                                                         flex: 2,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${widget.objFinalIndication!.land![i].no}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 5,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "Land",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 6,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 6,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                   ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "Total",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.totallandsizesqm.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.land![0].sizesqft.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 12,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10)))))
+    //                                                 ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .start,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .start,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 20,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "B.Building")))),
+    //                                                 ]),
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget
+    //                                                         .objFinalIndication!
+    //                                                         .building!
+    //                                                         .length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                   mainAxisAlignment: pw
+    //                                                       .MainAxisAlignment
+    //                                                       .center,
+    //                                                   crossAxisAlignment: pw
+    //                                                       .CrossAxisAlignment
+    //                                                       .center,
+    //                                                   children: [
+    //                                                     pw.Expanded(
+    //                                                         flex: 2,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${widget.objFinalIndication!.building![i].no}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 5,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "Building",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 3,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 6,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                     pw.Expanded(
+    //                                                         flex: 6,
+    //                                                         child: pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw.BoxDecoration(
+    //                                                                 border: pw
+    //                                                                         .Border
+    //                                                                     .all()),
+    //                                                             child: pw.Center(
+    //                                                                 child: pw.Text(
+    //                                                                     "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+    //                                                                     style: pw.TextStyle(
+    //                                                                         fontSize:
+    //                                                                             10))))),
+    //                                                   ]),
+    //                                             pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 crossAxisAlignment: pw
+    //                                                     .CrossAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                       flex: 7,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "Total",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 3,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.building![0].sizesqft.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10))))),
+    //                                                   pw.Expanded(
+    //                                                       flex: 12,
+    //                                                       child: pw.Container(
+    //                                                           height: 25,
+    //                                                           decoration: pw
+    //                                                               .BoxDecoration(
+    //                                                                   border: pw
+    //                                                                           .Border
+    //                                                                       .all()),
+    //                                                           child: pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                                   style: pw.TextStyle(
+    //                                                                       color: PdfColors
+    //                                                                           .red,
+    //                                                                       fontSize:
+    //                                                                           10)))))
+    //                                                 ]),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               crossAxisAlignment: pw
+    //                                                   .CrossAxisAlignment
+    //                                                   .center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 7,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                         "Fair Market Value",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize: 10),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 18,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     child: pw.Column(
+    //                                                       mainAxisAlignment: pw
+    //                                                           .MainAxisAlignment
+    //                                                           .start,
+    //                                                       children: [
+    //                                                         pw.Expanded(
+    //                                                           flex: 18,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child:
+    //                                                                   pw.Text(
+    //                                                                 "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()) + double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                                 style: pw.TextStyle(
+    //                                                                     color: PdfColors
+    //                                                                         .red,
+    //                                                                     fontSize:
+    //                                                                         10,
+    //                                                                     decoration: pw
+    //                                                                         .TextDecoration
+    //                                                                         .underline),
+    //                                                               ),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                         pw.Expanded(
+    //                                                           flex: 18,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child:
+    //                                                                   pw.Text(
+    //                                                                 moneyInWords,
+    //                                                                 style: pw
+    //                                                                     .TextStyle(
+    //                                                                   color: PdfColors
+    //                                                                       .red,
+    //                                                                   fontSize:
+    //                                                                       10,
+    //                                                                   decoration: pw
+    //                                                                       .TextDecoration
+    //                                                                       .underline,
+    //                                                                 ),
+    //                                                               ),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                       ],
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             )
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property LAND VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                     mainAxisAlignment:
+    //                                         pw.MainAxisAlignment.center,
+    //                                     crossAxisAlignment:
+    //                                         pw.CrossAxisAlignment.center,
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                           flex: 2,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("No",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 5,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Subject Property",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text("Size Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 3,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Size Sqft",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 6,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Property Value USD/Sqm",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                       pw.Expanded(
+    //                                           flex: 6,
+    //                                           child: pw.Container(
+    //                                               height: 25,
+    //                                               decoration: pw.BoxDecoration(
+    //                                                   border: pw.Border.all()),
+    //                                               child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                       "Property Value",
+    //                                                       style: pw.TextStyle(
+    //                                                           fontSize: 10))))),
+    //                                     ]),
+    //                                 for (int i = 0;
+    //                                     i <
+    //                                         widget.objFinalIndication!.land!
+    //                                             .length;
+    //                                     i++)
+    //                                   pw.Row(
+    //                                       mainAxisAlignment:
+    //                                           pw.MainAxisAlignment.center,
+    //                                       crossAxisAlignment:
+    //                                           pw.CrossAxisAlignment.center,
+    //                                       children: [
+    //                                         pw.Expanded(
+    //                                             flex: 2,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${widget.objFinalIndication!.land![i].no}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 5,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text("Land",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 3,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 3,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 6,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                         pw.Expanded(
+    //                                             flex: 6,
+    //                                             child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                         border: pw.Border
+    //                                                             .all()),
+    //                                                 child: pw.Center(
+    //                                                     child: pw.Text(
+    //                                                         "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize:
+    //                                                                 10))))),
+    //                                       ]),
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 7,
+    //                                       child: pw.Container(
+    //                                         height: 50,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                             "Fair Market Value",
+    //                                             style:
+    //                                                 pw.TextStyle(fontSize: 10),
+    //                                           ),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 18,
+    //                                       child: pw.Container(
+    //                                         height: 50,
+    //                                         child: pw.Column(
+    //                                           mainAxisAlignment:
+    //                                               pw.MainAxisAlignment.start,
+    //                                           children: [
+    //                                             pw.Expanded(
+    //                                               flex: 18,
+    //                                               child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                   border: pw.Border.all(),
+    //                                                 ),
+    //                                                 child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                     "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totallandvalue.toString()))}",
+    //                                                     style: pw.TextStyle(
+    //                                                         color:
+    //                                                             PdfColors.red,
+    //                                                         fontSize: 10,
+    //                                                         decoration: pw
+    //                                                             .TextDecoration
+    //                                                             .underline),
+    //                                                   ),
+    //                                                 ),
+    //                                               ),
+    //                                             ),
+    //                                             pw.Expanded(
+    //                                               flex: 18,
+    //                                               child: pw.Container(
+    //                                                 height: 25,
+    //                                                 decoration:
+    //                                                     pw.BoxDecoration(
+    //                                                   border: pw.Border.all(),
+    //                                                 ),
+    //                                                 child: pw.Center(
+    //                                                   child: pw.Text(
+    //                                                     landinWord,
+    //                                                     style: pw.TextStyle(
+    //                                                       color: PdfColors.red,
+    //                                                       fontSize: 10,
+    //                                                       decoration: pw
+    //                                                           .TextDecoration
+    //                                                           .underline,
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ),
+    //                                             ),
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 )
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property OFFICE SPACE VALUATION REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Subject Property",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Floor/Unit No.",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("No.of Bedroom",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Gross Area (Sqm)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Size Sqft",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                               "Property Value USD/Sqm",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Property Value",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget
+    //                                                         .objFinalIndication!
+    //                                                         .building!
+    //                                                         .length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "Office Space",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objFinalIndication!.building![i].floorno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objFinalIndication!.building![i].bedroomno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 5,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 5,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ],
+    //                                               ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Total",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 3,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 3,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${widget.objFinalIndication!.building![0].sizesqft.toString()}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               crossAxisAlignment: pw
+    //                                                   .CrossAxisAlignment
+    //                                                   .center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                         "Fair Market Value",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize: 10),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 16,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     child: pw.Column(
+    //                                                       mainAxisAlignment: pw
+    //                                                           .MainAxisAlignment
+    //                                                           .start,
+    //                                                       children: [
+    //                                                         pw.Expanded(
+    //                                                           flex: 16,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child:
+    //                                                                   pw.Text(
+    //                                                                 "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                                 style: pw.TextStyle(
+    //                                                                     color: PdfColors
+    //                                                                         .red,
+    //                                                                     fontSize:
+    //                                                                         10,
+    //                                                                     decoration: pw
+    //                                                                         .TextDecoration
+    //                                                                         .underline),
+    //                                                               ),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                         pw.Expanded(
+    //                                                           flex: 16,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   officespaceinword,
+    //                                                                   style: pw
+    //                                                                       .TextStyle(
+    //                                                                     color: PdfColors
+    //                                                                         .red,
+    //                                                                     fontSize:
+    //                                                                         10,
+    //                                                                     decoration: pw
+    //                                                                         .TextDecoration
+    //                                                                         .underline,
+    //                                                                   ),
+    //                                                                   textAlign: pw
+    //                                                                       .TextAlign
+    //                                                                       .center),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                       ],
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             )
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ] else if (widget.objCover!.header ==
+    //                                   "Property CONDO REPORT") ...[
+    //                                 pw.SizedBox(height: 10),
+    //                                 pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 4,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Subject Property",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Floor/Unit No.",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("No.of Bedroom",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Gross Area (Sqm)",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 3,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Size Sqft",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                               "Property Value USD/Sqm",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Property Value",
+    //                                               style: pw.TextStyle(
+    //                                                   fontSize: 10),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ],
+    //                                 ),
+    //                                 pw.Container(
+    //                                   width: double.infinity,
+    //                                   decoration: pw.BoxDecoration(
+    //                                     border: pw.Border.all(),
+    //                                   ),
+    //                                   child: pw.Row(
+    //                                     children: [
+    //                                       pw.Expanded(
+    //                                         flex: 20,
+    //                                         child: pw.Column(
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             for (int i = 0;
+    //                                                 i <
+    //                                                     widget
+    //                                                         .objFinalIndication!
+    //                                                         .building!
+    //                                                         .length;
+    //                                                 i++)
+    //                                               pw.Row(
+    //                                                 mainAxisAlignment: pw
+    //                                                     .MainAxisAlignment
+    //                                                     .center,
+    //                                                 children: [
+    //                                                   pw.Expanded(
+    //                                                     flex: 4,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "Condo",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objFinalIndication!.building![i].floorno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${(widget.objFinalIndication!.building![i].bedroomno)}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 3,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 5,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                   pw.Expanded(
+    //                                                     flex: 5,
+    //                                                     child: pw.Container(
+    //                                                       height: 25,
+    //                                                       decoration:
+    //                                                           pw.BoxDecoration(
+    //                                                         border:
+    //                                                             pw.Border.all(),
+    //                                                       ),
+    //                                                       child: pw.Center(
+    //                                                         child: pw.Text(
+    //                                                             "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+    //                                                             style: pw
+    //                                                                 .TextStyle(
+    //                                                                     fontSize:
+    //                                                                         10),
+    //                                                             textAlign: pw
+    //                                                                 .TextAlign
+    //                                                                 .center),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ],
+    //                                               ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "Total",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 3,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingsizesqm.toString()))}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 3,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${widget.objFinalIndication!.building![0].sizesqft.toString()}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 25,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                           "${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                           style:
+    //                                                               pw.TextStyle(
+    //                                                                   fontSize:
+    //                                                                       10),
+    //                                                           textAlign: pw
+    //                                                               .TextAlign
+    //                                                               .center),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             ),
+    //                                             pw.Row(
+    //                                               mainAxisAlignment: pw
+    //                                                   .MainAxisAlignment.center,
+    //                                               crossAxisAlignment: pw
+    //                                                   .CrossAxisAlignment
+    //                                                   .center,
+    //                                               children: [
+    //                                                 pw.Expanded(
+    //                                                   flex: 10,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     decoration:
+    //                                                         pw.BoxDecoration(
+    //                                                       border:
+    //                                                           pw.Border.all(),
+    //                                                     ),
+    //                                                     child: pw.Center(
+    //                                                       child: pw.Text(
+    //                                                         "Fair Market Value",
+    //                                                         style: pw.TextStyle(
+    //                                                             fontSize: 10),
+    //                                                       ),
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                                 pw.Expanded(
+    //                                                   flex: 16,
+    //                                                   child: pw.Container(
+    //                                                     height: 50,
+    //                                                     child: pw.Column(
+    //                                                       mainAxisAlignment: pw
+    //                                                           .MainAxisAlignment
+    //                                                           .start,
+    //                                                       children: [
+    //                                                         pw.Expanded(
+    //                                                           flex: 16,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child:
+    //                                                                   pw.Text(
+    //                                                                 "\$ ${numformat.format(double.parse(widget.objFinalIndication!.totalbuildingvalue.toString()))}",
+    //                                                                 style: pw.TextStyle(
+    //                                                                     color: PdfColors
+    //                                                                         .red,
+    //                                                                     fontSize:
+    //                                                                         10,
+    //                                                                     decoration: pw
+    //                                                                         .TextDecoration
+    //                                                                         .underline),
+    //                                                               ),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                         pw.Expanded(
+    //                                                           flex: 16,
+    //                                                           child:
+    //                                                               pw.Container(
+    //                                                             height: 25,
+    //                                                             decoration: pw
+    //                                                                 .BoxDecoration(
+    //                                                               border:
+    //                                                                   pw.Border
+    //                                                                       .all(),
+    //                                                             ),
+    //                                                             child:
+    //                                                                 pw.Center(
+    //                                                               child: pw.Text(
+    //                                                                   condoinword,
+    //                                                                   style: pw
+    //                                                                       .TextStyle(
+    //                                                                     color: PdfColors
+    //                                                                         .red,
+    //                                                                     fontSize:
+    //                                                                         10,
+    //                                                                     decoration: pw
+    //                                                                         .TextDecoration
+    //                                                                         .underline,
+    //                                                                   ),
+    //                                                                   textAlign: pw
+    //                                                                       .TextAlign
+    //                                                                       .center),
+    //                                                             ),
+    //                                                           ),
+    //                                                         ),
+    //                                                       ],
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               ],
+    //                                             )
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ],
+    //                                   ),
+    //                                 ),
+    //                               ],
+    //                               // Controlled Table
+    //                               pw.SizedBox(height: 5),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Controlled By",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 25,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("Verified By",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 43,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Column(
+    //                                           mainAxisAlignment:
+    //                                               pw.MainAxisAlignment.center,
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             pw.Text('${controll[0]}',
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                             pw.SizedBox(height: 3),
+    //                                             pw.Text("${controll[1]}",
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                             pw.SizedBox(height: 3),
+    //                                             pw.Text("${controll[2]}",
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 43,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Column(
+    //                                           mainAxisAlignment:
+    //                                               pw.MainAxisAlignment.center,
+    //                                           crossAxisAlignment:
+    //                                               pw.CrossAxisAlignment.center,
+    //                                           children: [
+    //                                             pw.Text("${parts[0]}",
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                             pw.SizedBox(height: 3),
+    //                                             pw.Text("${parts[1]}",
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                             pw.SizedBox(height: 3),
+    //                                             pw.Text("${parts[2]}",
+    //                                                 style: pw.TextStyle(
+    //                                                   fontSize: 10,
+    //                                                 ),
+    //                                                 textAlign:
+    //                                                     pw.TextAlign.center),
+    //                                           ],
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 70,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                     pw.Expanded(
+    //                                       flex: 5,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 70,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 10,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 10,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 30,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                               "Company Seal of Cambodia Angkor Real Estate Co., Ltd",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 14,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 9,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 30,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text(
+    //                                               "Chief Executive Officer License No. V-07-013-04",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 14,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Row(
+    //                                   mainAxisAlignment:
+    //                                       pw.MainAxisAlignment.center,
+    //                                   crossAxisAlignment:
+    //                                       pw.CrossAxisAlignment.center,
+    //                                   children: [
+    //                                     pw.Expanded(
+    //                                       flex: 10,
+    //                                       child: pw.Container(
+    //                                         alignment: pw.Alignment.center,
+    //                                         height: 90,
+    //                                         decoration: pw.BoxDecoration(
+    //                                           border: pw.Border.all(),
+    //                                         ),
+    //                                         child: pw.Center(
+    //                                           child: pw.Text("",
+    //                                               style: pw.TextStyle(
+    //                                                 fontSize: 16,
+    //                                               ),
+    //                                               textAlign:
+    //                                                   pw.TextAlign.center),
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   ]),
+    //                               pw.Padding(
+    //                                   padding: pw.EdgeInsets.only(right: 10),
+    //                                   child: pw.Row(
+    //                                       mainAxisAlignment:
+    //                                           pw.MainAxisAlignment.spaceBetween,
+    //                                       children: [
+    //                                         pw.Row(children: [
+    //                                           pw.Text('Issue Date: ',
+    //                                               style: header2(true)),
+    //                                           pw.Text(
+    //                                               '${widget.objFinalIndication!.issus_date}',
+    //                                               style: header2(false))
+    //                                         ]),
+    //                                         pw.Row(children: [
+    //                                           pw.Text('Expiry Date: ',
+    //                                               style: header2(true)),
+    //                                           pw.Text(
+    //                                               '${widget.objFinalIndication!.expiry_date}',
+    //                                               style: header2(false))
+    //                                         ])
+    //                                       ])),
+    //                             ],
+    //                           ) // Add margin here
+    //                           )),
+    //                 ),
+    //               )),
+    //             ],
+    //           ));
+    //     }));
 
 //     // //Page Nineteen
 //     pdf.addPage(
