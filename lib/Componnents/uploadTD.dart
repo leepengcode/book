@@ -57,8 +57,8 @@ class _ButtonWidgetState extends State<TDImagePicker> {
               if (imageUrl != null)
                 Image.network(
                   imageUrl!,
-                  width: 520,
-                  height: 350,
+                  width: 300,
+                  height: 200,
                   fit: BoxFit.cover,
                 )
             ],
@@ -69,8 +69,8 @@ class _ButtonWidgetState extends State<TDImagePicker> {
               pickImage();
             },
             child: Container(
-                width: 520,
-                height: 350,
+                width: 300,
+                height: 200,
                 decoration: BoxDecoration(border: Border.all()),
                 child: image == null && imageUrl == null
                     ? Icon(

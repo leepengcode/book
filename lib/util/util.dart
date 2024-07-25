@@ -79,42 +79,42 @@ class MyPDF extends StatefulWidget {
 }
 
 class _MyPDFState extends State<MyPDF> {
-  // List<Uint8List> viewimg = [];
-  // List<Uint8List> insideimg = [];
-  // List<Uint8List> viewlandimg = [];
+  List<Uint8List> viewimg = [];
+  List<Uint8List> insideimg = [];
+  List<Uint8List> viewlandimg = [];
 
-  // Uint8List? frontviewimage;
-  // Uint8List? roadviewimage1;
-  // Uint8List? roadviewimage2;
-  // Uint8List? surroundin1;
-  // Uint8List? surroundin2;
-  // Uint8List? surroundin3;
-  // Uint8List? surroundin4;
-  // Uint8List? surroundin5;
-  // Uint8List? surroundin6;
+  Uint8List? frontviewimage;
+  Uint8List? roadviewimage1;
+  Uint8List? roadviewimage2;
+  Uint8List? surroundin1;
+  Uint8List? surroundin2;
+  Uint8List? surroundin3;
+  Uint8List? surroundin4;
+  Uint8List? surroundin5;
+  Uint8List? surroundin6;
   // Uint8List? pImage;
 
   Future formart_to_pdf() async {
-    // if (widget.objCover!.header !=
-    //     "Property [LAND AND BUILDING] VALUATION REPORT") {
-    //   await viewland();
-    // } else {
-    //   await Viewimage();
-    //   await Insideimg();
-    // }
+    if (widget.objCover!.header !=
+        "Property [LAND AND BUILDING] VALUATION REPORT") {
+      await viewland();
+    } else {
+      await Viewimage();
+      await Insideimg();
+    }
 
-    // frontviewimage =
-    //     await getBlobData(widget.objPhotoDetail!.frontviewimage!.path);
-    // roadviewimage1 =
-    //     await getBlobData(widget.objPhotoDetail!.roadviewimage1!.path);
-    // roadviewimage2 =
-    //     await getBlobData(widget.objPhotoDetail!.roadviewimage2!.path);
-    // surroundin1 = await getBlobData(widget.objPhotoDetail!.surroundin1!.path);
-    // surroundin2 = await getBlobData(widget.objPhotoDetail!.surroundin2!.path);
-    // surroundin3 = await getBlobData(widget.objPhotoDetail!.surroundin3!.path);
-    // surroundin4 = await getBlobData(widget.objPhotoDetail!.surroundin4!.path);
-    // surroundin5 = await getBlobData(widget.objPhotoDetail!.surroundin5!.path);
-    // surroundin6 = await getBlobData(widget.objPhotoDetail!.surroundin6!.path);
+    frontviewimage =
+        await getBlobData(widget.objPhotoDetail!.frontviewimage!.path);
+    roadviewimage1 =
+        await getBlobData(widget.objPhotoDetail!.roadviewimage1!.path);
+    roadviewimage2 =
+        await getBlobData(widget.objPhotoDetail!.roadviewimage2!.path);
+    surroundin1 = await getBlobData(widget.objPhotoDetail!.surroundin1!.path);
+    surroundin2 = await getBlobData(widget.objPhotoDetail!.surroundin2!.path);
+    surroundin3 = await getBlobData(widget.objPhotoDetail!.surroundin3!.path);
+    surroundin4 = await getBlobData(widget.objPhotoDetail!.surroundin4!.path);
+    surroundin5 = await getBlobData(widget.objPhotoDetail!.surroundin5!.path);
+    surroundin6 = await getBlobData(widget.objPhotoDetail!.surroundin6!.path);
 
     // pImage = await getBlobData(widget.objfinalmap!.Finalmap!.path);
 
@@ -254,36 +254,36 @@ class _MyPDFState extends State<MyPDF> {
     }
   }
 
-  // Future Viewimage() async {
-  //   for (int i = 0; i < widget.list_forviewproperty!.length; i++) {
-  //     try {
-  //       viewimg.add(await getBlobData(widget.list_forviewproperty![i].path));
-  //     } catch (e) {
-  //       print("Error loop get_listviewimg $e\n");
-  //     }
-  //   }
-  // }
+  Future Viewimage() async {
+    for (int i = 0; i < widget.list_forviewproperty!.length; i++) {
+      try {
+        viewimg.add(await getBlobData(widget.list_forviewproperty![i].path));
+      } catch (e) {
+        print("Error loop get_listviewimg $e\n");
+      }
+    }
+  }
 
-  // Future Insideimg() async {
-  //   for (int i = 0; i < widget.list_forinsideproperty!.length; i++) {
-  //     try {
-  //       insideimg
-  //           .add(await getBlobData(widget.list_forinsideproperty![i].path));
-  //     } catch (e) {
-  //       print("Error loop get_listinside\n");
-  //     }
-  //   }
-  // }
+  Future Insideimg() async {
+    for (int i = 0; i < widget.list_forinsideproperty!.length; i++) {
+      try {
+        insideimg
+            .add(await getBlobData(widget.list_forinsideproperty![i].path));
+      } catch (e) {
+        print("Error loop get_listinside\n");
+      }
+    }
+  }
 
-  // Future viewland() async {
-  //   for (int i = 0; i < widget.list_forviewland!.length; i++) {
-  //     try {
-  //       viewlandimg.add(await getBlobData(widget.list_forviewland![i].path));
-  //     } catch (e) {
-  //       print("Error loop get_listviewland\n");
-  //     }
-  //   }
-  // }
+  Future viewland() async {
+    for (int i = 0; i < widget.list_forviewland!.length; i++) {
+      try {
+        viewlandimg.add(await getBlobData(widget.list_forviewland![i].path));
+      } catch (e) {
+        print("Error loop get_listviewland\n");
+      }
+    }
+  }
 
   Future<Uint8List> generatePdf(
     final PdfPageFormat format,
@@ -333,26 +333,24 @@ class _MyPDFState extends State<MyPDF> {
     //   print(fireinWord);
     // }
 
-    // Uint8List fidcard1 =
-    //     await getBlobData(widget.objIdcard!.frontidcard1!.path);
+    Uint8List fidcard1 =
+        await getBlobData(widget.objIdcard!.frontidcard1!.path);
     // Uint8List fidcard2 =
     //     await getBlobData(widget.objIdcard!.frontidcard2!.path);
-    // Uint8List bidcard1 = await getBlobData(widget.objIdcard!.backidcard1!.path);
+    Uint8List bidcard1 = await getBlobData(widget.objIdcard!.backidcard1!.path);
     // Uint8List bidcard2 = await getBlobData(widget.objIdcard!.backidcard2!.path);
 
-    // Uint8List ownerimg1 = await getBlobData(widget.objLayout!.deepimage1!.path);
-    // Uint8List ownerimg2 = await getBlobData(widget.objLayout!.deepimage2!.path);
-    // Uint8List layoutimg =
-    //     await getBlobData(widget.objLayout!.layoutimage!.path);
+    Uint8List ownerimg1 = await getBlobData(widget.objLayout!.deepimage1!.path);
+    Uint8List ownerimg2 = await getBlobData(widget.objLayout!.deepimage2!.path);
+    Uint8List layoutimg =
+        await getBlobData(widget.objLayout!.layoutimage!.path);
 
-    // Uint8List map1Image = await getBlobData(widget.objGmap!.pmapimage!.path);
-    // Uint8List map2Image = await getBlobData(widget.objGmap!.apmapimage!.path);
-    // Uint8List map3Image = await getBlobData(widget.objGmap!.skmapimage!.path);
+    Uint8List map1Image = await getBlobData(widget.objGmap!.pmapimage!.path);
+    Uint8List map2Image = await getBlobData(widget.objGmap!.apmapimage!.path);
+    Uint8List map3Image = await getBlobData(widget.objGmap!.skmapimage!.path);
 
-    // final ByteData angkor = await rootBundle.load('assets/images/angkor.jpg');
-
-    // final ByteData map = await rootBundle.load('assets/images/map.jpg');
-    // final Uint8List mapImage = map.buffer.asUint8List();
+    final ByteData map = await rootBundle.load('assets/images/map.jpg');
+    final Uint8List mapImage = map.buffer.asUint8List();
 
     // final ByteData bank = await rootBundle.load('assets/images/bank.jpg');
     // final Uint8List bankImage = bank.buffer.asUint8List();
@@ -377,12 +375,13 @@ class _MyPDFState extends State<MyPDF> {
     // final ByteData mrnull1 = await rootBundle.load('assets/images/mrnull1.jpg');
     // final Uint8List null1Image = mrnull1.buffer.asUint8List();
 
-    // Uint8List? layoutImage;
+    Uint8List? layoutImage;
 
     final pageTheme = await _myPageTheme(format);
     final font = await PdfGoogleFonts.notoSansAdlamRegular();
     final h_font = await PdfGoogleFonts.notoSansAdlamBold();
     final b_font = await PdfGoogleFonts.notoSansAdlamBold();
+    final khmer = await PdfGoogleFonts.notoSansKhmerBlack();
 
 //style
     pw.TextStyle header1() {
@@ -396,7 +395,7 @@ class _MyPDFState extends State<MyPDF> {
     pw.TextStyle header2(bool c) {
       return pw.TextStyle(
           fontSize: 13,
-          font: h_font,
+          font: khmer,
           color: (c) ? PdfColor.fromInt(0x2473b8) : PdfColor.fromInt(0xc4242c),
           fontWeight: pw.FontWeight.bold);
     }
@@ -706,48 +705,90 @@ class _MyPDFState extends State<MyPDF> {
                             style: header2(true),
                             textAlign: pw.TextAlign.center,
                           ),
+                          if (widget.objCover!.header ==
+                              "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nProperty [LAND AND BUILDING] VALUATION REPORT .................................................................... -2 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nProperty LAND VALUATION REPORT ................................................................................................. -2 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nProperty OFFICE SPACE VALUATION REPORT ................................................................................. -2 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nProperty CONDO REPORT .................................................................................................................. -2 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ],
                           pw.Text(
-                              "\n${widget.objCover!.header} ..................................................................... -2 -",
+                              "\nOwner's Identification Card ............................................................................................................... -4 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nOwner's Identification Card ............................................................................................................... -5 -",
+                              "\nCopy Title Deed ..................................................................................................................................... -5 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          if (widget.objCover!.header ==
+                              "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nLand and Building Layout ................................................................................................................... -6 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nLand Layout ........................................................................................................................................... -6 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT") ...[
+                            pw.Text(
+                                "\nOffice Space Layout ............................................................................................................................ -6 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else if (widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nCondo Layout ....................................................................................................................................... -6 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ],
+                          pw.Text(
+                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. -7 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nCopy Title Deed ...................................................................................................................................... -6 -",
+                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. -8 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\n${widget.objCover!.header == "Property [LAND AND BUILDING] VALUATION REPORT" ? "Land and Building Layout" : "Land Layout"} .................................................................................................................. -10 -",
+                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ -9 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................ -11 -",
+                              "\nInspaction Officer's Report ................................................................................................................. -12 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nAerial Photograph Of Phnom Penh Loacation ................................................................................. -12 -",
+                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. -13 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nDetails Of Photos Taken At The Site Inspection ............................................................................... -13 -",
+                              "\nValue Of Comparable Nearby Property ............................................................................................ -14 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nInspaction Officer's Report ................................................................................................................. -18 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. -19 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nValue Of Comparable Nearby Property ............................................................................................ -20 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nProvisional Valuation Made By The Inspecting Officer(S) ............................................................. -22 -",
+                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. -16 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
@@ -756,7 +797,7 @@ class _MyPDFState extends State<MyPDF> {
                             textAlign: pw.TextAlign.center,
                           ),
                           pw.Text(
-                              "\nFinal Indication Of Subject Property Market Value ....................................................................... -23 -",
+                              "\nFinal Indication Of Subject Property Market Value ......................................................................... -17 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
@@ -765,15 +806,15 @@ class _MyPDFState extends State<MyPDF> {
                             textAlign: pw.TextAlign.center,
                           ),
                           pw.Text(
-                              "\nC.A.R.E Limiting Terms, Condition & Liability .............................................................................. -24 -",
+                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... -18 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate ..................... -26 - ",
+                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... -20 - ",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
-                              "\nLicenses and Certificate Property Valuation ................................................................................. -27 -",
+                              "\nLicenses and Certificate Property Valuation ..................................................................................... -21 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.SizedBox(height: 20),
@@ -889,2727 +930,3381 @@ class _MyPDFState extends State<MyPDF> {
       ),
     );
 
-    // //Five Page
-    // pdf.addPage(pw.Page(
-    //   pageTheme: pageTheme,
-    //   build: (final context) {
-    //     return pw.FullPage(
-    //       ignoreMargins: true,
-    //       child: pw.Column(
-    //         crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //         children: [
-    //           pw.Container(
-    //             margin: const pw.EdgeInsets.only(
-    //                 top: 25, right: 25), // Add margin here
-    //             child: pw.Text(
-    //               "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //               style: pw.TextStyle(fontSize: 9, font: font),
-    //             ),
-    //           ),
-    //           pw.Expanded(
-    //             child: pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 5, left: 40, right: 25, bottom: 25),
-    //               decoration: pw.BoxDecoration(
-    //                 border: pw.Border.all(
-    //                   color: PdfColors.black,
-    //                   width: 2, // Adjust border width as needed
-    //                 ),
-    //               ),
-    //               child: pw.Container(
-    //                   padding: pw.EdgeInsets.only(left: 40, right: 20),
-    //                   child: pw.Column(
-    //                     crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                     mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                     children: [
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 20, left: -20), // Add margin here
-    //                         child: pw.Text(
-    //                           " Valuation Report",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.RichText(
-    //                         text: pw.TextSpan(
-    //                           text:
-    //                               '\nHaving undertaken detailed inspections of the site and, where necessary, consulted the relevant local and national authorities; Cambodia Angkor Real Estate Co. Ltd. hereby submits the following ',
-    //                           style: body1(), // Base style
-    //                           children: [
-    //                             if (widget.objCover!.header ==
-    //                                 "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                               pw.TextSpan(
-    //                                 text: 'Property [Land and Building]',
-    //                                 style: header2(true),
-    //                               ),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property LAND VALUATION REPORT") ...[
-    //                               pw.TextSpan(
-    //                                 text: 'Property [Land]',
-    //                                 style: header2(true),
-    //                               ),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                               pw.TextSpan(
-    //                                 text: 'Property [Office Space]',
-    //                                 style: header2(true),
-    //                               ),
-    //                             ] else ...[
-    //                               pw.TextSpan(
-    //                                 text: 'Property [CONDO]',
-    //                                 style: header2(true),
-    //                               ),
-    //                             ],
-    //                             pw.TextSpan(
-    //                               text:
-    //                                   ' Valuation Report as a true and accurate reflection of the current market value of the Subject Property.  This Property [Land and Building] Valuation Report has been prepared to',
-    //                               style: body1(),
-    //                             ),
-    //                             pw.TextSpan(
-    //                               text:
-    //                                   ' ${widget.objCover!.bank}. (${widget.objCover!.branch}),',
-    //                               style: header2(true),
-    //                             ),
-    //                             pw.TextSpan(
-    //                               text: ' for ownership’s name',
-    //                               style: body1(),
-    //                             ),
-    //                             pw.TextSpan(
-    //                               text: ' \n${widget.objCover!.ownername},',
-    //                               style: header2(true),
-    //                             ),
-    //                             pw.TextSpan(
-    //                               text:
-    //                                   ' clients of Cambodia Angkor Real Estate Co., Ltd.  ',
-    //                               style: body1(),
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Text(
-    //                           "One copy of the Title Deeds was provided by the clients.",
-    //                           style: body1()),
-    //                       pw.Padding(
-    //                           padding: const pw.EdgeInsets.only(
-    //                               top: 20, left: -20), // Add margin here
-    //                           child: pw.Column(children: [
-    //                             if (widget.objCover!.header ==
-    //                                 "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                 "General Details of Subject Property [Land and Building]",
-    //                                 style: header2(true),
-    //                                 textAlign: pw.TextAlign.center,
-    //                               ),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property LAND VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                 "General Details of Subject Property [Land]",
-    //                                 style: header2(true),
-    //                                 textAlign: pw.TextAlign.center,
-    //                               ),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                 "General Details of Subject Property [Office Space]",
-    //                                 style: header2(true),
-    //                                 textAlign: pw.TextAlign.center,
-    //                               ),
-    //                             ] else ...[
-    //                               pw.Text(
-    //                                 "General Details of Subject Property [Condo]",
-    //                                 style: header2(true),
-    //                                 textAlign: pw.TextAlign.center,
-    //                               ),
-    //                             ],
-    //                           ])),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Land Location",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Plot",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.plotno}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Street",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objCover!.street}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Village/Phum",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objCover!.villageorphum}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Communue/Khan",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objCover!.communeorkhan}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "District/Sangkat",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objCover!.districtorsangkat}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Province",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objCover!.cityorprovince}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Country",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : Cambodia",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Bordered by the following",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "North",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.north}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "South",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.south}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "East",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.east}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "West",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.west}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Land Title Deed Number",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Land Title Deep No",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.landtitledeep}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Land Size by Title Deed",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Land Side",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.landsize}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Land Size by Measurement",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Total Land Size",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.landsize}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 10), // Add margin here
-    //                         child: pw.Text(
-    //                           "Type of Land",
-    //                           style: header2(true),
-    //                           textAlign: pw.TextAlign.center,
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Type of Land",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.typeland}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                       pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 5, left: 20), // Add margin here
-    //                         child: pw.Row(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                           children: [
-    //                             pw.SizedBox(
-    //                               width: 150, // Adjust width as necessary
-    //                               child: pw.Text(
-    //                                 "Tenure",
-    //                                 style: body(),
-    //                                 textAlign: pw.TextAlign.left,
-    //                               ),
-    //                             ),
-    //                             pw.Text(
-    //                               " : ${widget.objPropertyInfor!.tenure}",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.left,
-    //                             ),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                     ],
-    //                   )),
-    //             ),
-    //           ),
-    //           pw.SizedBox(height: 20)
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // ));
+    //Five Page
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Container(
+                      padding: pw.EdgeInsets.only(left: 40, right: 20),
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        mainAxisAlignment: pw.MainAxisAlignment.center,
+                        children: [
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 20, left: -20), // Add margin here
+                            child: pw.Text(
+                              " Valuation Report",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.RichText(
+                            text: pw.TextSpan(
+                              text:
+                                  '\nHaving undertaken detailed inspections of the site and, where necessary, consulted the relevant local and national authorities; Cambodia Angkor Real Estate Co. Ltd. hereby submits the following ',
+                              style: body1(), // Base style
+                              children: [
+                                if (widget.objCover!.header ==
+                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                  pw.TextSpan(
+                                    text: 'Property [Land and Building]',
+                                    style: header2(true),
+                                  ),
+                                ] else if (widget.objCover!.header ==
+                                    "Property LAND VALUATION REPORT") ...[
+                                  pw.TextSpan(
+                                    text: 'Property [Land]',
+                                    style: header2(true),
+                                  ),
+                                ] else if (widget.objCover!.header ==
+                                    "Property OFFICE SPACE VALUATION REPORT") ...[
+                                  pw.TextSpan(
+                                    text: 'Property [Office Space]',
+                                    style: header2(true),
+                                  ),
+                                ] else ...[
+                                  pw.TextSpan(
+                                    text: 'Property [CONDO]',
+                                    style: header2(true),
+                                  ),
+                                ],
+                                pw.TextSpan(
+                                  text:
+                                      ' Valuation Report as a true and accurate reflection of the current market value of the Subject Property.  This Property [Land and Building] Valuation Report has been prepared to',
+                                  style: body1(),
+                                ),
+                                pw.TextSpan(
+                                  text:
+                                      ' ${widget.objCover!.bank}. (${widget.objCover!.branch}),',
+                                  style: header2(true),
+                                ),
+                                pw.TextSpan(
+                                  text: ' for ownership’s name',
+                                  style: body1(),
+                                ),
+                                pw.TextSpan(
+                                  text: ' \n${widget.objCover!.ownername},',
+                                  style: header2(true),
+                                ),
+                                pw.TextSpan(
+                                  text:
+                                      ' clients of Cambodia Angkor Real Estate Co., Ltd.  ',
+                                  style: body1(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Text(
+                              "One copy of the Title Deeds was provided by the clients.",
+                              style: body1()),
+                          pw.Padding(
+                              padding: const pw.EdgeInsets.only(
+                                  top: 20, left: -20), // Add margin here
+                              child: pw.Column(children: [
+                                if (widget.objCover!.header ==
+                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                  pw.Text(
+                                    "General Details of Subject Property [Land and Building]",
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ] else if (widget.objCover!.header ==
+                                    "Property LAND VALUATION REPORT") ...[
+                                  pw.Text(
+                                    "General Details of Subject Property [Land]",
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ] else if (widget.objCover!.header ==
+                                    "Property OFFICE SPACE VALUATION REPORT") ...[
+                                  pw.Text(
+                                    "General Details of Subject Property [Office Space]",
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ] else ...[
+                                  pw.Text(
+                                    "General Details of Subject Property [Condo]",
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ],
+                              ])),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Land Location",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Plot",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.plotno}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Street",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objCover!.street}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Village/Phum",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objCover!.villageorphum}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Communue/Khan",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objCover!.communeorkhan}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "District/Sangkat",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objCover!.districtorsangkat}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Province",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objCover!.cityorprovince}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Country",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : Cambodia",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Bordered by the following",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "North",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.north}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "South",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.south}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "East",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.east}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "West",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.west}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Land Title Deed Number",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Land Title Deep No",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.landtitledeep}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Land Size by Title Deed",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Land Side",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.landsize}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Land Size by Measurement",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Total Land Size",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.landsize}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10), // Add margin here
+                            child: pw.Text(
+                              "Type of Land",
+                              style: header2(true),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Type of Land",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.typeland}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 5, left: 20), // Add margin here
+                            child: pw.Row(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(
+                                  width: 150, // Adjust width as necessary
+                                  child: pw.Text(
+                                    "Tenure",
+                                    style: body(),
+                                    textAlign: pw.TextAlign.left,
+                                  ),
+                                ),
+                                pw.Text(
+                                  " : ${widget.objPropertyInfor!.tenure}",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+              ),
+              pw.SizedBox(height: 20)
+            ],
+          ),
+        );
+      },
+    ));
 
     //New Page
-    // if (widget.objCover!.header != "Property LAND VALUATION REPORT") {
-    //   pdf.addPage(
-    //     pw.Page(
-    //       pageTheme: pageTheme,
-    //       build: (final context) {
-    //         return pw.FullPage(
-    //           ignoreMargins: true,
-    //           child: pw.Column(
-    //             crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //             children: [
-    //               pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 25, right: 25), // Add margin here
-    //                 child: pw.Text(
-    //                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                   style: pw.TextStyle(fontSize: 9, font: font),
-    //                 ),
-    //               ),
-    //               pw.Expanded(
-    //                 child: pw.Container(
-    //                   margin: const pw.EdgeInsets.only(
-    //                       top: 5, left: 40, right: 25, bottom: 25),
-    //                   decoration: pw.BoxDecoration(
-    //                     border: pw.Border.all(
-    //                       color: PdfColors.black,
-    //                       width: 2, // Adjust border width as needed
-    //                     ),
-    //                   ),
-    //                   child: pw.Container(
-    //                       padding: pw.EdgeInsets.only(left: 40, right: 20),
-    //                       child: pw.Column(
-    //                         crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                         // mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                         children: [
-    //                           pw.SizedBox(height: 10),
-    //                           if (widget.objCover!.header ==
-    //                               "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                               "Building Title Deep Number  ",
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.center,
-    //                             ),
-    //                             pw.SizedBox(height: 10),
-    //                             pw.Padding(
-    //                               padding: const pw.EdgeInsets.only(
-    //                                   top: 5, left: 20), // Add margin here
-    //                               child: pw.Row(
-    //                                 mainAxisAlignment:
-    //                                     pw.MainAxisAlignment.start,
-    //                                 crossAxisAlignment:
-    //                                     pw.CrossAxisAlignment.start,
-    //                                 children: [
-    //                                   pw.SizedBox(
-    //                                     width: 150, // Adjust width as necessary
-    //                                     child: pw.Text(
-    //                                       "Title Deep No",
-    //                                       style: body(),
-    //                                       textAlign: pw.TextAlign.left,
-    //                                     ),
-    //                                   ),
-    //                                   pw.Text(
-    //                                     " : ${widget.objPropertyInfor!.deepnumber}",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ],
-    //                               ),
-    //                             ),
-    //                             pw.Padding(
-    //                               padding: const pw.EdgeInsets.only(
-    //                                   top: 5, left: 20), // Add margin here
-    //                               child: pw.Row(
-    //                                 mainAxisAlignment:
-    //                                     pw.MainAxisAlignment.start,
-    //                                 crossAxisAlignment:
-    //                                     pw.CrossAxisAlignment.start,
-    //                                 children: [
-    //                                   pw.SizedBox(
-    //                                     width: 150, // Adjust width as necessary
-    //                                     child: pw.Text(
-    //                                       "Unit",
-    //                                       style: body(),
-    //                                       textAlign: pw.TextAlign.left,
-    //                                     ),
-    //                                   ),
-    //                                   pw.Text(
-    //                                     " : ${widget.objPropertyInfor!.unit}",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ],
-    //                               ),
-    //                             ),
-    //                           ],
-    //                           pw.SizedBox(height: 10),
-    //                           pw.Text(
-    //                             "Building Size  ",
-    //                             style: header2(true),
-    //                             textAlign: pw.TextAlign.center,
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Add margin here
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Building",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   " : ${widget.objPropertyInfor!.flatsize}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           // pw.Padding(
-    //                           //   padding:
-    //                           //       const pw.EdgeInsets.only(top: 15, left: 20),
-    //                           //   child: pw.Text(
-    //                           //     "Roof Extension",
-    //                           //     style: header4(),
-    //                           //     textAlign: pw.TextAlign.center,
-    //                           //   ),
-    //                           // ),
-    //                           // pw.Padding(
-    //                           //   padding: const pw.EdgeInsets.only(left: 20),
-    //                           //   child: pw.Row(
-    //                           //     children: [
-    //                           //       pw.Text(
-    //                           //         "Building Size : ",
-    //                           //         style: body(),
-    //                           //         textAlign: pw.TextAlign.center,
-    //                           //       ),
-    //                           //       pw.Text(
-    //                           //         "${widget.objPropertyInfor!.buildingsize ?? ''}",
-    //                           //         style: body(),
-    //                           //         textAlign: pw.TextAlign.center,
-    //                           //       ),
-    //                           //     ],
-    //                           //   ),
-    //                           // ),
-    //                           // pw.Padding(
-    //                           //   padding:
-    //                           //       const pw.EdgeInsets.only(top: 15, left: 20),
-    //                           //   child: pw.Row(
-    //                           //     children: [
-    //                           //       pw.Text(
-    //                           //         "Total Building Size : ",
-    //                           //         style: header4(),
-    //                           //         textAlign: pw.TextAlign.center,
-    //                           //       ),
-    //                           //       pw.Text(
-    //                           //         "${widget.objPropertyInfor!.totalsize ?? ''}",
-    //                           //         style: body(),
-    //                           //         textAlign: pw.TextAlign.center,
-    //                           //       ),
-    //                           //     ],
-    //                           //   ),
-    //                           // ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(top: 5),
-    //                             child: pw.Text(
-    //                               "Building Detail",
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.center,
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Type of Building",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.typeofbuilding ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Age of Building",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.buildingage ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Cost of Construction",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "By owner",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.byowner ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Metal Roof area",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.metalroof ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Occupied or Vacant",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.occoupied ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Disposability",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.disposability ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Quality given as a",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Percentage",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.percentage ?? ''}%",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 150, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Type of building",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": [${widget.objPropertyInfor!.typeofbuilding ?? ''}]",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                               top: 5,
-    //                             ), // Add margin here
-    //                             child: pw.Text(
-    //                               "Building Description",
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.center,
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Add margin here
-    //                             child: pw.Text(
-    //                               "The building (Flat) is generally constructed by concrete foundation and frame, finished with brick and cement. The table below, detail more the materials of the building.  ",
-    //                               style: body(),
-    //                               textAlign: pw.TextAlign.start,
-    //                             ),
-    //                           ),
-    //                           pw.Expanded(
-    //                               child: pw.Container(
-    //                                   margin: const pw.EdgeInsets.only(
-    //                                       top: 5, bottom: 5),
-    //                                   decoration: pw.BoxDecoration(
-    //                                     border: pw.Border.all(
-    //                                       color: PdfColors.black,
-    //                                       width:
-    //                                           2, // Adjust border width as needed
-    //                                     ),
-    //                                   ),
-    //                                   child: pw.Row(children: [
-    //                                     pw.Expanded(
-    //                                         flex: 4,
-    //                                         child: pw.Container(
-    //                                             decoration: pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width:
-    //                                                     2, // Adjust border width as needed
-    //                                               ),
-    //                                             ),
-    //                                             child: pw.Column(children: [
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                       child: pw.Text(
-    //                                                           "Sources of Materials",
-    //                                                           style: header4()),
-    //                                                       alignment: pw
-    //                                                           .Alignment
-    //                                                           .center)),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 width: double.infinity,
-    //                                                 decoration:
-    //                                                     pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added top margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Floor",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               50), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.floor ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration:
-    //                                                     pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Door",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               50), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.door ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Window",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               35), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.windows ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration:
-    //                                                     pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Stair",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               50), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.stair ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Roof",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               50), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.roof ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration:
-    //                                                     pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Ceiling",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               40), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         " : ${widget.objPropertyInfor!.ceiling ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               )),
-    //                                               pw.Expanded(
-    //                                                   child: pw.Container(
-    //                                                 decoration:
-    //                                                     pw.BoxDecoration(
-    //                                                   border: pw.Border.all(
-    //                                                     color: PdfColors.black,
-    //                                                     width:
-    //                                                         2, // Adjust border width as needed
-    //                                                   ),
-    //                                                 ),
-    //                                                 child: pw.Padding(
-    //                                                   padding: const pw
-    //                                                       .EdgeInsets.only(
-    //                                                       left:
-    //                                                           20), // Added left margin
-    //                                                   child: pw.Row(
-    //                                                     crossAxisAlignment: pw
-    //                                                         .CrossAxisAlignment
-    //                                                         .center,
-    //                                                     mainAxisAlignment: pw
-    //                                                         .MainAxisAlignment
-    //                                                         .start,
-    //                                                     children: [
-    //                                                       pw.Text(
-    //                                                         "Wall",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                       pw.SizedBox(
-    //                                                           width:
-    //                                                               55), // Add spacing between label and value
-    //                                                       pw.Text(
-    //                                                         ": ${widget.objPropertyInfor!.wall ?? ''}",
-    //                                                         style:
-    //                                                             body(), // Apply consistent styling
-    //                                                         textAlign: pw
-    //                                                             .TextAlign
-    //                                                             .left, // Align text to the left
-    //                                                       ),
-    //                                                     ],
-    //                                                   ),
-    //                                                 ),
-    //                                               ))
-    //                                             ]))),
-    //                                     if (widget.objCover!.header !=
-    //                                             "Property OFFICE SPACE VALUATION REPORT" &&
-    //                                         widget.objCover!.header !=
-    //                                             "Property CONDO REPORT") ...[
-    //                                       pw.Expanded(
-    //                                           flex: 3,
-    //                                           child: pw.Container(
-    //                                               child: pw.Column(children: [
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     width: double.infinity,
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                         "Internal Description",
-    //                                                         style: header4()),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     child: pw.Text(
-    //                                                       "Floor/Story",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "Bathroom",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "Room",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     child: pw.Container(
-    //                                                         child: pw.Text(
-    //                                                           "Kitchen",
-    //                                                         ),
-    //                                                         alignment: pw
-    //                                                             .Alignment
-    //                                                             .center))),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Container(
-    //                                                         child: pw.Text(
-    //                                                           "Dining/Living Room",
-    //                                                         ),
-    //                                                         alignment: pw
-    //                                                             .Alignment
-    //                                                             .center))),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     child: pw.Text(
-    //                                                       "Storage Room",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "Total Accommodation",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center))
-    //                                           ]))),
-    //                                       pw.Expanded(
-    //                                           flex: 2,
-    //                                           child: pw.Container(
-    //                                               child: pw.Column(children: [
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                         "Quantity",
-    //                                                         style: header4()),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.floornstory ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.bathroom ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.room ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.kitchen ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.diningnlivingroom ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.store ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                                       border: pw.Border.all(
-    //                                                         color:
-    //                                                             PdfColors.black,
-    //                                                         width:
-    //                                                             2, // Adjust border width as needed
-    //                                                       ),
-    //                                                     ),
-    //                                                     child: pw.Text(
-    //                                                       "${widget.objPropertyInfor!.total ?? ''}",
-    //                                                     ),
-    //                                                     alignment: pw
-    //                                                         .Alignment.center))
-    //                                           ]))),
-    //                                     ],
-    //                                   ]))),
-    //                           pw.Text(
-    //                             "Utilities/Facilities Available",
-    //                             style: header2(true),
-    //                             textAlign: pw.TextAlign.center,
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Water",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.water ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Electricity",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.electricity ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Sewerage",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.severage ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Telecommunications",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.telecom ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Security",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.security ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.Padding(
-    //                             padding: const pw.EdgeInsets.only(
-    //                                 top: 5, left: 20), // Added top margin
-    //                             child: pw.Row(
-    //                               mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                               crossAxisAlignment:
-    //                                   pw.CrossAxisAlignment.start,
-    //                               children: [
-    //                                 pw.SizedBox(
-    //                                   width: 180, // Adjust width as necessary
-    //                                   child: pw.Text(
-    //                                     "Garage/Parking",
-    //                                     style: body(),
-    //                                     textAlign: pw.TextAlign.left,
-    //                                   ),
-    //                                 ),
-    //                                 pw.Text(
-    //                                   ": ${widget.objPropertyInfor!.parking ?? ''}",
-    //                                   style: body(),
-    //                                   textAlign: pw.TextAlign.left,
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           pw.SizedBox(height: 20)
-    //                         ],
-    //                       )),
-    //                 ),
-    //               ),
-    //               pw.SizedBox(height: 20)
-    //             ],
-    //           ),
-    //         );
-    //       },
-    //     ),
-    //   );
-    // }
+    if (widget.objCover!.header != "Property LAND VALUATION REPORT") {
+      pdf.addPage(
+        pw.Page(
+          pageTheme: pageTheme,
+          build: (final context) {
+            return pw.FullPage(
+              ignoreMargins: true,
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                children: [
+                  pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 25, right: 25), // Add margin here
+                    child: pw.Text(
+                      "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                      style: pw.TextStyle(fontSize: 9, font: font),
+                    ),
+                  ),
+                  pw.Expanded(
+                    child: pw.Container(
+                      margin: const pw.EdgeInsets.only(
+                          top: 5, left: 40, right: 25, bottom: 25),
+                      decoration: pw.BoxDecoration(
+                        border: pw.Border.all(
+                          color: PdfColors.black,
+                          width: 2, // Adjust border width as needed
+                        ),
+                      ),
+                      child: pw.Container(
+                          padding: pw.EdgeInsets.only(left: 40, right: 20),
+                          child: pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            // mainAxisAlignment: pw.MainAxisAlignment.center,
+                            children: [
+                              pw.SizedBox(height: 10),
+                              if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text(
+                                  "Building Title Deep Number  ",
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                                pw.SizedBox(height: 10),
+                                pw.Padding(
+                                  padding: const pw.EdgeInsets.only(
+                                      top: 5, left: 20), // Add margin here
+                                  child: pw.Row(
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.start,
+                                    children: [
+                                      pw.SizedBox(
+                                        width: 150, // Adjust width as necessary
+                                        child: pw.Text(
+                                          "Title Deep No",
+                                          style: body(),
+                                          textAlign: pw.TextAlign.left,
+                                        ),
+                                      ),
+                                      pw.Text(
+                                        " : ${widget.objPropertyInfor!.deepnumber}",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                pw.Padding(
+                                  padding: const pw.EdgeInsets.only(
+                                      top: 5, left: 20), // Add margin here
+                                  child: pw.Row(
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.start,
+                                    children: [
+                                      pw.SizedBox(
+                                        width: 150, // Adjust width as necessary
+                                        child: pw.Text(
+                                          "Unit",
+                                          style: body(),
+                                          textAlign: pw.TextAlign.left,
+                                        ),
+                                      ),
+                                      pw.Text(
+                                        " : ${widget.objPropertyInfor!.unit}",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                              pw.SizedBox(height: 10),
+                              pw.Text(
+                                "Building Size  ",
+                                style: header2(true),
+                                textAlign: pw.TextAlign.center,
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Add margin here
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Building",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      " : ${widget.objPropertyInfor!.flatsize}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // pw.Padding(
+                              //   padding:
+                              //       const pw.EdgeInsets.only(top: 15, left: 20),
+                              //   child: pw.Text(
+                              //     "Roof Extension",
+                              //     style: header4(),
+                              //     textAlign: pw.TextAlign.center,
+                              //   ),
+                              // ),
+                              // pw.Padding(
+                              //   padding: const pw.EdgeInsets.only(left: 20),
+                              //   child: pw.Row(
+                              //     children: [
+                              //       pw.Text(
+                              //         "Building Size : ",
+                              //         style: body(),
+                              //         textAlign: pw.TextAlign.center,
+                              //       ),
+                              //       pw.Text(
+                              //         "${widget.objPropertyInfor!.buildingsize ?? ''}",
+                              //         style: body(),
+                              //         textAlign: pw.TextAlign.center,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // pw.Padding(
+                              //   padding:
+                              //       const pw.EdgeInsets.only(top: 15, left: 20),
+                              //   child: pw.Row(
+                              //     children: [
+                              //       pw.Text(
+                              //         "Total Building Size : ",
+                              //         style: header4(),
+                              //         textAlign: pw.TextAlign.center,
+                              //       ),
+                              //       pw.Text(
+                              //         "${widget.objPropertyInfor!.totalsize ?? ''}",
+                              //         style: body(),
+                              //         textAlign: pw.TextAlign.center,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(top: 5),
+                                child: pw.Text(
+                                  "Building Detail",
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Type of Building",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.typeofbuilding ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Age of Building",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.buildingage ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Cost of Construction",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "By owner",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.byowner ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Metal Roof area",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.metalroof ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Occupied or Vacant",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.occoupied ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Disposability",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.disposability ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Quality given as a",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Percentage",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.percentage ?? ''}%",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 150, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Type of building",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": [${widget.objPropertyInfor!.typeofbuilding ?? ''}]",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                  top: 5,
+                                ), // Add margin here
+                                child: pw.Text(
+                                  "Building Description",
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Add margin here
+                                child: pw.Text(
+                                  "The building (Flat) is generally constructed by concrete foundation and frame, finished with brick and cement. The table below, detail more the materials of the building.  ",
+                                  style: body(),
+                                  textAlign: pw.TextAlign.start,
+                                ),
+                              ),
+                              pw.Expanded(
+                                  child: pw.Container(
+                                      margin: const pw.EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      decoration: pw.BoxDecoration(
+                                        border: pw.Border.all(
+                                          color: PdfColors.black,
+                                          width:
+                                              2, // Adjust border width as needed
+                                        ),
+                                      ),
+                                      child: pw.Row(children: [
+                                        pw.Expanded(
+                                            flex: 4,
+                                            child: pw.Container(
+                                                decoration: pw.BoxDecoration(
+                                                  border: pw.Border.all(
+                                                    color: PdfColors.black,
+                                                    width:
+                                                        2, // Adjust border width as needed
+                                                  ),
+                                                ),
+                                                child: pw.Column(children: [
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                          child: pw.Text(
+                                                              "Sources of Materials",
+                                                              style: header4()),
+                                                          alignment: pw
+                                                              .Alignment
+                                                              .center)),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    width: double.infinity,
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                      border: pw.Border.all(
+                                                        color: PdfColors.black,
+                                                        width:
+                                                            2, // Adjust border width as needed
+                                                      ),
+                                                    ),
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added top margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Floor",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  50), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.floor ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                      border: pw.Border.all(
+                                                        color: PdfColors.black,
+                                                        width:
+                                                            2, // Adjust border width as needed
+                                                      ),
+                                                    ),
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Door",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  50), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.door ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Window",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  35), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.windows ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                      border: pw.Border.all(
+                                                        color: PdfColors.black,
+                                                        width:
+                                                            2, // Adjust border width as needed
+                                                      ),
+                                                    ),
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Stair",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  50), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.stair ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Roof",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  50), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.roof ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                      border: pw.Border.all(
+                                                        color: PdfColors.black,
+                                                        width:
+                                                            2, // Adjust border width as needed
+                                                      ),
+                                                    ),
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Ceiling",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  40), // Add spacing between label and value
+                                                          pw.Text(
+                                                            " : ${widget.objPropertyInfor!.ceiling ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )),
+                                                  pw.Expanded(
+                                                      child: pw.Container(
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                      border: pw.Border.all(
+                                                        color: PdfColors.black,
+                                                        width:
+                                                            2, // Adjust border width as needed
+                                                      ),
+                                                    ),
+                                                    child: pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left:
+                                                              20), // Added left margin
+                                                      child: pw.Row(
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          pw.Text(
+                                                            "Wall",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                          pw.SizedBox(
+                                                              width:
+                                                                  55), // Add spacing between label and value
+                                                          pw.Text(
+                                                            ": ${widget.objPropertyInfor!.wall ?? ''}",
+                                                            style:
+                                                                body(), // Apply consistent styling
+                                                            textAlign: pw
+                                                                .TextAlign
+                                                                .left, // Align text to the left
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ))
+                                                ]))),
+                                        if (widget.objCover!.header !=
+                                                "Property OFFICE SPACE VALUATION REPORT" &&
+                                            widget.objCover!.header !=
+                                                "Property CONDO REPORT") ...[
+                                          pw.Expanded(
+                                              flex: 3,
+                                              child: pw.Container(
+                                                  child: pw.Column(children: [
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                            "Internal Description",
+                                                            style: header4()),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        child: pw.Text(
+                                                          "Floor/Story",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "Bathroom",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "Room",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        child: pw.Container(
+                                                            child: pw.Text(
+                                                              "Kitchen",
+                                                            ),
+                                                            alignment: pw
+                                                                .Alignment
+                                                                .center))),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Container(
+                                                            child: pw.Text(
+                                                              "Dining/Living Room",
+                                                            ),
+                                                            alignment: pw
+                                                                .Alignment
+                                                                .center))),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        child: pw.Text(
+                                                          "Storage Room",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "Total Accommodation",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center))
+                                              ]))),
+                                          pw.Expanded(
+                                              flex: 2,
+                                              child: pw.Container(
+                                                  child: pw.Column(children: [
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                            "Quantity",
+                                                            style: header4()),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.floornstory ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.bathroom ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.room ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.kitchen ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.diningnlivingroom ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.store ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center)),
+                                                pw.Expanded(
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width:
+                                                                2, // Adjust border width as needed
+                                                          ),
+                                                        ),
+                                                        child: pw.Text(
+                                                          "${widget.objPropertyInfor!.total ?? ''}",
+                                                        ),
+                                                        alignment: pw
+                                                            .Alignment.center))
+                                              ]))),
+                                        ],
+                                      ]))),
+                              pw.Text(
+                                "Utilities/Facilities Available",
+                                style: header2(true),
+                                textAlign: pw.TextAlign.center,
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Water",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.water ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Electricity",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.electricity ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Sewerage",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.severage ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Telecommunications",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.telecom ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Security",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.security ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.Padding(
+                                padding: const pw.EdgeInsets.only(
+                                    top: 5, left: 20), // Added top margin
+                                child: pw.Row(
+                                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.SizedBox(
+                                      width: 180, // Adjust width as necessary
+                                      child: pw.Text(
+                                        "Garage/Parking",
+                                        style: body(),
+                                        textAlign: pw.TextAlign.left,
+                                      ),
+                                    ),
+                                    pw.Text(
+                                      ": ${widget.objPropertyInfor!.parking ?? ''}",
+                                      style: body(),
+                                      textAlign: pw.TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              pw.SizedBox(height: 20)
+                            ],
+                          )),
+                    ),
+                  ),
+                  pw.SizedBox(height: 20)
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
 
 //     //Page six
-    // pdf.addPage(
-    //   pw.Page(
-    //     pageTheme: pageTheme,
-    //     build: (final context) {
-    //       return pw.FullPage(
-    //         ignoreMargins: true,
-    //         child: pw.Column(
-    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //           children: [
-    //             pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 25, right: 25), // Add margin here
-    //               child: pw.Text(
-    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                 style: pw.TextStyle(fontSize: 9, font: font),
-    //               ),
-    //             ),
-    //             pw.Expanded(
-    //               child: pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 5, left: 40, right: 25, bottom: 25),
-    //                 decoration: pw.BoxDecoration(
-    //                   border: pw.Border.all(
-    //                     color: PdfColors.black,
-    //                     width: 2, // Adjust border width as needed
-    //                   ),
-    //                 ),
-    //                 child: pw.Center(
-    //                     child: pw.Column(
-    //                   crossAxisAlignment: pw.CrossAxisAlignment.center,
-    //                   // mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                   children: [
-    //                     pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 25, left: 15, right: 15),
-    //                         child: pw.Column(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                           children: [
-    //                             pw.Text('Owner’s Identification Card',
-    //                                 style: header2(true),
-    //                                 textAlign: pw.TextAlign.start),
-    //                             pw.SizedBox(height: 10),
-    //                             pw.GridView(
-    //                                 crossAxisCount: 2,
-    //                                 crossAxisSpacing: 6,
-    //                                 mainAxisSpacing: 6,
-    //                                 childAspectRatio: 0.59,
-    //                                 children: [
-    //                                   pw.Image(pw.MemoryImage(fidcard1),
-    //                                       fit: pw.BoxFit.cover, width: 260),
-    //                                   pw.Image(pw.MemoryImage(bidcard1),
-    //                                       fit: pw.BoxFit.cover, width: 260),
-    //                                   // pw.Image(pw.MemoryImage(fidcard2),
-    //                                   //     fit: pw.BoxFit.cover, width: 260),
-    //                                   // pw.Image(pw.MemoryImage(bidcard2),
-    //                                   //     fit: pw.BoxFit.cover, width: 260),
-    //                                 ])
-    //                           ],
-    //                         ) // Add margin here
-    //                         )
-    //                   ],
-    //                 )),
-    //               ),
-    //             ),
-    //             pw.SizedBox(height: 20)
-    //           ],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Center(
+                        child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      // mainAxisAlignment: pw.MainAxisAlignment.center,
+                      children: [
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 25, left: 15, right: 15),
+                            child: pw.Column(
+                              mainAxisAlignment: pw.MainAxisAlignment.center,
+                              children: [
+                                pw.Text('Owner’s Identification Card',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                                pw.SizedBox(height: 10),
+                                pw.GridView(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 6,
+                                    mainAxisSpacing: 6,
+                                    childAspectRatio: 0.59,
+                                    children: [
+                                      pw.Image(pw.MemoryImage(fidcard1),
+                                          fit: pw.BoxFit.cover,
+                                          width: 260,
+                                          height: 200),
+                                      pw.Image(pw.MemoryImage(bidcard1),
+                                          fit: pw.BoxFit.cover,
+                                          width: 260,
+                                          height: 200),
+                                      // pw.Image(pw.MemoryImage(fidcard2),
+                                      //     fit: pw.BoxFit.cover, width: 260),
+                                      // pw.Image(pw.MemoryImage(bidcard2),
+                                      //     fit: pw.BoxFit.cover, width: 260),
+                                    ])
+                              ],
+                            ) // Add margin here
+                            )
+                      ],
+                    )),
+                  ),
+                ),
+                pw.SizedBox(height: 20)
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
     //Page Seven
-    // pdf.addPage(
-    //   pw.Page(
-    //     pageTheme: pageTheme,
-    //     build: (final context) {
-    //       return pw.FullPage(
-    //         ignoreMargins: true,
-    //         child: pw.Column(
-    //           crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //           children: [
-    //             pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 25, right: 25), // Add margin here
-    //               child: pw.Text(
-    //                 "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //                 style: pw.TextStyle(fontSize: 9, font: font),
-    //               ),
-    //             ),
-    //             pw.Expanded(
-    //               child: pw.Container(
-    //                 margin: const pw.EdgeInsets.only(
-    //                     top: 5, left: 40, right: 25, bottom: 25),
-    //                 decoration: pw.BoxDecoration(
-    //                   border: pw.Border.all(
-    //                     color: PdfColors.black,
-    //                     width: 2, // Adjust border width as needed
-    //                   ),
-    //                 ),
-    //                 child: pw.Center(
-    //                     child: pw.Column(
-    //                   crossAxisAlignment: pw.CrossAxisAlignment.center,
-    //                   children: [
-    //                     pw.Padding(
-    //                         padding: const pw.EdgeInsets.only(
-    //                             top: 25, left: 15, right: 15),
-    //                         child: pw.Column(
-    //                           mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                           children: [
-    //                             if (widget.objCover!.header ==
-    //                                 "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                   'Copy Land and Building Title Deed No: ${widget.objCover!.deeptitle}',
-    //                                   style: header2(true),
-    //                                   textAlign: pw.TextAlign.start),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property LAND VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                   'Copy Land Title Deed No: ${widget.objCover!.deeptitle}',
-    //                                   style: header2(true),
-    //                                   textAlign: pw.TextAlign.start),
-    //                             ] else if (widget.objCover!.header ==
-    //                                 "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                               pw.Text(
-    //                                   'Copy Office Space Title Deed No: ${widget.objCover!.deeptitle}',
-    //                                   style: header2(true),
-    //                                   textAlign: pw.TextAlign.start),
-    //                             ] else ...[
-    //                               pw.Text(
-    //                                   'Copy Condo Title Deed No: ${widget.objCover!.deeptitle}',
-    //                                   style: header2(true),
-    //                                   textAlign: pw.TextAlign.start),
-    //                             ],
-    //                             pw.SizedBox(height: 10),
-    //                             pw.GridView(
-    //                                 crossAxisCount: 1,
-    //                                 // crossAxisSpacing: 2,
-    //                                 mainAxisSpacing: 25,
-    //                                 childAspectRatio: 0.59,
-    //                                 children: [
-    //                                   pw.Image(
-    //                                     pw.MemoryImage(ownerimg1),
-    //                                   ),
-    //                                   pw.Image(
-    //                                     pw.MemoryImage(ownerimg2),
-    //                                   ),
-    //                                 ])
-    //                           ],
-    //                         ) // Add margin here
-    //                         )
-    //                   ],
-    //                 )),
-    //               ),
-    //             ),
-    //             pw.SizedBox(height: 20)
-    //           ],
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Center(
+                        child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 25, left: 15, right: 15),
+                            child: pw.Column(
+                              mainAxisAlignment: pw.MainAxisAlignment.center,
+                              children: [
+                                if (widget.objCover!.header ==
+                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                  pw.Text(
+                                      'Copy Land and Building Title Deed No: ${widget.objCover!.deeptitle}',
+                                      style: header2(true),
+                                      textAlign: pw.TextAlign.start),
+                                ] else if (widget.objCover!.header ==
+                                    "Property LAND VALUATION REPORT") ...[
+                                  pw.Text(
+                                      'Copy Land Title Deed No: ${widget.objCover!.deeptitle}',
+                                      style: header2(true),
+                                      textAlign: pw.TextAlign.start),
+                                ] else if (widget.objCover!.header ==
+                                    "Property OFFICE SPACE VALUATION REPORT") ...[
+                                  pw.Text(
+                                      'Copy Office Space Title Deed No: ${widget.objCover!.deeptitle}',
+                                      style: header2(true),
+                                      textAlign: pw.TextAlign.start),
+                                ] else ...[
+                                  pw.Text(
+                                      'Copy Condo Title Deed No: ${widget.objCover!.deeptitle}',
+                                      style: header2(true),
+                                      textAlign: pw.TextAlign.start),
+                                ],
+                                pw.SizedBox(height: 10),
+                                pw.GridView(
+                                    crossAxisCount: 1,
+                                    // crossAxisSpacing: 2,
+                                    mainAxisSpacing: 25,
+                                    childAspectRatio: 0.59,
+                                    children: [
+                                      pw.Image(
+                                        pw.MemoryImage(ownerimg1),
+                                      ),
+                                      pw.Image(
+                                        pw.MemoryImage(ownerimg2),
+                                      ),
+                                    ])
+                              ],
+                            ) // Add margin here
+                            )
+                      ],
+                    )),
+                  ),
+                ),
+                pw.SizedBox(height: 20)
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
     //Page Eight
-//     pdf.addPage(pw.Page(
-//       pageTheme: pageTheme,
-//       build: (final context) {
-//         return pw.FullPage(
-//           ignoreMargins: true,
-//           child: pw.Column(
-//             crossAxisAlignment: pw.CrossAxisAlignment.end,
-//             children: [
-//               pw.Container(
-//                 margin: const pw.EdgeInsets.only(
-//                     top: 25, right: 25), // Add margin here
-//                 child: pw.Text(
-//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                   style: pw.TextStyle(fontSize: 9, font: font),
-//                 ),
-//               ),
-//               pw.Expanded(
-//                 child: pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 5, left: 40, right: 25, bottom: 25),
-//                   decoration: pw.BoxDecoration(
-//                     border: pw.Border.all(
-//                       color: PdfColors.black,
-//                       width: 2, // Adjust border width as needed
-//                     ),
-//                   ),
-//                   child: pw.Center(
-//                       child: pw.Padding(
-//                           padding: const pw.EdgeInsets.only(
-//                               top: 25, left: 15, right: 15),
-//                           child: pw.Column(
-//                             mainAxisAlignment: pw.MainAxisAlignment.center,
-//                             children: [
-//                               if (widget.objCover!.header ==
-//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                 pw.Text('Land and Building Layout',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property LAND VALUATION REPORT") ...[
-//                                 pw.Text('Land Layout',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                 pw.Text('Office Space Layout',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else ...[
-//                                 pw.Text('Condo Layout',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ],
-//                               pw.Expanded(
-//                                 child: (layoutimg != null)
-//                                     ? pw.Container(
-//                                         margin: const pw.EdgeInsets.only(
-//                                             top: 10,
-//                                             left: 25,
-//                                             right: 25,
-//                                             bottom: 50),
-//                                         decoration: pw.BoxDecoration(
-//                                           image: pw.DecorationImage(
-//                                               image: pw.MemoryImage(layoutimg)),
-//                                           border: pw.Border.all(
-//                                             color: PdfColors.black,
-//                                             width: 2,
-//                                             // Adjust border width as needed
-//                                           ),
-//                                         ))
-//                                     : pw.Container(
-//                                         margin: const pw.EdgeInsets.only(
-//                                             top: 10,
-//                                             left: 25,
-//                                             right: 25,
-//                                             bottom: 50),
-//                                         decoration: pw.BoxDecoration(
-//                                           border: pw.Border.all(
-//                                             color: PdfColors.black,
-//                                             width: 2,
-//                                             // Adjust border width as needed
-//                                           ),
-//                                         )),
-//                               )
-//                             ],
-//                           ) // Add margin here
-//                           )),
-//                 ),
-//               ),
-//               pw.SizedBox(height: 20)
-//             ],
-//           ),
-//         );
-//       },
-//     ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 25, left: 15, right: 15),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.center,
+                            children: [
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Text('Land and Building Layout',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT") ...[
+                                pw.Text('Land Layout',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text('Office Space Layout',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else ...[
+                                pw.Text('Condo Layout',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ],
+                              pw.Expanded(
+                                child: (layoutimg != null)
+                                    ? pw.Container(
+                                        margin: const pw.EdgeInsets.only(
+                                            top: 10,
+                                            left: 25,
+                                            right: 25,
+                                            bottom: 50),
+                                        decoration: pw.BoxDecoration(
+                                          image: pw.DecorationImage(
+                                              image: pw.MemoryImage(layoutimg)),
+                                          border: pw.Border.all(
+                                            color: PdfColors.black,
+                                            width: 2,
+                                            // Adjust border width as needed
+                                          ),
+                                        ))
+                                    : pw.Container(
+                                        margin: const pw.EdgeInsets.only(
+                                            top: 10,
+                                            left: 25,
+                                            right: 25,
+                                            bottom: 50),
+                                        decoration: pw.BoxDecoration(
+                                          border: pw.Border.all(
+                                            color: PdfColors.black,
+                                            width: 2,
+                                            // Adjust border width as needed
+                                          ),
+                                        )),
+                              )
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+              pw.SizedBox(height: 20)
+            ],
+          ),
+        );
+      },
+    ));
 
     // Page Ningh
-    // pdf.addPage(pw.Page(
-    //   pageTheme: pageTheme,
-    //   build: (final context) {
-    //     return pw.FullPage(
-    //       ignoreMargins: true,
-    //       child: pw.Column(
-    //         crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //         children: [
-    //           pw.Container(
-    //             margin: const pw.EdgeInsets.only(
-    //                 top: 25, right: 25), // Add margin here
-    //             child: pw.Text(
-    //               "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //               style: pw.TextStyle(fontSize: 9, font: font),
-    //             ),
-    //           ),
-    //           pw.Expanded(
-    //             child: pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 5, left: 40, right: 25, bottom: 25),
-    //               decoration: pw.BoxDecoration(
-    //                 border: pw.Border.all(
-    //                   color: PdfColors.black,
-    //                   width: 2, // Adjust border width as needed
-    //                 ),
-    //               ),
-    //               child: pw.Center(
-    //                   child: pw.Padding(
-    //                       padding: const pw.EdgeInsets.only(
-    //                           top: 15, left: 15, right: 15),
-    //                       child: pw.Column(
-    //                         mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                         children: [
-    //                           pw.Text('Cambodia Map',
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.start),
-    //                           pw.Expanded(
-    //                             flex: 3,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 5, left: 10, right: 10, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.Column(children: [
-    //                                   pw.Expanded(
-    //                                     flex: 5,
-    //                                     child: pw.Container(
-    //                                       decoration: pw.BoxDecoration(
-    //                                           border: pw.Border.all(
-    //                                             color: PdfColors.black,
-    //                                             width: 2,
-    //                                           ),
-    //                                           image: pw.DecorationImage(
-    //                                               image: pw.MemoryImage(
-    //                                                   mapImage))),
-    //                                     ),
-    //                                   ),
-    //                                   pw.Expanded(
-    //                                       flex: 3,
-    //                                       child: pw.Container(
-    //                                           decoration: pw.BoxDecoration(
-    //                                             border: pw.Border.all(
-    //                                               color: PdfColors.black,
-    //                                               width: 2,
-    //                                             ),
-    //                                           ),
-    //                                           child: pw.Row(children: [
-    //                                             pw.Expanded(
-    //                                                 child: pw.Text(
-    //                                                     "Phnom Penh To All Province",
-    //                                                     style: body1(),
-    //                                                     textAlign: pw
-    //                                                         .TextAlign.center)),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width: 2,
-    //                                               ),
-    //                                             ))),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width: 2,
-    //                                               ),
-    //                                             ))),
-    //                                             pw.Expanded(
-    //                                                 child: pw.Container(
-    //                                                     decoration:
-    //                                                         pw.BoxDecoration(
-    //                                               border: pw.Border.all(
-    //                                                 color: PdfColors.black,
-    //                                                 width: 2,
-    //                                               ),
-    //                                             )))
-    //                                           ])))
-    //                                 ])),
-    //                           ),
-    //                           pw.Text('Location Map in Phnom Penh',
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.start),
-    //                           pw.Expanded(
-    //                               flex: 2,
-    //                               child: pw.Container(
-    //                                   height: double.minPositive,
-    //                                   margin: const pw.EdgeInsets.only(
-    //                                       top: 5,
-    //                                       left: 10,
-    //                                       right: 10,
-    //                                       bottom: 20),
-    //                                   decoration: pw.BoxDecoration(
-    //                                       border: pw.Border.all(
-    //                                         color: PdfColors.black,
-    //                                         width: 2,
-    //                                       ),
-    //                                       image: pw.DecorationImage(
-    //                                           image:
-    //                                               pw.MemoryImage(map1Image)))))
-    //                         ],
-    //                       ) // Add margin here
-    //                       )),
-    //             ),
-    //           ),
-    //           pw.SizedBox(height: 20)
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 15, left: 15, right: 15),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.center,
+                            children: [
+                              pw.Text('Cambodia Map',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.start),
+                              pw.Expanded(
+                                flex: 3,
+                                child: pw.Container(
+                                    margin: const pw.EdgeInsets.only(
+                                        top: 5, left: 10, right: 10, bottom: 5),
+                                    decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: pw.Column(children: [
+                                      pw.Expanded(
+                                        flex: 5,
+                                        child: pw.Container(
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                                color: PdfColors.black,
+                                                width: 2,
+                                              ),
+                                              image: pw.DecorationImage(
+                                                  image: pw.MemoryImage(
+                                                      mapImage))),
+                                        ),
+                                      ),
+                                      pw.Expanded(
+                                          flex: 3,
+                                          child: pw.Container(
+                                              decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: pw.Row(children: [
+                                                pw.Expanded(
+                                                    flex: 2,
+                                                    child: pw.Text(
+                                                        "Phnom Penh To All Province",
+                                                        style: body1(),
+                                                        textAlign: pw
+                                                            .TextAlign.center)),
+                                                pw.Expanded(
+                                                    flex: 3,
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width: 2,
+                                                          ),
+                                                        ),
+                                                        child: pw.Column(
+                                                            crossAxisAlignment: pw
+                                                                .CrossAxisAlignment
+                                                                .center,
+                                                            children: [
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "1-Angkor Wat =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 321Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "2-Siem Reap =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 314Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "3-Kirirum =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 117Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "4-Kampot =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 148Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "5-Krong Kep =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 174Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "6-Sihanoukville =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 230Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "7-Kampong Chhnang =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 91Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "8-Pursat =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 189Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                              pw.Padding(
+                                                                padding: pw.EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            4,
+                                                                        vertical:
+                                                                            3),
+                                                                child: pw.Row(
+                                                                    mainAxisAlignment: pw
+                                                                        .MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                    children: [
+                                                                      pw.Text(
+                                                                          "9-Battambang =",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                      pw.Text(
+                                                                          " 291Km",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 9)),
+                                                                    ]),
+                                                              ),
+                                                            ]))),
+                                                pw.Expanded(
+                                                    flex: 3,
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width: 2,
+                                                          ),
+                                                        ),
+                                                        child: pw.Column(
+                                                          crossAxisAlignment: pw
+                                                              .CrossAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "10-Pailin =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 371Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "11-Banteay Meanchey =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 359Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "12-Bokor =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 189Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "13-Kampong Cham =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 124Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "14-Kampong Thom =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 168Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "15-Prey Veng =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 90Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "16-Svay Rieng =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 122Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "17-Takeo =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 78Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "18-Kandal =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 11Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ))),
+                                                pw.Expanded(
+                                                    flex: 3,
+                                                    child: pw.Container(
+                                                        decoration:
+                                                            pw.BoxDecoration(
+                                                          border: pw.Border.all(
+                                                            color:
+                                                                PdfColors.black,
+                                                            width: 2,
+                                                          ),
+                                                        ),
+                                                        child: pw.Column(
+                                                          crossAxisAlignment: pw
+                                                              .CrossAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "19-Steong Treng =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 455Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "20-Kampong Speu =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 48Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "21-Kratie =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 315Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "22-Mondolkiri =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 521Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "23-Preah Vihear =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 294Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "24-Ratanakiri =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 588Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "25-Koh Kong =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 271Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            pw.Padding(
+                                                              padding: pw.EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4,
+                                                                      vertical:
+                                                                          3),
+                                                              child: pw.Row(
+                                                                mainAxisAlignment: pw
+                                                                    .MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  pw.Text(
+                                                                      "26-Oddar Meanchey =",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                  pw.Text(
+                                                                      " 460Km",
+                                                                      style: pw.TextStyle(
+                                                                          fontSize:
+                                                                              9)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )))
+                                              ])))
+                                    ])),
+                              ),
+                              pw.Text('Location Map in Phnom Penh',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.start),
+                              pw.Expanded(
+                                  flex: 2,
+                                  child: pw.Container(
+                                      height: double.minPositive,
+                                      margin: const pw.EdgeInsets.only(
+                                          top: 5,
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 20),
+                                      decoration: pw.BoxDecoration(
+                                          border: pw.Border.all(
+                                            color: PdfColors.black,
+                                            width: 2,
+                                          ),
+                                          image: pw.DecorationImage(
+                                              image:
+                                                  pw.MemoryImage(map1Image)))))
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+              pw.SizedBox(height: 20)
+            ],
+          ),
+        );
+      },
+    ));
 
     // Page ninght
-    // pdf.addPage(pw.Page(
-    //   pageTheme: pageTheme,
-    //   build: (final context) {
-    //     return pw.FullPage(
-    //       ignoreMargins: true,
-    //       child: pw.Column(
-    //         crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //         children: [
-    //           pw.Container(
-    //             margin: const pw.EdgeInsets.only(
-    //                 top: 25, right: 25), // Add margin here
-    //             child: pw.Text(
-    //               "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //               style: pw.TextStyle(fontSize: 9, font: font),
-    //             ),
-    //           ),
-    //           pw.Expanded(
-    //             child: pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 5, left: 40, right: 25, bottom: 25),
-    //               decoration: pw.BoxDecoration(
-    //                 border: pw.Border.all(
-    //                   color: PdfColors.black,
-    //                   width: 2, // Adjust border width as needed
-    //                 ),
-    //               ),
-    //               child: pw.Center(
-    //                   child: pw.Padding(
-    //                       padding: const pw.EdgeInsets.only(
-    //                           top: 15, left: 15, right: 15),
-    //                       child: pw.Column(
-    //                         mainAxisAlignment: pw.MainAxisAlignment.center,
-    //                         children: [
-    //                           pw.Text(
-    //                               'Aerial Photograph of Phnom Penh Location',
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.start),
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Container(
-    //                                 margin: const pw.EdgeInsets.only(
-    //                                     top: 5, left: 10, right: 10, bottom: 5),
-    //                                 decoration: pw.BoxDecoration(
-    //                                   border: pw.Border.all(
-    //                                     color: PdfColors.black,
-    //                                     width: 2,
-    //                                   ),
-    //                                 ),
-    //                                 child: pw.Column(children: [
-    //                                   pw.Expanded(
-    //                                     flex: 5,
-    //                                     child: pw.Container(
-    //                                       decoration: pw.BoxDecoration(
-    //                                           border: pw.Border.all(
-    //                                             color: PdfColors.black,
-    //                                             width: 2,
-    //                                           ),
-    //                                           image: pw.DecorationImage(
-    //                                               image: pw.MemoryImage(
-    //                                                   map2Image))),
-    //                                     ),
-    //                                   ),
-    //                                 ])),
-    //                           ),
-    //                           pw.Text('Map Sketch',
-    //                               style: header2(true),
-    //                               textAlign: pw.TextAlign.start),
-    //                           pw.Expanded(
-    //                               flex: 2,
-    //                               child: pw.Container(
-    //                                   height: double.minPositive,
-    //                                   margin: const pw.EdgeInsets.only(
-    //                                       top: 5,
-    //                                       left: 10,
-    //                                       right: 10,
-    //                                       bottom: 20),
-    //                                   decoration: pw.BoxDecoration(
-    //                                       border: pw.Border.all(
-    //                                         color: PdfColors.black,
-    //                                         width: 2,
-    //                                       ),
-    //                                       image: pw.DecorationImage(
-    //                                           image:
-    //                                               pw.MemoryImage(map3Image)))))
-    //                         ],
-    //                       ) // Add margin here
-    //                       )),
-    //             ),
-    //           ),
-    //           pw.SizedBox(height: 20)
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 15, left: 15, right: 15),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.center,
+                            children: [
+                              pw.Text(
+                                  'Aerial Photograph of Phnom Penh Location',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.start),
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Container(
+                                    margin: const pw.EdgeInsets.only(
+                                        top: 5, left: 10, right: 10, bottom: 5),
+                                    decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: pw.Column(children: [
+                                      pw.Expanded(
+                                        flex: 5,
+                                        child: pw.Container(
+                                          decoration: pw.BoxDecoration(
+                                              border: pw.Border.all(
+                                                color: PdfColors.black,
+                                                width: 2,
+                                              ),
+                                              image: pw.DecorationImage(
+                                                  image: pw.MemoryImage(
+                                                      map2Image))),
+                                        ),
+                                      ),
+                                    ])),
+                              ),
+                              pw.Text('Map Sketch',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.start),
+                              pw.Expanded(
+                                  flex: 2,
+                                  child: pw.Container(
+                                      height: double.minPositive,
+                                      margin: const pw.EdgeInsets.only(
+                                          top: 5,
+                                          left: 10,
+                                          right: 10,
+                                          bottom: 20),
+                                      decoration: pw.BoxDecoration(
+                                          border: pw.Border.all(
+                                            color: PdfColors.black,
+                                            width: 2,
+                                          ),
+                                          image: pw.DecorationImage(
+                                              image:
+                                                  pw.MemoryImage(map3Image)))))
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+              pw.SizedBox(height: 20)
+            ],
+          ),
+        );
+      },
+    ));
 
     //Page Ten
-//     pdf.addPage(pw.Page(
-//       pageTheme: pageTheme,
-//       build: (final context) {
-//         return pw.FullPage(
-//           ignoreMargins: true,
-//           child: pw.Column(
-//             crossAxisAlignment: pw.CrossAxisAlignment.end,
-//             children: [
-//               pw.Container(
-//                 margin: const pw.EdgeInsets.only(
-//                     top: 25, right: 25), // Add margin here
-//                 child: pw.Text(
-//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                   style: pw.TextStyle(fontSize: 9, font: font),
-//                 ),
-//               ),
-//               pw.Expanded(
-//                 flex: 6,
-//                 child: pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 10, left: 40, right: 25, bottom: 25),
-//                   decoration: pw.BoxDecoration(
-//                     border: pw.Border.all(
-//                       color: PdfColors.black,
-//                       width: 2, // Adjust border width as needed
-//                     ),
-//                   ),
-//                   child: pw.Center(
-//                       child: pw.Padding(
-//                           padding: const pw.EdgeInsets.only(
-//                               top: 10, left: 20, right: 20),
-//                           child: pw.Column(
-//                             mainAxisAlignment: pw.MainAxisAlignment.start,
-//                             crossAxisAlignment: pw.CrossAxisAlignment.center,
-//                             children: [
-//                               pw.Text(
-//                                   'Aerial Photograph of Phnom Penh Location',
-//                                   style: header2(true),
-//                                   textAlign: pw.TextAlign.start),
-//                               if (widget.objCover!.header ==
-//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                 pw.Text('I. Photo front view of the Property',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property LAND VALUATION REPORT") ...[
-//                                 pw.Text('I. Photo front view of the Land',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                 pw.Text(
-//                                     'I. Photo front view of the Office Space',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else ...[
-//                                 pw.Text('I. Photo front view of the Condo',
-//                                     style: header2(true),
-//                                     textAlign: pw.TextAlign.start),
-//                               ],
-//                               pw.Expanded(
-//                                 flex: 2,
-//                                 child: pw.Container(
-//                                   margin: const pw.EdgeInsets.only(
-//                                     top: 3,
-//                                   ),
-//                                   decoration: pw.BoxDecoration(
-//                                       border: pw.Border.all(
-//                                         color: PdfColors.black,
-//                                         width: 2,
-//                                       ),
-//                                       image: pw.DecorationImage(
-//                                           image:
-//                                               pw.MemoryImage(frontviewimage!))),
-//                                 ),
-//                               ),
-//                               if (widget.objCover!.header ==
-//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                 pw.Text(
-//                                     'II. Photos inside view of the Property',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                                 pw.Text('1.Photos view of the Property',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property LAND VALUATION REPORT") ...[
-//                                 pw.Text('II. Photos inside view of the Land',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                                 pw.Text('1.Photos view of the Land',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else if (widget.objCover!.header ==
-//                                   "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                 pw.Text(
-//                                     'II. Photos inside view of the Office Space',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                                 pw.Text('1.Photos view of the Office Space ',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                               ] else ...[
-//                                 pw.Text('II. Photos inside view of the Condo',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                                 pw.Text('1.Photos view of the Condo ',
-//                                     style: header3(),
-//                                     textAlign: pw.TextAlign.start),
-//                               ],
-//                               if (widget.objCover!.header ==
-//                                   "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                 pw.Expanded(
-//                                   flex: 2,
-//                                   child: pw.GridView(
-//                                       crossAxisCount: 2,
-//                                       crossAxisSpacing: 2,
-//                                       mainAxisSpacing: 4,
-//                                       children: [
-//                                         for (var photo in viewimg) ...[
-//                                           pw.Image(pw.MemoryImage(photo),
-//                                               height: 150,
-//                                               width: 700,
-//                                               fit: pw.BoxFit.contain),
-//                                         ]
-//                                       ]),
-//                                 ),
-//                               ] else ...[
-//                                 pw.Expanded(
-//                                   flex: 2,
-//                                   child: pw.GridView(
-//                                       crossAxisCount: 2,
-//                                       crossAxisSpacing: 2,
-//                                       mainAxisSpacing: 4,
-//                                       children: [
-//                                         for (var photo in viewlandimg) ...[
-//                                           pw.Image(pw.MemoryImage(photo),
-//                                               height: 150,
-//                                               width: 700,
-//                                               fit: pw.BoxFit.contain),
-//                                         ]
-//                                       ]),
-//                                 ),
-//                               ],
-//                               pw.SizedBox(height: 20)
-//                             ],
-//                           ) // Add margin here
-//                           )),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                flex: 6,
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 10, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 10, left: 20, right: 20),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.start,
+                            crossAxisAlignment: pw.CrossAxisAlignment.center,
+                            children: [
+                              pw.Text(
+                                  'Aerial Photograph of Phnom Penh Location',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.start),
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Text('I. Photo front view of the Property',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT") ...[
+                                pw.Text('I. Photo front view of the Land',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text(
+                                    'I. Photo front view of the Office Space',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ] else ...[
+                                pw.Text('I. Photo front view of the Condo',
+                                    style: header2(true),
+                                    textAlign: pw.TextAlign.start),
+                              ],
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Container(
+                                  margin: const pw.EdgeInsets.only(
+                                    top: 3,
+                                  ),
+                                  decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                      image: pw.DecorationImage(
+                                          image:
+                                              pw.MemoryImage(frontviewimage!))),
+                                ),
+                              ),
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Text(
+                                    'II. Photos inside view of the Property',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                                pw.Text('1.Photos view of the Property',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT") ...[
+                                pw.Text('II. Photos inside view of the Land',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                                pw.Text('1.Photos view of the Land',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text(
+                                    'II. Photos inside view of the Office Space',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                                pw.Text('1.Photos view of the Office Space ',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else ...[
+                                pw.Text('II. Photos inside view of the Condo',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                                pw.Text('1.Photos view of the Condo ',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ],
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Expanded(
+                                  flex: 2,
+                                  child: pw.GridView(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 2,
+                                      mainAxisSpacing: 4,
+                                      children: [
+                                        for (var photo in viewimg) ...[
+                                          pw.Image(pw.MemoryImage(photo),
+                                              height: 150,
+                                              width: 700,
+                                              fit: pw.BoxFit.contain),
+                                        ]
+                                      ]),
+                                ),
+                              ] else ...[
+                                pw.Expanded(
+                                  flex: 2,
+                                  child: pw.GridView(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 2,
+                                      mainAxisSpacing: 4,
+                                      children: [
+                                        for (var photo in viewlandimg) ...[
+                                          pw.Image(pw.MemoryImage(photo),
+                                              height: 150,
+                                              width: 700,
+                                              fit: pw.BoxFit.contain),
+                                        ]
+                                      ]),
+                                ),
+                              ],
+                              pw.SizedBox(height: 20)
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ));
 
-// // Page Twell
-//     if (widget.objCover!.header ==
-//         "Property [LAND AND BUILDING] VALUATION REPORT") {
-//       pdf.addPage(pw.Page(
-//         pageTheme: pageTheme,
-//         build: (final context) {
-//           return pw.FullPage(
-//             ignoreMargins: true,
-//             child: pw.Column(
-//               crossAxisAlignment: pw.CrossAxisAlignment.end,
-//               children: [
-//                 pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 25, right: 25), // Add margin here
-//                   child: pw.Text(
-//                     "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                     style: pw.TextStyle(fontSize: 9, font: font),
-//                   ),
-//                 ),
-//                 pw.Expanded(
-//                   flex: 5,
-//                   child: pw.Container(
-//                     margin: const pw.EdgeInsets.only(
-//                         top: 10, left: 40, right: 25, bottom: 25),
-//                     decoration: pw.BoxDecoration(
-//                       border: pw.Border.all(
-//                         color: PdfColors.black,
-//                         width: 2, // Adjust border width as needed
-//                       ),
-//                     ),
-//                     child: pw.Center(
-//                         child: pw.Padding(
-//                             padding: const pw.EdgeInsets.only(
-//                                 top: 10, left: 20, right: 20),
-//                             child: pw.Column(
-//                               mainAxisAlignment: pw.MainAxisAlignment.start,
-//                               crossAxisAlignment: pw.CrossAxisAlignment.center,
-//                               children: [
-//                                 if (widget.objCover!.header ==
-//                                     "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-//                                   pw.Text(
-//                                       'II. Photos inside view of the Property',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                   pw.Text(
-//                                       '2.Photos view inside of the Property',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                 ] else if (widget.objCover!.header ==
-//                                     "Property LAND VALUATION REPORT") ...[
-//                                   pw.Text('II. Photos inside view of the Land',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                   pw.Text('2.Photos view inside of the Land',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                 ] else if (widget.objCover!.header ==
-//                                     "Property OFFICE SPACE VALUATION REPORT") ...[
-//                                   pw.Text(
-//                                       'II. Photos inside view of the Office Space',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                   pw.Text(
-//                                       '2.Photos view inside of the Office Space ',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                 ] else ...[
-//                                   pw.Text('II. Photos inside view of the Condo',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                   pw.Text('2.Photos view inside of the Condo ',
-//                                       style: header3(),
-//                                       textAlign: pw.TextAlign.start),
-//                                 ],
-//                                 pw.Expanded(
-//                                   flex: 2,
-//                                   child: pw.GridView(
-//                                       crossAxisCount: 2,
-//                                       crossAxisSpacing: 2,
-//                                       mainAxisSpacing: 4,
-//                                       children: [
-//                                         for (var photo in insideimg) ...[
-//                                           pw.Image(pw.MemoryImage(photo),
-//                                               height: 150,
-//                                               width: 700,
-//                                               fit: pw.BoxFit.contain),
-//                                         ]
-//                                       ]),
-//                                 ),
-//                                 pw.SizedBox(height: 20)
-//                               ],
-//                             ) // Add margin here
-//                             )),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ));
-//     }
+// Page Twell
+    if (widget.objCover!.header ==
+        "Property [LAND AND BUILDING] VALUATION REPORT") {
+      pdf.addPage(pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  flex: 5,
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 10, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Center(
+                        child: pw.Padding(
+                            padding: const pw.EdgeInsets.only(
+                                top: 10, left: 20, right: 20),
+                            child: pw.Column(
+                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                              crossAxisAlignment: pw.CrossAxisAlignment.center,
+                              children: [
+                                if (widget.objCover!.header ==
+                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                  pw.Text(
+                                      'II. Photos inside view of the Property',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                  pw.Text(
+                                      '2.Photos view inside of the Property',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                ] else if (widget.objCover!.header ==
+                                    "Property LAND VALUATION REPORT") ...[
+                                  pw.Text('II. Photos inside view of the Land',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                  pw.Text('2.Photos view inside of the Land',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                ] else if (widget.objCover!.header ==
+                                    "Property OFFICE SPACE VALUATION REPORT") ...[
+                                  pw.Text(
+                                      'II. Photos inside view of the Office Space',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                  pw.Text(
+                                      '2.Photos view inside of the Office Space ',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                ] else ...[
+                                  pw.Text('II. Photos inside view of the Condo',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                  pw.Text('2.Photos view inside of the Condo ',
+                                      style: header3(),
+                                      textAlign: pw.TextAlign.start),
+                                ],
+                                pw.Expanded(
+                                  flex: 2,
+                                  child: pw.GridView(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 2,
+                                      mainAxisSpacing: 4,
+                                      children: [
+                                        for (var photo in insideimg) ...[
+                                          pw.Image(pw.MemoryImage(photo),
+                                              height: 150,
+                                              width: 700,
+                                              fit: pw.BoxFit.contain),
+                                        ]
+                                      ]),
+                                ),
+                                pw.SizedBox(height: 20)
+                              ],
+                            ) // Add margin here
+                            )),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ));
+    }
 
     //Page Twenty
-    // pdf.addPage(pw.Page(
-    //   pageTheme: pageTheme,
-    //   build: (final context) {
-    //     return pw.FullPage(
-    //       ignoreMargins: true,
-    //       child: pw.Column(
-    //         crossAxisAlignment: pw.CrossAxisAlignment.end,
-    //         children: [
-    //           pw.Container(
-    //             margin: const pw.EdgeInsets.only(
-    //               top: 25,
-    //               right: 25,
-    //             ), // Add margin here
-    //             child: pw.Text(
-    //               "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-    //               style: pw.TextStyle(fontSize: 9, font: font),
-    //             ),
-    //           ),
-    //           pw.Expanded(
-    //             flex: 6,
-    //             child: pw.Container(
-    //               margin: const pw.EdgeInsets.only(
-    //                   top: 10, left: 40, right: 25, bottom: 25),
-    //               decoration: pw.BoxDecoration(
-    //                 border: pw.Border.all(
-    //                   color: PdfColors.black,
-    //                   width: 2, // Adjust border width as needed
-    //                 ),
-    //               ),
-    //               child: pw.Center(
-    //                   child: pw.Padding(
-    //                       padding: const pw.EdgeInsets.only(
-    //                           top: 10, left: 40, right: 40, bottom: 10),
-    //                       child: pw.Column(
-    //                         mainAxisAlignment: pw.MainAxisAlignment.start,
-    //                         crossAxisAlignment: pw.CrossAxisAlignment.center,
-    //                         children: [
-    //                           if (widget.objCover!.header ==
-    //                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Property',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (widget.objCover!.header ==
-    //                               "Property LAND VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Land',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (widget.objCover!.header ==
-    //                               "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Office Space',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else ...[
-    //                             pw.Text(
-    //                                 'III. Photos view of Access Road to the Condo',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ],
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Row(
-    //                                 mainAxisAlignment:
-    //                                     pw.MainAxisAlignment.spaceBetween,
-    //                                 children: [
-    //                                   pw.Image(pw.MemoryImage(roadviewimage1!),
-    //                                       height: 150,
-    //                                       width: 700,
-    //                                       fit: pw.BoxFit.contain),
-    //                                   pw.Image(pw.MemoryImage(roadviewimage2!),
-    //                                       height: 150,
-    //                                       width: 700,
-    //                                       fit: pw.BoxFit.contain),
-    //                                 ]),
-    //                           ),
-    //                           if (widget.objCover!.header ==
-    //                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Property',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (widget.objCover!.header ==
-    //                               "Property LAND VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Land',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else if (widget.objCover!.header ==
-    //                               "Property OFFICE SPACE VALUATION REPORT") ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Office Space',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ] else ...[
-    //                             pw.Text(
-    //                                 'IV. Photos surroundings view of the Condo',
-    //                                 style: header3(),
-    //                                 textAlign: pw.TextAlign.start),
-    //                           ],
-    //                           pw.SizedBox(height: 10),
-    //                           pw.Expanded(
-    //                               flex: 2,
-    //                               child: pw.Row(
-    //                                   mainAxisAlignment:
-    //                                       pw.MainAxisAlignment.spaceBetween,
-    //                                   children: [
-    //                                     pw.Column(
-    //                                         crossAxisAlignment:
-    //                                             pw.CrossAxisAlignment.center,
-    //                                         children: [
-    //                                           pw.Image(
-    //                                               pw.MemoryImage(surroundin1!),
-    //                                               height: 150,
-    //                                               width: 700,
-    //                                               fit: pw.BoxFit.contain),
-    //                                           pw.SizedBox(height: 2),
-    //                                           pw.Text(
-    //                                               '${widget.objPhotoDetail!.dessurroundin1}',
-    //                                               style: header3(),
-    //                                               textAlign:
-    //                                                   pw.TextAlign.start),
-    //                                         ]),
-    //                                     pw.Column(
-    //                                         crossAxisAlignment:
-    //                                             pw.CrossAxisAlignment.center,
-    //                                         children: [
-    //                                           pw.Image(
-    //                                               pw.MemoryImage(surroundin2!),
-    //                                               height: 150,
-    //                                               width: 700,
-    //                                               fit: pw.BoxFit.contain),
-    //                                           pw.SizedBox(height: 2),
-    //                                           pw.Text(
-    //                                               '${widget.objPhotoDetail!.dessurroundin2}',
-    //                                               style: header3(),
-    //                                               textAlign:
-    //                                                   pw.TextAlign.start),
-    //                                         ])
-    //                                   ])),
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Row(
-    //                                 mainAxisAlignment:
-    //                                     pw.MainAxisAlignment.spaceBetween,
-    //                                 children: [
-    //                                   pw.Column(
-    //                                       crossAxisAlignment:
-    //                                           pw.CrossAxisAlignment.center,
-    //                                       children: [
-    //                                         pw.Image(
-    //                                             pw.MemoryImage(surroundin3!),
-    //                                             height: 150,
-    //                                             width: 700,
-    //                                             fit: pw.BoxFit.contain),
-    //                                         pw.SizedBox(height: 2),
-    //                                         pw.Text(
-    //                                             '${widget.objPhotoDetail!.dessurroundin3}',
-    //                                             style: header3(),
-    //                                             textAlign: pw.TextAlign.start),
-    //                                       ]),
-    //                                   pw.Column(
-    //                                       crossAxisAlignment:
-    //                                           pw.CrossAxisAlignment.center,
-    //                                       children: [
-    //                                         pw.Image(
-    //                                             pw.MemoryImage(surroundin4!),
-    //                                             height: 150,
-    //                                             width: 700,
-    //                                             fit: pw.BoxFit.contain),
-    //                                         pw.SizedBox(height: 2),
-    //                                         pw.Text(
-    //                                             '${widget.objPhotoDetail!.dessurroundin4}',
-    //                                             style: header3(),
-    //                                             textAlign: pw.TextAlign.start),
-    //                                       ])
-    //                                 ]),
-    //                           ),
-    //                           pw.Expanded(
-    //                             flex: 2,
-    //                             child: pw.Row(
-    //                                 mainAxisAlignment:
-    //                                     pw.MainAxisAlignment.spaceBetween,
-    //                                 children: [
-    //                                   pw.Column(
-    //                                       crossAxisAlignment:
-    //                                           pw.CrossAxisAlignment.center,
-    //                                       children: [
-    //                                         pw.Image(
-    //                                             pw.MemoryImage(surroundin5!),
-    //                                             height: 150,
-    //                                             width: 700,
-    //                                             fit: pw.BoxFit.contain),
-    //                                         pw.SizedBox(height: 2),
-    //                                         pw.Text(
-    //                                             '${widget.objPhotoDetail!.dessurroundin5}',
-    //                                             style: header3(),
-    //                                             textAlign: pw.TextAlign.start),
-    //                                       ]),
-    //                                   pw.Column(
-    //                                       crossAxisAlignment:
-    //                                           pw.CrossAxisAlignment.center,
-    //                                       children: [
-    //                                         pw.Image(
-    //                                             pw.MemoryImage(surroundin6!),
-    //                                             height: 150,
-    //                                             width: 700,
-    //                                             fit: pw.BoxFit.contain),
-    //                                         pw.SizedBox(height: 2),
-    //                                         pw.Text(
-    //                                             '${widget.objPhotoDetail!.dessurroundin6}',
-    //                                             style: header3(),
-    //                                             textAlign: pw.TextAlign.start),
-    //                                       ])
-    //                                 ]),
-    //                           ),
-    //                         ],
-    //                       ) // Add margin here
-    //                       )),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                  top: 25,
+                  right: 25,
+                ), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                flex: 6,
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 10, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 10, left: 40, right: 40, bottom: 10),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.start,
+                            crossAxisAlignment: pw.CrossAxisAlignment.center,
+                            children: [
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Text(
+                                    'III. Photos view of Access Road to the Property',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT") ...[
+                                pw.Text(
+                                    'III. Photos view of Access Road to the Land',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text(
+                                    'III. Photos view of Access Road to the Office Space',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else ...[
+                                pw.Text(
+                                    'III. Photos view of Access Road to the Condo',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ],
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Row(
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      pw.Image(pw.MemoryImage(roadviewimage1!),
+                                          height: 150,
+                                          width: 700,
+                                          fit: pw.BoxFit.contain),
+                                      pw.Image(pw.MemoryImage(roadviewimage2!),
+                                          height: 150,
+                                          width: 700,
+                                          fit: pw.BoxFit.contain),
+                                    ]),
+                              ),
+                              if (widget.objCover!.header ==
+                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                pw.Text(
+                                    'IV. Photos surroundings view of the Property',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT") ...[
+                                pw.Text(
+                                    'IV. Photos surroundings view of the Land',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else if (widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT") ...[
+                                pw.Text(
+                                    'IV. Photos surroundings view of the Office Space',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ] else ...[
+                                pw.Text(
+                                    'IV. Photos surroundings view of the Condo',
+                                    style: header3(),
+                                    textAlign: pw.TextAlign.start),
+                              ],
+                              pw.SizedBox(height: 10),
+                              pw.Expanded(
+                                  flex: 2,
+                                  child: pw.Row(
+                                      mainAxisAlignment:
+                                          pw.MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        pw.Column(
+                                            crossAxisAlignment:
+                                                pw.CrossAxisAlignment.center,
+                                            children: [
+                                              pw.Image(
+                                                  pw.MemoryImage(surroundin1!),
+                                                  height: 150,
+                                                  width: 700,
+                                                  fit: pw.BoxFit.contain),
+                                              pw.SizedBox(height: 2),
+                                              pw.Text(
+                                                  '${widget.objPhotoDetail!.dessurroundin1}',
+                                                  style: header3(),
+                                                  textAlign:
+                                                      pw.TextAlign.start),
+                                            ]),
+                                        pw.Column(
+                                            crossAxisAlignment:
+                                                pw.CrossAxisAlignment.center,
+                                            children: [
+                                              pw.Image(
+                                                  pw.MemoryImage(surroundin2!),
+                                                  height: 150,
+                                                  width: 700,
+                                                  fit: pw.BoxFit.contain),
+                                              pw.SizedBox(height: 2),
+                                              pw.Text(
+                                                  '${widget.objPhotoDetail!.dessurroundin2}',
+                                                  style: header3(),
+                                                  textAlign:
+                                                      pw.TextAlign.start),
+                                            ])
+                                      ])),
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Row(
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      pw.Column(
+                                          crossAxisAlignment:
+                                              pw.CrossAxisAlignment.center,
+                                          children: [
+                                            pw.Image(
+                                                pw.MemoryImage(surroundin3!),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                            pw.SizedBox(height: 2),
+                                            pw.Text(
+                                                '${widget.objPhotoDetail!.dessurroundin3}',
+                                                style: header3(),
+                                                textAlign: pw.TextAlign.start),
+                                          ]),
+                                      pw.Column(
+                                          crossAxisAlignment:
+                                              pw.CrossAxisAlignment.center,
+                                          children: [
+                                            pw.Image(
+                                                pw.MemoryImage(surroundin4!),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                            pw.SizedBox(height: 2),
+                                            pw.Text(
+                                                '${widget.objPhotoDetail!.dessurroundin4}',
+                                                style: header3(),
+                                                textAlign: pw.TextAlign.start),
+                                          ])
+                                    ]),
+                              ),
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Row(
+                                    mainAxisAlignment:
+                                        pw.MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      pw.Column(
+                                          crossAxisAlignment:
+                                              pw.CrossAxisAlignment.center,
+                                          children: [
+                                            pw.Image(
+                                                pw.MemoryImage(surroundin5!),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                            pw.SizedBox(height: 2),
+                                            pw.Text(
+                                                '${widget.objPhotoDetail!.dessurroundin5}',
+                                                style: header3(),
+                                                textAlign: pw.TextAlign.start),
+                                          ]),
+                                      pw.Column(
+                                          crossAxisAlignment:
+                                              pw.CrossAxisAlignment.center,
+                                          children: [
+                                            pw.Image(
+                                                pw.MemoryImage(surroundin6!),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                            pw.SizedBox(height: 2),
+                                            pw.Text(
+                                                '${widget.objPhotoDetail!.dessurroundin6}',
+                                                style: header3(),
+                                                textAlign: pw.TextAlign.start),
+                                          ])
+                                    ]),
+                              ),
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ));
 
     //Page Thirty
     // pdf.addPage(

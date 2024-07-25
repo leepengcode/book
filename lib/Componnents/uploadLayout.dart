@@ -57,8 +57,8 @@ class _ButtonWidgetState extends State<LayerImagePicker> {
               if (imageUrl != null)
                 Image.network(
                   imageUrl!,
-                  width: 550,
-                  height: 800,
+                  width: 300,
+                  height: 400,
                   fit: BoxFit.cover,
                 )
             ],
@@ -69,8 +69,8 @@ class _ButtonWidgetState extends State<LayerImagePicker> {
               pickImage();
             },
             child: Container(
-                width: 550,
-                height: 800,
+                width: 300,
+                height: 400,
                 decoration: BoxDecoration(border: Border.all()),
                 child: image == null && imageUrl == null
                     ? Icon(

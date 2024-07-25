@@ -299,24 +299,30 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // _buildTextFieldColumn(
-                        //     title: "(Flat)Building Size",
-                        //     label: "",
-                        //     width: 250,
-                        //     keytype: TextInputType.number,
-                        //     controller: _flatsize),
                         _buildTextFieldColumn(
                             title: "Building Size",
                             label: "",
                             keytype: TextInputType.number,
                             width: 250,
                             controller: _flatsize),
-                        // _buildTextFieldColumn(
-                        //     title: "Total Building Size",
-                        //     label: "",
-                        //     width: 250,
-                        //     keytype: TextInputType.number,
-                        //     controller: _totalsize),
+                        _buildTextFieldColumn(
+                            title: "By Owmer",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _byowner),
+                        _buildTextFieldColumn(
+                            title: "Age of Building",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _buildingage),
+                        _buildTextFieldColumn(
+                            title: "Metal Roof area",
+                            label: "",
+                            width: 250,
+                            keytype: TextInputType.number,
+                            controller: _metalroof),
                       ],
                     ),
                   ] else if (widget.ck1 == "Property CONDO REPORT") ...[

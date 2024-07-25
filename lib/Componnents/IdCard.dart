@@ -45,8 +45,8 @@ class _ButtonWidgetState extends State<IdcardPicker> {
             if (image != null)
               Image.network(
                 imageUrl!,
-                width: 500,
-                height: 300,
+                width: 300,
+                height: 200,
                 fit: BoxFit.cover,
               )
           ],
@@ -57,8 +57,8 @@ class _ButtonWidgetState extends State<IdcardPicker> {
             pickImage();
           },
           child: Container(
-              width: 500,
-              height: 300,
+              width: 300,
+              height: 200,
               decoration: BoxDecoration(border: Border.all()),
               child: image == null && imageUrl == null
                   ? Icon(

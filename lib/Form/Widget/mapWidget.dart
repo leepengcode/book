@@ -58,167 +58,170 @@ class _MapwidgetState extends State<Mapwidget> {
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                "Location Map in Phnom Penh",
-                style: THeader(),
-              ),
-              Text(
-                " *",
-                style: TextStyle(color: Colors.red, fontSize: 15),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Stack(
+              Column(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     children: [
-                      if (pmapimage != null)
-                        Image.network(
-                          pmapimage!.path,
-                          width: 1000,
-                          height: 600,
-                          fit: BoxFit.cover,
-                        )
+                      Text(
+                        "Location Map in Phnom Penh",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
                     ],
                   ),
-                  Positioned(
-                      child: GestureDetector(
-                          onTap: () async {
-                            pmapimage = await pickImage('Pmap');
-                            setState(() {
-                              pmapimage;
-                              objGmap.pmapimage = pmapimage;
-                            });
-                          },
-                          child: Container(
-                            width: 1000,
-                            height: 600,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: (pmapimage == null)
-                                ? Image.network(
-                                    "https://img.icons8.com/cotton/100/image--v2.png")
-                                : SizedBox(),
-                          ))),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (pmapimage != null)
+                                Image.network(
+                                  pmapimage!.path,
+                                  width: 300,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                )
+                            ],
+                          ),
+                          Positioned(
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    pmapimage = await pickImage('Pmap');
+                                    setState(() {
+                                      pmapimage;
+                                      objGmap.pmapimage = pmapimage;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 300,
+                                    height: 200,
+                                    decoration:
+                                        BoxDecoration(border: Border.all()),
+                                    child: (pmapimage == null)
+                                        ? Image.network(
+                                            "https://img.icons8.com/cotton/100/image--v2.png")
+                                        : SizedBox(),
+                                  ))),
+                        ],
+                      )),
                 ],
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Text(
-                "Aerial Photograph of Phnom Penh Location ",
-                style: THeader(),
               ),
-              Text(
-                " *",
-                style: TextStyle(color: Colors.red, fontSize: 15),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Stack(
+              Column(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     children: [
-                      if (apmapimage != null)
-                        Image.network(
-                          apmapimage!.path,
-                          width: 1000,
-                          height: 600,
-                          fit: BoxFit.cover,
-                        )
+                      Text(
+                        "Aerial Photograph of Phnom Penh Location ",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
                     ],
                   ),
-                  Positioned(
-                      child: GestureDetector(
-                          onTap: () async {
-                            apmapimage = await pickImage('apmap');
-                            setState(() {
-                              apmapimage;
-                              objGmap.apmapimage = apmapimage;
-                            });
-                          },
-                          child: Container(
-                            width: 1000,
-                            height: 600,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: (apmapimage == null)
-                                ? Image.network(
-                                    "https://img.icons8.com/cotton/100/image--v2.png")
-                                : SizedBox(),
-                          )))
+                  Align(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (apmapimage != null)
+                                Image.network(
+                                  apmapimage!.path,
+                                  width: 300,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                )
+                            ],
+                          ),
+                          Positioned(
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    apmapimage = await pickImage('apmap');
+                                    setState(() {
+                                      apmapimage;
+                                      objGmap.apmapimage = apmapimage;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 300,
+                                    height: 200,
+                                    decoration:
+                                        BoxDecoration(border: Border.all()),
+                                    child: (apmapimage == null)
+                                        ? Image.network(
+                                            "https://img.icons8.com/cotton/100/image--v2.png")
+                                        : SizedBox(),
+                                  )))
+                        ],
+                      )),
                 ],
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Text(
-                "Map Sketch",
-                style: THeader(),
               ),
-              Text(
-                " *",
-                style: TextStyle(color: Colors.red, fontSize: 15),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-              alignment: Alignment.center,
-              child: Stack(
+              Column(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     children: [
-                      if (skmapimage != null)
-                        Image.network(
-                          skmapimage!.path,
-                          width: 1000,
-                          height: 600,
-                          fit: BoxFit.cover,
-                        )
+                      Text(
+                        "Map Sketch",
+                        style: THeader(),
+                      ),
+                      Text(
+                        " *",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      )
                     ],
                   ),
-                  Positioned(
-                      child: GestureDetector(
-                          onTap: () async {
-                            skmapimage = await pickImage('skmap');
-                            setState(() {
-                              skmapimage;
-                              objGmap.skmapimage = skmapimage;
-                              widget.getForm(objGmap);
-                            });
-                          },
-                          child: Container(
-                            width: 1000,
-                            height: 600,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: (skmapimage == null)
-                                ? Image.network(
-                                    "https://img.icons8.com/cotton/100/image--v2.png")
-                                : SizedBox(),
-                          )))
+                  Align(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (skmapimage != null)
+                                Image.network(
+                                  skmapimage!.path,
+                                  width: 300,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                )
+                            ],
+                          ),
+                          Positioned(
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    skmapimage = await pickImage('skmap');
+                                    setState(() {
+                                      skmapimage;
+                                      objGmap.skmapimage = skmapimage;
+                                      widget.getForm(objGmap);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 300,
+                                    height: 200,
+                                    decoration:
+                                        BoxDecoration(border: Border.all()),
+                                    child: (skmapimage == null)
+                                        ? Image.network(
+                                            "https://img.icons8.com/cotton/100/image--v2.png")
+                                        : SizedBox(),
+                                  )))
+                        ],
+                      )),
                 ],
-              )),
-        ]));
+              )
+            ]));
   }
 }

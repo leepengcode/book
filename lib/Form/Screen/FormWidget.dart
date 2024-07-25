@@ -95,23 +95,23 @@ class _FormWidgetState extends State<FormWidget> {
                 GestureDetector(
                   onTap: () async {
                     setState(() {
-                      // dataPhoto;
+                      dataPhoto;
 
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MyPDF(
                           objCover: dataCover,
-                          // objPropertyInfor: dataInfo,
-                          // objIdcard: dataIdcard,
-                          // objLayout: dataLayout,
-                          // objGmap: dataGmap,
+                          objPropertyInfor: dataInfo,
+                          objIdcard: dataIdcard,
+                          objLayout: dataLayout,
+                          objGmap: dataGmap,
                           // objFinalIndication: dataFinalIndic,
                           // objProvisional: dataProvisional,
                           // objfinalmap: datafinalmap,
                           // objOfficerReport: dataOfficer,
-                          // objPhotoDetail: dataPhoto,
-                          // list_forviewproperty: list_forviewproperty,
-                          // list_forinsideproperty: list_forinsideproperty,
-                          // list_forviewland: list_forviewland,
+                          objPhotoDetail: dataPhoto,
+                          list_forviewproperty: list_forviewproperty,
+                          list_forinsideproperty: list_forinsideproperty,
+                          list_forviewland: list_forviewland,
                         ),
                       ));
                     });
@@ -146,99 +146,97 @@ class _FormWidgetState extends State<FormWidget> {
                       height: 10,
                       color: Colors.black,
                     ),
-                    // PropertyInfo_Widget(
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       dataInfo = value;
-                    //     });
-                    //   },
-                    //   ck1: ck1,
-                    // ),
-                    // Container(
-                    //   height: 10,
-                    //   color: Colors.black,
-                    // ),
+                    PropertyInfo_Widget(
+                      getForm: (value) {
+                        setState(() {
+                          dataInfo = value;
+                        });
+                      },
+                      ck1: ck1,
+                    ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
 
-                    // uploadIDCard(
-                    //   getForm: (value) {
-                    //     if (value != null) {
-                    //       setState(() {
-                    //         dataIdcard = value;
-                    //       });
-                    //     }
-                    //   },
-                    // ),
-                    // Container(
-                    //   height: 10,
-                    //   color: Colors.black,
-                    // ),
-                    // uploadLayoutWidget(
-                    //   getForm: (value) {
-                    //     dataLayout = value;
-                    //   },
-                    //   ck1: ck1,
-                    // ),
-                    // Container(
-                    //   height: 10,
-                    //   color: Colors.black,
-                    // ),
-                    // Mapwidget(
-                    //   getForm: (value) {
-                    //     if (value != null) {
-                    //       print("Value : ${value}");
-                    //       dataGmap = value;
-                    //     }
-                    //   },
-                    // ),
-                    // Container(
-                    //   height: 10,
-                    //   color: Colors.black,
-                    // ),
+                    uploadIDCard(
+                      getForm: (value) {
+                        if (value != null) {
+                          setState(() {
+                            dataIdcard = value;
+                          });
+                        }
+                      },
+                    ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
+                    uploadLayoutWidget(
+                      getForm: (value) {
+                        dataLayout = value;
+                      },
+                      ck1: ck1,
+                    ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
+                    Mapwidget(
+                      getForm: (value) {
+                        print("Value : ${value}");
+                        dataGmap = value;
+                      },
+                    ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
 
-                    // if (ck1 != null)
-                    //   PhotoDetailWidget(
-                    //     getForm: (value) {
-                    //       setState(() {
-                    //         dataPhoto = value;
-                    //         print(
-                    //             "frontviewimage ${dataPhoto.frontviewimage}\n");
-                    //       });
-                    //     },
-                    //     ck1: ck1,
-                    //     get_viewproperty: (value) {
-                    //       if (value != null) {
-                    //         setState(() {
-                    //           list_forviewproperty = value;
-                    //           dataPhoto.viewimage = value;
-                    //           print(
-                    //               "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
-                    //         });
-                    //       }
-                    //     },
-                    //     get_insideproperty: (value) {
-                    //       if (value != null) {
-                    //         setState(() {
-                    //           list_forinsideproperty = value;
-                    //           dataPhoto.insideimage = value;
-                    //           print(
-                    //               "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
-                    //         });
-                    //       }
-                    //     },
-                    //     get_viewland: (value) {
-                    //       if (value != null) {
-                    //         setState(() {
-                    //           print("In main get_viewland\n\n");
-                    //           list_forviewland = value;
-                    //           dataPhoto.landimage = list_forviewland;
-                    //         });
-                    //       }
-                    //     },
-                    //   ),
-                    // Container(
-                    //   height: 10,
-                    //   color: Colors.black,
-                    // ),
+                    if (ck1 != null)
+                      PhotoDetailWidget(
+                        getForm: (value) {
+                          setState(() {
+                            dataPhoto = value;
+                            print(
+                                "frontviewimage ${dataPhoto.frontviewimage}\n");
+                          });
+                        },
+                        ck1: ck1,
+                        get_viewproperty: (value) {
+                          if (value != null) {
+                            setState(() {
+                              list_forviewproperty = value;
+                              dataPhoto.viewimage = value;
+                              print(
+                                  "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
+                            });
+                          }
+                        },
+                        get_insideproperty: (value) {
+                          if (value != null) {
+                            setState(() {
+                              list_forinsideproperty = value;
+                              dataPhoto.insideimage = value;
+                              print(
+                                  "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
+                            });
+                          }
+                        },
+                        get_viewland: (value) {
+                          if (value != null) {
+                            setState(() {
+                              print("In main get_viewland\n\n");
+                              list_forviewland = value;
+                              dataPhoto.landimage = list_forviewland;
+                            });
+                          }
+                        },
+                      ),
+                    Container(
+                      height: 10,
+                      color: Colors.black,
+                    ),
 
                     // NearbyPropertyWidget(
                     //   getForm: (value) {
@@ -299,15 +297,14 @@ class _FormWidgetState extends State<FormWidget> {
                         // await OfficerReport()
                         //   ..InsertOfficer(dataOfficer!);
 
-                        // await Gmap().insertGmap(dataGmap!);
+                        await Gmap().insertGmap(dataGmap!);
 
-                        // await InsertPhoto();
+                        await InsertPhoto();
 
-                        // await Layout().InsertLayout(dataLayout!);
-                        // await IDCard().InsertIdCard(dataIdcard!);
+                        await Layout().InsertLayout(dataLayout!);
+                        await IDCard().InsertIdCard(dataIdcard!);
 
-                        // await PropertyInfor()
-                        //   ..InsertInfo(dataInfo!);
+                        await PropertyInfor().InsertInfo(dataInfo!);
                       },
                       child: Center(
                           child: Container(

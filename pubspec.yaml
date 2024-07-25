@@ -106,6 +106,9 @@ flutter:
     - family: Nato
       fonts:
         - asset: assets/fonts/NotoSerifKhmer-Bold.ttf
+    - family: NotoSansKhmer
+      fonts:
+        - asset: assets/fonts/NotoSansKhmer-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
