@@ -299,7 +299,7 @@ class _MyWidgetState extends State<CoverWidget> {
               children: [
                 _buildTextFieldColumn(
                   title: "Owner Name",
-                  label: "",
+                  label: "Owner Name",
                   width: 250,
                   controller: ownerNameContoller,
                   onChanged: (value) {
@@ -310,7 +310,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 ),
                 _buildTextFieldColumn(
                   title: "Deep Title",
-                  label: "",
+                  label: "Deep Title",
                   width: 250,
                   controller: deepTitleController,
                   onChanged: (value) {
@@ -321,7 +321,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 ),
                 _buildTextFieldColumn(
                   title: "Property Location",
-                  label: "",
+                  label: "Property Location",
                   width: 250,
                   controller: locationControltter,
                   onChanged: (value) {
@@ -332,7 +332,7 @@ class _MyWidgetState extends State<CoverWidget> {
                 ),
                 _buildTextFieldColumn(
                   title: "Street",
-                  label: "",
+                  label: "Street",
                   width: 250,
                   controller: streetController,
                   onChanged: (value) {

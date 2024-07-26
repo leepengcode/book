@@ -5,6 +5,7 @@ import 'package:book/Model/ProvisionalBuildingMdel.dart';
 import 'package:book/Model/ProvisionalLandMdel.dart';
 import 'package:book/Model/ProvisionalModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 typedef OnChangeCallback = void Function(dynamic value);
 
@@ -245,12 +246,20 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           _buildTextFieldColumn(
                               title: "Size Sqm",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 210,
                               controller: landInfo.sizeSqm),
                           SizedBox(width: 25),
                           _buildTextFieldColumn(
                               title: "\$/sqm(Min)",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 210,
                               controller: landInfo.minPrice),
                           SizedBox(width: 25),
@@ -264,6 +273,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           _buildTextFieldColumn(
                               title: "\$/sqm(Max)",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 210,
                               controller: landInfo.maxPrice),
                           SizedBox(width: 25),
@@ -367,12 +380,20 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           _buildTextFieldColumn(
                               title: "Size Sqm",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 210,
                               controller: landInfo.sizeSqm),
                           SizedBox(width: 25),
                           _buildTextFieldColumn(
                               title: "\$/sqm(Min)",
                               label: "Enter",
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               width: 210,
                               controller: landInfo.minPrice),
                           SizedBox(width: 25),
@@ -387,6 +408,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               title: "\$/sqm(Max)",
                               label: "Enter",
                               width: 210,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               controller: landInfo.maxPrice),
                           SizedBox(width: 25),
                           _buildTextFieldColumn(
@@ -487,12 +512,20 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               _buildTextFieldColumn(
                                   title: "Size Sqm",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 210,
                                   controller: buildingInfo.sizeSqm),
                               SizedBox(width: 25),
                               _buildTextFieldColumn(
                                   title: "\$/sqm(Min)",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 210,
                                   controller: buildingInfo.minPrice),
                               SizedBox(width: 25),
@@ -507,6 +540,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                                   title: "\$/sqm(Max)",
                                   label: "Enter",
                                   width: 210,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   controller: buildingInfo.maxPrice),
                               SizedBox(width: 25),
                               _buildTextFieldColumn(
@@ -613,12 +650,20 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               _buildTextFieldColumn(
                                   title: "Gross Area Sqm",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 170,
                                   controller: buildingInfo.sizeSqm),
                               SizedBox(width: 25),
                               _buildTextFieldColumn(
                                   title: "\$/sqm(Min)",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 170,
                                   controller: buildingInfo.minPrice),
                               SizedBox(width: 25),
@@ -632,6 +677,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               _buildTextFieldColumn(
                                   title: "\$/sqm(Max)",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 180,
                                   controller: buildingInfo.maxPrice),
                               SizedBox(width: 25),
@@ -737,12 +786,20 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               _buildTextFieldColumn(
                                   title: "Gross Area Sqm",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 170,
                                   controller: buildingInfo.sizeSqm),
                               SizedBox(width: 25),
                               _buildTextFieldColumn(
                                   title: "\$/sqm(Min)",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 170,
                                   controller: buildingInfo.minPrice),
                               SizedBox(width: 25),
@@ -756,6 +813,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                               _buildTextFieldColumn(
                                   title: "\$/sqm(Max)",
                                   label: "Enter",
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   width: 180,
                                   controller: buildingInfo.maxPrice),
                               SizedBox(width: 25),
@@ -851,6 +912,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           width: 300,
                           title: "Fire Insurance Value",
                           label: "Enter",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           // readOnly: true,
                           controller: _fireinsurance),
                       SizedBox(
@@ -860,6 +925,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           width: 350,
                           title: "Force Sale Value",
                           label: "Enter",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           // readOnly: true,
                           controller: _forcesale),
                     ] else ...[
@@ -867,6 +936,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                           width: 350,
                           title: "Force Sale Value",
                           label: "Enter",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           // readOnly: true,
                           controller: _forcesale),
                     ]
@@ -883,6 +956,8 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
     required String label,
     required double width,
     required TextEditingController controller,
+    TextInputType keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
     bool readOnly = false,
     String? Function(String?)? validator,
   }) {
@@ -904,6 +979,8 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
         Container(
           width: width,
           child: TextFormField(
+            keyboardType: keyboardType,
+            inputFormatters: inputFormatters,
             readOnly: readOnly,
             controller: controller,
             maxLines: null,

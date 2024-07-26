@@ -2,6 +2,7 @@ import 'package:book/Componnents/style.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PropertyInfo_Widget extends StatefulWidget {
   PropertyInfo_Widget({
@@ -188,17 +189,29 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
               children: [
                 _buildTextFieldColumn(
                     title: "Plot Nº",
-                    label: "",
+                    label: "Plot Nº",
                     width: 250,
                     controller: _plotno),
                 _buildTextFieldColumn(
-                    title: "North", label: "", width: 250, controller: _north),
+                    title: "North",
+                    label: "North",
+                    width: 250,
+                    controller: _north),
                 _buildTextFieldColumn(
-                    title: "South", label: "", width: 250, controller: _south),
+                    title: "South",
+                    label: "South",
+                    width: 250,
+                    controller: _south),
                 _buildTextFieldColumn(
-                    title: "East", label: "", width: 250, controller: _east),
+                    title: "East",
+                    label: "East",
+                    width: 250,
+                    controller: _east),
                 _buildTextFieldColumn(
-                    title: "West", label: "", width: 250, controller: _west),
+                    title: "West",
+                    label: "West",
+                    width: 250,
+                    controller: _west),
               ],
             ),
             SizedBox(
@@ -217,29 +230,29 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
               children: [
                 _buildTextFieldColumn(
                     title: "Land title deed Nº",
-                    label: "",
+                    label: "Deed Nº",
                     width: 250,
                     controller: _landtitledeep),
                 _buildTextFieldColumn(
                     title: "Land Size(by title deed)",
-                    label: "",
+                    label: "Title deed",
                     width: 250,
                     keytype: TextInputType.number,
                     controller: _landsize),
                 _buildTextFieldColumn(
                     title: "Total Land Size(by Measurement)",
-                    label: "",
+                    label: "Measurement",
                     width: 250,
                     keytype: TextInputType.number,
                     controller: _totalland),
                 _buildTextFieldColumn(
                     title: "Type of land",
-                    label: "",
+                    label: "Type of land",
                     width: 250,
                     controller: _typeland),
                 _buildTextFieldColumn(
                     title: "Type of Tenure",
-                    label: "",
+                    label: "Type of Tenure",
                     width: 250,
                     controller: _tenure),
                 // if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
@@ -275,19 +288,19 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",
-                            label: "",
+                            label: "Deep Number",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _deepnumber),
                         _buildTextFieldColumn(
                             title: "Unit/Floor",
-                            label: "",
+                            label: "Unit/Floor",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _unit),
                         _buildTextFieldColumn(
                             title: "Building Size",
-                            label: "",
+                            label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
                             controller: _flatsize),
@@ -301,25 +314,25 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       children: [
                         _buildTextFieldColumn(
                             title: "Building Size",
-                            label: "",
+                            label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
                             controller: _flatsize),
                         _buildTextFieldColumn(
                             title: "By Owmer",
-                            label: "",
+                            label: "By Owmer",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _byowner),
                         _buildTextFieldColumn(
                             title: "Age of Building",
-                            label: "",
+                            label: "Age of Building",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _buildingage),
                         _buildTextFieldColumn(
                             title: "Metal Roof area",
-                            label: "",
+                            label: "Metal Roof area",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _metalroof),
@@ -332,19 +345,19 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",
-                            label: "",
+                            label: "Deep Number",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _deepnumber),
                         _buildTextFieldColumn(
                             title: "Unit/Floor",
-                            label: "",
+                            label: "Unit/Floor",
                             width: 250,
                             keytype: TextInputType.number,
                             controller: _unit),
                         _buildTextFieldColumn(
                             title: "Building Size",
-                            label: "",
+                            label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
                             controller: _flatsize),
@@ -360,27 +373,31 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     children: [
                       _buildTextFieldColumn(
                           title: "Occupied or Vacant",
-                          label: "",
+                          label: "Occupied",
                           width: 250,
                           controller: _occoupied),
                       _buildTextFieldColumn(
                           title: "Disposability",
-                          label: "",
+                          label: "Disposability",
                           width: 250,
                           controller: _disposability),
                       _buildTextFieldColumn(
                           title: "Quality given as a",
-                          label: "",
+                          label: "Quality",
                           width: 250,
                           controller: _quality),
                       _buildTextFieldColumn(
                           title: "Percentage",
-                          label: "",
+                          label: "Percentage",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           width: 250,
                           controller: _percentage),
                       _buildTextFieldColumn(
                           title: "Type of building",
-                          label: "",
+                          label: "Type of building",
                           width: 250,
                           controller: _typeofbuilding),
                     ],
@@ -401,27 +418,27 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     children: [
                       _buildTextFieldColumn(
                           title: "Floor",
-                          label: "",
+                          label: "Floor",
                           width: 250,
                           controller: _floor),
                       _buildTextFieldColumn(
                           title: "Roof",
-                          label: "",
+                          label: "Roof",
                           width: 250,
                           controller: _roof),
                       _buildTextFieldColumn(
                           title: "Door",
-                          label: "",
+                          label: "Door",
                           width: 250,
                           controller: _door),
                       _buildTextFieldColumn(
                           title: "Stair",
-                          label: "",
+                          label: "Stair",
                           width: 250,
                           controller: _stair),
                       _buildTextFieldColumn(
                           title: "Window",
-                          label: "",
+                          label: "Window",
                           width: 250,
                           controller: _windows),
                     ],
@@ -435,12 +452,12 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     children: [
                       _buildTextFieldColumn(
                           title: "Ceiling",
-                          label: "",
+                          label: "Ceiling",
                           width: 250,
                           controller: _ceiling),
                       _buildTextFieldColumn(
                           title: "Wall",
-                          label: "",
+                          label: "Wall",
                           width: 250,
                           controller: _wall),
                     ],
@@ -463,27 +480,27 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       children: [
                         _buildTextFieldColumn(
                             title: "Floor/Story",
-                            label: "",
+                            label: "Floor",
                             width: 250,
                             controller: _floornstory),
                         _buildTextFieldColumn(
                             title: "Bathroom",
-                            label: "",
+                            label: "Bathroom",
                             width: 250,
                             controller: _bathroom),
                         _buildTextFieldColumn(
                             title: "Room",
-                            label: "",
+                            label: "Room",
                             width: 250,
                             controller: _room),
                         _buildTextFieldColumn(
                             title: "Kitchen",
-                            label: "",
+                            label: "Kitchen",
                             width: 250,
                             controller: _kitchen),
                         _buildTextFieldColumn(
                             title: "Dining/Living Room",
-                            label: "",
+                            label: "Dining",
                             width: 250,
                             controller: _diningnlivingroom),
                       ],
@@ -497,12 +514,12 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       children: [
                         _buildTextFieldColumn(
                             title: "Storage Room",
-                            label: "",
+                            label: "Storage Room",
                             width: 250,
                             controller: _store),
                         _buildTextFieldColumn(
                             title: "Total Accommodation",
-                            label: "",
+                            label: "Total Accommodation",
                             width: 250,
                             controller: _total),
                       ],
@@ -524,32 +541,32 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     children: [
                       _buildTextFieldColumn(
                           title: "Water",
-                          label: "",
+                          label: "Water",
                           width: 210,
                           controller: _water),
                       _buildTextFieldColumn(
                           title: "Electricity",
-                          label: "",
+                          label: "Electricity",
                           width: 210,
                           controller: _electricity),
                       _buildTextFieldColumn(
                           title: "Sewerage",
-                          label: "",
+                          label: "Sewerage",
                           width: 210,
                           controller: _severage),
                       _buildTextFieldColumn(
                           title: "Telecommunications",
-                          label: "",
+                          label: "Telecommunications",
                           width: 210,
                           controller: _telecom),
                       _buildTextFieldColumn(
                           title: "Security",
-                          label: "",
+                          label: "Security",
                           width: 210,
                           controller: _security),
                       _buildTextFieldColumn(
                           title: "Garash/Parking",
-                          label: "",
+                          label: "Garash",
                           width: 210,
                           controller: _parking),
                     ],
@@ -567,6 +584,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
       required String label,
       required double width,
       required TextEditingController controller,
+      TextInputType keyboardType = TextInputType.text,
+      List<TextInputFormatter>? inputFormatters,
       bool readOnly = false,
       String? Function(String?)? validator,
       TextInputType? keytype}) {
@@ -588,7 +607,8 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
         Container(
           width: width,
           child: TextFormField(
-            keyboardType: keytype,
+            keyboardType: keyboardType,
+            inputFormatters: inputFormatters,
             readOnly: readOnly,
             controller: controller,
             maxLines: null,

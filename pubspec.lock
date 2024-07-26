@@ -295,7 +295,7 @@ packages:
     source: hosted
     version: "1.0.5"
   flutter_image_compress_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_image_compress_web
       sha256: f02fe352b17f82b72f481de45add240db062a2585850bea1667e82cc4cd6c311
@@ -406,7 +406,7 @@ packages:
     source: hosted
     version: "4.0.2"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       sha256: "2237616a36c0d69aef7549ab439b833fb7f9fb9fc861af2cc9ac3eedddd69ca8"
@@ -717,6 +717,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.1"
+  progress_dialog_null_safe:
+    dependency: "direct main"
+    description:
+      name: progress_dialog_null_safe
+      sha256: f7d452ba9b17bb60f32ee74170e1a2c4367eeb1c428b1626dfe343c70412e4ce
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   provider:
     dependency: "direct main"
     description:

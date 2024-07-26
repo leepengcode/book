@@ -33,6 +33,9 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.6
   pdf: ^3.10.8
   printing: ^5.12.0
@@ -45,8 +48,6 @@ dependencies:
   video_player: ^2.8.6
   universal_io: ^2.2.2
   date_picker_plus: ^4.0.0
-  flutter_localizations:
-    sdk: flutter
   google_maps: ^7.1.0
   google_maps_flutter: ^2.7.0
   easy_sidemenu: ^0.6.0
@@ -61,7 +62,9 @@ dependencies:
   dropdown_textfield: ^1.2.0
   flutter_image_compress: ^2.3.0
   stepper_page_view: ^0.0.2
-
+  flutter_image_compress_web: ^0.1.4+1
+  image: any
+  progress_dialog_null_safe: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -108,7 +111,7 @@ flutter:
         - asset: assets/fonts/NotoSerifKhmer-Bold.ttf
     - family: NotoSansKhmer
       fonts:
-        - asset: assets/fonts/NotoSansKhmer-Regular.ttf
+        - asset: assets/fonts/NotoSansKhmer.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

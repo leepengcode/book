@@ -4,10 +4,14 @@ import 'dart:io';
 
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/PhotoDetailModel.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:image/image.dart' as img;
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
 
 typedef OnChangeCallback = void Function(List<File>? value);
 
@@ -72,44 +76,134 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
 
   File? image;
   String? imageUrl;
-
+  double percentage = 0.0;
   Future<File?> pickImage(String? check_Calling) async {
-    File? image;
+    // ProgressDialog progressDialog = ProgressDialog(context);
+    // progressDialog.style(
+    //   message: 'Compressing image...',
+    //   progressWidgetAlignment: Alignment.center,
+    //   progressWidget: CircularProgressIndicator(),
+    // );
+
     try {
       XFile? pickedImage =
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage == null) {
         return null;
       } else {
-        setState(() {
-          imageUrl = pickedImage.path;
-          // print("object $check_Calling : $imageUrl\n");
-          image = File(pickedImage.path);
-        });
-        return image!;
+        // await progressDialog.show();
+        // Uint8List? compressedBytes = await compressImage(
+        //     pickedImage, 30); // Compress the image with 75% quality
+        // await progressDialog.hide();
+
+        // if (compressedBytes != null) {
+        if (kIsWeb) {
+          // For web, return the original picked image as a dummy file
+          return File(pickedImage.path);
+          //   } else {
+          //     // For mobile/desktop, save the compressed bytes as a file
+          //     File compressedFile =
+          //         await saveCompressedImage(compressedBytes, pickedImage.path);
+          //     return compressedFile;
+          //   }
+          // } else {
+          //   print('Failed to compress image.');
+          //   return File(pickedImage.path);
+        }
       }
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
+      // await progressDialog.hide();
       return null;
     }
   }
 
-  List<File>? imageFileList = [];
+  Future<Uint8List?> compressImage(XFile image, int quality) async {
+    try {
+      final bytes = await image.readAsBytes();
+      final img.Image? decodedImage = img.decodeImage(bytes);
 
+      if (decodedImage == null) {
+        return null;
+      }
+      final totalStages = 10;
+      final stageDuration = Duration(milliseconds: 100);
+
+      for (int i = 1; i <= totalStages; i++) {
+        await Future.delayed(stageDuration);
+        LinearProgressIndicator(
+          value: i / totalStages,
+        );
+      }
+      final compressedBytes =
+          Uint8List.fromList(img.encodeJpg(decodedImage, quality: quality));
+      return compressedBytes;
+    } catch (e) {
+      print("Error compressing image: $e");
+      return null;
+    }
+  }
+
+  Future<File> saveCompressedImage(Uint8List bytes, String originalPath) async {
+    final filePath = originalPath.replaceFirst('.jpg', '_compressed.jpg');
+    final file = File(filePath);
+    await file.writeAsBytes(bytes);
+    return file;
+  }
+
+  List<File>? imageFileList = [];
   Future<List<File>> selectImages() async {
     List<File> tempList = [];
+    // ProgressDialog progressDialog = ProgressDialog(context);
+    // progressDialog.style(
+    //   message: 'Compressing images...',
+    //   progressWidget: CircularProgressIndicator(),
+    // );
+
     try {
       List<XFile>? selectedImages = await ImagePicker().pickMultiImage();
-      for (var image in selectedImages) {
-        tempList.add(File(image.path));
+      if (selectedImages != null) {
+        // await progressDialog.show();
+        for (var image in selectedImages) {
+          // Uint8List? compressedBytes = await compressImage(
+          //     image, 30); // Compress the image with 75% quality
+          // if (compressedBytes != null) {
+          //   if (kIsWeb) {
+          tempList.add(File(image
+              .path)); // For web, return the original picked image as a dummy file
+          //   } else {
+          //     File compressedFile =
+          //         await saveCompressedImage(compressedBytes, image.path);
+          //     tempList.add(compressedFile);
+          //   }
+          // } else {
+          //   tempList.add(
+          //       File(image.path)); // Add original file if compression fails
+          // }
+        }
+        // await progressDialog.hide();
       }
-
       return tempList;
     } catch (e) {
       print("Error picking images: $e");
+      // await progressDialog.hide();
       return tempList;
     }
   }
+  // Future<List<File>> selectImages() async {
+  //   List<File> tempList = [];
+  //   try {
+  //     List<XFile>? selectedImages = await ImagePicker().pickMultiImage();
+  //     for (var image in selectedImages) {
+  //       tempList.add(File(image.path));
+  //     }
+
+  //     return tempList;
+  //   } catch (e) {
+  //     print("Error picking images: $e");
+  //     return tempList;
+  //   }
+  // }
 
   void removeImage(int index) {
     setState(() {
@@ -127,6 +221,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
     });
   }
 
+  bool f = false;
   @override
   void initState() {
     if (widget.ck1 != "Property LAND VALUATION REPORT") {
@@ -141,7 +236,22 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    widget.ck1;
+    setState(() {
+      if (widget.ck1 != "Property LAND VALUATION REPORT") {
+        if (viewproperty!.isEmpty && insideproperty!.isEmpty) {
+          viewproperty = [];
+          insideproperty = [];
+        }
+        viewland = [];
+      } else {
+        if (viewland!.isEmpty) {
+          viewland = [];
+        }
+        viewproperty = [];
+        insideproperty = [];
+      }
+    });
+
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
         width: 1500,
@@ -190,7 +300,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                           ],
                         ),
                         Positioned(
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () async {
                               frontview = await pickImage('frontview');
                               setState(() {
@@ -222,7 +332,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "1. Photos view of the property",
+                      "1. Photos view of the property(4 Photos)",
                       style: THeader(),
                     ),
                     Text(
@@ -330,7 +440,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "2. Photos inside of the property",
+                      "2. Photos inside of the property (8 Photos)",
                       style: THeader(),
                     ),
                     Text(
@@ -1035,7 +1145,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 Row(
                   children: [
                     Text(
-                      "II. Photos inside view of the Land",
+                      "II. Photos inside view of the Land (4 Photos)",
                       style: THeader(),
                     ),
                     Text(

@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:book/Form/LeftSideBar.dart';
+import 'package:book/Form/Screen/BookList.dart';
 import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
 import 'package:book/Form/Widget/GoogleMap.dart';
@@ -104,10 +106,10 @@ class _FormWidgetState extends State<FormWidget> {
                           objIdcard: dataIdcard,
                           objLayout: dataLayout,
                           objGmap: dataGmap,
-                          // objFinalIndication: dataFinalIndic,
-                          // objProvisional: dataProvisional,
-                          // objfinalmap: datafinalmap,
-                          // objOfficerReport: dataOfficer,
+                          objFinalIndication: dataFinalIndic,
+                          objProvisional: dataProvisional,
+                          objfinalmap: datafinalmap,
+                          objOfficerReport: dataOfficer,
                           objPhotoDetail: dataPhoto,
                           list_forviewproperty: list_forviewproperty,
                           list_forinsideproperty: list_forinsideproperty,
@@ -193,118 +195,109 @@ class _FormWidgetState extends State<FormWidget> {
                       color: Colors.black,
                     ),
 
-                    if (ck1 != null)
-                      PhotoDetailWidget(
-                        getForm: (value) {
+                    // if (ck1 != null)
+                    PhotoDetailWidget(
+                      getForm: (value) {
+                        setState(() {
+                          dataPhoto = value;
+                          print("frontviewimage ${dataPhoto.frontviewimage}\n");
+                        });
+                      },
+                      ck1: ck1,
+                      get_viewproperty: (value) {
+                        if (value != null) {
                           setState(() {
-                            dataPhoto = value;
+                            list_forviewproperty = value;
+                            dataPhoto.viewimage = value;
                             print(
-                                "frontviewimage ${dataPhoto.frontviewimage}\n");
+                                "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
                           });
-                        },
-                        ck1: ck1,
-                        get_viewproperty: (value) {
-                          if (value != null) {
-                            setState(() {
-                              list_forviewproperty = value;
-                              dataPhoto.viewimage = value;
-                              print(
-                                  "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
-                            });
-                          }
-                        },
-                        get_insideproperty: (value) {
-                          if (value != null) {
-                            setState(() {
-                              list_forinsideproperty = value;
-                              dataPhoto.insideimage = value;
-                              print(
-                                  "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
-                            });
-                          }
-                        },
-                        get_viewland: (value) {
-                          if (value != null) {
-                            setState(() {
-                              print("In main get_viewland\n\n");
-                              list_forviewland = value;
-                              dataPhoto.landimage = list_forviewland;
-                            });
-                          }
-                        },
-                      ),
+                        }
+                      },
+                      get_insideproperty: (value) {
+                        if (value != null) {
+                          setState(() {
+                            list_forinsideproperty = value;
+                            dataPhoto.insideimage = value;
+                            print(
+                                "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
+                          });
+                        }
+                      },
+                      get_viewland: (value) {
+                        if (value != null) {
+                          setState(() {
+                            print("In main get_viewland\n\n");
+                            list_forviewland = value;
+                            dataPhoto.landimage = list_forviewland;
+                          });
+                        }
+                      },
+                    ),
                     Container(
                       height: 10,
                       color: Colors.black,
                     ),
 
-                    // NearbyPropertyWidget(
-                    //   getForm: (value) {
-                    //     dataOfficer = value;
-                    //   },
-                    // ),
-                    // SizedBox(
-                    //   height: 25,
-                    // ),
-                    // GoogleMapImage(
-                    //   getFile: (value) {
-                    //     if (value != null) {
-                    //       setState(() {
-                    //         print("test2\n ${value!.Finalmap!.path}\n");
-                    //         datafinalmap = value;
-                    //       });
-                    //     }
-                    //   },
-                    // ),
-                    // SizedBox(
-                    //   height: 25,
-                    // ),
-                    // ProvisionalValue(
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       dataProvisional = value;
-                    //     });
-                    //   },
-                    //   NoLandCount: 1,
-                    //   ck1: ck1,
-                    // ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
-                    // FinalIndicationWidget(
-                    //   getForm: (value) {
-                    //     setState(() {
-                    //       if (value != null) {
-                    //         dataFinalIndic = value;
-                    //         print("in form ${dataFinalIndic.expiry_date}");
-                    //       }
-                    //     });
-                    //   },
-                    //   ck1: ck1,
-                    //   NoLandCount: 1,
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    //),
+                    NearbyPropertyWidget(
+                      getForm: (value) {
+                        dataOfficer = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    GoogleMapImage(
+                      getFile: (value) {
+                        if (value != null) {
+                          setState(() {
+                            print("test2\n ${value!.Finalmap!.path}\n");
+                            datafinalmap = value;
+                          });
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    ProvisionalValue(
+                      getForm: (value) {
+                        setState(() {
+                          dataProvisional = value;
+                        });
+                      },
+                      NoLandCount: 1,
+                      ck1: ck1,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    FinalIndicationWidget(
+                      getForm: (value) {
+                        setState(() {
+                          if (value != null) {
+                            dataFinalIndic = value;
+                            print("in form ${dataFinalIndic.expiry_date}");
+                          }
+                        });
+                      },
+                      ck1: ck1,
+                      NoLandCount: 1,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     GestureDetector(
                       onTap: () async {
-                        await Cover().InsertCover(dataCover!);
-                        // await FinalMap().InsertFinalMap(datafinalmap!);
-
-                        // await FinalIndication().InsertFinal(dataFinalIndic);
-                        // await Provisional().InsertProvisional(dataProvisional);
-
-                        // await OfficerReport()
-                        //   ..InsertOfficer(dataOfficer!);
-
-                        await Gmap().insertGmap(dataGmap!);
-
-                        await InsertPhoto();
-
-                        await Layout().InsertLayout(dataLayout!);
-                        await IDCard().InsertIdCard(dataIdcard!);
-
-                        await PropertyInfor().InsertInfo(dataInfo!);
+                        if (_await == true) {
+                          await Method_insert(context);
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => MyleftSideBar()));
+                          setState(() {
+                            _await = false;
+                          });
+                        }
                       },
                       child: Center(
                           child: Container(
@@ -331,200 +324,39 @@ class _FormWidgetState extends State<FormWidget> {
           ),
         ],
       ),
-      // body: SingleChildScrollView(
-      //   child: Center(
-      //     child: Column(
-      //       children: [
+    );
+  }
 
-      //         CoverWidget(
-      //           onChanged: (value) {
-      //             setState(() {
-      //               ck1 = value.toString();
-      //             });
-      //           },
-      //           getForm: (value) {
-      //             setState(() {
-      //               if (value != null) {
-      //                 print("object ${value.info}");
-      //                 dataCover = value;
-      //               }
-      //             });
-      //           },
-      //         ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         PropertyInfo_Widget(
-      //           getForm: (value) {
-      //             setState(() {
-      //               dataInfo = value;
-      //             });
-      //           },
-      //           ck1: ck1,
-      //         ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         uploadIDCard(
-      //           getForm: (value) {
-      //             if (value != null) {
-      //               dataIdcard = value;
-      //             }
-      //           },
-      //         ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         uploadLayoutWidget(
-      //           getForm: (value) {
-      //             dataLayout = value;
-      //           },
-      //           ck1: ck1,
-      //         ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         Mapwidget(
-      //           getForm: (value) {
-      //             if (value != null) {
-      //               print("Value : ${value}");
-      //               dataGmap = value;
-      //             }
-      //           },
-      //         ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         if (ck1 != null)
-      //           PhotoDetailWidget(
-      //             getForm: (value) {
-      //               setState(() {
-      //                 dataPhoto = value;
-      //               });
-      //             },
-      //             ck1: ck1,
-      //             get_viewproperty: (value) {
-      //               if (value != null) {
-      //                 setState(() {
-      //                   list_forviewproperty = value;
-      //                 });
-      //               }
-      //             },
-      //             get_insideproperty: (value) {
-      //               if (value != null) {
-      //                 setState(() {
-      //                   list_forinsideproperty = value;
-      //                 });
-      //               }
-      //             },
-      //             get_viewland: (value) {
-      //               if (value != null) {
-      //                 setState(() {
-      //                   print("In main get_viewland\n\n");
-      //                   list_forviewland = value;
-      //                 });
-      //               }
-      //             },
-      //           ),
-      //         const SizedBox(
-      //           height: 25,
-      //         ),
-      //         NearbyPropertyWidget(
-      //           getForm: (value) {
-      //             dataOfficer = value;
-      //           },
-      //         ),
-      //         SizedBox(
-      //           height: 25,
-      //         ),
-      //         GoogleMapImage(
-      //           getFile: (value) {
-      //            setState(() {
-      //               datafinalmap = value;
-      //            });
-      //           },
-      //         ),
-      //         SizedBox(
-      //           height: 25,
-      //         ),
-      //         ProvisionalValue(
-      //           getForm: (value) {
-      //             setState(() {
-      //               if (value != null) {
-      //                 dataProvisional = value;
-      //               }
-      //             });
-      //           },
-      //           NoLandCount: 1,
-      //           ck1: ck1,
-      //         ),
-      //         SizedBox(
-      //           height: 30,
-      //         ),
-      //         FinalIndicationWidget(
-      //           getForm: (value) {
-      //             setState(() {
-      //               if (value != null) {
-      //                 dataFinalIndic = value;
-      //               }
-      //             });
-      //           },
-      //           ck1: ck1,
-      //           NoLandCount: 1,
-      //         ),
-      //         SizedBox(
-      //           height: 20,
-      //         ),
-      //         GestureDetector(
-      //           onTap: () async {
+  bool _await = true;
+  var ckeck_insert;
+  Future<String> _get() async {
+    _await = true;
+    await Future.wait([Cover().InsertCover(dataCover!)]);
+    await Future.wait([PropertyInfor().InsertInfo(dataInfo!)]);
+    await Future.wait([IDCard().InsertIdCard(dataIdcard!)]);
+    await Future.wait([Layout().InsertLayout(dataLayout!)]);
+    await Future.wait([Gmap().insertGmap(dataGmap!)]);
+    await Future.wait([InsertPhoto()]);
+    await Future.wait([OfficerReport().InsertOfficer(dataOfficer!)]);
+    // await Future.wait([FinalMap().InsertFinalMap(datafinalmap!)]);
 
-      //             // await FinalMap().. InsertFinalMap(datafinalmap!);
+    // await Future.wait([FinalIndication().InsertFinal(dataFinalIndic)]);
 
-      //             // await FinalIndication()
-      //             //   ..InsertFinal(dataFinalIndic);
-      //             // await Provisional()
-      //             //   ..InsertProvisional(dataProvisional);
+    // await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
 
-      //             // await OfficerReport()
-      //             //   ..InsertOfficer(dataOfficer!);
+    setState(() {
+      ckeck_insert = "Insert succes";
+    });
 
-      //             // await Gmap()
-      //             //   ..insertGmap(dataGmap!);
+    return ckeck_insert;
+  }
 
-      //             // await InsertPhoto();
-
-      //             // await Layout()
-      //             //   ..InsertLayout(dataLayout!);
-      //             // await IDCard()
-      //             //   ..InsertIdCard(dataIdcard!);
-
-      //             // await PropertyInfor()
-      //             //   ..InsertInfo(dataInfo!);
-
-      //             // await Cover()
-      //             //   ..InsertCover(dataCover!);
-      //           },
-      //           child: Center(
-      //               child: Container(
-      //             width: 150,
-      //             height: 30,
-      //             decoration: BoxDecoration(
-      //                 borderRadius: BorderRadius.circular(20),
-      //                 color: Colors.blue),
-      //             child: Center(
-      //                 child: Text(
-      //               "Save",
-      //               style: TextStyle(color: Colors.white, fontSize: 20),
-      //             )),
-      //           )),
-      //         ),
-      //         SizedBox(
-      //           height: 20,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+  Method_insert(BuildContext context) {
+    return FutureBuilder(
+      future: _get(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        return SizedBox();
+      },
     );
   }
 
@@ -537,14 +369,16 @@ class _FormWidgetState extends State<FormWidget> {
     }
   }
 
+  Future<String> convertToBase64(String path) async {
+    var cvByte = await getBlobData(path);
+    return base64Encode(cvByte);
+  }
+
   Future<void> InsertPhoto() async {
+    print("dataPhoto.dessurroundin1 ${dataPhoto.dessurroundin1}\n");
     if (list_forviewland == null) {
       List<String> viewimage = [];
       List<String> insideimage = [];
-      Future<String> convertToBase64(String path) async {
-        var cvByte = await getBlobData(path);
-        return base64Encode(cvByte);
-      }
 
       if (list_forinsideproperty != null &&
           list_forinsideproperty!.isNotEmpty) {
@@ -605,10 +439,6 @@ class _FormWidgetState extends State<FormWidget> {
       }
     } else {
       List<String> viewland = [];
-      Future<String> convertToBase64(String path) async {
-        var cvByte = await getBlobData(path);
-        return base64Encode(cvByte);
-      }
 
       if (list_forviewland != null && list_forviewland!.isNotEmpty) {
         for (var file in list_forviewland!) {

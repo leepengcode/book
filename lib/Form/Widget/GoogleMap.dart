@@ -71,8 +71,8 @@ class _GoogleMapState extends State<GoogleMapImage> {
                       if (map != null)
                         Image.network(
                           map!.path,
-                          width: 1000,
-                          height: 600,
+                          width: 300,
+                          height: 200,
                           fit: BoxFit.cover,
                         )
                     ],
@@ -88,8 +88,8 @@ class _GoogleMapState extends State<GoogleMapImage> {
                             });
                           },
                           child: Container(
-                            width: 1000,
-                            height: 600,
+                            width: 300,
+                            height: 200,
                             decoration: BoxDecoration(border: Border.all()),
                             child: (map == null)
                                 ? Image.network(
