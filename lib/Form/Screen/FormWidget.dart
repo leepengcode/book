@@ -27,7 +27,6 @@ import 'package:book/Model/PhotoDetailModel.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
 import 'package:book/Model/ProvisionalModel.dart';
 import 'package:book/util/util.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -64,28 +63,6 @@ class _FormWidgetState extends State<FormWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     Padding(
-      //       padding: const EdgeInsets.only(right: 20),
-      //       child: GestureDetector(
-      //         onTap: () async {
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyPDF(),));
-      //           // await Printing.layoutPdf(
-      //           //     onLayout: (format) => generatePdf(format, 'ko' ));
-      //           //             Navigator.pushNamed(context, '/pdf',arguments: <String, String>{
-      //           //   'name': 'Berlin'
-      //           // },);
-      //         },
-      //         child: const Icon(
-      //           Icons.picture_as_pdf,
-      //           color: Colors.black,
-      //           size: 25,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -339,10 +316,8 @@ class _FormWidgetState extends State<FormWidget> {
     await Future.wait([InsertPhoto()]);
     await Future.wait([OfficerReport().InsertOfficer(dataOfficer!)]);
     // await Future.wait([FinalMap().InsertFinalMap(datafinalmap!)]);
-
+// await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
     // await Future.wait([FinalIndication().InsertFinal(dataFinalIndic)]);
-
-    // await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
 
     setState(() {
       ckeck_insert = "Insert succes";

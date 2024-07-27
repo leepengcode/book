@@ -697,7 +697,7 @@ class _MyPDFState extends State<MyPDF> {
                             ),
                           ),
                           pw.Text(
-                              "Introduction ............................................................................................................................................ -1 -",
+                              "Introduction ............................................................................................................................................ - 1 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.Text(
@@ -708,121 +708,263 @@ class _MyPDFState extends State<MyPDF> {
                           if (widget.objCover!.header ==
                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
                             pw.Text(
-                                "\nProperty [LAND AND BUILDING] VALUATION REPORT .................................................................... -2 -",
+                                "\nProperty [LAND AND BUILDING] VALUATION REPORT .................................................................... - 2 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
                               "Property LAND VALUATION REPORT") ...[
                             pw.Text(
-                                "\nProperty LAND VALUATION REPORT ................................................................................................. -2 -",
+                                "\nProperty LAND VALUATION REPORT ................................................................................................. - 2 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
                               "Property OFFICE SPACE VALUATION REPORT") ...[
                             pw.Text(
-                                "\nProperty OFFICE SPACE VALUATION REPORT ................................................................................. -2 -",
+                                "\nProperty OFFICE SPACE VALUATION REPORT ................................................................................. - 2 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
                               "Property CONDO REPORT") ...[
                             pw.Text(
-                                "\nProperty CONDO REPORT .................................................................................................................. -2 -",
+                                "\nProperty CONDO REPORT .................................................................................................................. - 2 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ],
-                          pw.Text(
-                              "\nOwner's Identification Card ............................................................................................................... -4 -",
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT") ...[
+                           pw.Text(
+                              "\nOwner's Identification Card ............................................................................................................... - 3 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nCopy Title Deed ..................................................................................................................................... -5 -",
+                          ]else ...[
+                            pw.Text(
+                              "\nOwner's Identification Card ............................................................................................................... - 4 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
+                          ],
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT") ...[
+                           pw.Text(
+                              "\nCopy Title Deed ..................................................................................................................................... - 4 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ]else ...[
+                            pw.Text(
+                              "\nCopy Title Deed ..................................................................................................................................... - 5 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                         
                           if (widget.objCover!.header ==
                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
                             pw.Text(
-                                "\nLand and Building Layout ................................................................................................................... -6 -",
+                                "\nLand and Building Layout ................................................................................................................... - 6 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT") ...[
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
                             pw.Text(
-                                "\nLand Layout ........................................................................................................................................... -6 -",
+                                "\nLand Layout ........................................................................................................................................... - 5 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
                               "Property OFFICE SPACE VALUATION REPORT") ...[
                             pw.Text(
-                                "\nOffice Space Layout ............................................................................................................................ -6 -",
+                                "\nOffice Space Layout ............................................................................................................................ - 6 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
                               "Property CONDO REPORT") ...[
                             pw.Text(
-                                "\nCondo Layout ....................................................................................................................................... -6 -",
+                                "\nCondo Layout ....................................................................................................................................... - 6 -",
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ],
-                          pw.Text(
-                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. -7 -",
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                          
+                              pw.Text(
+                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 6 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. -8 -",
+                          ]else ...[
+                            pw.Text(
+                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 7 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ -9 -",
+                          ],
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                           pw.Text(
+                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 7 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nInspaction Officer's Report ................................................................................................................. -12 -",
+                          ]else ...[
+                            pw.Text(
+                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 8 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. -13 -",
+                          ],
+                          
+                           if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                           pw.Text(
+                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 8 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
+                          ]else ...[
+                            pw.Text(
+                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 9 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                         
+                         if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
                           pw.Text(
+                       
+                              "\nInspacting Officer's Report ................................................................................................................. - 10 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ]else ...[
+                           
+                               pw.Text(
+                              "\nInspacting Officer's Report ................................................................................................................. - 12 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                          pw.Text(
+                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 11 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ]else ...[
+                            pw.Text(
+                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 13 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                         pw.Text(
+                              "\nValue Of Comparable Nearby Property ............................................................................................ - 12 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ]else ...[
+                            pw.Text(
                               "\nValue Of Comparable Nearby Property ............................................................................................ -14 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. -16 -",
+                          ],
+                         
+                         
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                         pw.Text(
+                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 14 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
+                          ]else ...[
+                             pw.Text(
+                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 16 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                         
                           pw.Text(
                             "\nFinal Valuation",
                             style: header2(true),
                             textAlign: pw.TextAlign.center,
                           ),
-                          pw.Text(
-                              "\nFinal Indication Of Subject Property Market Value ......................................................................... -17 -",
+                          if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                         pw.Text(
+                              "\nFinal Indication Of Subject Property Market Value ......................................................................... - 15 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
+                          ]else ...[
+                             pw.Text(
+                              "\nFinal Indication Of Subject Property Market Value ......................................................................... - 17 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                         
                           pw.Text(
                             "\nAppendix",
                             style: header2(true),
                             textAlign: pw.TextAlign.center,
                           ),
+                           if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
                           pw.Text(
-                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... -18 -",
+                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 16 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
-                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... -20 - ",
+                          ]else ...[
+                              pw.Text(
+                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 18 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
-                          pw.Text(
+                          ],
+                           if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                         pw.Text(
+                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 18 - ",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ]else ...[
+                              pw.Text(
+                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 20 - ",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          ],
+                        
+                           if (widget.objCover!.header ==
+                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
+                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
+                              "Property CONDO REPORT") ...[
+                         pw.Text(
+                              "\nLicenses and Certificate Property Valuation ..................................................................................... -19 -",
+                              style: body(),
+                              textAlign: pw.TextAlign.center),
+                          pw.SizedBox(height: 20),
+                          ]else ...[
+                                pw.Text(
                               "\nLicenses and Certificate Property Valuation ..................................................................................... -21 -",
                               style: body(),
                               textAlign: pw.TextAlign.center),
                           pw.SizedBox(height: 20),
+                          ],
+                        
                         ],
                       ),
                     ),
                   ),
                 ),
+                
               ],
             ),
           );

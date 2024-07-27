@@ -349,6 +349,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                     width: 250,
                     child: TextField(
                       controller: _markrtpriceController,
+                      keyboardType: TextInputType.number,
                       onChanged: (value) {
                         setState(() {
                           objOfficer!.markrtprice = value.toString();
