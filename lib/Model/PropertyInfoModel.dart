@@ -253,7 +253,7 @@ class PropertyInfor {
   Future InsertInfo(PropertyInfor dataInfo) async {
     var dio = Dio();
     var response = await dio.request(
-      'http://192.168.1.31:8000/api/insertinfo',
+      'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertinfo',
       options: Options(
         method: 'POST',
       ),

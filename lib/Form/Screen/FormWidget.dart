@@ -315,9 +315,9 @@ class _FormWidgetState extends State<FormWidget> {
     await Future.wait([Gmap().insertGmap(dataGmap!)]);
     await Future.wait([InsertPhoto()]);
     await Future.wait([OfficerReport().InsertOfficer(dataOfficer!)]);
-    // await Future.wait([FinalMap().InsertFinalMap(datafinalmap!)]);
-// await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
-    // await Future.wait([FinalIndication().InsertFinal(dataFinalIndic)]);
+    await Future.wait([FinalMap().InsertFinalMap(datafinalmap!)]);
+    await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
+    await Future.wait([FinalIndication().InsertFinal(dataFinalIndic)]);
 
     setState(() {
       ckeck_insert = "Insert succes";
@@ -378,7 +378,8 @@ class _FormWidgetState extends State<FormWidget> {
 
       try {
         var response = await http.post(
-          Uri.parse("http://192.168.1.31:8000/api/insertphoto"),
+          Uri.parse(
+              "https://www.angkorrealestate.com/book_report/bookReport/public/api/insertphoto"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({
             'dessurroundin1': dataPhoto.dessurroundin1,
@@ -427,7 +428,8 @@ class _FormWidgetState extends State<FormWidget> {
 
       try {
         var response = await http.post(
-          Uri.parse("http://192.168.1.31:8000/api/insertphoto"),
+          Uri.parse(
+              "https://www.angkorrealestate.com/book_report/bookReport/public/api/insertphoto"),
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({
             'dessurroundin1': dataPhoto.dessurroundin1,

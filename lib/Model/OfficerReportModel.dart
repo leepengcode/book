@@ -48,7 +48,9 @@ class OfficerReport {
 
   Future InsertOfficer(OfficerReport objOfficer) async {
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.31:8000/api/insert-officer'));
+        'POST',
+        Uri.parse(
+            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insert-officer'));
 
     request.body = jsonEncode({
       'condition': objOfficer.condition,

@@ -46,11 +46,11 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   DateTime date2 = DateTime.now();
   @override
   void initState() {
+    fetchDropDownItems();
     super.initState();
     date2;
     _addNewLandInfo(); // Initialize with the first row
     _addNewBuildingInfo(); // Initialize with the first row
-    fetchDropDownItems();
   }
 
   void _addNewLandInfo() {
@@ -133,19 +133,20 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   List? dropDownItems;
   bool isLoading = true;
   Future<void> fetchDropDownItems() async {
+    const url =
+        'https://www.angkorrealestate.com/book_report/bookReport/public/api/getallinspactor';
+
     try {
-      final response = await http
-          .get(Uri.parse('http://192.168.1.31:8000/api/getallinspactor'));
+      final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
         if (jsonResponse['data'] != null) {
-          final items = (jsonResponse['data'] as List)
-              .map((item) => item['name'].toString())
-              .toList();
           setState(() {
             dropDownItems = jsonResponse['data'];
             isLoading = false;
           });
+        } else {
+          print('Error: Data is null');
         }
       } else {
         print('Error: ${response.reasonPhrase}');
@@ -159,6 +160,9 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   bool ckeck = false;
   @override
   Widget build(BuildContext context) {
+    if (dropDownItems == null) {
+      fetchDropDownItems();
+    }
     if (!ckeck) {
       Future.delayed(Duration(seconds: 1), () {
         setState(() {

@@ -62,9 +62,12 @@ class Provisional {
       'force_sale': force_sale ?? '',
     };
   }
-    Future InsertProvisional(Provisional dataProvisional) async {
+
+  Future InsertProvisional(Provisional dataProvisional) async {
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.31:8000/api/insertprovisional'));
+        'POST',
+        Uri.parse(
+            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertprovisional'));
     if (dataProvisional.fair_market == '') {
       request.body = jsonEncode({
         'name': dataProvisional.name,

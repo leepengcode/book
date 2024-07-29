@@ -40,7 +40,9 @@ class Layout {
 
   Future InsertLayout(Layout objlayout) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.1.31:8000/api/insertlayout'));
+        'POST',
+        Uri.parse(
+            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertlayout'));
 
     print("object btnClick");
     if (objlayout.deepimage1 != null) {
@@ -64,7 +66,7 @@ class Layout {
     if (objlayout.deepimage2 != null) {
       Uint8List cvByte;
       if (kIsWeb && objlayout.deepimage2!.path.startsWith('blob:')) {
-        // For web environment 
+        // For web environment
         cvByte = await getBlobData(objlayout.deepimage2!.path);
       } else {
         // For mobile environment

@@ -373,7 +373,7 @@ class _MyPDFState extends State<MyPDF> {
     final Uint8List nullImage = mrnull.buffer.asUint8List();
 
     final ByteData mrnull1 = await rootBundle.load('assets/images/mrnull1.jpg');
-    // final Uint8List null1Image = mrnull1.buffer.asUint8List();
+    final Uint8List null1Image = mrnull1.buffer.asUint8List();
 
     Uint8List? layoutImage;
 
@@ -732,29 +732,28 @@ class _MyPDFState extends State<MyPDF> {
                           ],
                           if (widget.objCover!.header ==
                               "Property LAND VALUATION REPORT") ...[
-                           pw.Text(
-                              "\nOwner's Identification Card ............................................................................................................... - 3 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
                             pw.Text(
-                              "\nOwner's Identification Card ............................................................................................................... - 4 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nOwner's Identification Card ............................................................................................................... - 3 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nOwner's Identification Card ............................................................................................................... - 4 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
                           if (widget.objCover!.header ==
                               "Property LAND VALUATION REPORT") ...[
-                           pw.Text(
-                              "\nCopy Title Deed ..................................................................................................................................... - 4 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
                             pw.Text(
-                              "\nCopy Title Deed ..................................................................................................................................... - 5 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nCopy Title Deed ..................................................................................................................................... - 4 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nCopy Title Deed ..................................................................................................................................... - 5 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                         
                           if (widget.objCover!.header ==
                               "Property [LAND AND BUILDING] VALUATION REPORT") ...[
                             pw.Text(
@@ -762,9 +761,11 @@ class _MyPDFState extends State<MyPDF> {
                                 style: body(),
                                 textAlign: pw.TextAlign.center),
                           ] else if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
                             pw.Text(
                                 "\nLand Layout ........................................................................................................................................... - 5 -",
                                 style: body(),
@@ -783,188 +784,198 @@ class _MyPDFState extends State<MyPDF> {
                                 textAlign: pw.TextAlign.center),
                           ],
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                          
-                              pw.Text(
-                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 6 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
                             pw.Text(
-                              "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 7 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 6 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nCambodia Map & Location Map In Phnom Penh ............................................................................. - 7 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                           pw.Text(
-                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 7 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
                             pw.Text(
-                              "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 8 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ],
-                          
-                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                           pw.Text(
-                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 8 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
+                                "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 7 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
                             pw.Text(
-                              "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 9 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ],
-                         
-                         if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                          pw.Text(
-                       
-                              "\nInspacting Officer's Report ................................................................................................................. - 10 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
-                           
-                               pw.Text(
-                              "\nInspacting Officer's Report ................................................................................................................. - 12 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nAerial Photograph Of Phnom Penh Loacation .................................................................................. - 8 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                          pw.Text(
-                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 11 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
                             pw.Text(
-                              "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 13 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 8 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nDetails Of Photos Taken At The Site Inspection ................................................................................ - 9 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                         pw.Text(
-                              "\nValue Of Comparable Nearby Property ............................................................................................ - 12 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
                             pw.Text(
-                              "\nValue Of Comparable Nearby Property ............................................................................................ -14 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                "\nInspacting Officer's Report ................................................................................................................. - 10 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nInspacting Officer's Report ................................................................................................................. - 12 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                         
-                         
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                         pw.Text(
-                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 14 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
-                             pw.Text(
-                              "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 16 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 11 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nProposed Developments Affecting The Value Of The Subject Land .............................................. - 13 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                         
+                          if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nValue Of Comparable Nearby Property ............................................................................................ - 12 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nValue Of Comparable Nearby Property ............................................................................................ -14 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ],
+                          if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 14 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nProvisional Valuation Made By The Inspecting Officer(S) .............................................................. - 16 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ],
                           pw.Text(
                             "\nFinal Valuation",
                             style: header2(true),
                             textAlign: pw.TextAlign.center,
                           ),
                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                         pw.Text(
-                              "\nFinal Indication Of Subject Property Market Value ......................................................................... - 15 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
-                             pw.Text(
-                              "\nFinal Indication Of Subject Property Market Value ......................................................................... - 17 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nFinal Indication Of Subject Property Market Value ......................................................................... - 15 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nFinal Indication Of Subject Property Market Value ......................................................................... - 17 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                         
                           pw.Text(
                             "\nAppendix",
                             style: header2(true),
                             textAlign: pw.TextAlign.center,
                           ),
-                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                          pw.Text(
-                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 16 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
-                              pw.Text(
-                              "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 18 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                          if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 16 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nC.A.R.E Limiting Terms, Condition & Liability ................................................................................... - 18 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                         pw.Text(
-                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 18 - ",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          ]else ...[
-                              pw.Text(
-                              "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 20 - ",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
+                          if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 18 - ",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                          ] else ...[
+                            pw.Text(
+                                "\nOur Valued Partners and CVEA & Professional Indemnity Insurance Certificate .......................... - 20 - ",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
                           ],
-                        
-                           if (widget.objCover!.header ==
-                              "Property LAND VALUATION REPORT" && widget.objCover!.header ==
-                              "Property OFFICE SPACE VALUATION REPORT" && widget.objCover!.header ==
-                              "Property CONDO REPORT") ...[
-                         pw.Text(
-                              "\nLicenses and Certificate Property Valuation ..................................................................................... -19 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          pw.SizedBox(height: 20),
-                          ]else ...[
-                                pw.Text(
-                              "\nLicenses and Certificate Property Valuation ..................................................................................... -21 -",
-                              style: body(),
-                              textAlign: pw.TextAlign.center),
-                          pw.SizedBox(height: 20),
+                          if (widget.objCover!.header ==
+                                  "Property LAND VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property OFFICE SPACE VALUATION REPORT" &&
+                              widget.objCover!.header ==
+                                  "Property CONDO REPORT") ...[
+                            pw.Text(
+                                "\nLicenses and Certificate Property Valuation ..................................................................................... -19 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                            pw.SizedBox(height: 20),
+                          ] else ...[
+                            pw.Text(
+                                "\nLicenses and Certificate Property Valuation ..................................................................................... -21 -",
+                                style: body(),
+                                textAlign: pw.TextAlign.center),
+                            pw.SizedBox(height: 20),
                           ],
-                        
                         ],
                       ),
                     ),
                   ),
                 ),
-                
               ],
             ),
           );
@@ -9954,409 +9965,409 @@ class _MyPDFState extends State<MyPDF> {
               ));
         }));
 
-//     // //Page Nineteen
-//     pdf.addPage(
-//       pw.Page(
-//         pageTheme: pageTheme,
-//         build: (final context) {
-//           return pw.FullPage(
-//             ignoreMargins: true,
-//             child: pw.Column(
-//               crossAxisAlignment: pw.CrossAxisAlignment.end,
-//               children: [
-//                 pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 25, right: 25), // Add margin here
-//                   child: pw.Text(
-//                     "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                     style: pw.TextStyle(fontSize: 9, font: font),
-//                   ),
-//                 ),
-//                 pw.Expanded(
-//                   child: pw.Container(
-//                     margin: const pw.EdgeInsets.only(
-//                         top: 5, left: 40, right: 25, bottom: 25),
-//                     decoration: pw.BoxDecoration(
-//                       border: pw.Border.all(
-//                         color: PdfColors.black,
-//                         width: 2, // Adjust border width as needed
-//                       ),
-//                     ),
-//                     child: pw.Container(
-//                         padding: pw.EdgeInsets.only(left: 40, right: 20),
-//                         child: pw.Column(
-//                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-//                           // mainAxisAlignment: pw.MainAxisAlignment.center,
-//                           children: [
-//                             pw.Padding(
-//                               padding: const pw.EdgeInsets.only(
-//                                   top: 25, left: -20), // Add margin here
-//                               child: pw.Text(
-//                                 "Cambodia Angkor Real Estate Co.,Ltd.\nLimiting Terms, Conditions and Liability",
-//                                 style: header1(),
-//                                 textAlign: pw.TextAlign.start,
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 10),
-//                             pw.Text("General", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'This Valuation of the Subject Property has been made following an extensive process of research and consultation.  All reasonable measures have been taken to ensure the accuracy of the final Valuation.  The Valuation has been prepared in good faith by Cambodia Real Estate Co., Ltd. and represents a true and accurate valuation of the Subject Property at the time this Property Valuation was certified.  ',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 10),
-//                             pw.Text("pdfumentation", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'Cambodia Angkor Real Estate Co., Ltd. has examined a copy of the Title Deed relating to the Subject Property.  The copy of the Title Deed was provided by the client.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 10),
-//                             pw.Text("Consultation", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'The Valuation Report and Certificate were completed following consultation with members of the local community.  Where the Title Deed is registered with the Cadastral Land Registry Office it is not necessary to consult Room or Commune representatives.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 10),
-//                             pw.Text("Inspection and Survey Information",
-//                                 style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'The Site Inspection Survey Information relating to the Subject Property (attached) was prepared solely by officers of Cambodia Real Estate Co., Ltd. and was based on the inspection and recording procedures used by Cambodia Angkor Real Estate Co., Ltd. The Inspecting Officer’s Report and Survey Information does not purport to be a technical or geographical survey of the Subject Property.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 10),
-//                             pw.Text("Liability", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                   text:
-//                                       'Cambodia Angkor Real Estate Co., Ltd. has taken all reasonable measures to ensure the accuracy of this Valuation.  However, all pdfumentation and ancillary information included in this Valuation is intended for reference only.  Some information has been gathered from government departments, outside agencies or private individuals. Therefore, ',
-//                                   style: body1(),
-//                                   children: [
-//                                     pw.TextSpan(
-//                                         text:
-//                                             "Cambodia Angkor Real Estate Co., Ltd. accepts no liability for the accuracy of this information.",
-//                                         style: b_body())
-//                                   ] // Base style
-//                                   ),
-//                             ),
-//                             pw.SizedBox(height: 20),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'The appraiser will not give testimony or appear in the court because he/she made an appraisal of the property in question, unless specific arrangement to do so have been made beforehand, or as otherwise required by law.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                           ],
-//                         )),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
+    // //Page Nineteen
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Container(
+                        padding: pw.EdgeInsets.only(left: 40, right: 20),
+                        child: pw.Column(
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          // mainAxisAlignment: pw.MainAxisAlignment.center,
+                          children: [
+                            pw.Padding(
+                              padding: const pw.EdgeInsets.only(
+                                  top: 25, left: -20), // Add margin here
+                              child: pw.Text(
+                                "Cambodia Angkor Real Estate Co.,Ltd.\nLimiting Terms, Conditions and Liability",
+                                style: header1(),
+                                textAlign: pw.TextAlign.start,
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("General", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'This Valuation of the Subject Property has been made following an extensive process of research and consultation.  All reasonable measures have been taken to ensure the accuracy of the final Valuation.  The Valuation has been prepared in good faith by Cambodia Real Estate Co., Ltd. and represents a true and accurate valuation of the Subject Property at the time this Property Valuation was certified.  ',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("pdfumentation", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'Cambodia Angkor Real Estate Co., Ltd. has examined a copy of the Title Deed relating to the Subject Property.  The copy of the Title Deed was provided by the client.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("Consultation", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'The Valuation Report and Certificate were completed following consultation with members of the local community.  Where the Title Deed is registered with the Cadastral Land Registry Office it is not necessary to consult Room or Commune representatives.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("Inspection and Survey Information",
+                                style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'The Site Inspection Survey Information relating to the Subject Property (attached) was prepared solely by officers of Cambodia Real Estate Co., Ltd. and was based on the inspection and recording procedures used by Cambodia Angkor Real Estate Co., Ltd. The Inspecting Officer’s Report and Survey Information does not purport to be a technical or geographical survey of the Subject Property.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 10),
+                            pw.Text("Liability", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                  text:
+                                      'Cambodia Angkor Real Estate Co., Ltd. has taken all reasonable measures to ensure the accuracy of this Valuation.  However, all pdfumentation and ancillary information included in this Valuation is intended for reference only.  Some information has been gathered from government departments, outside agencies or private individuals. Therefore, ',
+                                  style: body1(),
+                                  children: [
+                                    pw.TextSpan(
+                                        text:
+                                            "Cambodia Angkor Real Estate Co., Ltd. accepts no liability for the accuracy of this information.",
+                                        style: b_body())
+                                  ] // Base style
+                                  ),
+                            ),
+                            pw.SizedBox(height: 20),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'The appraiser will not give testimony or appear in the court because he/she made an appraisal of the property in question, unless specific arrangement to do so have been made beforehand, or as otherwise required by law.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
-//     //Page Tweenty
-//     pdf.addPage(
-//       pw.Page(
-//         pageTheme: pageTheme,
-//         build: (final context) {
-//           return pw.FullPage(
-//             ignoreMargins: true,
-//             child: pw.Column(
-//               crossAxisAlignment: pw.CrossAxisAlignment.end,
-//               children: [
-//                 pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 25, right: 25), // Add margin here
-//                   child: pw.Text(
-//                     "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                     style: pw.TextStyle(fontSize: 9, font: font),
-//                   ),
-//                 ),
-//                 pw.Expanded(
-//                   child: pw.Container(
-//                     margin: const pw.EdgeInsets.only(
-//                         top: 5, left: 40, right: 25, bottom: 25),
-//                     decoration: pw.BoxDecoration(
-//                       border: pw.Border.all(
-//                         color: PdfColors.black,
-//                         width: 2, // Adjust border width as needed
-//                       ),
-//                     ),
-//                     child: pw.Container(
-//                         padding: pw.EdgeInsets.only(left: 40, right: 20),
-//                         child: pw.Column(
-//                           crossAxisAlignment: pw.CrossAxisAlignment.start,
-//                           // mainAxisAlignment: pw.MainAxisAlignment.center,
-//                           children: [
-//                             pw.SizedBox(height: 15),
-//                             pw.Text("Hazardous", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'We have not carried investigation of any hidden or unapparent conditions of the property like hazardous materials has been used in the construction of the building or adverse environmental conditions (including the presence of hazardous wastes, toxic substances, etc.) that would make the property more or less valuable and has assumed that there are no such conditions and makes no guarantees or warranties, expressed or implied, regarding the condition of the property.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 15),
-//                             pw.Text("Measuring the Property", style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'All measurements that we take are based on measuring practice of Cambodia Angkor Real Estate and in accordance with Cadastral Land Registry Office. If for whatever reason dimensions or areas are calculated from other sources, then we will state this in the report.',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                             pw.SizedBox(height: 15),
-//                             pw.Text("Confidentiality/Publication/Copyright",
-//                                 style: header3()),
-//                             pw.RichText(
-//                               text: pw.TextSpan(
-//                                 text:
-//                                     'This Property Valuation has been prepared for a client of Cambodia Angkor Real Estate Co., Ltd. for the sole use of the client and the client’s nominated representative(s).  The Valuation is, otherwise, completely confidential.  The client may refer to Cambodia Angkor Real Estate Co., Ltd. in future dealings with government departments, official agencies, private individuals and the media where such dealings relate to the Subject Property. However, the client cannot reproduce, sell, publish or distribute the Valuation Report without the prior written consent of Cambodia Angkor Real Estate Co., Ltd.   ',
-//                                 style: body1(), // Base style
-//                               ),
-//                             ),
-//                           ],
-//                         )),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
+    //Page Tweenty
+    pdf.addPage(
+      pw.Page(
+        pageTheme: pageTheme,
+        build: (final context) {
+          return pw.FullPage(
+            ignoreMargins: true,
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              children: [
+                pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 25, right: 25), // Add margin here
+                  child: pw.Text(
+                    "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                    style: pw.TextStyle(fontSize: 9, font: font),
+                  ),
+                ),
+                pw.Expanded(
+                  child: pw.Container(
+                    margin: const pw.EdgeInsets.only(
+                        top: 5, left: 40, right: 25, bottom: 25),
+                    decoration: pw.BoxDecoration(
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 2, // Adjust border width as needed
+                      ),
+                    ),
+                    child: pw.Container(
+                        padding: pw.EdgeInsets.only(left: 40, right: 20),
+                        child: pw.Column(
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
+                          // mainAxisAlignment: pw.MainAxisAlignment.center,
+                          children: [
+                            pw.SizedBox(height: 15),
+                            pw.Text("Hazardous", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'We have not carried investigation of any hidden or unapparent conditions of the property like hazardous materials has been used in the construction of the building or adverse environmental conditions (including the presence of hazardous wastes, toxic substances, etc.) that would make the property more or less valuable and has assumed that there are no such conditions and makes no guarantees or warranties, expressed or implied, regarding the condition of the property.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 15),
+                            pw.Text("Measuring the Property", style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'All measurements that we take are based on measuring practice of Cambodia Angkor Real Estate and in accordance with Cadastral Land Registry Office. If for whatever reason dimensions or areas are calculated from other sources, then we will state this in the report.',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                            pw.SizedBox(height: 15),
+                            pw.Text("Confidentiality/Publication/Copyright",
+                                style: header3()),
+                            pw.RichText(
+                              text: pw.TextSpan(
+                                text:
+                                    'This Property Valuation has been prepared for a client of Cambodia Angkor Real Estate Co., Ltd. for the sole use of the client and the client’s nominated representative(s).  The Valuation is, otherwise, completely confidential.  The client may refer to Cambodia Angkor Real Estate Co., Ltd. in future dealings with government departments, official agencies, private individuals and the media where such dealings relate to the Subject Property. However, the client cannot reproduce, sell, publish or distribute the Valuation Report without the prior written consent of Cambodia Angkor Real Estate Co., Ltd.   ',
+                                style: body1(), // Base style
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
 
-//     //Page Tweenty One
-//     pdf.addPage(pw.Page(
-//       pageTheme: pageTheme,
-//       build: (final context) {
-//         return pw.FullPage(
-//           ignoreMargins: true,
-//           child: pw.Column(
-//             crossAxisAlignment: pw.CrossAxisAlignment.end,
-//             children: [
-//               pw.Container(
-//                 margin: const pw.EdgeInsets.only(
-//                     top: 25, right: 25), // Add margin here
-//                 child: pw.Text(
-//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                   style: pw.TextStyle(fontSize: 9, font: font),
-//                 ),
-//               ),
-//               pw.Expanded(
-//                 flex: 5,
-//                 child: pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 5, left: 40, right: 25, bottom: 25),
-//                   decoration: pw.BoxDecoration(
-//                     border: pw.Border.all(
-//                       color: PdfColors.black,
-//                       width: 2, // Adjust border width as needed
-//                     ),
-//                   ),
-//                   child: pw.Center(
-//                       child: pw.Padding(
-//                           padding: const pw.EdgeInsets.only(
-//                               top: 10, left: 20, right: 20),
-//                           child: pw.Column(
-//                             // mainAxisAlignment: pw.MainAxisAlignment.start,
-//                             crossAxisAlignment: pw.CrossAxisAlignment.center,
-//                             children: [
-//                               pw.Expanded(
-//                                 flex: 2,
-//                                 child: pw.Container(
-//                                   margin: const pw.EdgeInsets.only(
-//                                     top: 3,
-//                                   ),
-//                                   decoration: pw.BoxDecoration(
-//                                       border: pw.Border.all(
-//                                         color: PdfColors.black,
-//                                         width: 2,
-//                                       ),
-//                                       image: pw.DecorationImage(
-//                                           image: pw.MemoryImage(bankImage),
-//                                           fit: pw.BoxFit.contain)),
-//                                 ),
-//                               ),
-//                               pw.SizedBox(height: 10),
-//                               pw.Text(
-//                                   'CVEA & Professional Indemnity Insurance Certificate',
-//                                   style: header1(),
-//                                   textAlign: pw.TextAlign.center),
-//                               pw.SizedBox(height: 10),
-//                               pw.Expanded(
-//                                 flex: 2,
-//                                 child: pw.Container(
-//                                     margin: const pw.EdgeInsets.only(
-//                                         top: 3, bottom: 25),
-//                                     decoration: pw.BoxDecoration(
-//                                       border: pw.Border.all(
-//                                         color: PdfColors.black,
-//                                         width: 2,
-//                                       ),
-//                                     ),
-//                                     child: pw.GridView(
-//                                         crossAxisCount: 2,
-//                                         crossAxisSpacing: 4,
-//                                         mainAxisSpacing: 4,
-//                                         children: [
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         certi1Image))),
-//                                           ),
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         certi2Image),
-//                                                     fit: pw.BoxFit.contain)),
-//                                           ),
-//                                         ])),
-//                               ),
-//                             ],
-//                           ) // Add margin here
-//                           )),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     ));
+    //Page Tweenty One
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                flex: 5,
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 10, left: 20, right: 20),
+                          child: pw.Column(
+                            // mainAxisAlignment: pw.MainAxisAlignment.start,
+                            crossAxisAlignment: pw.CrossAxisAlignment.center,
+                            children: [
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Container(
+                                  margin: const pw.EdgeInsets.only(
+                                    top: 3,
+                                  ),
+                                  decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                      image: pw.DecorationImage(
+                                          image: pw.MemoryImage(bankImage),
+                                          fit: pw.BoxFit.contain)),
+                                ),
+                              ),
+                              pw.SizedBox(height: 10),
+                              pw.Text(
+                                  'CVEA & Professional Indemnity Insurance Certificate',
+                                  style: header1(),
+                                  textAlign: pw.TextAlign.center),
+                              pw.SizedBox(height: 10),
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Container(
+                                    margin: const pw.EdgeInsets.only(
+                                        top: 3, bottom: 25),
+                                    decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: pw.GridView(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 4,
+                                        mainAxisSpacing: 4,
+                                        children: [
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        certi1Image))),
+                                          ),
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        certi2Image),
+                                                    fit: pw.BoxFit.contain)),
+                                          ),
+                                        ])),
+                              ),
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ));
 
-//     pdf.addPage(pw.Page(
-//       pageTheme: pageTheme,
-//       build: (final context) {
-//         return pw.FullPage(
-//           ignoreMargins: true,
-//           child: pw.Column(
-//             crossAxisAlignment: pw.CrossAxisAlignment.end,
-//             children: [
-//               pw.Container(
-//                 margin: const pw.EdgeInsets.only(
-//                     top: 25, right: 25), // Add margin here
-//                 child: pw.Text(
-//                   "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
-//                   style: pw.TextStyle(fontSize: 9, font: font),
-//                 ),
-//               ),
-//               pw.Expanded(
-//                 flex: 5,
-//                 child: pw.Container(
-//                   margin: const pw.EdgeInsets.only(
-//                       top: 5, left: 40, right: 25, bottom: 25),
-//                   decoration: pw.BoxDecoration(
-//                     border: pw.Border.all(
-//                       color: PdfColors.black,
-//                       width: 2, // Adjust border width as needed
-//                     ),
-//                   ),
-//                   child: pw.Center(
-//                       child: pw.Padding(
-//                           padding: const pw.EdgeInsets.only(
-//                               top: 20, left: 20, right: 20),
-//                           child: pw.Column(
-//                             mainAxisAlignment: pw.MainAxisAlignment.start,
-//                             crossAxisAlignment: pw.CrossAxisAlignment.start,
-//                             children: [
-//                               pw.Text(
-//                                   'Licenses and Certificate Property Valuation Year 2021-2024',
-//                                   style: header2(true),
-//                                   textAlign: pw.TextAlign.center),
-//                               pw.SizedBox(height: 10),
-//                               pw.Expanded(
-//                                 flex: 2,
-//                                 child: pw.Container(
-//                                     margin: const pw.EdgeInsets.only(
-//                                         top: 3, bottom: 25),
-//                                     decoration: pw.BoxDecoration(
-//                                       border: pw.Border.all(
-//                                         color: PdfColors.black,
-//                                         width: 2,
-//                                       ),
-//                                     ),
-//                                     child: pw.GridView(
-//                                         crossAxisCount: 2,
-//                                         crossAxisSpacing: 4,
-//                                         mainAxisSpacing: 4,
-//                                         children: [
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         DenImage))),
-//                                           ),
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         DoungImage))),
-//                                           ),
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         nullImage))),
-//                                           ),
-//                                           pw.Container(
-//                                             decoration: pw.BoxDecoration(
-//                                                 border: pw.Border.all(
-//                                                   color: PdfColors.black,
-//                                                   width: 2,
-//                                                 ),
-//                                                 image: pw.DecorationImage(
-//                                                     image: pw.MemoryImage(
-//                                                         null1Image))),
-//                                           ),
-//                                         ])),
-//                               ),
-//                             ],
-//                           ) // Add margin here
-//                           )),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     ));
+    pdf.addPage(pw.Page(
+      pageTheme: pageTheme,
+      build: (final context) {
+        return pw.FullPage(
+          ignoreMargins: true,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Container(
+                margin: const pw.EdgeInsets.only(
+                    top: 25, right: 25), // Add margin here
+                child: pw.Text(
+                  "©BY CAMBODIA ANGKOR REAL ESTATE CO., LTD",
+                  style: pw.TextStyle(fontSize: 9, font: font),
+                ),
+              ),
+              pw.Expanded(
+                flex: 5,
+                child: pw.Container(
+                  margin: const pw.EdgeInsets.only(
+                      top: 5, left: 40, right: 25, bottom: 25),
+                  decoration: pw.BoxDecoration(
+                    border: pw.Border.all(
+                      color: PdfColors.black,
+                      width: 2, // Adjust border width as needed
+                    ),
+                  ),
+                  child: pw.Center(
+                      child: pw.Padding(
+                          padding: const pw.EdgeInsets.only(
+                              top: 20, left: 20, right: 20),
+                          child: pw.Column(
+                            mainAxisAlignment: pw.MainAxisAlignment.start,
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                  'Licenses and Certificate Property Valuation Year 2021-2024',
+                                  style: header2(true),
+                                  textAlign: pw.TextAlign.center),
+                              pw.SizedBox(height: 10),
+                              pw.Expanded(
+                                flex: 2,
+                                child: pw.Container(
+                                    margin: const pw.EdgeInsets.only(
+                                        top: 3, bottom: 25),
+                                    decoration: pw.BoxDecoration(
+                                      border: pw.Border.all(
+                                        color: PdfColors.black,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: pw.GridView(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 4,
+                                        mainAxisSpacing: 4,
+                                        children: [
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        DenImage))),
+                                          ),
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        DoungImage))),
+                                          ),
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        nullImage))),
+                                          ),
+                                          pw.Container(
+                                            decoration: pw.BoxDecoration(
+                                                border: pw.Border.all(
+                                                  color: PdfColors.black,
+                                                  width: 2,
+                                                ),
+                                                image: pw.DecorationImage(
+                                                    image: pw.MemoryImage(
+                                                        null1Image))),
+                                          ),
+                                        ])),
+                              ),
+                            ],
+                          ) // Add margin here
+                          )),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ));
 
     final pdfBytes = pdf.save();
 

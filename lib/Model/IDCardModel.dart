@@ -45,7 +45,9 @@ class IDCard {
 
   Future InsertIdCard(IDCard objidcard) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.1.31:8000/api/insertidcard'));
+        'POST',
+        Uri.parse(
+            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertidcard'));
 
     if (objidcard.frontidcard1 != null) {
       Uint8List cvByte;

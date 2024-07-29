@@ -28,7 +28,9 @@ class FinalMap {
 
   Future InsertFinalMap(FinalMap objfinalmap) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.1.31:8000/api/insertfinalmap'));
+        'POST',
+        Uri.parse(
+            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertfinalmap'));
 
     print("Save \n\n");
     if (objfinalmap.Finalmap != null) {

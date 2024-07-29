@@ -23,16 +23,13 @@ class _TestPageState extends State<TestPage> {
 
   Future<void> fetchDropDownItems() async {
     try {
-      final response = await http
-          .get(Uri.parse('http://192.168.1.31:8000/api/getallinspactor'));
+      final response = await http.get(Uri.parse(
+          'https://www.angkorrealestate.com/book_report/bookReport/public/api/getallinspactor'));
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
         if (jsonResponse['data'] != null) {
-          final items = (jsonResponse['data'] as List)
-              .map((item) => item['name'].toString())
-              .toList();
           setState(() {
-            dropDownItems = items;
+            dropDownItems = jsonResponse['data'];
             isLoading = false;
           });
         }
