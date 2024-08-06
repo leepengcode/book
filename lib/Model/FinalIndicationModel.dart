@@ -56,13 +56,12 @@ class FinalIndication {
     };
   }
 
-  Future InsertFinal(FinalIndication dataFinalIndic) async {
+  Future InsertFinal(FinalIndication dataFinalIndic, var id_book) async {
     var request = http.Request(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertfinal'));
+            'https://virakst.online/bookReport/public/api/insertfinal/${id_book}'));
     if (dataFinalIndic.totalbuildingsizesqm == '') {
-      print('in API ${dataFinalIndic.expiry_date}');
       request.body = jsonEncode({
         'totallandsizesqm': dataFinalIndic.totallandsizesqm,
         'totallandvalue': dataFinalIndic.totallandvalue,
@@ -93,7 +92,7 @@ class FinalIndication {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in InsertFinal");
     } else {
       print(response.reasonPhrase);
       print(await response.stream.bytesToString());

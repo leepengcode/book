@@ -36,8 +36,17 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
       comparePropertyWidgets.add(ComparePropertyWidget(
         parcelNumber: parcelCounter,
         getvalue: (value) {
-          print("location ${value.location}\n");
-          objComparison.add(value);
+          if (objComparison.length == 0) {
+            objComparison.add(value);
+            print(
+                "location ${objComparison[objComparison.length - 1].totalprice}\n");
+          } else if (objComparison.length > 0 &&
+              objComparison[objComparison.length - 1].totalprice !=
+                  value.totalprice) {
+            objComparison.add(value);
+            print(
+                "location2 ${objComparison[objComparison.length - 1].totalprice}\n");
+          }
         },
       ));
       parcelCounter++;

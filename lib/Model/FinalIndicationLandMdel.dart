@@ -18,7 +18,7 @@ class Land {
   // From JSON
   factory Land.fromJson(Map<String, dynamic> json) {
     return Land(
-      no: json['no'] ?? '',
+      no: json['no'].toString() ?? '',
       sizesqm: json['sizesqm'] ?? '',
       sizesqft: json['sizesqft'] ?? '',
       valuesqm: json['valuesqm'] ?? '',

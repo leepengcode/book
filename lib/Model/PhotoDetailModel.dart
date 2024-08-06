@@ -5,8 +5,8 @@ import 'package:universal_io/io.dart';
 
 class PhotoDetail {
   File? frontviewimage;
-  List<File>? viewimage ;
-  List<File>? insideimage ;
+  List<File>? viewimage;
+  List<File>? insideimage;
   List<File>? landimage;
   File? roadviewimage1;
   File? roadviewimage2;
@@ -45,18 +45,18 @@ class PhotoDetail {
   });
   factory PhotoDetail.fromJson(Map<String, dynamic> json) {
     return PhotoDetail(
-      frontviewimage: json['frontviewimage'] ?? '',
-      viewimage: [],
-      insideimage: [],
-      landimage: [],
-      roadviewimage1: json['roadviewimage1'] ?? '',
-      roadviewimage2: json['roadviewimage2'] ?? '',
-      surroundin1: json['surroundin1'] ?? '',
-      surroundin2: json['surroundin2'] ?? '',
-      surroundin3: json['surroundin3'] ?? '',
-      surroundin4: json['surroundin4'] ?? '',
-      surroundin5: json['surroundin5'] ?? '',
-      surroundin6: json['surroundin6'] ?? '',
+      frontviewimage:
+          File.fromRawPath(base64Decode(json['frontviewimage'] ?? '')),
+      roadviewimage1:
+          File.fromRawPath(base64Decode(json['roadviewimage1'] ?? '')),
+      roadviewimage2:
+          File.fromRawPath(base64Decode(json['roadviewimage2'] ?? '')),
+      surroundin1: File.fromRawPath(base64Decode(json['surroundin1'] ?? '')),
+      surroundin2: File.fromRawPath(base64Decode(json['surroundin2'] ?? '')),
+      surroundin3: File.fromRawPath(base64Decode(json['surroundin3'] ?? '')),
+      surroundin4: File.fromRawPath(base64Decode(json['surroundin4'] ?? '')),
+      surroundin5: File.fromRawPath(base64Decode(json['surroundin5'] ?? '')),
+      surroundin6: File.fromRawPath(base64Decode(json['surroundin6'] ?? '')),
       dessurroundin1: json['dessurroundin1'] ?? '',
       dessurroundin2: json['dessurroundin2'] ?? '',
       dessurroundin3: json['dessurroundin3'] ?? '',
@@ -87,5 +87,4 @@ class PhotoDetail {
       'dessurroundin6': dessurroundin6,
     };
   }
-  
 }

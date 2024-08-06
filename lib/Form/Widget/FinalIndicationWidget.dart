@@ -133,8 +133,7 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
   List? dropDownItems;
   bool isLoading = true;
   Future<void> fetchDropDownItems() async {
-    const url =
-        'https://www.angkorrealestate.com/book_report/bookReport/public/api/getallinspactor';
+    const url = 'https://virakst.online/bookReport/public/api/getallinspactor';
 
     try {
       final response = await http.get(Uri.parse(url));

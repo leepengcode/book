@@ -24,7 +24,7 @@ class _TestPageState extends State<TestPage> {
   Future<void> fetchDropDownItems() async {
     try {
       final response = await http.get(Uri.parse(
-          'https://www.angkorrealestate.com/book_report/bookReport/public/api/getallinspactor'));
+          'https://virakst.online/bookReport/public/api/getallinspactor'));
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
         if (jsonResponse['data'] != null) {
