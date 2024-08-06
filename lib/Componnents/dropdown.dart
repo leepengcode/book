@@ -65,7 +65,6 @@ class _HeaderDropdownState extends State<HeaderDropdown> {
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  print("object! ${value}\n");
                   widget.onChanged!(value);
                 });
               },
@@ -139,7 +138,6 @@ class _HeaderDropdownState1 extends State<HeaderDropdown1> {
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  print("object! ${value}\n");
                   widget.onChanged(value);
                 });
               },

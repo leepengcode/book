@@ -17,9 +17,9 @@ class IDCard {
   });
   factory IDCard.fromJson(Map<String, dynamic> json) {
     return IDCard(
-      frontidcard1: json['frontidcard1'] ?? '',
+      frontidcard1: File.fromRawPath(base64Decode(json['frontidcard1'])),
       // frontidcard2: json['frontidcard2'] ?? '',
-      backidcard1: json['backidcard1'] ?? '',
+      backidcard1: File.fromRawPath(base64Decode(json['backidcard1'])),
       // backidcard2: json['backidcard2'] ?? '',
     );
   }
@@ -43,11 +43,11 @@ class IDCard {
     }
   }
 
-  Future InsertIdCard(IDCard objidcard) async {
+  Future InsertIdCard(IDCard objidcard, var id_book) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertidcard'));
+            'https://virakst.online/bookReport/public/api/insertidcard/${id_book}'));
 
     if (objidcard.frontidcard1 != null) {
       Uint8List cvByte;
@@ -124,7 +124,7 @@ class IDCard {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in Card");
     } else {
       print(response.reasonPhrase);
     }

@@ -11,7 +11,7 @@ class OfficerReport {
   late String? opportunity;
   late String? threat;
   late String? markrtprice;
-  List<Comparison>? comparison;
+  List<Comparison>? comparison = [];
   OfficerReport({
     this.condition,
     this.immediate,
@@ -30,8 +30,7 @@ class OfficerReport {
         weakness: json['weakness'] ?? '',
         opportunity: json['opportunity'] ?? '',
         threat: json['threat'] ?? '',
-        markrtprice: json['markrtprice'] ?? '',
-        comparison: []);
+        markrtprice: json['markrtprice'] ?? '');
   }
   Map<String, dynamic> toJson() {
     return {
@@ -46,11 +45,11 @@ class OfficerReport {
     };
   }
 
-  Future InsertOfficer(OfficerReport objOfficer) async {
+  Future InsertOfficer(OfficerReport objOfficer, var id_book) async {
     var request = http.Request(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insert-officer'));
+            'https://virakst.online/bookReport/public/api/insert-officer/${id_book}'));
 
     request.body = jsonEncode({
       'condition': objOfficer.condition,
@@ -65,7 +64,7 @@ class OfficerReport {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in InsertOfficer");
     } else {
       print("${response.reasonPhrase}\n");
       print(await response.stream.bytesToString());

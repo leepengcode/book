@@ -16,9 +16,9 @@ class Layout {
   });
   factory Layout.fromJson(Map<String, dynamic> json) {
     return Layout(
-      deepimage1: json['deepimage1'] ?? '',
-      deepimage2: json['deepimage2'] ?? '',
-      layoutimage: json['layoutimage'] ?? '',
+      deepimage1: base64Decode(json['deepimage1']),
+      deepimage2: base64Decode(json['deepimage2']),
+      layoutimage: base64Decode(json['layoutimage']),
     );
   }
   Map<String, dynamic> toJson() {
@@ -38,11 +38,11 @@ class Layout {
     }
   }
 
-  Future InsertLayout(Layout objlayout) async {
+  Future InsertLayout(Layout objlayout, var id_book) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertlayout'));
+            'https://virakst.online/bookReport/public/api/insertlayout/${id_book}'));
 
     print("object btnClick");
     if (objlayout.deepimage1 != null) {
@@ -102,7 +102,7 @@ class Layout {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in Layout");
     } else {
       print(response.reasonPhrase);
     }

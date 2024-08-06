@@ -21,7 +21,7 @@ class Building {
   // From JSON
   factory Building.fromJson(Map<String, dynamic> json) {
     return Building(
-      no: json['no'] ?? '',
+      no: json['no'].toString() ?? '',
       sizesqm: json['sizesqm'] ?? '',
       floorno: json['floorno'] ?? '',
       bedroomno: json['bedroomno'] ?? '',

@@ -20,13 +20,12 @@ class PLand {
   // From JSON
   factory PLand.fromJson(Map<String, dynamic> json) {
     return PLand(
-      no: json['no'] ?? '',
-      size_sqm: json['size_sqm'] ?? '',
-      minsqm: json['minsqm'] ?? '',
-      maxsqm: json['maxsqm'] ?? '',
-      totalmin: json['totalmin'] ?? '',
-      totalmax: json['totalmax'] ?? '',
-    );
+        no: json['no'].toString() ?? "",
+        size_sqm: json['size_sqm'].toString() ?? "",
+        minsqm: json['minsqm'].toString() ?? "",
+        maxsqm: json['maxsqm'].toString() ?? "",
+        totalmin: json['totalmin'].toString() ?? "",
+        totalmax: json['totalmax'].toString() ?? "");
   }
 
   // To JSON

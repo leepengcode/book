@@ -42,11 +42,9 @@ class Provisional {
         totalbuildingsizesqm: json['totalbuildingsizesqm'] ?? '',
         totalbuildingvaluemin: json['totalbuildingvaluemin'] ?? '',
         totalbuildingvaluemax: json['totalbuildingvaluemax'] ?? '',
-        fair_market: json['fair_market'] ?? '',
-        fire_insurance: json['fire_insurance'] ?? '',
-        force_sale: json['force_sale'] ?? '',
-        land: [],
-        building: []);
+        fair_market: json['fair_market'] ?? '0.0',
+        fire_insurance: json['fire_insurance'] ?? '0.0',
+        force_sale: json['force_sale'] ?? '0.0');
   }
   Map<String, dynamic> toJson() {
     return {
@@ -63,11 +61,11 @@ class Provisional {
     };
   }
 
-  Future InsertProvisional(Provisional dataProvisional) async {
+  Future InsertProvisional(Provisional dataProvisional, var id_book) async {
     var request = http.Request(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertprovisional'));
+            'https://virakst.online/bookReport/public/api/insertprovisional/${id_book}'));
     if (dataProvisional.fair_market == '') {
       request.body = jsonEncode({
         'name': dataProvisional.name,
@@ -100,7 +98,7 @@ class Provisional {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in Provisional");
     } else {
       print(response.reasonPhrase);
     }

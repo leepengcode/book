@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 class Comparison {
-  late String parcel;
-  late String typeofproperty1;
-  late String typeofproperty2;
-  late String location;
-  late String landsize;
-  late String buildingsize;
-  late String landvalue;
-  late String buildingvalue;
-  late String landprice;
-  late String buildingprice;
-  late String totalprice;
-  late String typecompare;
+  String parcel;
+  String typeofproperty1;
+  String typeofproperty2;
+  String location;
+  String landsize;
+  String buildingsize;
+  String landvalue;
+  String buildingvalue;
+  String landprice;
+  String buildingprice;
+  String totalprice;
+  String typecompare;
 
   Comparison({
     required this.parcel,

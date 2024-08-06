@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +9,7 @@ class FinalMap {
   FinalMap({this.Finalmap});
   factory FinalMap.fromJson(Map<String, dynamic> json) {
     return FinalMap(
-      Finalmap: json['Finalmap'] ?? '',
+      Finalmap: File.fromRawPath(base64Decode(json['finalmap'])),
     );
   }
   Map<String, dynamic> toJson() {
@@ -26,11 +27,11 @@ class FinalMap {
     }
   }
 
-  Future InsertFinalMap(FinalMap objfinalmap) async {
+  Future InsertFinalMap(FinalMap objfinalmap, var id_book) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertfinalmap'));
+            'https://virakst.online/bookReport/public/api/insertfinalmap/${id_book}'));
 
     print("Save \n\n");
     if (objfinalmap.Finalmap != null) {
@@ -53,7 +54,7 @@ class FinalMap {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in InsertFinalMap");
     } else {
       print(response.reasonPhrase);
     }

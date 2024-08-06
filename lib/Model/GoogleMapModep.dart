@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
@@ -11,9 +12,15 @@ class Gmap {
 
   factory Gmap.fromJson(Map<String, dynamic> json) {
     return Gmap(
-      pmapimage: json['pmapimage'] != null ? File(json['pmapimage']) : null,
-      apmapimage: json['apmapimage'] != null ? File(json['apmapimage']) : null,
-      skmapimage: json['skmapimage'] != null ? File(json['skmapimage']) : null,
+      pmapimage: json['pmapimage'] != null
+          ? File.fromRawPath(base64Decode(json['pmapimage']))
+          : null,
+      apmapimage: json['apmapimage'] != null
+          ? File.fromRawPath(base64Decode(json['apmapimage']))
+          : null,
+      skmapimage: json['skmapimage'] != null
+          ? File.fromRawPath(base64Decode(json['skmapimage']))
+          : null,
     );
   }
 
@@ -25,11 +32,11 @@ class Gmap {
     };
   }
 
-  Future insertGmap(Gmap objGmap) async {
+  Future insertGmap(Gmap objGmap, var id_book) async {
     var request = http.MultipartRequest(
       'POST',
       Uri.parse(
-          'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertpmap'),
+          'https://virakst.online/bookReport/public/api/insertpmap/${id_book}'),
     );
 
     // Add JSON fields
@@ -112,7 +119,7 @@ class Gmap {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      print("Done in Gmap");
     } else {
       print(response.reasonPhrase);
     }

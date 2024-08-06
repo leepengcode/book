@@ -42,6 +42,29 @@ class Cover {
       this.date,
       this.code});
 
+  factory Cover.fromJson(Map<String, dynamic> json) {
+    return Cover(
+      header: json['header'] ?? '',
+      info: json['info'] ?? '',
+      bank: json['bank'] ?? '',
+      branch: json['branch'] ?? '',
+      ownership: json['ownership'] ?? '',
+      image: File.fromRawPath(base64Decode(
+          json['image'] ?? '')), // Assuming image is stored as base64
+      ownername: json['ownername'] ?? '',
+      deeptitle: json['deeptitle'] ?? '',
+      location: json['location'] ?? '',
+      street: json['street'] ?? '',
+      cityorprovince: json['cityorprovince'] ?? '',
+      communeorkhan: json['communeorkhan'] ?? '',
+      districtorsangkat: json['districtorsangkat'] ?? '',
+      villageorphum: json['villageorphum'] ?? '',
+      reportto: json['reportto'] ?? '',
+      date: json['date'] ?? '',
+      code: json['code'] ?? '',
+    );
+  }
+
   Map<String, String> toJson() {
     return {
       'header': header ?? '',
@@ -80,30 +103,32 @@ class Cover {
     }
   }
 
-  Future InsertCover(Cover objCover) async {
+  Future<String> convertToBase64(String path) async {
+    var cvByte = await getBlobData(path);
+    return base64Encode(cvByte);
+  }
+
+  Future InsertCover(Cover objCover, var id_book) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://www.angkorrealestate.com/book_report/bookReport/public/api/insertcover'));
+            'https://virakst.online/bookReport/public/api/insertcover/${id_book}'));
 
     request.fields.addAll(objCover.toJson());
 
     if (objCover.image != null) {
       Uint8List cvByte;
+      var cvByte1;
       if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
         // For web environment
 
-        cvByte = await getBlobData(objCover.image!.path);
+        cvByte1 = convertToBase64(objCover.image!.path);
       } else {
         // For mobile environment
         cvByte = await File(objCover.image!.path).readAsBytes();
       }
 
-      request.files.add(http.MultipartFile.fromBytes(
-        'image',
-        cvByte,
-        filename: 'care.jpg',
-      ));
+      request.files.add(http.MultipartFile.fromString('image', cvByte1));
     } else {
       print("Error: No image provided");
     }
@@ -111,8 +136,7 @@ class Cover {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      print("object done");
+      print("Done in Cover");
     } else {
       print(response.statusCode);
       print("object not done");

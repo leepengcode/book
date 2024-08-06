@@ -134,7 +134,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             objInfo.totalsize = _totalsize.text.toString();
             objInfo.buildingtype = _buildingtype.text.toString();
             objInfo.buildingage = _buildingage.text.toString();
-            objInfo.cost = _cost.text.toString();
+            objInfo.cost = _cost.text.toString() ?? "No data";
             objInfo.byowner = _byowner.text.toString();
             objInfo.metalroof = _metalroof.text.toString();
             objInfo.occoupied = _occoupied.text.toString();
@@ -303,7 +303,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                             label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
-                            controller: _flatsize),
+                            controller: _buildingsize),
                       ],
                     ),
                   ] else if (widget.ck1 ==
@@ -317,7 +317,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                             label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
-                            controller: _flatsize),
+                            controller: _buildingsize),
                         _buildTextFieldColumn(
                             title: "By Owmer",
                             label: "By Owmer",
@@ -360,7 +360,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                             label: "Building Size",
                             keytype: TextInputType.number,
                             width: 250,
-                            controller: _flatsize),
+                            controller: _buildingsize),
                       ],
                     ),
                   ],

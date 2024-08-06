@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:book/Form/LeftSideBar.dart';
 import 'package:book/Form/Screen/BookList.dart';
@@ -29,9 +30,11 @@ import 'package:book/Model/ProvisionalModel.dart';
 import 'package:book/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 import 'dart:html' as html;
 import '../Widget/PhotoDetail.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -54,11 +57,17 @@ class _FormWidgetState extends State<FormWidget> {
   Comparison? dataComparison;
   List<File>? list_forviewproperty = [];
   List<File>? list_forinsideproperty = [];
-  List<File>? list_forviewland;
+  List<File> list_forviewland = [];
   PhotoDetail dataPhoto = PhotoDetail();
 
   Provisional dataProvisional = Provisional();
   FinalIndication dataFinalIndic = FinalIndication();
+  var id_book;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +263,6 @@ class _FormWidgetState extends State<FormWidget> {
                         setState(() {
                           if (value != null) {
                             dataFinalIndic = value;
-                            print("in form ${dataFinalIndic.expiry_date}");
                           }
                         });
                       },
@@ -266,15 +274,18 @@ class _FormWidgetState extends State<FormWidget> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        if (_await == true) {
-                          await Method_insert(context);
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => MyleftSideBar()));
-                          setState(() {
-                            _await = false;
-                          });
-                        }
+                        // if (_await == true) {
+
+                        await _valuableProgress(context);
+
+                        await insertphotodetails(id_book);
+                        await InsertPhoto(id_book);
+                        // await insertphotodetails();
+
+                        //   setState(() {
+                        //     _await = false;
+                        //   });
+                        // }
                       },
                       child: Center(
                           child: Container(
@@ -304,36 +315,64 @@ class _FormWidgetState extends State<FormWidget> {
     );
   }
 
+  var chars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  String RandomString(int strlen) {
+    Random rnd = Random(DateTime.now().millisecondsSinceEpoch);
+    String result = "";
+    for (var i = 0; i < strlen; i++) {
+      result += chars[rnd.nextInt(chars.length)];
+    }
+    return result;
+  }
+
+  Future<void> _valuableProgress(BuildContext context) async {
+    ProgressDialog pd = ProgressDialog(context: context);
+    setState(() {
+      id_book = '${RandomString(7)}${dataFinalIndic.issus_date}';
+    });
+    pd.show(
+      max: 100,
+      msg: 'File Downloading...',
+      progressType: ProgressType.valuable,
+    );
+
+    for (int i = 0; i <= 100; i++) {
+      pd.update(value: i);
+
+      try {
+        if (i == 2) {
+          await Cover().InsertCover(dataCover!, id_book);
+        } else if (i == 10) {
+          await PropertyInfor().InsertInfo(dataInfo!, id_book);
+        } else if (i == 20) {
+          await IDCard().InsertIdCard(dataIdcard!, id_book);
+        } else if (i == 30) {
+          await Layout().InsertLayout(dataLayout!, id_book);
+        } else if (i == 40) {
+          await Gmap().insertGmap(dataGmap!, id_book);
+        } else if (i == 70) {
+          await OfficerReport().InsertOfficer(dataOfficer!, id_book);
+        } else if (i == 80) {
+          await FinalMap().InsertFinalMap(datafinalmap!, id_book);
+        } else if (i == 90) {
+          await Provisional().InsertProvisional(dataProvisional, id_book);
+        } else if (i == 95) {
+          await FinalIndication().InsertFinal(dataFinalIndic, id_book);
+        }
+      } catch (e) {
+        print('Error at progress $i: $e');
+      }
+
+      await Future.delayed(Duration(milliseconds: 600));
+    }
+
+    pd.close();
+  }
+
   bool _await = true;
   var ckeck_insert;
-  Future<String> _get() async {
-    _await = true;
-    await Future.wait([Cover().InsertCover(dataCover!)]);
-    await Future.wait([PropertyInfor().InsertInfo(dataInfo!)]);
-    await Future.wait([IDCard().InsertIdCard(dataIdcard!)]);
-    await Future.wait([Layout().InsertLayout(dataLayout!)]);
-    await Future.wait([Gmap().insertGmap(dataGmap!)]);
-    await Future.wait([InsertPhoto()]);
-    await Future.wait([OfficerReport().InsertOfficer(dataOfficer!)]);
-    await Future.wait([FinalMap().InsertFinalMap(datafinalmap!)]);
-    await Future.wait([Provisional().InsertProvisional(dataProvisional)]);
-    await Future.wait([FinalIndication().InsertFinal(dataFinalIndic)]);
-
-    setState(() {
-      ckeck_insert = "Insert succes";
-    });
-
-    return ckeck_insert;
-  }
-
-  Method_insert(BuildContext context) {
-    return FutureBuilder(
-      future: _get(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        return SizedBox();
-      },
-    );
-  }
+  late ProgressDialog pd;
 
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
@@ -346,12 +385,42 @@ class _FormWidgetState extends State<FormWidget> {
 
   Future<String> convertToBase64(String path) async {
     var cvByte = await getBlobData(path);
+
     return base64Encode(cvByte);
   }
 
-  Future<void> InsertPhoto() async {
-    print("dataPhoto.dessurroundin1 ${dataPhoto.dessurroundin1}\n");
-    if (list_forviewland == null) {
+  Future<void> insertphotodetails(var id_book) async {
+    var response2 = await http.post(
+      Uri.parse(
+          "https://virakst.online/bookReport/public/api/insertphotodetails/${id_book}"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        'dessurroundin1': dataPhoto.dessurroundin1,
+        'dessurroundin2': dataPhoto.dessurroundin2,
+        'dessurroundin3': dataPhoto.dessurroundin3,
+        'dessurroundin4': dataPhoto.dessurroundin4,
+        'dessurroundin5': dataPhoto.dessurroundin5,
+        'dessurroundin6': dataPhoto.dessurroundin6,
+        'frontviewimage': await convertToBase64(dataPhoto.frontviewimage!.path),
+        'surroundin1': await convertToBase64(dataPhoto.surroundin1!.path),
+        'surroundin2': await convertToBase64(dataPhoto.surroundin2!.path),
+        'surroundin3': await convertToBase64(dataPhoto.surroundin3!.path),
+        'surroundin4': await convertToBase64(dataPhoto.surroundin4!.path),
+        'surroundin5': await convertToBase64(dataPhoto.surroundin5!.path),
+        'surroundin6': await convertToBase64(dataPhoto.surroundin6!.path),
+        'roadviewimage1': await convertToBase64(dataPhoto.roadviewimage1!.path),
+        'roadviewimage2': await convertToBase64(dataPhoto.roadviewimage2!.path)
+      }),
+    );
+    if (response2.statusCode == 200 || response2.statusCode == 201) {
+      print("Done in insertphotodetails");
+    } else {
+      print("Error in server ${response2.statusCode}, ${response2.body}");
+    }
+  }
+
+  Future<void> InsertPhoto(var id_book) async {
+    if (list_forviewland == []) {
       List<String> viewimage = [];
       List<String> insideimage = [];
 
@@ -379,45 +448,31 @@ class _FormWidgetState extends State<FormWidget> {
       try {
         var response = await http.post(
           Uri.parse(
-              "https://www.angkorrealestate.com/book_report/bookReport/public/api/insertphoto"),
+              "https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
           headers: {"Content-Type": "application/json"},
-          body: jsonEncode({
-            'dessurroundin1': dataPhoto.dessurroundin1,
-            'dessurroundin2': dataPhoto.dessurroundin2,
-            'dessurroundin3': dataPhoto.dessurroundin3,
-            'dessurroundin4': dataPhoto.dessurroundin4,
-            'dessurroundin5': dataPhoto.dessurroundin5,
-            'dessurroundin6': dataPhoto.dessurroundin6,
-            'frontviewimage':
-                await convertToBase64(dataPhoto.frontviewimage!.path),
-            'surroundin1': await convertToBase64(dataPhoto.surroundin1!.path),
-            'surroundin2': await convertToBase64(dataPhoto.surroundin2!.path),
-            'surroundin3': await convertToBase64(dataPhoto.surroundin3!.path),
-            'surroundin4': await convertToBase64(dataPhoto.surroundin4!.path),
-            'surroundin5': await convertToBase64(dataPhoto.surroundin5!.path),
-            'surroundin6': await convertToBase64(dataPhoto.surroundin6!.path),
-            'roadviewimage1':
-                await convertToBase64(dataPhoto.roadviewimage1!.path),
-            'roadviewimage2':
-                await convertToBase64(dataPhoto.roadviewimage2!.path),
-            'insideimage': insideimage,
-            'viewimage': viewimage
-          }),
+          body:
+              jsonEncode({'insideimage': insideimage, 'viewimage': viewimage}),
         );
 
         if (response.statusCode == 200 || response.statusCode == 201) {
-          print(response.body);
+          print("Done in InsertPhoto insideimage");
         } else {
           print("Error in server ${response.statusCode}, ${response.body}");
         }
       } catch (e) {
-        print("Error catch in main $e");
+        if (e is SocketException) {
+          print("Network error: $e");
+        } else if (e is http.ClientException) {
+          print("Client error: $e");
+        } else {
+          print("Unknown error: $e");
+        }
       }
     } else {
       List<String> viewland = [];
 
-      if (list_forviewland != null && list_forviewland!.isNotEmpty) {
-        for (var file in list_forviewland!) {
+      if (list_forviewland != null && list_forviewland.isNotEmpty) {
+        for (var file in list_forviewland) {
           var base64Image = await convertToBase64(file.path);
           viewland.add(base64Image);
         }
@@ -429,33 +484,13 @@ class _FormWidgetState extends State<FormWidget> {
       try {
         var response = await http.post(
           Uri.parse(
-              "https://www.angkorrealestate.com/book_report/bookReport/public/api/insertphoto"),
+              "https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
           headers: {"Content-Type": "application/json"},
-          body: jsonEncode({
-            'dessurroundin1': dataPhoto.dessurroundin1,
-            'dessurroundin2': dataPhoto.dessurroundin2,
-            'dessurroundin3': dataPhoto.dessurroundin3,
-            'dessurroundin4': dataPhoto.dessurroundin4,
-            'dessurroundin5': dataPhoto.dessurroundin5,
-            'dessurroundin6': dataPhoto.dessurroundin6,
-            'frontviewimage':
-                await convertToBase64(dataPhoto.frontviewimage!.path),
-            'surroundin1': await convertToBase64(dataPhoto.surroundin1!.path),
-            'surroundin2': await convertToBase64(dataPhoto.surroundin2!.path),
-            'surroundin3': await convertToBase64(dataPhoto.surroundin3!.path),
-            'surroundin4': await convertToBase64(dataPhoto.surroundin4!.path),
-            'surroundin5': await convertToBase64(dataPhoto.surroundin5!.path),
-            'surroundin6': await convertToBase64(dataPhoto.surroundin6!.path),
-            'roadviewimage1':
-                await convertToBase64(dataPhoto.roadviewimage1!.path),
-            'roadviewimage2':
-                await convertToBase64(dataPhoto.roadviewimage2!.path),
-            'landimage': viewland,
-          }),
+          body: jsonEncode({'landimage': viewland}),
         );
 
         if (response.statusCode == 200 || response.statusCode == 201) {
-          print(response.body);
+          print("Done in InsertPhoto landimage");
         } else {
           print("Error in server ${response.statusCode}, ${response.body}");
         }
