@@ -4636,7 +4636,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                 style: header3()),
                             pw.RichText(
                               text: pw.TextSpan(
-                                text: '${widget.objOfficerReport!.condition}',
+                                text: '${widget.objOfficerReport!.conditions}',
                                 style: body1(), // Base style
                               ),
                             ),

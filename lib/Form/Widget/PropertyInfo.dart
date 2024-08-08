@@ -71,7 +71,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
   final _landsize = TextEditingController();
   final _totalland = TextEditingController();
   final _typeland = TextEditingController();
-  final _occupant = TextEditingController();
+  // final _occupant = TextEditingController();
   final _tenure = TextEditingController();
   final _deepnumber = TextEditingController();
   final _unit = TextEditingController();
@@ -284,7 +284,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       "Property OFFICE SPACE VALUATION REPORT") ...[
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,                                                                                                                                     
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",

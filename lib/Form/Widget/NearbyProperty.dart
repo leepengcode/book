@@ -60,7 +60,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
 
     addNewComparePropertyWidget();
     objOfficer = OfficerReport(
-        condition: 'we',
+        conditions: 'we',
         immediate: 'we',
         strength: 'we',
         weakness: 'we',
@@ -120,7 +120,7 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                 controller: _conditionController,
                 onChanged: (value) {
                   setState(() {
-                    objOfficer!.condition = value.toString();
+                    objOfficer!.conditions = value.toString();
                   });
                 },
                 maxLines: null,

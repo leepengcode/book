@@ -822,7 +822,6 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                     value: value['name'].toString(),
                                     child: Text('${value['name']}'),
                                     onTap: () {
-                                      print("object \n");
                                       _controllby =
                                           "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
                                     },
@@ -875,8 +874,6 @@ class _FinalIndicationWidgetState extends State<FinalIndicationWidget> {
                                     value: value['name'].toString(),
                                     child: Text('${value['name']}'),
                                     onTap: () {
-                                      print(
-                                          "object2 ${value['name']} 24k ${value['position']} 24k ${value['license_no']}\n");
                                       _verifyby =
                                           "${value['name']} 24k ${value['position']} 24k ${value['license_no']}";
                                     },

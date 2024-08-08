@@ -4,7 +4,7 @@ import 'package:book/Model/ComparisonModel.dart';
 import 'package:http/http.dart' as http;
 
 class OfficerReport {
-  late String? condition;
+  late String? conditions;
   late String? immediate;
   late String? strength;
   late String? weakness;
@@ -13,7 +13,7 @@ class OfficerReport {
   late String? markrtprice;
   List<Comparison>? comparison = [];
   OfficerReport({
-    this.condition,
+    this.conditions,
     this.immediate,
     this.strength,
     this.weakness,
@@ -24,7 +24,7 @@ class OfficerReport {
   });
   factory OfficerReport.fromJson(Map<String, dynamic> json) {
     return OfficerReport(
-        condition: json['condition'] ?? '',
+        conditions: json['conditions'] ?? '',
         immediate: json['immediate'] ?? '',
         strength: json['strength'] ?? '',
         weakness: json['weakness'] ?? '',
@@ -34,7 +34,7 @@ class OfficerReport {
   }
   Map<String, dynamic> toJson() {
     return {
-      'condition': condition,
+      'conditions': conditions,
       'immediate': immediate,
       'strength': strength,
       'weakness': weakness,
@@ -52,7 +52,7 @@ class OfficerReport {
             'https://virakst.online/bookReport/public/api/insert-officer/${id_book}'));
 
     request.body = jsonEncode({
-      'condition': objOfficer.condition,
+      'conditions': objOfficer.conditions,
       'immediate': objOfficer.immediate,
       'strength': objOfficer.strength,
       'weakness': objOfficer.weakness,

@@ -4553,7 +4553,7 @@ class _MyPDFState extends State<MyPDF> {
                                 style: header3()),
                             pw.RichText(
                               text: pw.TextSpan(
-                                text: '${widget.objOfficerReport!.condition}',
+                                text: '${widget.objOfficerReport!.conditions}',
                                 style: body1(), // Base style
                               ),
                             ),

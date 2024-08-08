@@ -125,7 +125,7 @@ class Cover {
         cvByte1 = convertToBase64(objCover.image!.path);
       } else {
         // For mobile environment
-        cvByte = await File(objCover.image!.path).readAsBytes();
+        cvByte1 = convertToBase64(objCover.image!.path);
       }
 
       request.files.add(http.MultipartFile.fromString('image', cvByte1));
