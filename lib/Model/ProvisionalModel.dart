@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:book/Model/ProvisionalBuildingMdel.dart';
@@ -66,6 +65,7 @@ class Provisional {
         'POST',
         Uri.parse(
             'https://virakst.online/bookReport/public/api/insertprovisional/${id_book}'));
+
     if (dataProvisional.fair_market == '') {
       request.body = jsonEncode({
         'name': dataProvisional.name,
@@ -89,7 +89,7 @@ class Provisional {
         'totalbuildingvaluemax': dataProvisional.totalbuildingvaluemax,
         'force_sale': dataProvisional.force_sale ?? '',
         'fair_market': dataProvisional.fair_market ?? '',
-        'fire_insurance': dataProvisional.fire_insurance ?? '',
+        'fire_insurance': dataProvisional.fire_insurance ?? '123',
         'land': dataProvisional.land!.toList(),
         'building': dataProvisional.building!.toList()
       });

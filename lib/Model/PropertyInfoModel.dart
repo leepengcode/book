@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class PropertyInfor {
@@ -158,7 +156,6 @@ class PropertyInfor {
       'landsize': landsize ?? '',
       'totalland': totalland ?? '',
       'typeland': typeland ?? '',
-      // 'occupant': occupant ?? '',
       'tenure': tenure ?? '',
       'deepnumber': deepnumber ?? '',
       'unit': unit ?? '',
@@ -204,6 +201,9 @@ class PropertyInfor {
           'POST',
           Uri.parse(
               'https://virakst.online/bookReport/public/api/insertinfo/${id_book}'));
+
+      // Set content-type to application/json
+      request.headers['Content-Type'] = 'application/json';
 
       request.body = json.encode({
         "plotno": dataInfo.plotno ?? "No data",

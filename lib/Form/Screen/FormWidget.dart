@@ -4,12 +4,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:book/Form/LeftSideBar.dart';
-import 'package:book/Form/Screen/BookList.dart';
 import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
 import 'package:book/Form/Widget/GoogleMap.dart';
-import 'package:book/Form/Widget/InspatorWidget.dart';
 import 'package:book/Form/Widget/NearbyProperty.dart';
 import 'package:book/Form/Widget/PropertyInfo.dart';
 import 'package:book/Form/Widget/ProvisionalValuationWidget.dart';
@@ -30,11 +27,10 @@ import 'package:book/Model/ProvisionalModel.dart';
 import 'package:book/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
-import 'dart:html' as html;
-import '../Widget/PhotoDetail.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
+
+import '../Widget/PhotoDetail.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -467,7 +463,7 @@ class _FormWidgetState extends State<FormWidget> {
     } else {
       List<String> viewland = [];
 
-      if (list_forviewland != null && list_forviewland.isNotEmpty) {
+      if (list_forviewland.isNotEmpty) {
         for (var file in list_forviewland) {
           var base64Image = await convertToBase64(file.path);
           viewland.add(base64Image);

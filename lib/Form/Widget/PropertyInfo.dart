@@ -1,6 +1,5 @@
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

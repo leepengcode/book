@@ -1,6 +1,4 @@
-import 'package:book/Componnents/googlelocation.dart';
 import 'package:book/Componnents/style.dart';
-
 import 'package:book/Model/ProvisionalBuildingMdel.dart';
 import 'package:book/Model/ProvisionalLandMdel.dart';
 import 'package:book/Model/ProvisionalModel.dart';
@@ -153,7 +151,7 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                   totalbuildingsizesqm: _totalBuildingSizeSqm.text,
                   totalbuildingvaluemin: _totalBuildingMinPrice.text,
                   totalbuildingvaluemax: _totalBuildingMaxPrice.text,
-                  force_sale: _forcesale.text ?? "",
+                  force_sale: _forcesale.text,
                   name: _inspactor.text,
                   land: objland);
               widget.getForm(obj);

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class PBuilding {
   final String? no;
   final String? sizesqm;
@@ -23,7 +21,7 @@ class PBuilding {
   // From JSON
   factory PBuilding.fromJson(Map<String, dynamic> json) {
     return PBuilding(
-      no: json['no'].toString() ?? '',
+      no: json['no'].toString(),
       sizesqm: json['sizesqm'] ?? '',
       floorno: json['floorno'] ?? '',
       bedroomno: json['bedroomno'] ?? '',

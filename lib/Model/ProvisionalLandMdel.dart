@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class PLand {
   final String? no;
   final String? size_sqm;

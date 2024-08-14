@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 
 class Cover {
@@ -102,36 +102,42 @@ class Cover {
   }
 
   Future InsertCover(Cover objCover, var id_book) async {
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://virakst.online/bookReport/public/api/insertcover/${id_book}'));
+    try {
+      var request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+              'https://virakst.online/bookReport/public/api/insertcover/${id_book}'));
 
-    request.fields.addAll(objCover.toJson());
+      // Set content-type to application/json
+      request.headers['Content-Type'] = 'application/json';
 
-    if (objCover.image != null) {
-      var cvByte1;
-      if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
-        // For web environment
+      request.fields.addAll(objCover.toJson());
 
-        cvByte1 = convertToBase64(objCover.image!.path);
+      if (objCover.image != null) {
+        var cvByte1;
+        if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
+          // For web environment
+          cvByte1 = await convertToBase64(objCover.image!.path);
+        } else {
+          // For mobile environment
+          cvByte1 = await convertToBase64(objCover.image!.path);
+        }
+
+        request.files.add(http.MultipartFile.fromString('image', cvByte1));
       } else {
-        // For mobile environment
-        cvByte1 = convertToBase64(objCover.image!.path);
+        print("Error: No image provided");
       }
 
-      request.files.add(http.MultipartFile.fromString('image', cvByte1));
-    } else {
-      print("Error: No image provided");
-    }
+      http.StreamedResponse response = await request.send();
 
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      print('Response body: ${await response.stream.bytesToString()}');
-    } else {
-      print(response.statusCode);
-      print("object not done");
+      if (response.statusCode == 200) {
+        print('Response body: ${await response.stream.bytesToString()}');
+      } else {
+        print('Error: ${response.statusCode}');
+        print(await response.stream.bytesToString());
+      }
+    } catch (e) {
+      print('Exception caught: $e');
     }
   }
 }
