@@ -86,13 +86,6 @@ class Cover {
     };
   }
 
-  // @override
-  // String toString() {
-  //   // TODO: implement toString
-  //   // return "${super.toString()} , '+ ' ${image!.path.toString()}";
-  //   return "${super.toString()} , '+ ' ${image!.path}";
-  // }
-
   Future<Uint8List> getBlobData(String url) async {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -117,7 +110,6 @@ class Cover {
     request.fields.addAll(objCover.toJson());
 
     if (objCover.image != null) {
-      Uint8List cvByte;
       var cvByte1;
       if (kIsWeb && objCover.image!.path.startsWith('blob:')) {
         // For web environment
@@ -136,7 +128,7 @@ class Cover {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print("Done in Cover");
+      print('Response body: ${await response.stream.bytesToString()}');
     } else {
       print(response.statusCode);
       print("object not done");

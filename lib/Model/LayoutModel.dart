@@ -44,7 +44,6 @@ class Layout {
         Uri.parse(
             'https://virakst.online/bookReport/public/api/insertlayout/${id_book}'));
 
-    print("object btnClick");
     if (objlayout.deepimage1 != null) {
       Uint8List cvByte;
       if (kIsWeb && objlayout.deepimage1!.path.startsWith('blob:')) {

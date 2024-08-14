@@ -126,6 +126,9 @@ class _FormWidgetState extends State<FormWidget> {
                         setState(() {
                           if (value != null) {
                             dataCover = value;
+                            print("Cover : ${dataCover!.toJson()}");
+                          } else {
+                            print("Cover No data");
                           }
                         });
                       },
@@ -138,6 +141,7 @@ class _FormWidgetState extends State<FormWidget> {
                       getForm: (value) {
                         setState(() {
                           dataInfo = value;
+                          print("Property Info : ${dataInfo!.toJson()}");
                         });
                       },
                       ck1: ck1,
@@ -195,8 +199,6 @@ class _FormWidgetState extends State<FormWidget> {
                           setState(() {
                             list_forviewproperty = value;
                             dataPhoto.viewimage = value;
-                            print(
-                                "In main dataPhoto.viewimage ${dataPhoto.viewimage!.length}\n\n");
                           });
                         }
                       },
@@ -205,15 +207,12 @@ class _FormWidgetState extends State<FormWidget> {
                           setState(() {
                             list_forinsideproperty = value;
                             dataPhoto.insideimage = value;
-                            print(
-                                "In main dataPhoto.insideimage ${dataPhoto.insideimage!.length}\n\n");
                           });
                         }
                       },
                       get_viewland: (value) {
                         if (value != null) {
                           setState(() {
-                            print("In main get_viewland\n\n");
                             list_forviewland = value;
                             dataPhoto.landimage = list_forviewland;
                           });
@@ -237,7 +236,6 @@ class _FormWidgetState extends State<FormWidget> {
                       getFile: (value) {
                         if (value != null) {
                           setState(() {
-                            print("test2\n ${value!.Finalmap!.path}\n");
                             datafinalmap = value;
                           });
                         }
@@ -261,9 +259,7 @@ class _FormWidgetState extends State<FormWidget> {
                     FinalIndicationWidget(
                       getForm: (value) {
                         setState(() {
-                          if (value != null) {
-                            dataFinalIndic = value;
-                          }
+                          dataFinalIndic = value;
                         });
                       },
                       ck1: ck1,
@@ -344,9 +340,9 @@ class _FormWidgetState extends State<FormWidget> {
         if (i == 2) {
           await Cover().InsertCover(dataCover!, id_book);
         } else if (i == 10) {
-          await PropertyInfor().InsertInfo(dataInfo!, id_book);
-        } else if (i == 20) {
           await IDCard().InsertIdCard(dataIdcard!, id_book);
+        } else if (i == 20) {
+          await PropertyInfor().InsertInfo(dataInfo!, id_book);
         } else if (i == 30) {
           await Layout().InsertLayout(dataLayout!, id_book);
         } else if (i == 40) {

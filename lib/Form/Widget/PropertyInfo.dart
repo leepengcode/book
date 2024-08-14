@@ -162,7 +162,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             objInfo.telecom = _telecom.text.toString();
             objInfo.security = _security.text.toString();
             objInfo.parking = _parking.text.toString();
-            print("${objInfo.toJson()}\n");
+
             widget.getForm!(objInfo);
           });
         }
@@ -284,7 +284,7 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       "Property OFFICE SPACE VALUATION REPORT") ...[
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,                                                                                                                                     
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",

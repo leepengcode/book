@@ -259,8 +259,6 @@ class PropertyInfor {
         print('Response body: ${await response.stream.bytesToString()}');
       } else {
         print('Failed with status code: ${response.statusCode}');
-        print('Reason: ${response.reasonPhrase}');
-        print('Response body: ${await response.stream.bytesToString()}');
       }
     } catch (e) {
       print('Error: $e');
