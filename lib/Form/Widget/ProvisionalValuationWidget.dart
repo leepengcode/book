@@ -175,8 +175,6 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
@@ -229,63 +227,62 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                         }
                       });
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 20),
-                      child: Row(
-                        children: [
-                          _buildTextFieldColumn(
-                              title: "No.",
-                              label: "",
-                              width: 50,
-                              readOnly: true,
-                              controller: TextEditingController(
-                                  text: landInfo.noCount.toString())),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Size Sqm",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 210,
-                              controller: landInfo.sizeSqm),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "\$/sqm(Min)",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 210,
-                              controller: landInfo.minPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Total (Min)",
-                              label: "",
-                              readOnly: true,
-                              width: 210,
-                              controller: landInfo.tminPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "\$/sqm(Max)",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 210,
-                              controller: landInfo.maxPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Total (Max)",
-                              label: "",
-                              readOnly: true,
-                              width: 210,
-                              controller: landInfo.tmaxPrice),
-                        ],
-                      ),
+                    child: Wrap(
+                      spacing: 10.0,
+                      children: [
+                        _buildTextFieldColumn(
+                            title: "No.",
+                            label: "",
+                            width: 50,
+                            readOnly: true,
+                            controller: TextEditingController(
+                                text: landInfo.noCount.toString())),
+                        _buildTextFieldColumn(
+                            title: "Size Sqm",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 180,
+                            controller: landInfo.sizeSqm),
+                        _buildTextFieldColumn(
+                            title: "\$/sqm(Min)",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 180,
+                            controller: landInfo.minPrice),
+                        _buildTextFieldColumn(
+                            title: "Total (Min)",
+                            label: "",
+                            readOnly: true,
+                            width: 180,
+                            controller: landInfo.tminPrice),
+                        _buildTextFieldColumn(
+                            title: "\$/sqm(Max)",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 180,
+                            controller: landInfo.maxPrice),
+                        _buildTextFieldColumn(
+                            title: "Total (Max)",
+                            label: "",
+                            readOnly: true,
+                            width: 180,
+                            controller: landInfo.tmaxPrice),
+                        _buildTextFieldColumn(
+                            title: "Total (Max)",
+                            label: "",
+                            readOnly: true,
+                            width: 180,
+                            controller: landInfo.tmaxPrice),
+                      ],
                     ),
                   )),
               Row(
@@ -310,27 +307,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 20),
-                child: Row(
+                child: Wrap(
+                  spacing: 10.0,
                   children: [
                     _buildTextFieldColumn(
                         title: "Total Size Sqm",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalLandSizeSqm),
-                    SizedBox(width: 25),
                     _buildTextFieldColumn(
                         title: "Total Value(Min)",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalMinPrice),
-                    SizedBox(width: 25),
                     _buildTextFieldColumn(
                         title: "Total Value(Max)",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalMaxPrice),
                   ],
                 ),
@@ -363,63 +359,56 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                         }
                       });
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 20),
-                      child: Row(
-                        children: [
-                          _buildTextFieldColumn(
-                              title: "No.",
-                              label: "",
-                              width: 50,
-                              readOnly: true,
-                              controller: TextEditingController(
-                                  text: landInfo.noCount.toString())),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Size Sqm",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 210,
-                              controller: landInfo.sizeSqm),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "\$/sqm(Min)",
-                              label: "Enter",
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              width: 210,
-                              controller: landInfo.minPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Total (Min)",
-                              label: "",
-                              readOnly: true,
-                              width: 210,
-                              controller: landInfo.tminPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "\$/sqm(Max)",
-                              label: "Enter",
-                              width: 210,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              controller: landInfo.maxPrice),
-                          SizedBox(width: 25),
-                          _buildTextFieldColumn(
-                              title: "Total (Max)",
-                              label: "",
-                              readOnly: true,
-                              width: 210,
-                              controller: landInfo.tmaxPrice),
-                        ],
-                      ),
+                    child: Wrap(
+                      spacing: 10.0,
+                      children: [
+                        _buildTextFieldColumn(
+                            title: "No.",
+                            label: "",
+                            width: 50,
+                            readOnly: true,
+                            controller: TextEditingController(
+                                text: landInfo.noCount.toString())),
+                        _buildTextFieldColumn(
+                            title: "Size Sqm",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 180,
+                            controller: landInfo.sizeSqm),
+                        _buildTextFieldColumn(
+                            title: "\$/sqm(Min)",
+                            label: "Enter",
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            width: 180,
+                            controller: landInfo.minPrice),
+                        _buildTextFieldColumn(
+                            title: "Total (Min)",
+                            label: "",
+                            readOnly: true,
+                            width: 180,
+                            controller: landInfo.tminPrice),
+                        _buildTextFieldColumn(
+                            title: "\$/sqm(Max)",
+                            label: "Enter",
+                            width: 180,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            controller: landInfo.maxPrice),
+                        _buildTextFieldColumn(
+                            title: "Total (Max)",
+                            label: "",
+                            readOnly: true,
+                            width: 180,
+                            controller: landInfo.tmaxPrice),
+                      ],
                     ),
                   )),
               Row(
@@ -444,27 +433,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 20),
-                child: Row(
+                child: Wrap(
+                  spacing: 10.0,
                   children: [
                     _buildTextFieldColumn(
                         title: "Total Size Sqm",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalLandSizeSqm),
-                    SizedBox(width: 25),
                     _buildTextFieldColumn(
                         title: "Total Value(Min)",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalMinPrice),
-                    SizedBox(width: 25),
                     _buildTextFieldColumn(
                         title: "Total Value(Max)",
                         label: "",
                         readOnly: true,
-                        width: 210,
+                        width: 180,
                         controller: _totalMaxPrice),
                   ],
                 ),
@@ -495,63 +483,56 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                             }
                           });
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                  title: "No.",
-                                  label: "",
-                                  width: 50,
-                                  readOnly: true,
-                                  controller: TextEditingController(
-                                      text: buildingInfo.noCount.toString())),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Size Sqm",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 210,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Min)",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 210,
-                                  controller: buildingInfo.minPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Min)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 210,
-                                  controller: buildingInfo.tminPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Max)",
-                                  label: "Enter",
-                                  width: 210,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  controller: buildingInfo.maxPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Max)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 210,
-                                  controller: buildingInfo.tmaxPrice),
-                            ],
-                          ),
+                        child: Wrap(
+                          spacing: 10.0,
+                          children: [
+                            _buildTextFieldColumn(
+                                title: "No.",
+                                label: "",
+                                width: 50,
+                                readOnly: true,
+                                controller: TextEditingController(
+                                    text: buildingInfo.noCount.toString())),
+                            _buildTextFieldColumn(
+                                title: "Size Sqm",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 180,
+                                controller: buildingInfo.sizeSqm),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Min)",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 180,
+                                controller: buildingInfo.minPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Min)",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.tminPrice),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Max)",
+                                label: "Enter",
+                                width: 180,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                controller: buildingInfo.maxPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Max)",
+                                label: "",
+                                readOnly: true,
+                                width: 180,
+                                controller: buildingInfo.tmaxPrice),
+                          ],
                         ),
                       )),
                   Row(
@@ -576,27 +557,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
+                    child: Wrap(
+                      spacing: 10.0,
                       children: [
                         _buildTextFieldColumn(
                             title: "Total Size Sqm",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingSizeSqm),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Min)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMinPrice),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Max)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMaxPrice),
                       ],
                     ),
@@ -629,67 +609,59 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                             }
                           });
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                  title: "Floor/Unit No.",
-                                  label: "",
-                                  width: 120,
-                                  controller: buildingInfo.floorno),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "No. of Bedroom",
-                                  label: "",
-                                  width: 120,
-                                  controller: buildingInfo.bedroomno),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Gross Area Sqm",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 170,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Min)",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 170,
-                                  controller: buildingInfo.minPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Min)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 170,
-                                  controller: buildingInfo.tminPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Max)",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 180,
-                                  controller: buildingInfo.maxPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Max)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 170,
-                                  controller: buildingInfo.tmaxPrice),
-                            ],
-                          ),
+                        child: Wrap(
+                          spacing: 10.0,
+                          children: [
+                            _buildTextFieldColumn(
+                                title: "Floor/Unit No.",
+                                label: "",
+                                width: 120,
+                                controller: buildingInfo.floorno),
+                            _buildTextFieldColumn(
+                                title: "No. of Bedroom",
+                                label: "",
+                                width: 120,
+                                controller: buildingInfo.bedroomno),
+                            _buildTextFieldColumn(
+                                title: "Gross Area Sqm",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 170,
+                                controller: buildingInfo.sizeSqm),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Min)",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 170,
+                                controller: buildingInfo.minPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Min)",
+                                label: "",
+                                readOnly: true,
+                                width: 170,
+                                controller: buildingInfo.tminPrice),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Max)",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 180,
+                                controller: buildingInfo.maxPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Max)",
+                                label: "",
+                                readOnly: true,
+                                width: 170,
+                                controller: buildingInfo.tmaxPrice),
+                          ],
                         ),
                       )),
                   Row(
@@ -714,27 +686,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
+                    child: Wrap(
+                      spacing: 10.0,
                       children: [
                         _buildTextFieldColumn(
                             title: "Total Size Sqm",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingSizeSqm),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Min)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMinPrice),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Max)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMaxPrice),
                       ],
                     ),
@@ -765,67 +736,59 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                             }
                           });
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, bottom: 20),
-                          child: Row(
-                            children: [
-                              _buildTextFieldColumn(
-                                  title: "Floor/Unit No.",
-                                  label: "",
-                                  width: 120,
-                                  controller: buildingInfo.floorno),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "No. of Bedroom",
-                                  label: "",
-                                  width: 120,
-                                  controller: buildingInfo.bedroomno),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Gross Area Sqm",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 170,
-                                  controller: buildingInfo.sizeSqm),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Min)",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 170,
-                                  controller: buildingInfo.minPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Min)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 170,
-                                  controller: buildingInfo.tminPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "\$/sqm(Max)",
-                                  label: "Enter",
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  width: 180,
-                                  controller: buildingInfo.maxPrice),
-                              SizedBox(width: 25),
-                              _buildTextFieldColumn(
-                                  title: "Total (Max)",
-                                  label: "",
-                                  readOnly: true,
-                                  width: 170,
-                                  controller: buildingInfo.tmaxPrice),
-                            ],
-                          ),
+                        child: Wrap(
+                          spacing: 10.0,
+                          children: [
+                            _buildTextFieldColumn(
+                                title: "Floor/Unit No.",
+                                label: "",
+                                width: 120,
+                                controller: buildingInfo.floorno),
+                            _buildTextFieldColumn(
+                                title: "No. of Bedroom",
+                                label: "",
+                                width: 120,
+                                controller: buildingInfo.bedroomno),
+                            _buildTextFieldColumn(
+                                title: "Gross Area Sqm",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 170,
+                                controller: buildingInfo.sizeSqm),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Min)",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 170,
+                                controller: buildingInfo.minPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Min)",
+                                label: "",
+                                readOnly: true,
+                                width: 170,
+                                controller: buildingInfo.tminPrice),
+                            _buildTextFieldColumn(
+                                title: "\$/sqm(Max)",
+                                label: "Enter",
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                width: 180,
+                                controller: buildingInfo.maxPrice),
+                            _buildTextFieldColumn(
+                                title: "Total (Max)",
+                                label: "",
+                                readOnly: true,
+                                width: 170,
+                                controller: buildingInfo.tmaxPrice),
+                          ],
                         ),
                       )),
                   Row(
@@ -850,27 +813,26 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Row(
+                    child: Wrap(
+                      spacing: 10.0,
                       children: [
                         _buildTextFieldColumn(
                             title: "Total Size Sqm",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingSizeSqm),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Min)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMinPrice),
-                        SizedBox(width: 25),
                         _buildTextFieldColumn(
                             title: "Total Value(Max)",
                             label: "",
                             readOnly: true,
-                            width: 210,
+                            width: 180,
                             controller: _totalBuildingMaxPrice),
                       ],
                     ),
@@ -894,7 +856,8 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
             ),
             Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Row(
+                child: Wrap(
+                  spacing: 10.0,
                   children: [
                     if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
                       // _buildTextFieldColumn(
@@ -949,10 +912,10 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
     );
   }
 
-  Column _buildTextFieldColumn({
+  Widget _buildTextFieldColumn({
     required String title,
     required String label,
-    required double width,
+    double? width,
     required TextEditingController controller,
     TextInputType keyboardType = TextInputType.text,
     List<TextInputFormatter>? inputFormatters,
@@ -960,19 +923,19 @@ class _FinalIndicationWidgetState extends State<ProvisionalValue> {
     String? Function(String?)? validator,
   }) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              title,
+        Text.rich(
+          overflow: TextOverflow.ellipsis,
+          TextSpan(children: [
+            TextSpan(
+              text: title,
               style: THeader(),
             ),
-            Text(
-              " *",
+            TextSpan(
+              text: " *",
               style: TextStyle(color: Colors.red, fontSize: 15),
             )
-          ],
+          ]),
         ),
         Container(
           width: width,

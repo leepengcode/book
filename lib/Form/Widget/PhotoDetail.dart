@@ -4,14 +4,12 @@ import 'dart:io';
 
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/PhotoDetailModel.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image/image.dart' as img;
-import 'dart:typed_data';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
+import 'package:image_picker/image_picker.dart';
 
 typedef OnChangeCallback = void Function(List<File>? value);
 
@@ -86,8 +84,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
     // );
 
     try {
-      XFile? pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      XFile? pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage == null) {
         return null;
       } else {
@@ -135,8 +132,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
           value: i / totalStages,
         );
       }
-      final compressedBytes =
-          Uint8List.fromList(img.encodeJpg(decodedImage, quality: quality));
+      final compressedBytes = Uint8List.fromList(img.encodeJpg(decodedImage, quality: quality));
       return compressedBytes;
     } catch (e) {
       print("Error compressing image: $e");
@@ -169,8 +165,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
           //     image, 30); // Compress the image with 75% quality
           // if (compressedBytes != null) {
           //   if (kIsWeb) {
-          tempList.add(File(image
-              .path)); // For web, return the original picked image as a dummy file
+          tempList.add(File(image.path)); // For web, return the original picked image as a dummy file
+
           //   } else {
           //     File compressedFile =
           //         await saveCompressedImage(compressedBytes, image.path);
@@ -183,6 +179,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
         }
         // await progressDialog.hide();
       }
+
       return tempList;
     } catch (e) {
       print("Error picking images: $e");
@@ -255,9 +252,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
         width: 1500,
-        decoration: BoxDecoration(
-            color: Colors.blueGrey.shade100,
-            borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: Colors.blueGrey.shade100, borderRadius: BorderRadius.circular(10)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           if (widget.ck1 != "Property LAND VALUATION REPORT") ...[
             Column(
@@ -294,7 +289,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 frontview!.path,
                                 width: 500,
                                 height: 300,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                               )
                             ]
                           ],
@@ -312,10 +307,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (frontview == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (frontview == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
@@ -379,12 +371,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             child: viewproperty != null
                                 ? GridView.builder(
                                     itemCount: viewproperty!.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 3,
                                     ),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
+                                    itemBuilder: (BuildContext context, int index) {
                                       if (kIsWeb) {
                                         return Stack(
                                           children: [
@@ -393,8 +383,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                               padding: EdgeInsets.all(3),
                                               decoration: BoxDecoration(
                                                 border: Border.all(),
-                                                color: const Color.fromARGB(
-                                                    255, 255, 255, 255),
+                                                color: const Color.fromARGB(255, 255, 255, 255),
                                               ),
                                               child: Image.network(
                                                 viewproperty![index].path,
@@ -418,8 +407,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                       } else {
                                         return Container(
                                           padding: EdgeInsets.all(3),
-                                          decoration: BoxDecoration(
-                                              border: Border.all()),
+                                          decoration: BoxDecoration(border: Border.all()),
                                           child: Image.file(
                                             File(viewproperty![index].path),
                                             fit: BoxFit.cover,
@@ -471,20 +459,13 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               widget.get_insideproperty!(selectedImages);
                             });
                           },
-                          child: Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.white),
-                              child: Image.network(
-                                  "https://img.icons8.com/cotton/100/image--v2.png")),
+                          child: Container(width: 70, height: 70, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white), child: Image.network("https://img.icons8.com/cotton/100/image--v2.png")),
                         ),
                         Divider(),
                         Expanded(
                           child: GridView.builder(
                             itemCount: insideproperty!.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                             ),
                             itemBuilder: (BuildContext context, int index) {
@@ -494,10 +475,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                     Container(
                                       height: 320,
                                       padding: EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(),
-                                          color: const Color.fromARGB(
-                                              255, 255, 255, 255)),
+                                      decoration: BoxDecoration(border: Border.all(), color: const Color.fromARGB(255, 255, 255, 255)),
                                       child: Image.network(
                                         insideproperty![index].path,
                                         fit: BoxFit.contain,
@@ -510,15 +488,13 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                             onPressed: () {
                                               removeImageinsideproperty(index);
                                             },
-                                            icon: Image.network(
-                                                "https://img.icons8.com/pulsar-gradient/23/delete-forever.png")))
+                                            icon: Image.network("https://img.icons8.com/pulsar-gradient/23/delete-forever.png")))
                                   ],
                                 );
                               } else {
                                 return Container(
                                   padding: EdgeInsets.all(3),
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
+                                  decoration: BoxDecoration(border: Border.all()),
                                   child: Image.file(
                                     File(insideproperty![index].path),
                                     fit: BoxFit.cover,
@@ -551,8 +527,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 9, //អ័ក្សX
+                  crossAxisSpacing: 9,
                   children: [
                     Stack(
                       children: [
@@ -582,17 +560,11 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (road1_land1 == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (road1_land1 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
                       ],
-                    ),
-                    SizedBox(
-                      width: 25,
                     ),
                     Stack(
                       children: [
@@ -622,10 +594,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (road2_land2 == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (road2_land2 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
@@ -652,8 +621,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 9, //អ័ក្សX
+                  crossAxisSpacing: 9,
                   children: [
                     Column(
                       children: [
@@ -675,8 +646,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround1_lan1 =
-                                      await pickImage('surround1_lan1');
+                                  surround1_lan1 = await pickImage('surround1_lan1');
                                   setState(() {
                                     surround1_lan1;
                                     objPhotoDetail.surroundin1 = surround1_lan1;
@@ -685,12 +655,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround1_lan1 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround1_lan1 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -705,8 +671,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround1_lan1,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin1 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin1 = value.toString();
                               });
                             },
                             maxLines: null,
@@ -714,15 +679,11 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         )
                       ],
-                    ),
-                    SizedBox(
-                      width: 25,
                     ),
                     Column(
                       children: [
@@ -744,8 +705,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround2_lan2 =
-                                      await pickImage('surround2_lan2');
+                                  surround2_lan2 = await pickImage('surround2_lan2');
                                   setState(() {
                                     surround2_lan2;
                                     objPhotoDetail.surroundin2 = surround2_lan2;
@@ -754,12 +714,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround2_lan2 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround2_lan2 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -774,8 +730,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround2_lan2,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin2 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin2 = value.toString();
                               });
                             },
                             maxLines: null,
@@ -783,8 +738,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         )
@@ -795,8 +749,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 9, //អ័ក្សX
+                  crossAxisSpacing: 9,
                   children: [
                     Column(
                       children: [
@@ -818,8 +774,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround3_lan3 =
-                                      await pickImage('surround3_lan3');
+                                  surround3_lan3 = await pickImage('surround3_lan3');
                                   setState(() {
                                     surround3_lan3;
                                     objPhotoDetail.surroundin3 = surround3_lan3;
@@ -828,12 +783,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround3_lan3 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround3_lan3 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -848,23 +799,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround3_lan3,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin3 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin3 = value.toString();
                               });
                             },
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         )
                       ],
-                    ),
-                    SizedBox(
-                      width: 25,
                     ),
                     Column(
                       children: [
@@ -886,8 +832,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround4_lan4 =
-                                      await pickImage('surround4_lan4');
+                                  surround4_lan4 = await pickImage('surround4_lan4');
                                   setState(() {
                                     surround4_lan4;
                                     objPhotoDetail.surroundin4 = surround4_lan4;
@@ -896,12 +841,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround4_lan4 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround4_lan4 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -916,16 +857,14 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround4_lan4,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin4 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin4 = value.toString();
                               });
                             },
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         )
@@ -936,8 +875,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                 SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 9, //អ័ក្សX
+                  crossAxisSpacing: 9,
                   children: [
                     Column(
                       children: [
@@ -959,8 +900,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround5_lan5 =
-                                      await pickImage('surround5_lan5');
+                                  surround5_lan5 = await pickImage('surround5_lan5');
                                   setState(() {
                                     surround5_lan5;
                                     objPhotoDetail.surroundin5 = surround5_lan5;
@@ -969,18 +909,14 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround5_lan5 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround5_lan5 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -989,23 +925,18 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround5_lan5,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin5 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin5 = value.toString();
                               });
                             },
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         )
                       ],
-                    ),
-                    SizedBox(
-                      width: 25,
                     ),
                     Column(
                       children: [
@@ -1027,8 +958,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround6_lan6 =
-                                      await pickImage('surround6_lan6');
+                                  surround6_lan6 = await pickImage('surround6_lan6');
                                   setState(() {
                                     surround6_lan6;
                                     objPhotoDetail.surroundin6 = surround6_lan6;
@@ -1038,12 +968,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround6_lan6 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround6_lan6 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1058,8 +984,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround6_lan6,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin6 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin6 = value.toString();
                                 widget.getForm(objPhotoDetail);
                               });
                             },
@@ -1067,8 +992,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               filled: true,
                               fillColor: Colors.grey[200],
                               hintText: "Text",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                             ),
                           ),
                         ),
@@ -1130,10 +1054,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (frontview == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (frontview == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
@@ -1175,20 +1096,13 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               widget.get_viewland!(get_viewland);
                             });
                           },
-                          child: Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.white),
-                              child: Image.network(
-                                  "https://img.icons8.com/cotton/100/image--v2.png")),
+                          child: Container(width: 70, height: 70, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white), child: Image.network("https://img.icons8.com/cotton/100/image--v2.png")),
                         ),
                         Divider(),
                         Expanded(
                           child: GridView.builder(
                             itemCount: viewland!.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                             ),
                             itemBuilder: (BuildContext context, int index) {
@@ -1198,10 +1112,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                     Container(
                                       height: 320,
                                       padding: EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(),
-                                          color: const Color.fromARGB(
-                                              255, 255, 255, 255)),
+                                      decoration: BoxDecoration(border: Border.all(), color: const Color.fromARGB(255, 255, 255, 255)),
                                       child: Image.network(
                                         viewland![index].path,
                                         fit: BoxFit.contain,
@@ -1214,15 +1125,13 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                             onPressed: () {
                                               removeImage(index);
                                             },
-                                            icon: Image.network(
-                                                "https://img.icons8.com/pulsar-gradient/48/delete-forever.png")))
+                                            icon: Image.network("https://img.icons8.com/pulsar-gradient/48/delete-forever.png")))
                                   ],
                                 );
                               } else {
                                 return Container(
                                   padding: EdgeInsets.all(3),
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
+                                  decoration: BoxDecoration(border: Border.all()),
                                   child: Image.file(
                                     File(viewland![index].path),
                                     fit: BoxFit.cover,
@@ -1285,10 +1194,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (road1_land1 == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (road1_land1 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
@@ -1325,10 +1231,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                               width: 500,
                               height: 300,
                               decoration: BoxDecoration(border: Border.all()),
-                              child: (road2_land2 == null)
-                                  ? Image.network(
-                                      "https://img.icons8.com/cotton/100/image--v2.png")
-                                  : SizedBox(),
+                              child: (road2_land2 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                             ),
                           ),
                         )
@@ -1377,8 +1280,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround1_lan1 =
-                                      await pickImage('surround1_lan1');
+                                  surround1_lan1 = await pickImage('surround1_lan1');
                                   setState(() {
                                     surround1_lan1;
                                     objPhotoDetail.surroundin1 = surround1_lan1;
@@ -1387,12 +1289,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround1_lan1 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround1_lan1 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1407,16 +1305,11 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround1_lan1,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin1 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin1 = value.toString();
                               });
                             },
                             maxLines: null,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],
@@ -1444,8 +1337,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround2_lan2 =
-                                      await pickImage('surround2_lan2');
+                                  surround2_lan2 = await pickImage('surround2_lan2');
                                   setState(() {
                                     surround2_lan2;
                                     objPhotoDetail.surroundin2 = surround2_lan2;
@@ -1454,12 +1346,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround2_lan2 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround2_lan2 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1474,16 +1362,11 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround2_lan2,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin2 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin2 = value.toString();
                               });
                             },
                             maxLines: null,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],
@@ -1516,8 +1399,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround3_lan3 =
-                                      await pickImage('surround3_lan3');
+                                  surround3_lan3 = await pickImage('surround3_lan3');
                                   setState(() {
                                     surround3_lan3;
                                     objPhotoDetail.surroundin3 = surround3_lan3;
@@ -1526,12 +1408,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround3_lan3 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround3_lan3 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1546,15 +1424,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround3_lan3,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin3 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin3 = value.toString();
                               });
                             },
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],
@@ -1582,8 +1455,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround4_lan4 =
-                                      await pickImage('surround4_lan4');
+                                  surround4_lan4 = await pickImage('surround4_lan4');
                                   setState(() {
                                     surround4_lan4;
                                     objPhotoDetail.surroundin4 = surround4_lan4;
@@ -1592,12 +1464,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround4_lan4 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround4_lan4 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1612,15 +1480,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround4_lan4,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin4 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin4 = value.toString();
                               });
                             },
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],
@@ -1653,8 +1516,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround5_lan5 =
-                                      await pickImage('surround5_lan5');
+                                  surround5_lan5 = await pickImage('surround5_lan5');
                                   setState(() {
                                     surround5_lan5;
                                     objPhotoDetail.surroundin5 = surround5_lan5;
@@ -1663,12 +1525,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround5_lan5 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround5_lan5 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1683,15 +1541,10 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround5_lan5,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin5 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin5 = value.toString();
                               });
                             },
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],
@@ -1719,8 +1572,7 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             Positioned(
                               child: GestureDetector(
                                 onTap: () async {
-                                  surround6_lan6 =
-                                      await pickImage('surround6_lan6');
+                                  surround6_lan6 = await pickImage('surround6_lan6');
                                   setState(() {
                                     surround6_lan6;
                                     objPhotoDetail.surroundin6 = surround6_lan6;
@@ -1729,12 +1581,8 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                                 child: Container(
                                   width: 500,
                                   height: 300,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
-                                  child: (surround6_lan6 == null)
-                                      ? Image.network(
-                                          "https://img.icons8.com/cotton/100/image--v2.png")
-                                      : SizedBox(),
+                                  decoration: BoxDecoration(border: Border.all()),
+                                  child: (surround6_lan6 == null) ? Image.network("https://img.icons8.com/cotton/100/image--v2.png") : SizedBox(),
                                 ),
                               ),
                             )
@@ -1749,16 +1597,11 @@ class _PhotoDetailWidgetState extends State<PhotoDetailWidget> {
                             controller: dessurround6_lan6,
                             onChanged: (value) {
                               setState(() {
-                                objPhotoDetail.dessurroundin6 =
-                                    value.toString();
+                                objPhotoDetail.dessurroundin6 = value.toString();
                                 widget.getForm(objPhotoDetail);
                               });
                             },
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                hintText: "Text",
-                                border: InputBorder.none),
+                            decoration: InputDecoration(filled: true, fillColor: Colors.grey[200], hintText: "Text", border: InputBorder.none),
                           ),
                         )
                       ],

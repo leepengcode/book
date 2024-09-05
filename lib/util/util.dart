@@ -1,12 +1,8 @@
 // ignore_for_file: unused_local_variable, deprecated_member_use
 
 import 'dart:io';
-import 'dart:js_interop';
-import 'dart:typed_data';
 
-import 'package:book/Componnents/style.dart';
-import 'package:book/Form/LeftSideBar.dart';
-import 'package:book/Form/Screen/FormWidget.dart';
+import 'package:book/Componnents/Sidebar.dart';
 import 'package:book/Model/ComparisonModel.dart';
 import 'package:book/Model/CoverModel.dart';
 import 'package:book/Model/FinalIndicationBuildingMdel.dart';
@@ -24,15 +20,13 @@ import 'package:book/Model/ProvisionalLandMdel.dart';
 import 'package:book/Model/ProvisionalModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_maps/google_maps.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-import 'package:http/http.dart' as http;
-import 'package:number_to_words/number_to_words.dart';
 
 class MyPDF extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
@@ -235,10 +229,10 @@ class _MyPDFState extends State<MyPDF> {
         builder: (context, i) {
           if (i.hasError) {
             return Center(
-              child: Text("Error ${i.error}\n"),
+              child: Text("Error ${i.error} \n "),
             );
           } else if (i.hasData) {
-            return MyleftSideBar();
+            return SideBar();
           } else {
             return Center(child: CircularProgressIndicator());
           }
@@ -661,10 +655,10 @@ class _MyPDFState extends State<MyPDF> {
                     margin: const pw.EdgeInsets.only(
                         top: 5, left: 40, right: 25, bottom: 25),
                     decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2,
-                      ),
+                      // border: pw.Border.all(
+                      //   color: PdfColors.black,
+                      //   width: 2,
+                      // ),
                     ),
                     child: pw.Center(
                       child: pw.Column(
@@ -1006,10 +1000,10 @@ class _MyPDFState extends State<MyPDF> {
                     margin: const pw.EdgeInsets.only(
                         top: 5, left: 40, right: 25, bottom: 25),
                     decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
+                      // border: pw.Border.all(
+                      //   color: PdfColors.black,
+                      //   width: 2, // Adjust border width as needed
+                      // ),
                     ),
                     child: pw.Container(
                         padding: pw.EdgeInsets.only(left: 40, right: 20),
@@ -1105,10 +1099,10 @@ class _MyPDFState extends State<MyPDF> {
                   margin: const pw.EdgeInsets.only(
                       top: 5, left: 40, right: 25, bottom: 25),
                   decoration: pw.BoxDecoration(
-                    border: pw.Border.all(
-                      color: PdfColors.black,
-                      width: 2, // Adjust border width as needed
-                    ),
+                    // border: pw.Border.all(
+                    //   color: PdfColors.black,
+                    //   width: 2, // Adjust border width as needed
+                    // ),
                   ),
                   child: pw.Container(
                       padding: pw.EdgeInsets.only(left: 40, right: 20),
@@ -1674,10 +1668,10 @@ class _MyPDFState extends State<MyPDF> {
                       margin: const pw.EdgeInsets.only(
                           top: 5, left: 40, right: 25, bottom: 25),
                       decoration: pw.BoxDecoration(
-                        border: pw.Border.all(
-                          color: PdfColors.black,
-                          width: 2, // Adjust border width as needed
-                        ),
+                        // border: pw.Border.all(
+                        //   color: PdfColors.black,
+                        //   width: 2, // Adjust border width as needed
+                        // ),
                       ),
                       child: pw.Container(
                           padding: pw.EdgeInsets.only(left: 40, right: 20),
@@ -2842,10 +2836,10 @@ class _MyPDFState extends State<MyPDF> {
                     margin: const pw.EdgeInsets.only(
                         top: 5, left: 40, right: 25, bottom: 25),
                     decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
+                      // border: pw.Border.all(
+                      //   color: PdfColors.black,
+                      //   width: 2, // Adjust border width as needed
+                      // ),
                     ),
                     child: pw.Center(
                         child: pw.Column(
@@ -2863,9 +2857,9 @@ class _MyPDFState extends State<MyPDF> {
                                     textAlign: pw.TextAlign.start),
                                 pw.SizedBox(height: 10),
                                 pw.GridView(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 6,
-                                    mainAxisSpacing: 6,
+                                  crossAxisCount: 1,
+                                    // crossAxisSpacing: 2,
+                                    mainAxisSpacing: 25,
                                     childAspectRatio: 0.59,
                                     children: [
                                       pw.Image(pw.MemoryImage(fidcard1),
@@ -2919,10 +2913,10 @@ class _MyPDFState extends State<MyPDF> {
                     margin: const pw.EdgeInsets.only(
                         top: 5, left: 40, right: 25, bottom: 25),
                     decoration: pw.BoxDecoration(
-                      border: pw.Border.all(
-                        color: PdfColors.black,
-                        width: 2, // Adjust border width as needed
-                      ),
+                      // border: pw.Border.all(
+                      //   color: PdfColors.black,
+                      //   width: 2, // Adjust border width as needed
+                      // ),
                     ),
                     child: pw.Center(
                         child: pw.Column(
@@ -3009,10 +3003,10 @@ class _MyPDFState extends State<MyPDF> {
                   margin: const pw.EdgeInsets.only(
                       top: 5, left: 40, right: 25, bottom: 25),
                   decoration: pw.BoxDecoration(
-                    border: pw.Border.all(
-                      color: PdfColors.black,
-                      width: 2, // Adjust border width as needed
-                    ),
+                    // border: pw.Border.all(
+                    //   color: PdfColors.black,
+                    //   width: 2, // Adjust border width as needed
+                    // ),
                   ),
                   child: pw.Center(
                       child: pw.Padding(
@@ -3106,10 +3100,10 @@ class _MyPDFState extends State<MyPDF> {
                   margin: const pw.EdgeInsets.only(
                       top: 5, left: 40, right: 25, bottom: 25),
                   decoration: pw.BoxDecoration(
-                    border: pw.Border.all(
-                      color: PdfColors.black,
-                      width: 2, // Adjust border width as needed
-                    ),
+                    // border: pw.Border.all(
+                    //   color: PdfColors.black,
+                    //   width: 2, // Adjust border width as needed
+                    // ),
                   ),
                   child: pw.Center(
                       child: pw.Padding(

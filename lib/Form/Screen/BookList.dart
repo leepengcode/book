@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:js_interop';
 
 import 'package:book/Model/ComparisonModel.dart';
 import 'package:book/Model/CoverModel.dart';
@@ -40,6 +39,7 @@ class _BookListScreenState extends State<BookListScreen> {
   @override
   void initState() {
     super.initState();
+    fetchBooks();
     // fetchBooks();
   }
 
@@ -49,8 +49,7 @@ class _BookListScreenState extends State<BookListScreen> {
       isLoading = true;
     });
 
-    final response =
-        await http.get(Uri.parse('$apiUrl/getbook?page=$currentPage'));
+    final response = await http.get(Uri.parse('$apiUrl/getbook?page=$currentPage'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -118,8 +117,7 @@ class _BookListScreenState extends State<BookListScreen> {
         dataFinalIndic = FinalIndication.fromJson(data['tbfinalindication'][0]);
         if (data['tbfinalbuilding'] != []) {
           for (var item in data['tbfinalbuilding']) {
-            dataFinalIndic.building!
-                .add(Building.fromJson(item as Map<String, dynamic>));
+            dataFinalIndic.building!.add(Building.fromJson(item as Map<String, dynamic>));
           }
         }
 
@@ -176,9 +174,7 @@ class _BookListScreenState extends State<BookListScreen> {
         list_forviewproperty = viewimage;
         list_forinsideproperty = insideimage;
         list_forviewland = landimage;
-      } catch (e) {
-        print('Error at progress : ${e.toExternalReference}');
-      }
+      } catch (e) {}
       // await _valuableProgress(context, data);
       try {
         Navigator.of(context).push(MaterialPageRoute(
@@ -202,12 +198,9 @@ class _BookListScreenState extends State<BookListScreen> {
             set_map1Image: base64Decode(data['tbmap'][0]['pmapimage']),
             set_map2Image: base64Decode(data['tbmap'][0]['apmapimage']),
             set_map3Image: base64Decode(data['tbmap'][0]['skmapimage']),
-            frontviewimage:
-                base64Decode(data['photodetails'][0]['frontviewimage']),
-            roadviewimage1:
-                base64Decode(data['photodetails'][0]['roadviewimage1']),
-            roadviewimage2:
-                base64Decode(data['photodetails'][0]['roadviewimage2']),
+            frontviewimage: base64Decode(data['photodetails'][0]['frontviewimage']),
+            roadviewimage1: base64Decode(data['photodetails'][0]['roadviewimage1']),
+            roadviewimage2: base64Decode(data['photodetails'][0]['roadviewimage2']),
             surroundin1: base64Decode(data['photodetails'][0]['surroundin1']),
             surroundin2: base64Decode(data['photodetails'][0]['surroundin2']),
             surroundin3: base64Decode(data['photodetails'][0]['surroundin3']),
@@ -228,82 +221,59 @@ class _BookListScreenState extends State<BookListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Paginated List'),
-      ),
-      // body: FutureBuilder(
-      //     future: fetchBooks(),
-      //     builder: (context, i) {
-      //       return ListView.builder(
-      //         itemCount: books.length,
-      //         itemBuilder: (context, index) {
-      //           final book = books[index];
-      //           return Card(
-      //             child: ListTile(
-      //               title: Text(book['header'] ?? ""),
-      //               subtitle: Column(
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //                   Text('Ownership: ${book['ownership'] ?? ""}'),
-      //                   Text('Owner Name: ${book['ownername'] ?? ""}'),
-      //                   Text('Location: ${book['location'] ?? ""}'),
-      //                   // Add more fields as needed
-      //                 ],
-      //               ),
-      //               leading: book['image'] != null
-      //                   ? Image.network(book['image'])
-      //                   : Icon(Icons.book),
-      //               onTap: () {
-      //                 // Handle item tap, e.g., show details in a dialog
-      //                 showDialog(
-      //                   context: context,
-      //                   builder: (context) {
-      //                     return AlertDialog(
-      //                       title: Text(book['header'] ?? ""),
-      //                       content: SingleChildScrollView(
-      //                         child: ListBody(
-      //                           children: [
-      //                             Text('Info: ${book['info'] ?? ""}'),
-      //                             Text('Bank: ${book['bank'] ?? ""}'),
-      //                             Text('Branch: ${book['branch'] ?? ""}'),
-      //                             Text('Ownership: ${book['ownership'] ?? ""}'),
-      //                             Text(
-      //                                 'Owner Name: ${book['ownername'] ?? ""}'),
-      //                             Text(
-      //                                 'Deep Title: ${book['deeptitle'] ?? ""}'),
-      //                             Text('Location: ${book['location'] ?? ""}'),
-      //                             Text('Street: ${book['street'] ?? ""}'),
-      //                             Text(
-      //                                 'City or Province: ${book['cityorprovince'] ?? ""}'),
-      //                             Text(
-      //                                 'Commune or Khan: ${book['communeorkhan'] ?? ""}'),
-      //                             Text(
-      //                                 'District or Sangkat: ${book['districtorsangkat'] ?? ""}'),
-      //                             Text(
-      //                                 'Village or Phum: ${book['villageorphum'] ?? ""}'),
-      //                             Text('Report To: ${book['reportto'] ?? ""}'),
-      //                             Text('Code: ${book['code'] ?? ""}'),
-      //                             Text('ID Book: ${book['id_book'] ?? ""}'),
-      //                           ],
-      //                         ),
-      //                       ),
-      //                       actions: [
-      //                         TextButton(
-      //                           onPressed: () {
-      //                             Navigator.of(context).pop();
-      //                           },
-      //                           child: Text('Close'),
-      //                         ),
-      //                       ],
-      //                     );
-      //                   },
-      //                 );
-      //               },
-      //             ),
-      //           );
-      //         },
-      //       );
-      //     }),
-    );
+        appBar: AppBar(
+          title: const Text('Paginated List'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (books != null) ...[
+                for (int i = 0; i < books.length; i++)
+                  InkWell(
+                    onTap: () async {
+                      await fetchBooks_by_id(books[i]['id_book']);
+                    },
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            // The image on the left side
+                            SizedBox(
+                              height: 200,
+                              child: Image.memory(
+                                base64Decode(books[i]['image']),
+                                fit: BoxFit.cover, // Adjust image fit if needed
+                              ),
+                            ),
+                            SizedBox(width: 10), // Add some spacing between the image and the text
+                            // Text column for title and subtitle
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start
+                                children: [
+                                  // Title
+                                  Text(
+                                    '${books[i]['header']}',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 5), // Add some space between title and subtitle
+                                  // Subtitle
+                                  Text(
+                                    '${books[i]['ownership']}',
+                                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(), // Add a divider to separate items
+                      ],
+                    ),
+                  )
+              ]
+            ],
+          ),
+        ));
   }
 }

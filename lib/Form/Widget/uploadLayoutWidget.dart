@@ -5,6 +5,7 @@ import 'package:book/Componnents/uploadLayout.dart';
 import 'package:book/Componnents/uploadTD.dart';
 import 'package:book/Model/LayoutModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class uploadLayoutWidget extends StatefulWidget {
   final ValueChanged<Layout?>? getForm;
@@ -26,35 +27,38 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            "Copy land title deep No : ភព 67733",
+            "Copy land title deep No : ",
             style: THeader(),
           ),
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          StaggeredGrid.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 9, //អ័ក្សX
+            crossAxisSpacing: 9,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Upload Image",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Upload Image",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   TDImagePicker(
                     getFile: (value) {
@@ -72,22 +76,20 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
                   ),
                 ],
               ),
-              SizedBox(
-                width: 20,
-              ),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Upload Image",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Upload Image",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   TDImagePicker(
                     getFile: (value) {
@@ -130,17 +132,18 @@ class _uploadLayoutWidgetState extends State<uploadLayoutWidget> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Upload Image",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Upload Image",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   LayerImagePicker(
                     getFile: (value) {

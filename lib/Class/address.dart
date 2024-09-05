@@ -1,5 +1,6 @@
 import 'package:book/Componnents/addressDropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class AddressData {
   static const Map<String, Map<String, Map<String, List<String>>>> address = {
@@ -75,62 +76,66 @@ class _CascadingDropdownState extends State<CascadingDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      AddressDropdown(
-        headerList: getProvinces(),
-        selectedVal: selectedCityorProvince,
-        title: 'Select City/Province',
-        hint: 'Choose a City/province',
-        onChanged: (value) {
-          setState(() {
-            selectedCityorProvince = value;
-            widget.getCityorProvince!(selectedCityorProvince);
+    return StaggeredGrid.count(
+        crossAxisCount: 4,
+        mainAxisSpacing: 9, //អ័ក្សX
+        crossAxisSpacing: 9,
+        children: [
+          AddressDropdown(
+            headerList: getProvinces(),
+            selectedVal: selectedCityorProvince,
+            title: 'Select City/Province',
+            hint: 'Choose a City/province',
+            onChanged: (value) {
+              setState(() {
+                selectedCityorProvince = value;
+                widget.getCityorProvince!(selectedCityorProvince);
 
-            selectedVillage = null;
-            selectedDistrict = null;
-            selectedCommune = null;
-          });
-        },
-      ),
-      AddressDropdown(
-        headerList: getCommune(),
-        selectedVal: selectedCommune,
-        title: 'Select Commune/Khan',
-        hint: 'Choose a Commune/Khan',
-        onChanged: (value) {
-          setState(() {
-            selectedCommune = value;
-            widget.getCommune!(selectedCommune);
-            selectedDistrict = null;
-            selectedVillage = null;
-          });
-        },
-      ),
-      AddressDropdown(
-        headerList: getDistrict(),
-        selectedVal: selectedDistrict,
-        title: 'Select District/Sangkat',
-        hint: 'Choose a District/Sangkat',
-        onChanged: (value) {
-          setState(() {
-            selectedDistrict = value;
-            widget.getDistrict!(selectedDistrict);
-            selectedVillage = null;
-          });
-        },
-      ),
-      AddressDropdown(
-        headerList: getVillage(),
-        selectedVal: selectedVillage,
-        title: 'Select Village/Phum',
-        hint: 'Choose a Village/Phum',
-        onChanged: (value) {
-          setState(() {
-            selectedVillage = value;
-            widget.getVillage!(selectedVillage);
-          });
-        },
-      )
-    ]);
+                selectedVillage = null;
+                selectedDistrict = null;
+                selectedCommune = null;
+              });
+            },
+          ),
+          AddressDropdown(
+            headerList: getCommune(),
+            selectedVal: selectedCommune,
+            title: 'Select Commune/Khan',
+            hint: 'Choose a Commune/Khan',
+            onChanged: (value) {
+              setState(() {
+                selectedCommune = value;
+                widget.getCommune!(selectedCommune);
+                selectedDistrict = null;
+                selectedVillage = null;
+              });
+            },
+          ),
+          AddressDropdown(
+            headerList: getDistrict(),
+            selectedVal: selectedDistrict,
+            title: 'Select District/Sangkat',
+            hint: 'Choose a District/Sangkat',
+            onChanged: (value) {
+              setState(() {
+                selectedDistrict = value;
+                widget.getDistrict!(selectedDistrict);
+                selectedVillage = null;
+              });
+            },
+          ),
+          AddressDropdown(
+            headerList: getVillage(),
+            selectedVal: selectedVillage,
+            title: 'Select Village/Phum',
+            hint: 'Choose a Village/Phum',
+            onChanged: (value) {
+              setState(() {
+                selectedVillage = value;
+                widget.getVillage!(selectedVillage);
+              });
+            },
+          )
+        ]);
   }
 }

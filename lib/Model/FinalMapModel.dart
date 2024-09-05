@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,12 +29,7 @@ class FinalMap {
   }
 
   Future InsertFinalMap(FinalMap objfinalmap, var id_book) async {
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://virakst.online/bookReport/public/api/insertfinalmap/${id_book}'));
-
-    print("Save \n\n");
+    var request = http.MultipartRequest('POST', Uri.parse('https://virakst.online/bookReport/public/api/insertfinalmap/${id_book}'));
     if (objfinalmap.Finalmap != null) {
       Uint8List cvByte;
       if (kIsWeb && objfinalmap.Finalmap!.path.startsWith('blob:')) {

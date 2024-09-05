@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:book/Componnents/style.dart';
-import 'package:book/Componnents/uploadSketchMap.dart';
 import 'package:book/Model/GoogleMapModep.dart';
-import 'package:book/Package/google_map_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_maps/google_maps.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Mapwidget extends StatefulWidget {
@@ -53,28 +50,29 @@ class _MapwidgetState extends State<Mapwidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
+        padding: EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: StaggeredGrid.count(
+            crossAxisCount: 3,
+            mainAxisSpacing: 9, //អ័ក្សX
+            crossAxisSpacing: 9,
             children: [
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Location Map in Phnom Penh",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Location Map in Phnom Penh",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   Align(
                       alignment: Alignment.center,
@@ -117,17 +115,18 @@ class _MapwidgetState extends State<Mapwidget> {
               ),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Aerial Photograph of Phnom Penh Location ",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Aerial Photograph of Phnom Penh Location ",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   Align(
                       alignment: Alignment.center,
@@ -170,17 +169,18 @@ class _MapwidgetState extends State<Mapwidget> {
               ),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Map Sketch",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Map Sketch",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   Align(
                       alignment: Alignment.center,

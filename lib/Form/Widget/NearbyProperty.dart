@@ -88,8 +88,6 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
         }
       },
       child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-          width: 1500,
           decoration: BoxDecoration(
               color: Colors.blueGrey.shade100,
               borderRadius: BorderRadius.circular(10)),
@@ -177,24 +175,26 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
             SizedBox(
               height: 15,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Wrap(
+              spacing: 10.0,
+              // spacing: 10,
+              // direction: Axis.horizontal,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Strengths",
+                    Text.rich(
+                      overflow: TextOverflow.ellipsis,
+                      TextSpan(children: [
+                        TextSpan(
+                          text: "Strengths",
                           style: THeader(),
                         ),
-                        Text(
-                          " *",
+                        TextSpan(
+                          text: " *",
                           style: TextStyle(color: Colors.red, fontSize: 15),
                         )
-                      ],
+                      ]),
                     ),
                     Container(
                       width: 250,
@@ -220,17 +220,18 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Weakness",
+                    Text.rich(
+                      overflow: TextOverflow.ellipsis,
+                      TextSpan(children: [
+                        TextSpan(
+                          text: "Weakness",
                           style: THeader(),
                         ),
-                        Text(
-                          " *",
+                        TextSpan(
+                          text: " *",
                           style: TextStyle(color: Colors.red, fontSize: 15),
                         )
-                      ],
+                      ]),
                     ),
                     Container(
                       width: 250,
@@ -256,17 +257,18 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Opportunities",
+                    Text.rich(
+                      overflow: TextOverflow.ellipsis,
+                      TextSpan(children: [
+                        TextSpan(
+                          text: "Opportunities",
                           style: THeader(),
                         ),
-                        Text(
-                          " *",
+                        TextSpan(
+                          text: " *",
                           style: TextStyle(color: Colors.red, fontSize: 15),
                         )
-                      ],
+                      ]),
                     ),
                     Container(
                       width: 250,
@@ -292,17 +294,18 @@ class _NearbyPropertyWidgetState extends State<NearbyPropertyWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Threats",
+                    Text.rich(
+                      overflow: TextOverflow.ellipsis,
+                      TextSpan(children: [
+                        TextSpan(
+                          text: "Threats",
                           style: THeader(),
                         ),
-                        Text(
-                          " *",
+                        TextSpan(
+                          text: " *",
                           style: TextStyle(color: Colors.red, fontSize: 15),
                         )
-                      ],
+                      ]),
                     ),
                     Container(
                       width: 250,

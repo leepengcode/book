@@ -2,6 +2,7 @@ import 'package:book/Componnents/style.dart';
 import 'package:book/Model/PropertyInfoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PropertyInfo_Widget extends StatefulWidget {
   PropertyInfo_Widget({
@@ -182,9 +183,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            StaggeredGrid.count(
+              crossAxisCount: 5,
+              mainAxisSpacing: 9, //អ័ក្សX
+              crossAxisSpacing: 9,
               children: [
                 _buildTextFieldColumn(
                     title: "Plot Nº",
@@ -223,9 +225,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
             SizedBox(
               height: 20,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            StaggeredGrid.count(
+              crossAxisCount: 5,
+              mainAxisSpacing: 9, //អ័ក្សX
+              crossAxisSpacing: 9,
               children: [
                 _buildTextFieldColumn(
                     title: "Land title deed Nº",
@@ -281,9 +284,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   ),
                   if (widget.ck1 ==
                       "Property OFFICE SPACE VALUATION REPORT") ...[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    StaggeredGrid.count(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 9, //អ័ក្សX
+                      crossAxisSpacing: 9,
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",
@@ -307,9 +311,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     ),
                   ] else if (widget.ck1 ==
                       "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    StaggeredGrid.count(
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 9, //អ័ក្សX
+                      crossAxisSpacing: 9,
                       children: [
                         _buildTextFieldColumn(
                             title: "Building Size",
@@ -338,9 +343,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                       ],
                     ),
                   ] else if (widget.ck1 == "Property CONDO REPORT") ...[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    StaggeredGrid.count(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 9, //អ័ក្សX
+                      crossAxisSpacing: 9,
                       children: [
                         _buildTextFieldColumn(
                             title: "Title Deep Number",
@@ -366,9 +372,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   SizedBox(
                     height: 25,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  StaggeredGrid.count(
+                    crossAxisCount: 5,
+                    mainAxisSpacing: 9, //អ័ក្សX
+                    crossAxisSpacing: 9,
                     children: [
                       _buildTextFieldColumn(
                           title: "Occupied or Vacant",
@@ -411,9 +418,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  StaggeredGrid.count(
+                    crossAxisCount: 5,
+                    mainAxisSpacing: 9, //អ័ក្សX
+                    crossAxisSpacing: 9,
                     children: [
                       _buildTextFieldColumn(
                           title: "Floor",
@@ -445,9 +453,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  StaggeredGrid.count(
+                    crossAxisCount: 5,
+                    mainAxisSpacing: 9, //អ័ក្សX
+                    crossAxisSpacing: 9,
                     children: [
                       _buildTextFieldColumn(
                           title: "Ceiling",
@@ -473,9 +482,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    StaggeredGrid.count(
+                      crossAxisCount: 5,
+                      mainAxisSpacing: 9, //អ័ក្សX
+                      crossAxisSpacing: 9,
                       children: [
                         _buildTextFieldColumn(
                             title: "Floor/Story",
@@ -507,9 +517,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    StaggeredGrid.count(
+                      crossAxisCount: 5,
+                      mainAxisSpacing: 9, //អ័ក្សX
+                      crossAxisSpacing: 9,
                       children: [
                         _buildTextFieldColumn(
                             title: "Storage Room",
@@ -534,9 +545,10 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  StaggeredGrid.count(
+                    crossAxisCount: 6,
+                    mainAxisSpacing: 9, //អ័ក្សX
+                    crossAxisSpacing: 9,
                     children: [
                       _buildTextFieldColumn(
                           title: "Water",
@@ -591,18 +603,15 @@ class _PropertyInfo_WidgetState extends State<PropertyInfo_Widget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              title,
-              style: THeader(),
-            ),
-            Text(
-              " *",
-              style: TextStyle(color: Colors.red, fontSize: 15),
-            )
-          ],
-        ),
+        Text.rich(
+            overflow: TextOverflow.ellipsis,
+            TextSpan(children: [
+              TextSpan(
+                text: title,
+              ),
+              TextSpan(
+                  text: " *", style: TextStyle(color: Colors.red, fontSize: 15))
+            ])),
         Container(
           width: width,
           child: TextFormField(

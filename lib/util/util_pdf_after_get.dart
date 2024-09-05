@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'dart:js_interop';
 import 'dart:typed_data';
 import 'dart:io' as io;
 import 'package:book/Componnents/style.dart';
@@ -295,7 +294,6 @@ class _MyPDFState_api extends State<MyPDF_api> {
                           onLayout: (format) => generatePdf(format));
                     },
                     child: Text("Get PDF   ")),
-               
               ],
             ),
           ),
@@ -2186,7 +2184,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                     ),
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added top margin
                                                       child: pw.Row(
@@ -2232,7 +2230,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                     ),
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -2270,7 +2268,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       child: pw.Container(
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -2316,7 +2314,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                     ),
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -2354,7 +2352,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       child: pw.Container(
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -2400,7 +2398,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                     ),
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -2446,7 +2444,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                     ),
                                                     child: pw.Padding(
                                                       padding: const pw
-                                                          .EdgeInsets.only(
+                                                              .EdgeInsets.only(
                                                           left:
                                                               20), // Added left margin
                                                       child: pw.Row(
@@ -4150,45 +4148,45 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                     style: header3(),
                                     textAlign: pw.TextAlign.start),
                               ],
-                              if(widget.list_forviewproperty!.length>=1 || widget.list_forviewland!.length>=1)...[
+                              if (widget.list_forviewproperty!.length >= 1 ||
+                                  widget.list_forviewland!.length >= 1) ...[
                                 if (widget.objCover!.header ==
-                                  "Property [LAND AND BUILDING] VALUATION REPORT") ...[
-                                pw.Expanded(
-                                  flex: 2,
-                                  child: pw.GridView(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 2,
-                                      mainAxisSpacing: 4,
-                                      children: [
-                                        for (var photo in widget
-                                            .list_forviewproperty!) ...[
-                                          pw.Image(pw.MemoryImage(photo),
-                                              height: 150,
-                                              width: 700,
-                                              fit: pw.BoxFit.contain),
-                                        ]
-                                      ]),
-                                ),
-                              ] else ...[
-                                pw.Expanded(
-                                  flex: 2,
-                                  child: pw.GridView(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 2,
-                                      mainAxisSpacing: 4,
-                                      children: [
-                                        for (var photo
-                                            in widget.list_forviewland!) ...[
-                                          pw.Image(pw.MemoryImage(photo),
-                                              height: 150,
-                                              width: 700,
-                                              fit: pw.BoxFit.contain),
-                                        ]
-                                      ]),
-                                ),
+                                    "Property [LAND AND BUILDING] VALUATION REPORT") ...[
+                                  pw.Expanded(
+                                    flex: 2,
+                                    child: pw.GridView(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 2,
+                                        mainAxisSpacing: 4,
+                                        children: [
+                                          for (var photo in widget
+                                              .list_forviewproperty!) ...[
+                                            pw.Image(pw.MemoryImage(photo),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                          ]
+                                        ]),
+                                  ),
+                                ] else ...[
+                                  pw.Expanded(
+                                    flex: 2,
+                                    child: pw.GridView(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 2,
+                                        mainAxisSpacing: 4,
+                                        children: [
+                                          for (var photo
+                                              in widget.list_forviewland!) ...[
+                                            pw.Image(pw.MemoryImage(photo),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                          ]
+                                        ]),
+                                  ),
+                                ],
                               ],
-                              ],
-                              
                               pw.SizedBox(height: 20)
                             ],
                           ) // Add margin here
@@ -4275,23 +4273,23 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                       style: header3(),
                                       textAlign: pw.TextAlign.start),
                                 ],
-                                if(widget.list_forinsideproperty!.length>=1)
-                                pw.Expanded(
-                                  flex: 2,
-                                  child: pw.GridView(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 2,
-                                      mainAxisSpacing: 4,
-                                      children: [
-                                        for (var photo in widget
-                                            .list_forinsideproperty!) ...[
-                                          pw.Image(pw.MemoryImage(photo),
-                                              height: 150,
-                                              width: 700,
-                                              fit: pw.BoxFit.contain),
-                                        ]
-                                      ]),
-                                ),
+                                if (widget.list_forinsideproperty!.length >= 1)
+                                  pw.Expanded(
+                                    flex: 2,
+                                    child: pw.GridView(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 2,
+                                        mainAxisSpacing: 4,
+                                        children: [
+                                          for (var photo in widget
+                                              .list_forinsideproperty!) ...[
+                                            pw.Image(pw.MemoryImage(photo),
+                                                height: 150,
+                                                width: 700,
+                                                fit: pw.BoxFit.contain),
+                                          ]
+                                        ]),
+                                  ),
                                 pw.SizedBox(height: 20)
                               ],
                             ) // Add margin here
@@ -5160,225 +5158,230 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                       child: pw.Center(
                                           child: pw.Text("Total Price"))))
                             ]),
-                            if(widget.objOfficerReport!.comparison!.length>=1)
-                            for (int i = 0;
-                                i < widget.objOfficerReport!.comparison!.length;
-                                i++)
-                              pw.Container(
-                                width: double.infinity,
-                                decoration: pw.BoxDecoration(
-                                  border: pw.Border.all(),
-                                ),
-                                child: pw.Column(
-                                  children: [
-                                    pw.Row(
-                                      children: [
-                                        pw.Expanded(
-                                          flex: 2,
-                                          child: pw.Container(
-                                            decoration: pw.BoxDecoration(
-                                              border: pw.Border(
-                                                left: pw.BorderSide(width: 1),
+                            if (widget.objOfficerReport!.comparison!.length >=
+                                1)
+                              for (int i = 0;
+                                  i <
+                                      widget
+                                          .objOfficerReport!.comparison!.length;
+                                  i++)
+                                pw.Container(
+                                  width: double.infinity,
+                                  decoration: pw.BoxDecoration(
+                                    border: pw.Border.all(),
+                                  ),
+                                  child: pw.Column(
+                                    children: [
+                                      pw.Row(
+                                        children: [
+                                          pw.Expanded(
+                                            flex: 2,
+                                            child: pw.Container(
+                                              decoration: pw.BoxDecoration(
+                                                border: pw.Border(
+                                                  left: pw.BorderSide(width: 1),
+                                                ),
                                               ),
-                                            ),
-                                            child: pw.Center(
-                                              child: pw.Text(
-                                                  "${widget.objOfficerReport!.comparison![i].parcel}"),
+                                              child: pw.Center(
+                                                child: pw.Text(
+                                                    "${widget.objOfficerReport!.comparison![i].parcel}"),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        pw.Expanded(
-                                          flex: 20,
-                                          child: pw.Column(
-                                            crossAxisAlignment:
-                                                pw.CrossAxisAlignment.center,
-                                            children: [
-                                              pw.Container(
-                                                height: 25,
-                                                decoration: pw.BoxDecoration(
-                                                  border: pw.Border.all(),
+                                          pw.Expanded(
+                                            flex: 20,
+                                            child: pw.Column(
+                                              crossAxisAlignment:
+                                                  pw.CrossAxisAlignment.center,
+                                              children: [
+                                                pw.Container(
+                                                  height: 25,
+                                                  decoration: pw.BoxDecoration(
+                                                    border: pw.Border.all(),
+                                                  ),
+                                                  child: pw.Center(
+                                                    child: pw.Text(
+                                                        "${widget.objOfficerReport!.comparison![i].location}",
+                                                        style: pw.TextStyle(),
+                                                        textAlign:
+                                                            pw.TextAlign.start),
+                                                  ),
                                                 ),
-                                                child: pw.Center(
-                                                  child: pw.Text(
-                                                      "${widget.objOfficerReport!.comparison![i].location}",
-                                                      style: pw.TextStyle(),
-                                                      textAlign:
-                                                          pw.TextAlign.start),
-                                                ),
-                                              ),
-                                              pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${widget.objOfficerReport!.comparison![i].typeofproperty1}")))),
-                                                    pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${((widget.objOfficerReport!.comparison![i].landprice))}")))),
-                                                    pw.Expanded(
-                                                        flex: 6,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landvalue.toString()))}")))),
-                                                    pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landprice))}")))),
-                                                    pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw.BoxDecoration(
-                                                                border: pw.Border.new(
-                                                                    left: pw.BorderSide(
-                                                                        width:
-                                                                            1),
-                                                                    right: pw.BorderSide(
-                                                                        width:
-                                                                            1),
-                                                                    top: pw.BorderSide(
-                                                                        width:
-                                                                            1))),
-                                                            child: pw.Padding(
-                                                              padding: pw
-                                                                      .EdgeInsets
-                                                                  .only(
-                                                                      top: 20),
+                                                pw.Row(
+                                                    mainAxisAlignment: pw
+                                                        .MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
                                                               child: pw.Center(
                                                                   child: pw.Text(
-                                                                      "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].totalprice))}",
-                                                                      style: pw
-                                                                          .TextStyle(),
-                                                                      textAlign: pw
-                                                                          .TextAlign
-                                                                          .center)),
-                                                            )))
-                                                  ]),
-                                              pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${widget.objOfficerReport!.comparison![i].typeofproperty2}")))),
-                                                    pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${((widget.objOfficerReport!.comparison![i].buildingsize))}")))),
-                                                    pw.Expanded(
-                                                        flex: 6,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${numformat.format(double.parse(
-                                                                      widget
-                                                                          .objOfficerReport!
-                                                                          .comparison![
-                                                                              i]
-                                                                          .buildingvalue,
-                                                                    ))}",
-                                                                    style: pw
-                                                                        .TextStyle(),
-                                                                    textAlign: pw
-                                                                        .TextAlign
-                                                                        .center)))),
-                                                    pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].buildingprice))}")))),
-                                                    pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border:
-                                                                        pw.Border
-                                                                            .new(
-                                                              left:
-                                                                  pw.BorderSide(
-                                                                      width: 1),
-                                                              right:
-                                                                  pw.BorderSide(
-                                                                      width: 1),
-                                                            )),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    ""))))
-                                                  ]),
-                                            ],
+                                                                      "${widget.objOfficerReport!.comparison![i].typeofproperty1}")))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${((widget.objOfficerReport!.comparison![i].landprice))}")))),
+                                                      pw.Expanded(
+                                                          flex: 6,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landvalue.toString()))}")))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].landprice))}")))),
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw.BoxDecoration(
+                                                                  border: pw.Border.new(
+                                                                      left: pw.BorderSide(
+                                                                          width:
+                                                                              1),
+                                                                      right: pw.BorderSide(
+                                                                          width:
+                                                                              1),
+                                                                      top: pw.BorderSide(
+                                                                          width:
+                                                                              1))),
+                                                              child: pw.Padding(
+                                                                padding: pw
+                                                                        .EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            20),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].totalprice))}",
+                                                                        style: pw
+                                                                            .TextStyle(),
+                                                                        textAlign: pw
+                                                                            .TextAlign
+                                                                            .center)),
+                                                              )))
+                                                    ]),
+                                                pw.Row(
+                                                    mainAxisAlignment: pw
+                                                        .MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${widget.objOfficerReport!.comparison![i].typeofproperty2}")))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${((widget.objOfficerReport!.comparison![i].buildingsize))}")))),
+                                                      pw.Expanded(
+                                                          flex: 6,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${numformat.format(double.parse(
+                                                                        widget
+                                                                            .objOfficerReport!
+                                                                            .comparison![i]
+                                                                            .buildingvalue,
+                                                                      ))}",
+                                                                      style: pw.TextStyle(),
+                                                                      textAlign: pw.TextAlign.center)))),
+                                                      pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                              child: pw.Center(
+                                                                  child: pw.Text(
+                                                                      "${numformat.format(double.parse(widget.objOfficerReport!.comparison![i].buildingprice))}")))),
+                                                      pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                              height: 25,
+                                                              decoration: pw
+                                                                  .BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .new(
+                                                                left: pw
+                                                                    .BorderSide(
+                                                                        width:
+                                                                            1),
+                                                                right: pw
+                                                                    .BorderSide(
+                                                                        width:
+                                                                            1),
+                                                              )),
+                                                              child: pw.Center(
+                                                                  child:
+                                                                      pw.Text(
+                                                                          ""))))
+                                                    ]),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
                           ],
                         )),
                   ),
@@ -5652,132 +5655,126 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                 child: pw.Text(
                                                                     "A.Land")))),
                                                   ]),
-                                              if(widget.objProvisional!
-                                                          .land!.length>=1)
-                                              for (int i = 0;
-                                                  i <
-                                                      widget.objProvisional!
-                                                          .land!.length;
-                                                  i++)
-                                                pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    crossAxisAlignment: pw
-                                                        .CrossAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                          flex: 2,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "${widget.objProvisional!.land![i].no}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 5,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Land",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .land![i]
-                                                                          .size_sqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .land![i]
-                                                                          .minsqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .land![i]
-                                                                          .totalmin
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .land![i]
-                                                                          .maxsqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .land![i]
-                                                                          .totalmax
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10)))))
-                                                    ]),
+                                              if (widget.objProvisional!.land!
+                                                      .length >=
+                                                  1)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.objProvisional!
+                                                            .land!.length;
+                                                    i++)
+                                                  pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .center,
+                                                      crossAxisAlignment: pw
+                                                          .CrossAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        pw.Expanded(
+                                                            flex: 2,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw
+                                                                            .Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        "${widget.objProvisional!.land![i].no}",
+                                                                        style: pw.TextStyle(
+                                                                            fontSize:
+                                                                                10))))),
+                                                        pw.Expanded(
+                                                            flex: 5,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw
+                                                                            .Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        "Land",
+                                                                        style: pw.TextStyle(
+                                                                            fontSize:
+                                                                                10))))),
+                                                        pw.Expanded(
+                                                            flex: 3,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .land![i]
+                                                                            .size_sqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 3,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .land![i]
+                                                                            .minsqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .land![i]
+                                                                            .totalmin
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .land![i]
+                                                                            .maxsqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .land![i]
+                                                                            .totalmax
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10)))))
+                                                      ]),
                                               pw.Row(
                                                   mainAxisAlignment: pw
                                                       .MainAxisAlignment.center,
@@ -5846,44 +5843,19 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                         .toString())),
                                                                     style: pw.TextStyle(fontSize: 10)))))
                                                   ]),
-                                                   if(widget.objProvisional!
-                                                          .building!.length>=1)
-                                              pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment.start,
-                                                  crossAxisAlignment: pw
-                                                      .CrossAxisAlignment.start,
-                                                  children: [
-                                                    pw.Expanded(
-                                                        flex: 20,
-                                                        child: pw.Container(
-                                                            height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                            child: pw.Center(
-                                                                child: pw.Text(
-                                                                    "B.Building")))),
-                                                  ]),
-                                              if(widget.objProvisional!
-                                                          .building!.length>=1)
-                                              for (int i = 0;
-                                                  i <
-                                                      widget.objProvisional!
-                                                          .building!.length;
-                                                  i++)
+                                              if (widget.objProvisional!
+                                                      .building!.length >=
+                                                  1)
                                                 pw.Row(
                                                     mainAxisAlignment: pw
                                                         .MainAxisAlignment
-                                                        .center,
+                                                        .start,
                                                     crossAxisAlignment: pw
                                                         .CrossAxisAlignment
-                                                        .center,
+                                                        .start,
                                                     children: [
                                                       pw.Expanded(
-                                                          flex: 2,
+                                                          flex: 20,
                                                           child: pw.Container(
                                                               height: 25,
                                                               decoration: pw
@@ -5893,110 +5865,131 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                           .all()),
                                                               child: pw.Center(
                                                                   child: pw.Text(
-                                                                      "${widget.objProvisional!.building![i].no}",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 5,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration: pw
-                                                                  .BoxDecoration(
-                                                                      border: pw
-                                                                              .Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      "Building",
-                                                                      style: pw.TextStyle(
-                                                                          fontSize:
-                                                                              10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .building![i]
-                                                                          .sizesqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 3,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .building![i]
-                                                                          .minsqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .building![i]
-                                                                          .totalmin
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .building![i]
-                                                                          .maxsqm
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10))))),
-                                                      pw.Expanded(
-                                                          flex: 4,
-                                                          child: pw.Container(
-                                                              height: 25,
-                                                              decoration:
-                                                                  pw.BoxDecoration(
-                                                                      border: pw.Border
-                                                                          .all()),
-                                                              child: pw.Center(
-                                                                  child: pw.Text(
-                                                                      numformat.format(double.parse(widget
-                                                                          .objProvisional!
-                                                                          .building![i]
-                                                                          .totalmax
-                                                                          .toString())),
-                                                                      style: pw.TextStyle(fontSize: 10)))))
+                                                                      "B.Building")))),
                                                     ]),
+                                              if (widget.objProvisional!
+                                                      .building!.length >=
+                                                  1)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.objProvisional!
+                                                            .building!.length;
+                                                    i++)
+                                                  pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .center,
+                                                      crossAxisAlignment: pw
+                                                          .CrossAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        pw.Expanded(
+                                                            flex: 2,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw
+                                                                            .Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        "${widget.objProvisional!.building![i].no}",
+                                                                        style: pw.TextStyle(
+                                                                            fontSize:
+                                                                                10))))),
+                                                        pw.Expanded(
+                                                            flex: 5,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw
+                                                                            .Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        "Building",
+                                                                        style: pw.TextStyle(
+                                                                            fontSize:
+                                                                                10))))),
+                                                        pw.Expanded(
+                                                            flex: 3,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .building![i]
+                                                                            .sizesqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 3,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .building![i]
+                                                                            .minsqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .building![i]
+                                                                            .totalmin
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .building![i]
+                                                                            .maxsqm
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10))))),
+                                                        pw.Expanded(
+                                                            flex: 4,
+                                                            child: pw.Container(
+                                                                height: 25,
+                                                                decoration: pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
+                                                                child: pw.Center(
+                                                                    child: pw.Text(
+                                                                        numformat.format(double.parse(widget
+                                                                            .objProvisional!
+                                                                            .building![i]
+                                                                            .totalmax
+                                                                            .toString())),
+                                                                        style: pw.TextStyle(fontSize: 10)))))
+                                                      ]),
                                               pw.Row(
                                                   mainAxisAlignment: pw
-                                                      .MainAxisAlignment
-                                                      .center,
+                                                      .MainAxisAlignment.center,
                                                   crossAxisAlignment: pw
                                                       .CrossAxisAlignment
                                                       .center,
@@ -6020,52 +6013,51 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                         flex: 3,
                                                         child: pw.Container(
                                                             height: 25,
-                                                            decoration: pw.BoxDecoration(
-                                                                border: pw.Border
-                                                                    .all()),
+                                                            decoration:
+                                                                pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
                                                             child: pw.Center(
                                                                 child: pw.Text(
                                                                     numformat.format(double.parse(widget
                                                                         .objProvisional!
                                                                         .totalbuildingsizesqm
                                                                         .toString())),
-                                                                    style:
-                                                                        pw.TextStyle(fontSize: 10))))),
+                                                                    style: pw.TextStyle(fontSize: 10))))),
                                                     pw.Expanded(
                                                         flex: 7,
                                                         child: pw.Container(
                                                             height: 25,
-                                                            decoration: pw.BoxDecoration(
-                                                                border: pw.Border
-                                                                    .all()),
+                                                            decoration:
+                                                                pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
                                                             child: pw.Center(
                                                                 child: pw.Text(
                                                                     numformat.format(double.parse(widget
                                                                         .objProvisional!
                                                                         .totalbuildingvaluemin
                                                                         .toString())),
-                                                                    style:
-                                                                        pw.TextStyle(fontSize: 10))))),
+                                                                    style: pw.TextStyle(fontSize: 10))))),
                                                     pw.Expanded(
                                                         flex: 8,
                                                         child: pw.Container(
                                                             height: 25,
-                                                            decoration: pw.BoxDecoration(
-                                                                border: pw.Border
-                                                                    .all()),
+                                                            decoration:
+                                                                pw.BoxDecoration(
+                                                                    border: pw.Border
+                                                                        .all()),
                                                             child: pw.Center(
                                                                 child: pw.Text(
                                                                     numformat.format(double.parse(widget
                                                                         .objProvisional!
                                                                         .totalbuildingvaluemax
                                                                         .toString())),
-                                                                    style:
-                                                                        pw.TextStyle(fontSize: 10)))))
+                                                                    style: pw.TextStyle(fontSize: 10)))))
                                                   ]),
                                               pw.Row(
                                                   mainAxisAlignment: pw
-                                                      .MainAxisAlignment
-                                                      .center,
+                                                      .MainAxisAlignment.center,
                                                   crossAxisAlignment: pw
                                                       .CrossAxisAlignment
                                                       .center,
@@ -6104,16 +6096,16 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                         flex: 8,
                                                         child: pw.Container(
                                                             height: 25,
-                                                            decoration: pw
-                                                                .BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
+                                                            decoration: pw.BoxDecoration(
+                                                                border: pw.Border
+                                                                    .all()),
                                                             child: pw.Center(
                                                                 child: pw.Text(
-                                                                    numformat.format(
-                                                                        double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) +
-                                                                            double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())),
+                                                                    numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) +
+                                                                        double.parse(widget
+                                                                            .objProvisional!
+                                                                            .totalbuildingvaluemax
+                                                                            .toString())),
                                                                     style: pw.TextStyle(fontSize: 10)))))
                                                   ])
                                             ],
@@ -6122,8 +6114,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                       ],
                                     ),
                                   ),
-                                ]
-                                else if (widget.objCover!.header ==
+                                ] else if (widget.objCover!.header ==
                                     "Property LAND VALUATION REPORT") ...[
                                   pw.SizedBox(height: 10),
                                   pw.Row(
@@ -6181,8 +6172,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 decoration: pw.BoxDecoration(
                                                     border: pw.Border.all()),
                                                 child: pw.Center(
-                                                    child: pw.Text(
-                                                        "Total(\$)",
+                                                    child: pw.Text("Total(\$)",
                                                         style: pw.TextStyle(
                                                             fontSize: 10))))),
                                         pw.Expanded(
@@ -6203,139 +6193,138 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 decoration: pw.BoxDecoration(
                                                     border: pw.Border.all()),
                                                 child: pw.Center(
-                                                    child: pw.Text(
-                                                        "Total(\$)",
+                                                    child: pw.Text("Total(\$)",
                                                         style: pw.TextStyle(
                                                             fontSize: 10)))))
                                       ]),
-                                if(widget.objProvisional!.land!.length>=1)
-                                  for (int i = 0;
-                                      i < widget.objProvisional!.land!.length;
-                                      i++)
-                                    pw.Row(
-                                        mainAxisAlignment:
-                                            pw.MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            pw.CrossAxisAlignment.center,
-                                        children: [
-                                          pw.Expanded(
-                                              flex: 2,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration:
-                                                      pw.BoxDecoration(
-                                                          border: pw.Border
-                                                              .all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          "${widget.objProvisional!.land![i].no}",
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 5,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration:
-                                                      pw.BoxDecoration(
-                                                          border: pw.Border
-                                                              .all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text("Land",
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border:
-                                                          pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          numformat.format(
-                                                              double.parse(widget
-                                                                  .objProvisional!
-                                                                  .land![i]
-                                                                  .size_sqm
-                                                                  .toString())),
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 3,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border:
-                                                          pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          numformat.format(
-                                                              double.parse(widget
-                                                                  .objProvisional!
-                                                                  .land![i]
-                                                                  .minsqm
-                                                                  .toString())),
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border:
-                                                          pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          numformat.format(
-                                                              double.parse(widget
-                                                                  .objProvisional!
-                                                                  .land![i]
-                                                                  .totalmin
-                                                                  .toString())),
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border:
-                                                          pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          numformat.format(
-                                                              double.parse(widget
-                                                                  .objProvisional!
-                                                                  .land![i]
-                                                                  .maxsqm
-                                                                  .toString())),
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10))))),
-                                          pw.Expanded(
-                                              flex: 4,
-                                              child: pw.Container(
-                                                  height: 25,
-                                                  decoration: pw.BoxDecoration(
-                                                      border:
-                                                          pw.Border.all()),
-                                                  child: pw.Center(
-                                                      child: pw.Text(
-                                                          numformat.format(
-                                                              double.parse(widget
-                                                                  .objProvisional!
-                                                                  .land![i]
-                                                                  .totalmax
-                                                                  .toString())),
-                                                          style: pw.TextStyle(
-                                                              fontSize:
-                                                                  10)))))
-                                        ]),
+                                  if (widget.objProvisional!.land!.length >= 1)
+                                    for (int i = 0;
+                                        i < widget.objProvisional!.land!.length;
+                                        i++)
+                                      pw.Row(
+                                          mainAxisAlignment:
+                                              pw.MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              pw.CrossAxisAlignment.center,
+                                          children: [
+                                            pw.Expanded(
+                                                flex: 2,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                            border: pw.Border
+                                                                .all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            "${widget.objProvisional!.land![i].no}",
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 5,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration:
+                                                        pw.BoxDecoration(
+                                                            border: pw.Border
+                                                                .all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text("Land",
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 3,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration: pw.BoxDecoration(
+                                                        border:
+                                                            pw.Border.all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            numformat.format(
+                                                                double.parse(widget
+                                                                    .objProvisional!
+                                                                    .land![i]
+                                                                    .size_sqm
+                                                                    .toString())),
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 3,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration: pw.BoxDecoration(
+                                                        border:
+                                                            pw.Border.all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            numformat.format(
+                                                                double.parse(widget
+                                                                    .objProvisional!
+                                                                    .land![i]
+                                                                    .minsqm
+                                                                    .toString())),
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 4,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration: pw.BoxDecoration(
+                                                        border:
+                                                            pw.Border.all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            numformat.format(
+                                                                double.parse(widget
+                                                                    .objProvisional!
+                                                                    .land![i]
+                                                                    .totalmin
+                                                                    .toString())),
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 4,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration: pw.BoxDecoration(
+                                                        border:
+                                                            pw.Border.all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            numformat.format(
+                                                                double.parse(widget
+                                                                    .objProvisional!
+                                                                    .land![i]
+                                                                    .maxsqm
+                                                                    .toString())),
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10))))),
+                                            pw.Expanded(
+                                                flex: 4,
+                                                child: pw.Container(
+                                                    height: 25,
+                                                    decoration: pw.BoxDecoration(
+                                                        border:
+                                                            pw.Border.all()),
+                                                    child: pw.Center(
+                                                        child: pw.Text(
+                                                            numformat.format(
+                                                                double.parse(widget
+                                                                    .objProvisional!
+                                                                    .land![i]
+                                                                    .totalmax
+                                                                    .toString())),
+                                                            style: pw.TextStyle(
+                                                                fontSize:
+                                                                    10)))))
+                                          ]),
                                   pw.Row(
                                       mainAxisAlignment:
                                           pw.MainAxisAlignment.center,
@@ -6458,8 +6447,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           child: pw.Center(
                                             child: pw.Text(
                                               "Fair Market Value",
-                                              style:
-                                                  pw.TextStyle(fontSize: 10),
+                                              style: pw.TextStyle(fontSize: 10),
                                             ),
                                           ),
                                         ),
@@ -6483,8 +6471,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                         .totallandvaluemin
                                                         .toString()),
                                               ),
-                                              style:
-                                                  pw.TextStyle(fontSize: 10),
+                                              style: pw.TextStyle(fontSize: 10),
                                             ),
                                           ),
                                         ),
@@ -6508,8 +6495,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                         .totallandvaluemax
                                                         .toString()),
                                               ),
-                                              style:
-                                                  pw.TextStyle(fontSize: 10),
+                                              style: pw.TextStyle(fontSize: 10),
                                             ),
                                           ),
                                         ),
@@ -6538,8 +6524,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 style: pw.TextStyle(
                                                   fontSize: 10,
                                                 ),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6556,8 +6541,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 style: pw.TextStyle(
                                                   fontSize: 10,
                                                 ),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6570,10 +6554,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("No.of Bedroom",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6586,10 +6569,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Gross Area (Sqm)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6602,10 +6584,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("\$/sqm(Min)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6618,10 +6599,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Total(\$)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6634,10 +6614,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("\$/sqm(Max)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6650,10 +6629,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Total(\$)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -6672,227 +6650,228 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                             crossAxisAlignment:
                                                 pw.CrossAxisAlignment.center,
                                             children: [
-                                              if(widget.objProvisional!
-                                                          .building!.length>=1)
-                                              for (int i = 0;
-                                                  i <
-                                                      widget.objProvisional!
-                                                          .building!.length;
-                                                  i++)
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment
-                                                      .center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Office Space",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${(widget.objProvisional!.building![i].floorno)}",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                              if (widget.objProvisional!
+                                                      .building!.length >=
+                                                  1)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.objProvisional!
+                                                            .building!.length;
+                                                    i++)
+                                                  pw.Row(
+                                                    mainAxisAlignment: pw
+                                                        .MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "Office Space",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${(widget.objProvisional!.building![i].bedroomno)}",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .sizesqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 4,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "${(widget.objProvisional!.building![i].floorno)}",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .minsqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "${(widget.objProvisional!.building![i].bedroomno)}",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(double.parse(widget
-                                                                  .objProvisional!
-                                                                  .building![
-                                                                      i]
-                                                                  .totalmin
-                                                                  .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .maxsqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 4,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .sizesqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(double.parse(widget
-                                                                  .objProvisional!
-                                                                  .building![
-                                                                      i]
-                                                                  .totalmax
-                                                                  .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .minsqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(double.parse(widget
+                                                                    .objProvisional!
+                                                                    .building![
+                                                                        i]
+                                                                    .totalmin
+                                                                    .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .maxsqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(double.parse(widget
+                                                                    .objProvisional!
+                                                                    .building![
+                                                                        i]
+                                                                    .totalmax
+                                                                    .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                               pw.Row(
-                                                mainAxisAlignment: pw
-                                                    .MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    pw.MainAxisAlignment.center,
                                                 children: [
                                                   pw.Expanded(
                                                     flex: 10,
@@ -6900,16 +6879,12 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
-                                                        child: pw.Text(
-                                                            "Total",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                        child: pw.Text("Total",
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -6922,8 +6897,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -6932,10 +6906,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingsizesqm
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -6948,8 +6920,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -6958,10 +6929,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemin
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -6974,8 +6943,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -6984,10 +6952,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemax
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -6997,8 +6963,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 ],
                                               ),
                                               pw.Row(
-                                                mainAxisAlignment: pw
-                                                    .MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    pw.MainAxisAlignment.center,
                                                 children: [
                                                   pw.Expanded(
                                                     flex: 14,
@@ -7006,16 +6972,13 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
                                                             "Fair Market Value",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7028,16 +6991,13 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
                                                             "${double.parse(widget.objProvisional!.totalbuildingvaluemin.toString())}",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7050,16 +7010,13 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
                                                             "${double.parse(widget.objProvisional!.totalbuildingvaluemax.toString())}",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7096,8 +7053,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 style: pw.TextStyle(
                                                   fontSize: 10,
                                                 ),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7114,8 +7070,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 style: pw.TextStyle(
                                                   fontSize: 10,
                                                 ),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7128,10 +7083,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("No.of Bedroom",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7144,10 +7098,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Gross Area (Sqm)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7160,10 +7113,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("\$/sqm(Min)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7176,10 +7128,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Total(\$)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7192,10 +7143,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("\$/sqm(Max)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7208,10 +7158,9 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                           ),
                                           child: pw.Center(
                                             child: pw.Text("Total(\$)",
-                                                style: pw.TextStyle(
-                                                    fontSize: 10),
-                                                textAlign:
-                                                    pw.TextAlign.center),
+                                                style:
+                                                    pw.TextStyle(fontSize: 10),
+                                                textAlign: pw.TextAlign.center),
                                           ),
                                         ),
                                       ),
@@ -7230,227 +7179,228 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                             crossAxisAlignment:
                                                 pw.CrossAxisAlignment.center,
                                             children: [
-                                              if(widget.objProvisional!
-                                                          .building!.length>=1)
-                                              for (int i = 0;
-                                                  i <
-                                                      widget.objProvisional!
-                                                          .building!.length;
-                                                  i++)
-                                                pw.Row(
-                                                  mainAxisAlignment: pw
-                                                      .MainAxisAlignment
-                                                      .center,
-                                                  children: [
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "Unit Condo",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${widget.objProvisional!.building![i].floorno}",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                              if (widget.objProvisional!
+                                                      .building!.length >=
+                                                  1)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.objProvisional!
+                                                            .building!.length;
+                                                    i++)
+                                                  pw.Row(
+                                                    mainAxisAlignment: pw
+                                                        .MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "Unit Condo",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              "${widget.objProvisional!.building![i].bedroomno}",
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 4,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .sizesqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 4,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "${widget.objProvisional!.building![i].floorno}",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .minsqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                "${widget.objProvisional!.building![i].bedroomno}",
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(double.parse(widget
-                                                                  .objProvisional!
-                                                                  .building![
-                                                                      i]
-                                                                  .totalmin
-                                                                  .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(
-                                                                  double.parse(widget
-                                                                      .objProvisional!
-                                                                      .building![
-                                                                          i]
-                                                                      .maxsqm
-                                                                      .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 4,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .sizesqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    pw.Expanded(
-                                                      flex: 3,
-                                                      child: pw.Container(
-                                                        height: 25,
-                                                        decoration:
-                                                            pw.BoxDecoration(
-                                                          border:
-                                                              pw.Border.all(),
-                                                        ),
-                                                        child: pw.Center(
-                                                          child: pw.Text(
-                                                              numformat.format(double.parse(widget
-                                                                  .objProvisional!
-                                                                  .building![
-                                                                      i]
-                                                                  .totalmax
-                                                                  .toString())),
-                                                              style: pw
-                                                                  .TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                              textAlign: pw
-                                                                  .TextAlign
-                                                                  .center),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .minsqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(double.parse(widget
+                                                                    .objProvisional!
+                                                                    .building![
+                                                                        i]
+                                                                    .totalmin
+                                                                    .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(
+                                                                    double.parse(widget
+                                                                        .objProvisional!
+                                                                        .building![
+                                                                            i]
+                                                                        .maxsqm
+                                                                        .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Expanded(
+                                                        flex: 3,
+                                                        child: pw.Container(
+                                                          height: 25,
+                                                          decoration:
+                                                              pw.BoxDecoration(
+                                                            border:
+                                                                pw.Border.all(),
+                                                          ),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                numformat.format(double.parse(widget
+                                                                    .objProvisional!
+                                                                    .building![
+                                                                        i]
+                                                                    .totalmax
+                                                                    .toString())),
+                                                                style: pw
+                                                                    .TextStyle(
+                                                                        fontSize:
+                                                                            10),
+                                                                textAlign: pw
+                                                                    .TextAlign
+                                                                    .center),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                               pw.Row(
-                                                mainAxisAlignment: pw
-                                                    .MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    pw.MainAxisAlignment.center,
                                                 children: [
                                                   pw.Expanded(
                                                     flex: 10,
@@ -7458,16 +7408,12 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
-                                                        child: pw.Text(
-                                                            "Total",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                        child: pw.Text("Total",
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7480,8 +7426,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -7490,10 +7435,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingsizesqm
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7506,8 +7449,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -7516,10 +7458,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemin
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7532,8 +7472,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -7542,10 +7481,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemax
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7555,8 +7492,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                 ],
                                               ),
                                               pw.Row(
-                                                mainAxisAlignment: pw
-                                                    .MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    pw.MainAxisAlignment.center,
                                                 children: [
                                                   pw.Expanded(
                                                     flex: 14,
@@ -7564,16 +7501,13 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
                                                             "Fair Market Value",
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7586,8 +7520,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -7596,10 +7529,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemin
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7612,8 +7543,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                       height: 25,
                                                       decoration:
                                                           pw.BoxDecoration(
-                                                        border:
-                                                            pw.Border.all(),
+                                                        border: pw.Border.all(),
                                                       ),
                                                       child: pw.Center(
                                                         child: pw.Text(
@@ -7622,10 +7552,8 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                     .objProvisional!
                                                                     .totalbuildingvaluemax
                                                                     .toString())),
-                                                            style:
-                                                                pw.TextStyle(
-                                                                    fontSize:
-                                                                        10),
+                                                            style: pw.TextStyle(
+                                                                fontSize: 10),
                                                             textAlign: pw
                                                                 .TextAlign
                                                                 .center),
@@ -7641,136 +7569,136 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                     ),
                                   ),
                                 ],
-                                  pw.SizedBox(height: 10),
-                                  if (widget.objCover!.header !=
-                                      "Property LAND VALUATION REPORT") ...[
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text: 'Fire Insurance',
-                                        style: header2(true), // Base style
-                                      ),
-                                    ),
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text:
-                                            'Based on the methodical collection of data for our inspection to the Subject Building, the current estimated value for Fire Insurance is as follow:',
-                                        style: body(), // Base style
-                                      ),
-                                    ),
-                                    pw.SizedBox(height: 20),
-                                    pw.Row(children: [
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text: 'Fire Insurance Value : ',
-                                          style: header2(true), // Base style
-                                        ),
-                                      ),
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text:
-                                              '\$${numformat.format(double.parse(widget.objProvisional!.fire_insurance.toString()))}',
-                                          style: header2(false), // Base style
-                                        ),
-                                      ),
-                                    ]),
-                                    pw.RichText(
-                                      text: pw.TextSpan(
-                                        text: fireinWord ,
-                                        style: header2(false), // Base style
-                                      ),
-                                    ),
-                                  ],
-                                  pw.SizedBox(height: 20),
+                                pw.SizedBox(height: 10),
+                                if (widget.objCover!.header !=
+                                    "Property LAND VALUATION REPORT") ...[
                                   pw.RichText(
                                     text: pw.TextSpan(
-                                      text: 'Force Sale Value',
+                                      text: 'Fire Insurance',
                                       style: header2(true), // Base style
                                     ),
                                   ),
                                   pw.RichText(
                                     text: pw.TextSpan(
                                       text:
-                                          'In attempt to get a current force sale value where clients sell off foreclosed the subject property quickly, the estimated value for Force Sale is as follow:',
+                                          'Based on the methodical collection of data for our inspection to the Subject Building, the current estimated value for Fire Insurance is as follow:',
                                       style: body(), // Base style
                                     ),
                                   ),
                                   pw.SizedBox(height: 20),
-                                  pw.Row(
-                                    children: [
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text: 'Force Sale Value : ',
-                                          style: header2(true), // Base style
-                                        ),
+                                  pw.Row(children: [
+                                    pw.RichText(
+                                      text: pw.TextSpan(
+                                        text: 'Fire Insurance Value : ',
+                                        style: header2(true), // Base style
                                       ),
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          children: [
-                                            if (widget.objCover!.header !=
-                                                "Property LAND VALUATION REPORT") ...[
-                                              pw.TextSpan(
-                                                text:
-                                                    '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
-                                                style: header2(
-                                                    false), // Base style
-                                              ),
-                                              pw.TextSpan(
-                                                text: ' to ',
-                                                style: header2(
-                                                    true), // Base style for "to"
-                                              ),
-                                              pw.TextSpan(
-                                                text:
-                                                    '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
-                                                style: header2(
-                                                    false), // Base style
-                                              ),
-                                            ] else ...[
-                                              pw.TextSpan(
-                                                text:
-                                                    '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()) - (double.parse(widget.objProvisional!.totallandvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
-                                                style: header2(
-                                                    false), // Base style
-                                              ),
-                                              pw.TextSpan(
-                                                text: ' to ',
-                                                style: header2(
-                                                    true), // Base style for "to"
-                                              ),
-                                              pw.TextSpan(
-                                                text:
-                                                    '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()) - (double.parse(widget.objProvisional!.totallandvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
-                                                style: header2(
-                                                    false), // Base style
-                                              ),
-                                            ]
-                                          ],
-                                        ),
+                                    ),
+                                    pw.RichText(
+                                      text: pw.TextSpan(
+                                        text:
+                                            '\$${numformat.format(double.parse(widget.objProvisional!.fire_insurance.toString()))}',
+                                        style: header2(false), // Base style
                                       ),
-                                    ],
+                                    ),
+                                  ]),
+                                  pw.RichText(
+                                    text: pw.TextSpan(
+                                      text: fireinWord,
+                                      style: header2(false), // Base style
+                                    ),
                                   ),
-                                  pw.SizedBox(height: 25),
-                                  pw.Row(
-                                    crossAxisAlignment:
-                                        pw.CrossAxisAlignment.start,
-                                    children: [
-                                      pw.RichText(
-                                        text: pw.TextSpan(
-                                          text: 'Please Note: ',
-                                          style: header2(true), // Base style
-                                        ),
-                                      ),
-                                      pw.Expanded(
-                                        child: pw.RichText(
-                                          text: pw.TextSpan(
-                                            text:
-                                                'This is a provisional valuation made without recourse to other parties or to Other valuation data help by Cambodia Angkor Real Estate Co. Ltd.',
-                                            style: body(), // Base style
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                ],
+                                pw.SizedBox(height: 20),
+                                pw.RichText(
+                                  text: pw.TextSpan(
+                                    text: 'Force Sale Value',
+                                    style: header2(true), // Base style
                                   ),
+                                ),
+                                pw.RichText(
+                                  text: pw.TextSpan(
+                                    text:
+                                        'In attempt to get a current force sale value where clients sell off foreclosed the subject property quickly, the estimated value for Force Sale is as follow:',
+                                    style: body(), // Base style
+                                  ),
+                                ),
+                                pw.SizedBox(height: 20),
+                                pw.Row(
+                                  children: [
+                                    pw.RichText(
+                                      text: pw.TextSpan(
+                                        text: 'Force Sale Value : ',
+                                        style: header2(true), // Base style
+                                      ),
+                                    ),
+                                    pw.RichText(
+                                      text: pw.TextSpan(
+                                        children: [
+                                          if (widget.objCover!.header !=
+                                              "Property LAND VALUATION REPORT") ...[
+                                            pw.TextSpan(
+                                              text:
+                                                  '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+                                              style:
+                                                  header2(false), // Base style
+                                            ),
+                                            pw.TextSpan(
+                                              text: ' to ',
+                                              style: header2(
+                                                  true), // Base style for "to"
+                                            ),
+                                            pw.TextSpan(
+                                              text:
+                                                  '\$ ${numformat.format(double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) - (double.parse(widget.objProvisional!.totalbuildingvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+                                              style:
+                                                  header2(false), // Base style
+                                            ),
+                                          ] else ...[
+                                            pw.TextSpan(
+                                              text:
+                                                  '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemin.toString()) - (double.parse(widget.objProvisional!.totallandvaluemin.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+                                              style:
+                                                  header2(false), // Base style
+                                            ),
+                                            pw.TextSpan(
+                                              text: ' to ',
+                                              style: header2(
+                                                  true), // Base style for "to"
+                                            ),
+                                            pw.TextSpan(
+                                              text:
+                                                  '\$ ${numformat.format(double.parse(widget.objProvisional!.totallandvaluemax.toString()) - (double.parse(widget.objProvisional!.totallandvaluemax.toString()) * (double.parse(widget.objProvisional!.force_sale.toString()) / 100)))}',
+                                              style:
+                                                  header2(false), // Base style
+                                            ),
+                                          ]
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                pw.SizedBox(height: 25),
+                                pw.Row(
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
+                                  children: [
+                                    pw.RichText(
+                                      text: pw.TextSpan(
+                                        text: 'Please Note: ',
+                                        style: header2(true), // Base style
+                                      ),
+                                    ),
+                                    pw.Expanded(
+                                      child: pw.RichText(
+                                        text: pw.TextSpan(
+                                          text:
+                                              'This is a provisional valuation made without recourse to other parties or to Other valuation data help by Cambodia Angkor Real Estate Co. Ltd.',
+                                          style: body(), // Base style
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ) // Add margin here
                             )),
@@ -8052,110 +7980,103 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                   child: pw.Text(
                                                                       "A.Land")))),
                                                     ]),
-                                                if(widget
-                                                            .objFinalIndication!
-                                                            .land!
-                                                            .length>=1)
-                                                for (int i = 0;
-                                                    i <
-                                                        widget
-                                                            .objFinalIndication!
-                                                            .land!
-                                                            .length;
-                                                    i++)
-                                                  pw.Row(
-                                                      mainAxisAlignment: pw
-                                                          .MainAxisAlignment
-                                                          .center,
-                                                      crossAxisAlignment: pw
-                                                          .CrossAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        pw.Expanded(
-                                                            flex: 2,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${widget.objFinalIndication!.land![i].no}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 5,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "Land",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 6,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 6,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                      ]),
+                                                if (widget.objFinalIndication!
+                                                        .land!.length >=
+                                                    1)
+                                                  for (int i = 0;
+                                                      i <
+                                                          widget
+                                                              .objFinalIndication!
+                                                              .land!
+                                                              .length;
+                                                      i++)
+                                                    pw.Row(
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .center,
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          pw.Expanded(
+                                                              flex: 2,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${widget.objFinalIndication!.land![i].no}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 5,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "Land",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 3,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 3,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 6,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 6,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                        ]),
                                                 pw.Row(
                                                     mainAxisAlignment: pw
                                                         .MainAxisAlignment
@@ -8252,110 +8173,103 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                                   child: pw.Text(
                                                                       "B.Building")))),
                                                     ]),
-                                                    if(widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length>=1)
-                                                for (int i = 0;
-                                                    i <
-                                                        widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length;
-                                                    i++)
-                                                  pw.Row(
-                                                      mainAxisAlignment: pw
-                                                          .MainAxisAlignment
-                                                          .center,
-                                                      crossAxisAlignment: pw
-                                                          .CrossAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        pw.Expanded(
-                                                            flex: 2,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${widget.objFinalIndication!.building![i].no}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 5,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "Building",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 3,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 6,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                        pw.Expanded(
-                                                            flex: 6,
-                                                            child: pw.Container(
-                                                                height: 25,
-                                                                decoration: pw.BoxDecoration(
-                                                                    border: pw
-                                                                            .Border
-                                                                        .all()),
-                                                                child: pw.Center(
-                                                                    child: pw.Text(
-                                                                        "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-                                                                        style: pw.TextStyle(
-                                                                            fontSize:
-                                                                                10))))),
-                                                      ]),
+                                                if (widget.objFinalIndication!
+                                                        .building!.length >=
+                                                    1)
+                                                  for (int i = 0;
+                                                      i <
+                                                          widget
+                                                              .objFinalIndication!
+                                                              .building!
+                                                              .length;
+                                                      i++)
+                                                    pw.Row(
+                                                        mainAxisAlignment: pw
+                                                            .MainAxisAlignment
+                                                            .center,
+                                                        crossAxisAlignment: pw
+                                                            .CrossAxisAlignment
+                                                            .center,
+                                                        children: [
+                                                          pw.Expanded(
+                                                              flex: 2,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${widget.objFinalIndication!.building![i].no}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 5,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "Building",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 3,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 3,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 6,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                          pw.Expanded(
+                                                              flex: 6,
+                                                              child: pw.Container(
+                                                                  height: 25,
+                                                                  decoration: pw.BoxDecoration(
+                                                                      border: pw
+                                                                              .Border
+                                                                          .all()),
+                                                                  child: pw.Center(
+                                                                      child: pw.Text(
+                                                                          "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+                                                                          style:
+                                                                              pw.TextStyle(fontSize: 10))))),
+                                                        ]),
                                                 pw.Row(
                                                     mainAxisAlignment: pw
                                                         .MainAxisAlignment
@@ -8609,103 +8523,104 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                                           style: pw.TextStyle(
                                                               fontSize: 10))))),
                                         ]),
-                                        if(widget.objFinalIndication!.land!
-                                                .length>=1)
-                                    for (int i = 0;
-                                        i <
-                                            widget.objFinalIndication!.land!
-                                                .length;
-                                        i++)
-                                      pw.Row(
-                                          mainAxisAlignment:
-                                              pw.MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              pw.CrossAxisAlignment.center,
-                                          children: [
-                                            pw.Expanded(
-                                                flex: 2,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${widget.objFinalIndication!.land![i].no}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 5,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text("Land",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 3,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 3,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 6,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                            pw.Expanded(
-                                                flex: 6,
-                                                child: pw.Container(
-                                                    height: 25,
-                                                    decoration:
-                                                        pw.BoxDecoration(
-                                                            border: pw.Border
-                                                                .all()),
-                                                    child: pw.Center(
-                                                        child: pw.Text(
-                                                            "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
-                                                            style: pw.TextStyle(
-                                                                fontSize:
-                                                                    10))))),
-                                          ]),
+                                    if (widget
+                                            .objFinalIndication!.land!.length >=
+                                        1)
+                                      for (int i = 0;
+                                          i <
+                                              widget.objFinalIndication!.land!
+                                                  .length;
+                                          i++)
+                                        pw.Row(
+                                            mainAxisAlignment:
+                                                pw.MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                pw.CrossAxisAlignment.center,
+                                            children: [
+                                              pw.Expanded(
+                                                  flex: 2,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text(
+                                                              "${widget.objFinalIndication!.land![i].no}",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                              pw.Expanded(
+                                                  flex: 5,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text("Land",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                              pw.Expanded(
+                                                  flex: 3,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text(
+                                                              "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqm.toString()))}",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                              pw.Expanded(
+                                                  flex: 3,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text(
+                                                              "${numformat.format(double.parse(widget.objFinalIndication!.land![i].sizesqft.toString()))}",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                              pw.Expanded(
+                                                  flex: 6,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text(
+                                                              "${numformat.format(double.parse(widget.objFinalIndication!.land![i].valuesqm.toString()))}",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                              pw.Expanded(
+                                                  flex: 6,
+                                                  child: pw.Container(
+                                                      height: 25,
+                                                      decoration:
+                                                          pw.BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all()),
+                                                      child: pw.Center(
+                                                          child: pw.Text(
+                                                              "${numformat.format(double.parse(widget.objFinalIndication!.land![i].propertyvalue.toString()))}",
+                                                              style: pw.TextStyle(
+                                                                  fontSize:
+                                                                      10))))),
+                                            ]),
                                     pw.Row(
                                       mainAxisAlignment:
                                           pw.MainAxisAlignment.center,
@@ -8927,178 +8842,170 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                               crossAxisAlignment:
                                                   pw.CrossAxisAlignment.center,
                                               children: [
-                                                if( widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length>=1)
-                                                for (int i = 0;
-                                                    i <
-                                                        widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length;
-                                                    i++)
-                                                  pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "Office Space",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objFinalIndication!.building![i].floorno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                if (widget.objFinalIndication!
+                                                        .building!.length >=
+                                                    1)
+                                                  for (int i = 0;
+                                                      i <
+                                                          widget
+                                                              .objFinalIndication!
+                                                              .building!
+                                                              .length;
+                                                      i++)
+                                                    pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "Office Space",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objFinalIndication!.building![i].bedroomno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${(widget.objFinalIndication!.building![i].floorno)}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 5,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${(widget.objFinalIndication!.building![i].bedroomno)}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 5,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Expanded(
+                                                          flex: 5,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Expanded(
+                                                          flex: 5,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                 pw.Row(
                                                   mainAxisAlignment: pw
                                                       .MainAxisAlignment.center,
@@ -9439,178 +9346,170 @@ class _MyPDFState_api extends State<MyPDF_api> {
                                               crossAxisAlignment:
                                                   pw.CrossAxisAlignment.center,
                                               children: [
-                                                if(widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length>=1)
-                                                for (int i = 0;
-                                                    i <
-                                                        widget
-                                                            .objFinalIndication!
-                                                            .building!
-                                                            .length;
-                                                    i++)
-                                                  pw.Row(
-                                                    mainAxisAlignment: pw
-                                                        .MainAxisAlignment
-                                                        .center,
-                                                    children: [
-                                                      pw.Expanded(
-                                                        flex: 4,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "Condo",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objFinalIndication!.building![i].floorno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                if (widget.objFinalIndication!
+                                                        .building!.length >=
+                                                    1)
+                                                  for (int i = 0;
+                                                      i <
+                                                          widget
+                                                              .objFinalIndication!
+                                                              .building!
+                                                              .length;
+                                                      i++)
+                                                    pw.Row(
+                                                      mainAxisAlignment: pw
+                                                          .MainAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        pw.Expanded(
+                                                          flex: 4,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "Condo",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${(widget.objFinalIndication!.building![i].bedroomno)}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${(widget.objFinalIndication!.building![i].floorno)}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 3,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 5,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${(widget.objFinalIndication!.building![i].bedroomno)}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      pw.Expanded(
-                                                        flex: 5,
-                                                        child: pw.Container(
-                                                          height: 25,
-                                                          decoration:
-                                                              pw.BoxDecoration(
-                                                            border:
-                                                                pw.Border.all(),
-                                                          ),
-                                                          child: pw.Center(
-                                                            child: pw.Text(
-                                                                "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
-                                                                style: pw
-                                                                    .TextStyle(
-                                                                        fontSize:
-                                                                            10),
-                                                                textAlign: pw
-                                                                    .TextAlign
-                                                                    .center),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqm.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                        pw.Expanded(
+                                                          flex: 3,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].sizesqft.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Expanded(
+                                                          flex: 5,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].valuesqm.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Expanded(
+                                                          flex: 5,
+                                                          child: pw.Container(
+                                                            height: 25,
+                                                            decoration: pw
+                                                                .BoxDecoration(
+                                                              border: pw.Border
+                                                                  .all(),
+                                                            ),
+                                                            child: pw.Center(
+                                                              child: pw.Text(
+                                                                  "${numformat.format(double.parse(widget.objFinalIndication!.building![i].propertyvalue.toString()))}",
+                                                                  style: pw.TextStyle(
+                                                                      fontSize:
+                                                                          10),
+                                                                  textAlign: pw
+                                                                      .TextAlign
+                                                                      .center),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                 pw.Row(
                                                   mainAxisAlignment: pw
                                                       .MainAxisAlignment.center,
@@ -10517,6 +10416,7 @@ class _MyPDFState_api extends State<MyPDF_api> {
                 opacity: 0.02,
                 child: pw.Image(logoImage, fit: pw.BoxFit.contain),
               ))),
+      
     );
   }
 

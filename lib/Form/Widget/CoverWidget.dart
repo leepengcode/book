@@ -8,6 +8,7 @@ import 'package:book/Componnents/dropdown.dart';
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/CoverModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 
 // typedef OnChangeCallback = void Function(Cover value);
@@ -161,14 +162,13 @@ class _MyWidgetState extends State<CoverWidget> {
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
+        width: 1400,
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
               children: [
                 HeaderDropdown(
                   hint: "Select Header",
@@ -200,8 +200,7 @@ class _MyWidgetState extends State<CoverWidget> {
               ],
             ),
             if (_selectedinfo == "Bank") ...[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
                 children: [
                   BankDropdown(
                     onBankChanged: (val) {
@@ -293,9 +292,10 @@ class _MyWidgetState extends State<CoverWidget> {
             const SizedBox(
               height: 25,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            StaggeredGrid.count(
+              crossAxisCount: 4,
+              mainAxisSpacing: 9, //អ័ក្សX
+              crossAxisSpacing: 9, //អ័ក្សY
               children: [
                 _buildTextFieldColumn(
                   title: "Owner Name",
@@ -371,8 +371,10 @@ class _MyWidgetState extends State<CoverWidget> {
             SizedBox(
               height: 25,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            StaggeredGrid.count(
+              crossAxisCount: 4,
+              // mainAxisSpacing: 9, //អ័ក្សX
+              // crossAxisSpacing: 9,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -401,12 +403,12 @@ class _MyWidgetState extends State<CoverWidget> {
                 Column(
                   children: [
                     SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          '${date.day}/${date.month}/${date.year}',
-                          style: THeader(),
-                        ),
+                      height: 30,
+                    ),
+                    SizedBox(
+                      child: Text(
+                        '${date.day}/${date.month}/${date.year}',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     Container(
@@ -447,7 +449,7 @@ class _MyWidgetState extends State<CoverWidget> {
     );
   }
 
-  Column _buildTextFieldColumn({
+  Widget _buildTextFieldColumn({
     required String title,
     required String label,
     required double width,
@@ -456,14 +458,13 @@ class _MyWidgetState extends State<CoverWidget> {
     String? Function(String?)? validator,
     void Function(String)? onChanged,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
       children: [
         Row(
           children: [
             Text(
               title,
-              style: THeader(),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
             Text(
               " *",

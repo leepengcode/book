@@ -1,7 +1,6 @@
 import 'dart:io' as io;
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,7 +58,7 @@ class _ButtonWidgetState extends State<LayerImagePicker> {
                   imageUrl!,
                   width: 300,
                   height: 400,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 )
             ],
           ),

@@ -29,7 +29,7 @@ class _HeaderDropdownState extends State<HeaderDropdown> {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
       child: SizedBox(
-        width: 550,
+        width: 420,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -52,7 +52,7 @@ class _HeaderDropdownState extends State<HeaderDropdown> {
                 hintText: widget.hint,
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-                contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                contentPadding: EdgeInsets.symmetric(horizontal: 1),
                 filled: true,
                 fillColor: Colors.grey[200], // Replace with your desired color
               ),
@@ -102,7 +102,7 @@ class _HeaderDropdownState1 extends State<HeaderDropdown1> {
     return Padding(
       padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
       child: SizedBox(
-        width: 550,
+        width: 400,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

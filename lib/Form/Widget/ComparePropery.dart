@@ -1,6 +1,7 @@
 import 'package:book/Componnents/style.dart';
 import 'package:book/Model/ComparisonModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ComparePropertyWidget extends StatefulWidget {
   final ValueChanged<Comparison>? getvalue;
@@ -115,11 +116,16 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.only(left: 5.0, bottom: 15.0),
+        padding: const EdgeInsets.only(bottom: 15.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            Wrap(
+              spacing: 10,
+              runSpacing: 10.0,
+              // crossAxisCount: 6,
+              // mainAxisSpacing: 9, //អ័ក្សX
+              // crossAxisSpacing: 9,
               children: [
                 _buildTextFieldColumn(
                   label: "Parcel",
@@ -128,31 +134,27 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
                   controller: TextEditingController(
                       text: widget.parcelNumber.toString()),
                 ),
-                SizedBox(width: 15),
+                SizedBox(width: 20),
                 _buildTextFieldColumn(
                   label: "type of property1",
                   width: 200,
                   controller: _typeofproperty1,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "type of property2",
                   width: 200,
                   controller: _typeofproperty2,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Land Size",
                   width: 230,
                   controller: _lsize,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Building Size",
                   width: 230,
                   controller: _bsize,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Land value USD/sqm",
                   width: 230,
@@ -161,34 +163,33 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
               ],
             ),
             SizedBox(height: 15),
-            Row(
+            StaggeredGrid.count(
+              crossAxisCount: 4,
+              mainAxisSpacing: 9, //អ័ក្សX
+              crossAxisSpacing: 9,
               children: [
                 _buildTextFieldColumn(
                     width: 230,
                     label: "Building value USD/sqm",
                     controller: _bprice),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Land Price/USD",
                   controller: _tlprice,
                   width: 230,
                   readOnly: true,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Building Price/USD",
                   width: 230,
                   controller: _tbprice,
                   readOnly: true,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                   label: "Total Price",
                   width: 230,
                   controller: _tblprice,
                   readOnly: true,
                 ),
-                SizedBox(width: 15),
                 _buildTextFieldColumn(
                     label: "Type of compare", width: 230, controller: _type),
               ],
@@ -207,7 +208,7 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     );
   }
 
-  Column _buildTextFieldColumn({
+  Widget _buildTextFieldColumn({
     required String label,
     required TextEditingController controller,
     bool readOnly = false,
@@ -216,17 +217,18 @@ class _ComparePropertyWidgetState extends State<ComparePropertyWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              label,
+        Text.rich(
+          overflow: TextOverflow.ellipsis,
+          TextSpan(children: [
+            TextSpan(
+              text: label,
               style: THeader(),
             ),
-            Text(
-              " *",
+            TextSpan(
+              text: " *",
               style: TextStyle(color: Colors.red, fontSize: 15),
             )
-          ],
+          ]),
         ),
         Container(
           width: width,

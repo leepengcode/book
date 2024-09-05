@@ -1,4 +1,3 @@
-import 'package:book/Componnents/style.dart';
 import 'package:flutter/material.dart';
 
 class BranchDropdown extends StatefulWidget {
@@ -31,17 +30,18 @@ class _BranchDropdownState extends State<BranchDropdown> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(
-                  "Select Report",
-                  style: THeader(),
+            Text.rich(
+              overflow: TextOverflow.ellipsis,
+              TextSpan(children: [
+                TextSpan(
+                  text: 'Select Report',
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text(
-                  " *",
+                TextSpan(
+                  text: " *",
                   style: TextStyle(color: Colors.red, fontSize: 15),
                 )
-              ],
+              ]),
             ),
             DropdownButtonFormField<String>(
               decoration: InputDecoration(

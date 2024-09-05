@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:book/Componnents/IdCard.dart';
-import 'package:book/Componnents/style.dart';
 import 'package:book/Model/IDCardModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class uploadIDCard extends StatefulWidget {
   final ValueChanged<IDCard?>? getForm;
@@ -24,29 +24,29 @@ class _uploadIDCardState extends State<uploadIDCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 22, horizontal: 22),
-        width: 1500,
         decoration: BoxDecoration(
             color: Colors.blueGrey.shade100,
             borderRadius: BorderRadius.circular(10)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+        child: StaggeredGrid.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 9, //អ័ក្សX
+            crossAxisSpacing: 9,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Front Of ID Card",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Front Of ID Card",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   IdcardPicker(
                     getFile: (value) {
@@ -61,23 +61,21 @@ class _uploadIDCardState extends State<uploadIDCard> {
                   ),
                 ],
               ),
-              SizedBox(
-                width: 100,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Back Of ID Card",
-                        style: THeader(),
+                  Text.rich(
+                    overflow: TextOverflow.ellipsis,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "Back Of ID Card",
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      Text(
-                        " *",
+                      TextSpan(
+                        text: " *",
                         style: TextStyle(color: Colors.red, fontSize: 15),
                       )
-                    ],
+                    ]),
                   ),
                   IdcardPicker(
                     getFile: (value) {
@@ -93,77 +91,75 @@ class _uploadIDCardState extends State<uploadIDCard> {
                   ),
                 ],
               ),
-            ],
-          ),
-          // SizedBox(
-          //   height: 30,
-          // ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Column(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         Row(
-          //           children: [
-          //             Text(
-          //               "Front Of ID Card",
-          //               style: THeader(),
-          //             ),
-          //             Text(
-          //               " *",
-          //               style: TextStyle(color: Colors.red, fontSize: 15),
-          //             )
-          //           ],
-          //         ),
-          //         IdcardPicker(
-          //           getFile: (value) {
-          //             if (io.length == 2) {
-          //               setState(() {
-          //                 if (value != null) {
-          //                   print("upload card3 ${value.toString()}\n");
-          //                   io.add(value);
-          //                 }
-          //               });
-          //             }
-          //           },
-          //         ),
-          //       ],
-          //     ),
-          //     SizedBox(
-          //       width: 100,
-          //     ),
-          //     Column(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: [
-          //         Row(
-          //           children: [
-          //             Text(
-          //               "Back Of ID Card",
-          //               style: THeader(),
-          //             ),
-          //             Text(
-          //               " *",
-          //               style: TextStyle(color: Colors.red, fontSize: 15),
-          //             )
-          //           ],
-          //         ),
-          //         IdcardPicker(
-          //           getFile: (value) {
-          //             if (io.length == 3) {
-          //               setState(() {
-          //                 if (value != null) {
-          //                   print("upload card4 ${value.toString()}\n");
-          //                   io.add(value);
-          //                 }
-          //               });
-          //             }
-          //           },
-          //         ),
-          //       ],
-          //     ),
-          //   ],
-          // )
-        ]));
+              SizedBox(
+                height: 10,
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Row(
+              //           children: [
+              //             Text(
+              //               "Front Of ID Card",
+              //               style: THeader(),
+              //             ),
+              //             Text(
+              //               " *",
+              //               style: TextStyle(color: Colors.red, fontSize: 15),
+              //             )
+              //           ],
+              //         ),
+              //         IdcardPicker(
+              //           getFile: (value) {
+              //             if (io.length == 2) {
+              //               setState(() {
+              //                 if (value != null) {
+              //                   print("upload card3 ${value.toString()}\n");
+              //                   io.add(value);
+              //                 }
+              //               });
+              //             }
+              //           },
+              //         ),
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       width: 100,
+              //     ),
+              //     Column(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Row(
+              //           children: [
+              //             Text(
+              //               "Back Of ID Card",
+              //               style: THeader(),
+              //             ),
+              //             Text(
+              //               " *",
+              //               style: TextStyle(color: Colors.red, fontSize: 15),
+              //             )
+              //           ],
+              //         ),
+              //         IdcardPicker(
+              //           getFile: (value) {
+              //             if (io.length == 3) {
+              //               setState(() {
+              //                 if (value != null) {
+              //                   print("upload card4 ${value.toString()}\n");
+              //                   io.add(value);
+              //                 }
+              //               });
+              //             }
+              //           },
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // )
+            ]));
   }
 }
