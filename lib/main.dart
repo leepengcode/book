@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, widget) => ResponsiveWrapper.builder(BouncingScrollWrapper.builder(context, widget!),
+      builder: (context, widget) => ResponsiveWrapper.builder(
+          BouncingScrollWrapper.builder(context, widget!),
           maxWidth: 1200,
           minWidth: 450,
           defaultScale: true,
@@ -56,7 +57,8 @@ class Routes {
   static const String post = "post";
   static const String style = "style";
 
-  static Route<T> fadeThrough<T>(RouteSettings settings, WidgetBuilder page, {int duration = 300}) {
+  static Route<T> fadeThrough<T>(RouteSettings settings, WidgetBuilder page,
+      {int duration = 300}) {
     return PageRouteBuilder<T>(
       settings: settings,
       transitionDuration: Duration(milliseconds: duration),

@@ -74,9 +74,12 @@ class _SideBarState extends State<SideBar> {
               footer: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.lightBlue[50], borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(
+                      color: Colors.lightBlue[50],
+                      borderRadius: BorderRadius.circular(12)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                     // child: Text(
                     //   'CARE',
                     //   style: TextStyle(fontSize: 15, color: Colors.grey[800]),
@@ -121,9 +124,13 @@ class _SideBarState extends State<SideBar> {
             child: PageView(
               controller: pageController,
               children: [
-                BookListScreen(),
-                FormWidget(),
                 Dashboard(),
+                FormWidget(),
+                BookListScreen(),
+
+                // BookListScreen(
+
+                // ),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:js_interop';
 
 import 'package:book/Model/ComparisonModel.dart';
 import 'package:book/Model/CoverModel.dart';
@@ -23,8 +24,8 @@ import '../../Model/ProvisionalBuildingMdel.dart';
 import '../../Model/ProvisionalLandMdel.dart';
 
 class BookListScreen extends StatefulWidget {
-  const BookListScreen({super.key});
-
+  const BookListScreen({super.key, this.id_book_report});
+  final String? id_book_report;
   @override
   State<BookListScreen> createState() => _BookListScreenState();
 }
@@ -39,8 +40,13 @@ class _BookListScreenState extends State<BookListScreen> {
   @override
   void initState() {
     super.initState();
-    fetchBooks();
-    // fetchBooks();
+    // fetchBooks();'
+    if (widget.id_book_report != null) {
+      fetchBooks_by_id('${widget.id_book_report}');
+      print("fetchBooks_by_id('${widget.id_book_report}');\n");
+    } else {
+      fetchBooks();
+    }
   }
 
   Future<void> fetchBooks() async {
@@ -49,7 +55,8 @@ class _BookListScreenState extends State<BookListScreen> {
       isLoading = true;
     });
 
-    final response = await http.get(Uri.parse('$apiUrl/getbook?page=$currentPage'));
+    final response =
+        await http.get(Uri.parse('$apiUrl/getbook?page=$currentPage'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -105,6 +112,7 @@ class _BookListScreenState extends State<BookListScreen> {
   List<PLand> land = [];
   List<PBuilding> building = [];
   Future<void> fetchBooks_by_id(var id_book) async {
+    print("id_book ${id_book}\n");
     final response = await http.get(Uri.parse('$apiUrl/getbook/${id_book}'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -115,9 +123,11 @@ class _BookListScreenState extends State<BookListScreen> {
         dataLayout = Layout.fromJson(data['tblayout'][0]);
         dataGmap = Gmap.fromJson(data['tbmap'][0]);
         dataFinalIndic = FinalIndication.fromJson(data['tbfinalindication'][0]);
+        print("dataFinalIndic: ${data['tbfinalindication'][0]}");
         if (data['tbfinalbuilding'] != []) {
           for (var item in data['tbfinalbuilding']) {
-            dataFinalIndic.building!.add(Building.fromJson(item as Map<String, dynamic>));
+            dataFinalIndic.building!
+                .add(Building.fromJson(item as Map<String, dynamic>));
           }
         }
 
@@ -174,7 +184,9 @@ class _BookListScreenState extends State<BookListScreen> {
         list_forviewproperty = viewimage;
         list_forinsideproperty = insideimage;
         list_forviewland = landimage;
-      } catch (e) {}
+      } catch (e) {
+        print("object ${e.toExternalReference}\n");
+      }
       // await _valuableProgress(context, data);
       try {
         Navigator.of(context).push(MaterialPageRoute(
@@ -198,9 +210,12 @@ class _BookListScreenState extends State<BookListScreen> {
             set_map1Image: base64Decode(data['tbmap'][0]['pmapimage']),
             set_map2Image: base64Decode(data['tbmap'][0]['apmapimage']),
             set_map3Image: base64Decode(data['tbmap'][0]['skmapimage']),
-            frontviewimage: base64Decode(data['photodetails'][0]['frontviewimage']),
-            roadviewimage1: base64Decode(data['photodetails'][0]['roadviewimage1']),
-            roadviewimage2: base64Decode(data['photodetails'][0]['roadviewimage2']),
+            frontviewimage:
+                base64Decode(data['photodetails'][0]['frontviewimage']),
+            roadviewimage1:
+                base64Decode(data['photodetails'][0]['roadviewimage1']),
+            roadviewimage2:
+                base64Decode(data['photodetails'][0]['roadviewimage2']),
             surroundin1: base64Decode(data['photodetails'][0]['surroundin1']),
             surroundin2: base64Decode(data['photodetails'][0]['surroundin2']),
             surroundin3: base64Decode(data['photodetails'][0]['surroundin3']),
@@ -228,7 +243,7 @@ class _BookListScreenState extends State<BookListScreen> {
           child: Column(
             children: [
               if (books != null) ...[
-                for (int i = 0; i < books.length; i++)
+                for (int i = books.length-1; i >=0 ; i--)
                   InkWell(
                     onTap: () async {
                       await fetchBooks_by_id(books[i]['id_book']);
@@ -245,22 +260,30 @@ class _BookListScreenState extends State<BookListScreen> {
                                 fit: BoxFit.cover, // Adjust image fit if needed
                               ),
                             ),
-                            SizedBox(width: 10), // Add some spacing between the image and the text
+                            SizedBox(
+                                width:
+                                    10), // Add some spacing between the image and the text
                             // Text column for title and subtitle
                             Expanded(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .start, // Align text to the start
                                 children: [
                                   // Title
                                   Text(
                                     '${books[i]['header']}',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 5), // Add some space between title and subtitle
+                                  SizedBox(
+                                      height:
+                                          5), // Add some space between title and subtitle
                                   // Subtitle
                                   Text(
                                     '${books[i]['ownership']}',
-                                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.grey),
                                   ),
                                 ],
                               ),

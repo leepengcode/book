@@ -22,7 +22,7 @@ class PBuilding {
   factory PBuilding.fromJson(Map<String, dynamic> json) {
     return PBuilding(
       no: json['no'].toString(),
-      sizesqm: json['sizesqm'] ?? '',
+      sizesqm: json['size_sqm'] ?? '',
       floorno: json['floorno'] ?? '',
       bedroomno: json['bedroomno'] ?? '',
       minsqm: json['minsqm'] ?? '',

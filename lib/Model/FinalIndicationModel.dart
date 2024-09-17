@@ -32,8 +32,8 @@ class FinalIndication {
     return FinalIndication(
         totallandsizesqm: json['totallandsizesqm'] ?? '',
         totallandvalue: json['totallandvalue'] ?? '',
-        totalbuildingsizesqm: json['totallandsizesqm'] ?? '',
-        totalbuildingvalue: json['totallandvalue'] ?? '',
+        totalbuildingsizesqm: json['totalbuildingsizesqm'] ?? '',
+        totalbuildingvalue: json['totalbuildingvalue'] ?? '',
         controlled_by: json['controlled_by'] ?? '',
         verified_by: json['verified_by'] ?? '',
         issus_date: json['issus_date'] ?? '',
@@ -45,8 +45,8 @@ class FinalIndication {
     return {
       'totallandsizesqm': totallandsizesqm,
       'totallandvalue': totallandvalue,
-      'totalbuildingsizesqm': totallandsizesqm,
-      'totalbuildingvalue': totallandvalue,
+      'totalbuildingsizesqm': totalbuildingsizesqm,
+      'totalbuildingvalue': totalbuildingvalue,
       'controlled_by': controlled_by,
       'verified_by': verified_by,
       'issus_date': issus_date,
@@ -65,8 +65,8 @@ class FinalIndication {
       request.body = jsonEncode({
         'totallandsizesqm': dataFinalIndic.totallandsizesqm,
         'totallandvalue': dataFinalIndic.totallandvalue,
-        'totalbuildingsizesqm': dataFinalIndic.totallandsizesqm,
-        'totalbuildingvalue': dataFinalIndic.totallandvalue,
+        'totalbuildingsizesqm': dataFinalIndic.totalbuildingsizesqm,
+        'totalbuildingvalue': dataFinalIndic.totalbuildingvalue,
         'controlled_by': dataFinalIndic.controlled_by,
         'verified_by': dataFinalIndic.verified_by,
         'issus_date': dataFinalIndic.issus_date,
@@ -78,8 +78,8 @@ class FinalIndication {
       request.body = jsonEncode({
         'totallandsizesqm': dataFinalIndic.totallandsizesqm,
         'totallandvalue': dataFinalIndic.totallandvalue,
-        'totalbuildingsizesqm': dataFinalIndic.totallandsizesqm,
-        'totalbuildingvalue': dataFinalIndic.totallandvalue,
+        'totalbuildingsizesqm': dataFinalIndic.totalbuildingsizesqm,
+        'totalbuildingvalue': dataFinalIndic.totalbuildingvalue,
         'controlled_by': dataFinalIndic.controlled_by,
         'verified_by': dataFinalIndic.verified_by,
         'issus_date': dataFinalIndic.issus_date,

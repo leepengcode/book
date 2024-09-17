@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:book/Form/Screen/BookList.dart';
 import 'package:book/Form/Widget/CoverWidget.dart';
 import 'package:book/Form/Widget/FinalIndicationWidget.dart';
 import 'package:book/Form/Widget/GoogleMap.dart';
@@ -69,50 +70,55 @@ class _FormWidgetState extends State<FormWidget> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(pinned: false, snap: true, floating: true, expandedHeight: 50.0, actions: [
-          GestureDetector(
-            onTap: () async {
-              setState(() {
-                dataPhoto;
-                dataCover;
-                dataInfo;
-                dataIdcard;
-                dataLayout;
-                dataGmap;
-                dataFinalIndic;
-                dataProvisional;
-                datafinalmap;
-                dataOfficer;
-                dataPhoto;
-                list_forviewproperty;
-                list_forinsideproperty;
-                list_forviewland;
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => MyPDF(
-                    objCover: dataCover,
-                    objPropertyInfor: dataInfo,
-                    objIdcard: dataIdcard,
-                    objLayout: dataLayout,
-                    objGmap: dataGmap,
-                    objFinalIndication: dataFinalIndic,
-                    objProvisional: dataProvisional,
-                    objfinalmap: datafinalmap,
-                    objOfficerReport: dataOfficer,
-                    objPhotoDetail: dataPhoto,
-                    list_forviewproperty: list_forviewproperty,
-                    list_forinsideproperty: list_forinsideproperty,
-                    list_forviewland: list_forviewland,
-                  ),
-                ));
-              });
-            },
-            child: const Icon(
-              Icons.picture_as_pdf,
-              color: Colors.black,
-              size: 25,
-            ),
-          ),
-        ]),
+        SliverAppBar(
+            pinned: false,
+            snap: true,
+            floating: true,
+            expandedHeight: 50.0,
+            actions: [
+              GestureDetector(
+                onTap: () async {
+                  setState(() {
+                    dataPhoto;
+                    dataCover;
+                    dataInfo;
+                    dataIdcard;
+                    dataLayout;
+                    dataGmap;
+                    dataFinalIndic;
+                    dataProvisional;
+                    datafinalmap;
+                    dataOfficer;
+                    dataPhoto;
+                    list_forviewproperty;
+                    list_forinsideproperty;
+                    list_forviewland;
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => MyPDF(
+                        objCover: dataCover,
+                        objPropertyInfor: dataInfo,
+                        objIdcard: dataIdcard,
+                        objLayout: dataLayout,
+                        objGmap: dataGmap,
+                        objFinalIndication: dataFinalIndic,
+                        objProvisional: dataProvisional,
+                        objfinalmap: datafinalmap,
+                        objOfficerReport: dataOfficer,
+                        objPhotoDetail: dataPhoto,
+                        list_forviewproperty: list_forviewproperty,
+                        list_forinsideproperty: list_forinsideproperty,
+                        list_forviewland: list_forviewland,
+                      ),
+                    ));
+                  });
+                },
+                child: const Icon(
+                  Icons.picture_as_pdf,
+                  color: Colors.black,
+                  size: 25,
+                ),
+              ),
+            ]),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
@@ -200,7 +206,8 @@ class _FormWidgetState extends State<FormWidget> {
                       if (value != null) {
                         setState(() {
                           list_forviewproperty = value;
-                          print("list_forviewproperty.length ${list_forviewproperty!.length}\n");
+                          print(
+                              "list_forviewproperty.length ${list_forviewproperty!.length}\n");
                           dataPhoto.viewimage = value;
                         });
                       }
@@ -209,7 +216,8 @@ class _FormWidgetState extends State<FormWidget> {
                       if (value != null) {
                         setState(() {
                           list_forinsideproperty = value;
-                          print("list_forinsideproperty.length ${list_forinsideproperty!.length}\n");
+                          print(
+                              "list_forinsideproperty.length ${list_forinsideproperty!.length}\n");
                           dataPhoto.insideimage = value;
                         });
                       }
@@ -219,7 +227,8 @@ class _FormWidgetState extends State<FormWidget> {
                         setState(() {
                           list_forviewland = value;
                           dataPhoto.landimage = list_forviewland;
-                          print("object list_forviewland ${list_forviewland.length}\n");
+                          print(
+                              "object list_forviewland ${list_forviewland.length}\n");
                         });
                       }
                     },
@@ -300,6 +309,7 @@ class _FormWidgetState extends State<FormWidget> {
                       await InsertPhoto(id_book);
 
                       print("11  await InsertPhoto(id_book); \n");
+
                       pd.close();
 
                       //   setState(() {
@@ -311,7 +321,9 @@ class _FormWidgetState extends State<FormWidget> {
                         child: Container(
                       width: 150,
                       height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.blue),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue),
                       child: Center(
                           child: Text(
                         "Save",
@@ -380,7 +392,8 @@ class _FormWidgetState extends State<FormWidget> {
           print("5 Gmap().insertGmap(dataGmap!, id_book) \n");
         } else if (i == 70) {
           await OfficerReport().InsertOfficer(dataOfficer!, id_book);
-          pd.update(msg: '6 OfficerReport().InsertOfficer(dataOfficer!, id_book)');
+          pd.update(
+              msg: '6 OfficerReport().InsertOfficer(dataOfficer!, id_book)');
           print("6 OfficerReport().InsertOfficer(dataOfficer!, id_book) \n");
         } else if (i == 80) {
           await FinalMap().InsertFinalMap(datafinalmap!, id_book);
@@ -388,11 +401,15 @@ class _FormWidgetState extends State<FormWidget> {
           print("7 FinalMap().InsertFinalMap(datafinalmap!, id_book) \n");
         } else if (i == 90) {
           await Provisional().InsertProvisional(dataProvisional, id_book);
-          pd.update(msg: '8 Provisional().InsertProvisional(dataProvisional, id_book) ');
-          print("8 Provisional().InsertProvisional(dataProvisional, id_book) \n");
+          pd.update(
+              msg:
+                  '8 Provisional().InsertProvisional(dataProvisional, id_book) ');
+          print(
+              "8 Provisional().InsertProvisional(dataProvisional, id_book) \n");
         } else if (i == 95) {
           await FinalIndication().InsertFinal(dataFinalIndic, id_book);
-          pd.update(msg: '9 FinalIndication().InsertFinal(dataFinalIndic, id_book)');
+          pd.update(
+              msg: '9 FinalIndication().InsertFinal(dataFinalIndic, id_book)');
           print("9 FinalIndication().InsertFinal(dataFinalIndic, id_book) \n");
         }
       } catch (e) {
@@ -406,11 +423,10 @@ class _FormWidgetState extends State<FormWidget> {
   Future<void> insertInfo(PropertyInfor dataInfo, var id_book) async {
     try {
       var response = await http.post(
-        Uri.parse('https://virakst.online/bookReport/public/api/insertinfo/$id_book'),
+        Uri.parse(
+            'https://virakst.online/bookReport/public/api/insertinfo/$id_book'),
         // Uncomment this line if you need to set the content-type header
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: jsonEncode({
           "plotno": dataInfo.plotno,
           "north": dataInfo.north,
@@ -491,10 +507,9 @@ class _FormWidgetState extends State<FormWidget> {
 
   Future<void> insertphotodetails(var id_book) async {
     var response2 = await http.post(
-      Uri.parse("https://virakst.online/bookReport/public/api/insertphotodetails/${id_book}"),
-      headers: {
-        "Content-Type": "application/json"
-      },
+      Uri.parse(
+          "https://virakst.online/bookReport/public/api/insertphotodetails/${id_book}"),
+      headers: {"Content-Type": "application/json"},
       body: jsonEncode({
         'dessurroundin1': dataPhoto.dessurroundin1,
         'dessurroundin2': dataPhoto.dessurroundin2,
@@ -547,21 +562,19 @@ class _FormWidgetState extends State<FormWidget> {
 
       try {
         var response = await http.post(
-          Uri.parse("https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: jsonEncode({
-            'insideimage': insideimage,
-            'viewimage': viewimage
-          }),
+          Uri.parse(
+              "https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
+          headers: {"Content-Type": "application/json"},
+          body:
+              jsonEncode({'insideimage': insideimage, 'viewimage': viewimage}),
         );
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           print("Done in  land/building  InsertPhoto insideimage");
           pd.update(msg: 'Done in  land/building  InsertPhoto insideimage');
         } else {
-          print("Error in land/building  server ${response.statusCode}, ${response.body}");
+          print(
+              "Error in land/building  server ${response.statusCode}, ${response.body}");
         }
       } catch (e) {
         if (e is SocketException) {
@@ -590,26 +603,32 @@ class _FormWidgetState extends State<FormWidget> {
 
       try {
         var response = await http.post(
-          Uri.parse("https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: jsonEncode({
-            'landimage': viewland
-          }),
+          Uri.parse(
+              "https://virakst.online/bookReport/public/api/insertphoto/${id_book}"),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode({'landimage': viewland}),
         );
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           print("Done land  in InsertPhoto landimage");
           pd.update(msg: 'Done land  in InsertPhoto landimage');
         } else {
-          print("Error land  in server ${response.statusCode}, ${response.body}");
-          pd.update(msg: 'Error land  in server ${response.statusCode}, ${response.body}');
+          print(
+              "Error land  in server ${response.statusCode}, ${response.body}");
+          pd.update(
+              msg:
+                  'Error land  in server ${response.statusCode}, ${response.body}');
         }
       } catch (e) {
         print("Error catch in main $e");
         pd.update(msg: '"Error catch in main $e"');
       }
     }
+    setState(() {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => BookListScreen(
+                id_book_report: id_book,
+              )));
+    });
   }
 }

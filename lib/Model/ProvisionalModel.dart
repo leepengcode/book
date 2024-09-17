@@ -66,7 +66,7 @@ class Provisional {
         Uri.parse(
             'https://virakst.online/bookReport/public/api/insertprovisional/${id_book}'));
 
-    if (dataProvisional.fair_market == '') {
+    if (dataProvisional.fire_insurance == '') {
       request.body = jsonEncode({
         'name': dataProvisional.name,
         'totallandsizesqm': dataProvisional.totallandsizesqm,
@@ -87,9 +87,9 @@ class Provisional {
         'totalbuildingsizesqm': dataProvisional.totalbuildingsizesqm,
         'totalbuildingvaluemin': dataProvisional.totalbuildingvaluemin,
         'totalbuildingvaluemax': dataProvisional.totalbuildingvaluemax,
-        'force_sale': dataProvisional.force_sale ?? '',
-        'fair_market': dataProvisional.fair_market ?? '',
-        'fire_insurance': dataProvisional.fire_insurance ?? '123',
+        'force_sale': dataProvisional.force_sale,
+        'fair_market': dataProvisional.fair_market,
+        'fire_insurance': dataProvisional.fire_insurance,
         'land': dataProvisional.land!.toList(),
         'building': dataProvisional.building!.toList()
       });
